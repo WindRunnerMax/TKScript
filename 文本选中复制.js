@@ -1,6 +1,5 @@
 // ==UserScript==
 // @name         文本选中复制
-// @namespace    https://www.wenku.zone/
 // @version      1.0
 // @description  文本选中复制
 // @author       Czy
@@ -16,9 +15,9 @@
     var ClipboardJS = window.ClipboardJS; // https://clipboardjs.com/#example-text
 
     function getSelectedText() {
-   if(window.getSelection) return window.getSelection().toString();
-   else if(document.getSelection) return document.getSelection();
-   else if(document.selection) return document.selection.createRange().text;
+        if(window.getSelection) return window.getSelection().toString();
+        else if(document.getSelection) return document.getSelection();
+        else if(document.selection) return document.selection.createRange().text;
     }
 
     (function(){
@@ -61,18 +60,25 @@
             </style>
          `;
         $("head").prepend(template);
-        var clipboard = new ClipboardJS('#_copy');
-        clipboard.on('success', function() {
+        ClipboardJS.prototype.on('success', function() {
             $("#_copy").html("复制成功");
             setTimeout(() => $("#_copy").fadeOut(1000), 1000);
         });
-        clipboard.on('error', function(e) {
+        ClipboardJS.prototype.on('error', function(e) {
             $("#_copy").html("复制失败");
             setTimeout(() => $("#_copy").fadeOut(1000), 1000);
+            e.clearSelection();
         });
         $("body").on("mousedown", (e) => {
             $("#_copy").remove();
+            e.clearSelection();
         })
     })();
 
 })();
+
+/**
+ * 文库下载
+ * https://www.wenku.zone/
+ * http://wenku.baiduvvv.com/
+ */
