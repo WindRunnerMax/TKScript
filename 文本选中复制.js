@@ -63,6 +63,7 @@
         ClipboardJS.prototype.on('success', function() {
             $("#_copy").html("复制成功");
             setTimeout(() => $("#_copy").fadeOut(1000), 1000);
+            e.clearSelection();
         });
         ClipboardJS.prototype.on('error', function(e) {
             $("#_copy").html("复制失败");
@@ -71,7 +72,6 @@
         });
         $("body").on("mousedown", (e) => {
             $("#_copy").remove();
-            e.clearSelection();
         })
     })();
 
