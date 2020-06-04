@@ -60,7 +60,7 @@
             </style>
          `;
         $("head").prepend(template);
-        ClipboardJS.prototype.on('success', function() {
+        ClipboardJS.prototype.on('success', function(e) {
             $("#_copy").html("复制成功");
             setTimeout(() => $("#_copy").fadeOut(1000), 1000);
             e.clearSelection();
