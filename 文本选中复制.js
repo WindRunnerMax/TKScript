@@ -1,12 +1,19 @@
 // ==UserScript==
 // @name         文本选中复制
-// @version      1.0
-// @description  文本选中复制
+// @namespace    https://github.com/WindrunnerMax/TKScript
+// @version      1.2
+// @description  文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文
 // @author       Czy
 // @include      https://wenku.baidu.com/view/*
+// @include      https://www.51test.net/show/*
+// @include      http://www.xuexi.la/*
+// @include      https://www.xuexila.com/*
+// @include      https://www.cspengbo.com/*
+// @include      http://www.doc88.com/*
+// @license      GPL License
+// @grant        unsafeWindow
 // @require      https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require      https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
-// @github       https://github.com/WindrunnerMax/TKScript
 // ==/UserScript==
 
 (function() {
@@ -15,6 +22,7 @@
     var ClipboardJS = window.ClipboardJS; // https://clipboardjs.com/#example-text
 
     function getSelectedText() {
+        if(window.location.host.match(".*doc88.*")) return unsafeWindow.Viewer._0OOO1O;
         if(window.getSelection) return window.getSelection().toString();
         else if(document.getSelection) return document.getSelection();
         else if(document.selection) return document.selection.createRange().text;
@@ -34,6 +42,9 @@
 
             $("body").append(template);
             $("#_copy").on("mousedown", (event) => {
+                 event.stopPropagation();
+             })
+            $("#_copy").on("mouseup", (event) => {
                  event.stopPropagation();
              })
             new ClipboardJS('#_copy');
@@ -57,6 +68,9 @@
                     font-size: 13px;
                     cursor: pointer;
                }
+               div[id^=reader-helper]{
+                    display: none !important;
+               }
             </style>
          `;
         $("head").prepend(template);
@@ -73,12 +87,17 @@
         $("body").on("mousedown", (e) => {
             $("#_copy").remove();
         })
+        document.oncopy = () => {}
+        $("body").on("copy", (e) => {
+            e.stopPropagation();
+            return true;
+        })
     })();
 
 })();
 
 /**
- * 文库下载
  * https://www.wenku.zone/
  * http://wenku.baiduvvv.com/
+ * https://www.huiyingwu.com/1718/
  */
