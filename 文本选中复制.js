@@ -1,19 +1,21 @@
 // ==UserScript==
 // @name         文本选中复制
 // @namespace    https://github.com/WindrunnerMax/TKScript
-// @version      1.2
+// @version      1.3
 // @description  文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文
 // @author       Czy
-// @include      https://wenku.baidu.com/view/*
-// @include      https://www.51test.net/show/*
-// @include      http://www.xuexi.la/*
-// @include      https://www.xuexila.com/*
-// @include      https://www.cspengbo.com/*
-// @include      http://www.doc88.com/*
+// @include      *://wenku.baidu.com/view/*
+// @include      *://www.51test.net/show/*
+// @include      *://www.xuexi.la/*
+// @include      *://www.xuexila.com/*
+// @include      *://www.cspengbo.com/*
+// @include      *://www.doc88.com/*
 // @license      GPL License
 // @grant        unsafeWindow
+// @grant        GM_xmlhttpRequest
 // @require      https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require      https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
+// @connect      res.doc88.com
 // ==/UserScript==
 
 (function() {
@@ -22,7 +24,7 @@
     var ClipboardJS = window.ClipboardJS; // https://clipboardjs.com/#example-text
 
     function getSelectedText() {
-        if(window.location.host.match(".*doc88.*")) return unsafeWindow.Viewer._0OOO1O;
+        if(window.location.host.match(".*doc88.*")) return unsafeWindow.Viewer[window.path];
         if(window.getSelection) return window.getSelection().toString();
         else if(document.getSelection) return document.getSelection();
         else if(document.selection) return document.selection.createRange().text;
@@ -92,8 +94,17 @@
             e.stopPropagation();
             return true;
         })
+        if(window.location.host.match(".*doc88.*")){
+            GM_xmlhttpRequest({
+                method: "GET",
+                url: "https://res.doc88.com/assets/js/v2.js",
+                onload: function(response) {
+                    var view = new Function("var view = " + response.responseText.replace("eval", "") + "; return view;");
+                    window.path = /<textarea[\s\S]*?Viewer.([\S]*?)\+[\S]*?\/textarea>/.exec(view())[1];
+                }
+            })
+        }
     })();
-
 })();
 
 /**
