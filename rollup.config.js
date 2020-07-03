@@ -23,7 +23,7 @@ const config = {
 }
 
 export default [{
-    input: "./modules/copy/src/index.js",
+    input: "./src/copy/src/index.js",
     output: {
         file: "./dist/copy.js",
         format: "iife",
@@ -34,7 +34,7 @@ export default [{
         babel(config.babel),
         // uglify(),
         metablock({
-            file: './modules/copy/meta.json'
+            file: './src/copy/meta.json'
         })
     ]
 }];
