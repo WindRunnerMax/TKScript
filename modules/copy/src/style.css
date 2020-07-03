@@ -1,0 +1,18 @@
+#_copy {
+    width: 60px;
+    height: 30px;
+    background: #4C98F7;
+    color: #fff;
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+div[id^=reader-helper] {
+    display: none !important;
+}

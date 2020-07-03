@@ -1,0 +1,26 @@
+{
+    "name": "文本选中复制",
+    "namespace": "https://github.com/WindrunnerMax/TKScript",
+    "version": "2.0.0",
+    "description": "文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文",
+    "author": "Czy",
+    "include": [
+        "*://wenku.baidu.com/view/*",
+        "*://www.51test.net/show/*",
+        "*://www.xuexi.la/*",
+        "*://www.xuexila.com/*",
+        "*://www.cspengbo.com/*",
+        "*://www.doc88.com/*"
+    ],
+    "license": "GPL License",
+    "grant": [
+        "unsafeWindow",
+        "GM_xmlhttpRequest"
+    ],
+    "require": [
+        "https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js",
+        "https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"
+    ],
+    "connect": "res.doc88.com"
+
+}
