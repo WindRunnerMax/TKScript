@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name        文本选中复制
-// @description 文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文
+// @name        🔥🔥🔥文本选中复制🔥🔥🔥
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.0.0
+// @version     2.0.1
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -10,6 +10,7 @@
 // @include     *://www.xuexila.com/*
 // @include     *://www.cspengbo.com/*
 // @include     *://www.doc88.com/*
+// @include     *://segmentfault.com/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -50,7 +51,7 @@
     }
   }
 
-  var css_248z = "#_copy{width:60px;height:30px;background:#4c98f7;color:#fff;position:absolute;z-index:1000;display:flex;justify-content:center;align-items:center;border-radius:3px;font-size:13px;cursor:pointer}div[id^=reader-helper]{display:none!important}";
+  var css_248z = "#_copy{width:60px;height:30px;background:#4c98f7;color:#fff;position:absolute;z-index:1000;display:flex;justify-content:center;align-items:center;border-radius:3px;font-size:13px;cursor:pointer}#select-tooltip,#sfModal,.modal-backdrop,div[id^=reader-helper]{display:none!important}.modal-open{overflow:auto!important}._sf_adjust_body{padding-right:0!important}";
   styleInject(css_248z);
 
   function initEvent($, ClipboardJS) {
@@ -102,8 +103,20 @@
     getSelectedText: getSelectedText
   };
 
+  function init$1($) {
+    $("body").addClass("_sf_adjust_body");
+    $("body").on("click", function (e) {
+      $("body").css("padding-right", 0);
+    });
+  }
+
+  var sf = {
+    init: init$1
+  };
+
   function initWebsite($, ClipboardJS) {
-    if (window.location.href.match(/.*www\.doc88\.com\/.+/)) doc88.init();
+    if (window.location.href.match(/.*doc88\.com\/.+/)) doc88.init();
+    if (window.location.href.match(/.*segmentfault\.com\/.+/)) sf.init($);
   }
 
   function getSelectedText$1() {
@@ -117,7 +130,7 @@
     var ClipboardJS = window.ClipboardJS; // https://clipboardjs.com/#example-text
 
     initEvent($, ClipboardJS);
-    initWebsite();
+    initWebsite($);
     document.addEventListener("mouseup", function (e) {
       var copyText = getSelectedText$1();
       if (copyText) console.log(copyText);else return "";

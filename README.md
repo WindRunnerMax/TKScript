@@ -8,7 +8,7 @@
 * `src/expansion`: 自动展开阅读全文
 * `src/completion`: 阿里矢量图标库添加`HTTP`按钮
 
-`copy`脚本需`npm`打包使用，其他脚本引入即可
+`copy`脚本需`rollup`打包使用，其他脚本引入即可
 ```shell
 npm install
 npm run build
