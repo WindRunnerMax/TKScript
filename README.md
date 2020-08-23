@@ -1,6 +1,6 @@
 # TKScript
 
-`TamperMonkey` 油猴插件
+`TamperMonkey` 油猴插件，`GreasyFork`[主页链接](https://greasyfork.org/zh-CN/users/584991-windrunnermax)。
 
 * `dist`: 打包后模块
 * `src/copy`: 文本选中复制
