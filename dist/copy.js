@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.0.1
+// @version     2.1.0
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -11,6 +11,7 @@
 // @include     *://www.cspengbo.com/*
 // @include     *://www.doc88.com/*
 // @include     *://segmentfault.com/*
+// @include     *://wk.baidu.com/view/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -114,9 +115,24 @@
     init: init$1
   };
 
+  function init$2($) {
+    $(window).on("load", function (e) {
+      $(".sf-edu-wenku-vw-container").attr("style", "");
+      $(".sfa-body").on("selectstart", function (e) {
+        e.stopPropagation();
+        return true;
+      });
+    });
+  }
+
+  var wk = {
+    init: init$2
+  };
+
   function initWebsite($, ClipboardJS) {
     if (window.location.href.match(/.*doc88\.com\/.+/)) doc88.init();
     if (window.location.href.match(/.*segmentfault\.com\/.+/)) sf.init($);
+    if (window.location.href.match(/.*wk\.baidu\.com\/view\/.+/)) wk.init($);
   }
 
   function getSelectedText$1() {
