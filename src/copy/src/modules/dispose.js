@@ -1,11 +1,13 @@
 import doc88 from "./website/doc88.js"
 import sf from "./website/sf.js"
 import wk from "./website/wk.js"
+import leetcode from "./website/leetcode.js"
 
 function initWebsite($, ClipboardJS){
     if (window.location.href.match(/.*doc88\.com\/.+/)) doc88.init();
     if (window.location.href.match(/.*segmentfault\.com\/.+/)) sf.init($);
     if (window.location.href.match(/.*wk\.baidu\.com\/view\/.+/)) wk.init($);
+    if (window.location.href.match(/.*leetcode-cn\.com\/problems\/.+/)) leetcode.init($);
 }
 
 function getSelectedText() {
