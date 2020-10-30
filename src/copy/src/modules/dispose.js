@@ -1,8 +1,9 @@
-import doc88 from "./website/doc88.js"
-import sf from "./website/sf.js"
-import wk from "./website/wk.js"
-import leetcode from "./website/leetcode.js"
-import zhihu from "./website/zhihu.js"
+import doc88 from "./website/doc88.js";
+import sf from "./website/sf.js";
+import wk from "./website/wk.js";
+import leetcode from "./website/leetcode.js";
+import zhihu from "./website/zhihu.js";
+import edu30 from "./website/edu30.js";
 
 function initWebsite($, ClipboardJS){
     if (window.location.href.match(/.*doc88\.com\/.+/)) doc88.init();
@@ -10,6 +11,7 @@ function initWebsite($, ClipboardJS){
     if (window.location.href.match(/.*wk\.baidu\.com\/view\/.+/)) wk.init($);
     if (window.location.href.match(/.*leetcode-cn\.com\/problems\/.+/)) leetcode.init($);
     if (window.location.href.match(/.*zhihu\.com\/question\/.+/)) zhihu.init($);
+    if (window.location.href.match(/.*30edu\.com\.cn\/.+/)) edu30.init($);
 }
 
 function getSelectedText() {

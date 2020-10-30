@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.3
+// @version     2.1.4
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -13,7 +13,8 @@
 // @include     *://segmentfault.com/*
 // @include     *://wk.baidu.com/view/*
 // @include     *://leetcode-cn.com/problems/*
-// @include     *://www.zhihu.com/question/*
+// @include     *://www.zhihu.com/*
+// @include     *://z.30edu.com.cn/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -147,12 +148,32 @@
     init: init$4
   };
 
+  function init$5($) {
+    window.onload = function () {
+      var iframes = document.getElementsByTagName("iframe");
+
+      if (iframes.length === 2) {
+        console.log(iframes[1].contentWindow.document);
+        var body = $(iframes[1].contentWindow.document.querySelector("body"));
+        console.log(body);
+        body.attr("oncopy", "");
+        body.attr("oncontextmenu", "");
+        body.attr("onselectstart", "");
+      }
+    };
+  }
+
+  var edu30 = {
+    init: init$5
+  };
+
   function initWebsite($, ClipboardJS) {
     if (window.location.href.match(/.*doc88\.com\/.+/)) doc88.init();
     if (window.location.href.match(/.*segmentfault\.com\/.+/)) sf.init($);
     if (window.location.href.match(/.*wk\.baidu\.com\/view\/.+/)) wk.init($);
     if (window.location.href.match(/.*leetcode-cn\.com\/problems\/.+/)) leetcode.init($);
     if (window.location.href.match(/.*zhihu\.com\/question\/.+/)) zhihu.init($);
+    if (window.location.href.match(/.*30edu\.com\.cn\/.+/)) edu30.init($);
   }
 
   function getSelectedText$1() {
