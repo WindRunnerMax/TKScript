@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.4
+// @version     2.1.5
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -99,7 +99,7 @@
   }
 
   function getSelectedText() {
-    return unsafeWindow.Viewer[path];
+    return unsafeWindow.Core.api._if;
   }
 
   var doc88 = {
@@ -108,17 +108,6 @@
   };
 
   function init$1($) {
-    $("body").addClass("_sf_adjust_body");
-    $("body").on("click", function (e) {
-      $("body").css("padding-right", 0);
-    });
-  }
-
-  var sf = {
-    init: init$1
-  };
-
-  function init$2($) {
     $(window).on("load", function (e) {
       $(".sf-edu-wenku-vw-container").attr("style", "");
       $(".sfa-body").on("selectstart", function (e) {
@@ -129,6 +118,14 @@
   }
 
   var wk = {
+    init: init$1
+  };
+
+  function init$2($) {
+    $("body").append("<style>#_copy{display: none !important;}</style>");
+  }
+
+  var leetcode = {
     init: init$2
   };
 
@@ -136,19 +133,11 @@
     $("body").append("<style>#_copy{display: none !important;}</style>");
   }
 
-  var leetcode = {
+  var zhihu = {
     init: init$3
   };
 
   function init$4($) {
-    $("body").append("<style>#_copy{display: none !important;}</style>");
-  }
-
-  var zhihu = {
-    init: init$4
-  };
-
-  function init$5($) {
     window.onload = function () {
       var iframes = document.getElementsByTagName("iframe");
 
@@ -164,16 +153,24 @@
   }
 
   var edu30 = {
-    init: init$5
+    init: init$4
   };
 
   function initWebsite($, ClipboardJS) {
-    if (window.location.href.match(/.*doc88\.com\/.+/)) doc88.init();
-    if (window.location.href.match(/.*segmentfault\.com\/.+/)) sf.init($);
-    if (window.location.href.match(/.*wk\.baidu\.com\/view\/.+/)) wk.init($);
-    if (window.location.href.match(/.*leetcode-cn\.com\/problems\/.+/)) leetcode.init($);
-    if (window.location.href.match(/.*zhihu\.com\/question\/.+/)) zhihu.init($);
-    if (window.location.href.match(/.*30edu\.com\.cn\/.+/)) edu30.init($);
+    var mather = function mather(regex, funct) {
+      for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        args[_key - 2] = arguments[_key];
+      }
+
+      if (regex.test(window.location.href)) funct.apply(void 0, args);
+    };
+
+    mather(/.*doc88\.com\/.+/, doc88.init);
+    mather(/.*segmentfault\.com\/.+/, wk.init, $);
+    mather(/.*wk\.baidu\.com\/view\/.+/, wk.init, $);
+    mather(/.*leetcode-cn\.com\/problems\/.+/, leetcode.init, $);
+    mather(/.*zhihu\.com\/.+/, zhihu.init, $);
+    mather(/.*30edu\.com\.cn\/.+/, edu30.init, $);
   }
 
   function getSelectedText$1() {

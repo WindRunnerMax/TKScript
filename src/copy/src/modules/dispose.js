@@ -6,12 +6,15 @@ import zhihu from "./website/zhihu.js";
 import edu30 from "./website/edu30.js";
 
 function initWebsite($, ClipboardJS){
-    if (window.location.href.match(/.*doc88\.com\/.+/)) doc88.init();
-    if (window.location.href.match(/.*segmentfault\.com\/.+/)) sf.init($);
-    if (window.location.href.match(/.*wk\.baidu\.com\/view\/.+/)) wk.init($);
-    if (window.location.href.match(/.*leetcode-cn\.com\/problems\/.+/)) leetcode.init($);
-    if (window.location.href.match(/.*zhihu\.com\/question\/.+/)) zhihu.init($);
-    if (window.location.href.match(/.*30edu\.com\.cn\/.+/)) edu30.init($);
+    const mather = (regex, funct, ...args) =>{
+        if(regex.test(window.location.href)) funct(...args);
+    } 
+    mather(/.*doc88\.com\/.+/, doc88.init);
+    mather(/.*segmentfault\.com\/.+/, wk.init, $);
+    mather(/.*wk\.baidu\.com\/view\/.+/, wk.init, $);
+    mather(/.*leetcode-cn\.com\/problems\/.+/, leetcode.init, $);
+    mather(/.*zhihu\.com\/.+/, zhihu.init, $);
+    mather(/.*30edu\.com\.cn\/.+/, edu30.init, $);
 }
 
 function getSelectedText() {

@@ -12,7 +12,7 @@ function init() {
 }
 
 function getSelectedText(){
-    return unsafeWindow.Viewer[path];
+    return unsafeWindow.Core.api._if;
 }
 
 export default { init, getSelectedText }
