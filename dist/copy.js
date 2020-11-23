@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.6
+// @version     2.1.7
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -15,6 +15,7 @@
 // @include     *://leetcode-cn.com/problems/*
 // @include     *://www.zhihu.com/*
 // @include     *://z.30edu.com.cn/*
+// @include     *://docs.qq.com/doc/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -167,25 +168,58 @@
     init: init$4
   };
 
-  function initWebsite($, ClipboardJS) {
-    var mather = function mather(regex, funct) {
-      for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-        args[_key - 2] = arguments[_key];
-      }
-
-      if (regex.test(window.location.href)) funct.apply(void 0, args);
+  function init$5($) {
+    var hide = function hide() {
+      return $("body").append("<style>#_copy{display: none !important;}</style>");
     };
 
-    mather(/.*doc88\.com\/.+/, doc88.init);
-    mather(/.*segmentfault\.com\/.+/, wk.init, $);
-    mather(/.*wk\.baidu\.com\/view\/.+/, wk.init, $);
-    mather(/.*leetcode-cn\.com\/problems\/.+/, leetcode.init, $);
-    mather(/.*zhihu\.com\/.+/, zhihu.init, $);
-    mather(/.*30edu\.com\.cn\/.+/, edu30.init, $);
+    if (unsafeWindow.pad) {
+      if (unsafeWindow.pad.editor._docEnv.copyable === true) hide();
+      unsafeWindow.pad.editor._docEnv.copyable = true;
+    } else {
+      hide();
+    }
   }
 
   function getSelectedText$1() {
-    if (window.location.href.match(/.*www\.doc88\.com\/.+/)) return doc88.getSelectedText();
+    if (unsafeWindow.pad) {
+      unsafeWindow.pad.editor.clipboardManager.copy();
+      return unsafeWindow.pad.editor.clipboardManager.customClipboard.plain;
+    }
+
+    return void 0;
+  }
+
+  var docqq = {
+    init: init$5,
+    getSelectedText: getSelectedText$1
+  };
+
+  var siteGetSelectedText = null;
+
+  function initWebsite($, ClipboardJS) {
+    var mather = function mather(regex, site) {
+      if (regex.test(window.location.href)) {
+        for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+          args[_key - 2] = arguments[_key];
+        }
+
+        site.init.apply(site, args);
+        if (site.getSelectedText) siteGetSelectedText = site.getSelectedText;
+      }
+    };
+
+    mather(/.*doc88\.com\/.+/, doc88);
+    mather(/.*segmentfault\.com\/.+/, wk, $);
+    mather(/.*wk\.baidu\.com\/view\/.+/, wk, $);
+    mather(/.*leetcode-cn\.com\/problems\/.+/, leetcode, $);
+    mather(/.*zhihu\.com\/.+/, zhihu, $);
+    mather(/.*30edu\.com\.cn\/.+/, edu30, $);
+    mather(/.*docs\.qq\.com\/.+/, docqq, $);
+  }
+
+  function getSelectedText$2() {
+    if (siteGetSelectedText) return siteGetSelectedText();
     if (window.getSelection) return window.getSelection().toString();else if (document.getSelection) return document.getSelection();else if (document.selection) return document.selection.createRange().text;
     return "";
   }
@@ -197,7 +231,7 @@
     initEvent($, ClipboardJS);
     initWebsite($);
     document.addEventListener("mouseup", function (e) {
-      var copyText = getSelectedText$1();
+      var copyText = getSelectedText$2();
       if (copyText) console.log(copyText);else return "";
       $("#_copy").remove();
       var template = "\n            <div id=\"_copy\"\n            style=\"left:".concat(e.pageX + 30, "px;top:").concat(e.pageY, "px;\"\n            data-clipboard-text=\"").concat(copyText, "\">\u590D\u5236</div>\n        ");
