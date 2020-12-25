@@ -87,115 +87,114 @@
   }
 
   var path = "";
-
-  function init() {
-    // GM_xmlhttpRequest({
-    //     method: "GET",
-    //     url: "https://res.doc88.com/assets/js/v2.js",
-    //     onload: function(response) {
-    //         var view = new Function("var view = " + response.responseText.replace("eval", "") + "; return view;");
-    //         path = /<textarea[\s\S]*?Viewer.([\S]*?)\+[\S]*?\/textarea>/.exec(view())[1];
-    //     }
-    // })
-    GM_xmlhttpRequest({
-      method: "GET",
-      url: "https://static.doc88.com/resources/js/modules/main-v1.min.js?v=1.29",
-      onload: function onload(response) {
-        path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
-      }
-    });
-  }
-
-  function getSelectedText() {
-    var select = unsafeWindow;
-    path.split(".").forEach(function (v) {
-      select = select[v];
-    });
-    return select;
-  }
-
-  var doc88 = {
-    init: init,
-    getSelectedText: getSelectedText
-  };
-
-  function init$1($) {
-    $(window).on("load", function (e) {
-      $(".sf-edu-wenku-vw-container").attr("style", "");
-      $(".sfa-body").on("selectstart", function (e) {
-        e.stopPropagation();
-        return true;
+  var website = {
+    regexp: /.*doc88\.com\/.+/,
+    init: function init($) {
+      // GM_xmlhttpRequest({
+      //     method: "GET",
+      //     url: "https://res.doc88.com/assets/js/v2.js",
+      //     onload: function(response) {
+      //         var view = new Function("var view = " + response.responseText.replace("eval", "") + "; return view;");
+      //         path = /<textarea[\s\S]*?Viewer.([\S]*?)\+[\S]*?\/textarea>/.exec(view())[1];
+      //     }
+      // })
+      GM_xmlhttpRequest({
+        method: "GET",
+        url: "https://static.doc88.com/resources/js/modules/main-v1.min.js?v=1.29",
+        onload: function onload(response) {
+          path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
+        }
       });
-    });
-  }
-
-  var wk = {
-    init: init$1
+    },
+    getSelectedText: function getSelectedText() {
+      var select = unsafeWindow;
+      path.split(".").forEach(function (v) {
+        select = select[v];
+      });
+      return select;
+    }
   };
 
-  function init$2($) {
-    $("body").append("<style>#_copy{display: none !important;}</style>");
-  }
-
-  var leetcode = {
-    init: init$2
+  var website$1 = {
+    regexp: /.*segmentfault\.com\/.+/,
+    init: function init($) {
+      $("body").addClass("_sf_adjust_body");
+      $("body").on("click", function (e) {
+        $("body").css("padding-right", 0);
+      });
+    }
   };
 
-  function init$3($) {
-    $("body").append("<style>#_copy{display: none !important;}</style>");
-  }
-
-  var zhihu = {
-    init: init$3
+  var website$2 = {
+    regexp: /.*wk\.baidu\.com\/view\/.+/,
+    init: function init($) {
+      $(window).on("load", function (e) {
+        $(".sf-edu-wenku-vw-container").attr("style", "");
+        $(".sfa-body").on("selectstart", function (e) {
+          e.stopPropagation();
+          return true;
+        });
+      });
+    }
   };
 
-  function init$4($) {
-    window.onload = function () {
-      var iframes = document.getElementsByTagName("iframe");
+  var website$3 = {
+    regexp: /.*leetcode-cn\.com\/problems\/.+/,
+    init: function init($) {
+      $("body").append("<style>#_copy{display: none !important;}</style>");
+    }
+  };
 
-      if (iframes.length === 2) {
-        console.log(iframes[1].contentWindow.document);
-        var body = $(iframes[1].contentWindow.document.querySelector("body"));
-        console.log(body);
-        body.attr("oncopy", "");
-        body.attr("oncontextmenu", "");
-        body.attr("onselectstart", "");
+  var website$4 = {
+    regexp: /.*zhihu\.com\/.+/,
+    init: function init($) {
+      $("body").append("<style>#_copy{display: none !important;}</style>");
+    }
+  };
+
+  var website$5 = {
+    regexp: /.*30edu\.com\.cn\/.+/,
+    init: function init($) {
+      window.onload = function () {
+        var iframes = document.getElementsByTagName("iframe");
+
+        if (iframes.length === 2) {
+          console.log(iframes[1].contentWindow.document);
+          var body = $(iframes[1].contentWindow.document.querySelector("body"));
+          body.attr("oncopy", "");
+          body.attr("oncontextmenu", "");
+          body.attr("onselectstart", "");
+        }
+      };
+    }
+  };
+
+  var website$6 = {
+    regexp: /.*docs\.qq\.com\/.+/,
+    init: function init($) {
+      var hide = function hide() {
+        return $("body").append("<style>#_copy{display: none !important;}</style>");
+      };
+
+      if (unsafeWindow.pad) {
+        if (unsafeWindow.pad.editor._docEnv.copyable === true) hide();
+        unsafeWindow.pad.editor._docEnv.copyable = true;
+      } else {
+        hide();
       }
-    };
-  }
+    },
+    getSelectedText: function getSelectedText() {
+      if (unsafeWindow.pad) {
+        unsafeWindow.pad.editor.clipboardManager.copy();
+        return unsafeWindow.pad.editor.clipboardManager.customClipboard.plain;
+      }
 
-  var edu30 = {
-    init: init$4
-  };
-
-  function init$5($) {
-    var hide = function hide() {
-      return $("body").append("<style>#_copy{display: none !important;}</style>");
-    };
-
-    if (unsafeWindow.pad) {
-      if (unsafeWindow.pad.editor._docEnv.copyable === true) hide();
-      unsafeWindow.pad.editor._docEnv.copyable = true;
-    } else {
-      hide();
+      return void 0;
     }
-  }
-
-  function getSelectedText$1() {
-    if (unsafeWindow.pad) {
-      unsafeWindow.pad.editor.clipboardManager.copy();
-      return unsafeWindow.pad.editor.clipboardManager.customClipboard.plain;
-    }
-
-    return void 0;
-  }
-
-  var docqq = {
-    init: init$5,
-    getSelectedText: getSelectedText$1
   };
 
   var siteGetSelectedText = null;
+  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6];
 
   function initWebsite($, ClipboardJS) {
     var mather = function mather(regex, site) {
@@ -209,16 +208,12 @@
       }
     };
 
-    mather(/.*doc88\.com\/.+/, doc88);
-    mather(/.*segmentfault\.com\/.+/, wk, $);
-    mather(/.*wk\.baidu\.com\/view\/.+/, wk, $);
-    mather(/.*leetcode-cn\.com\/problems\/.+/, leetcode, $);
-    mather(/.*zhihu\.com\/.+/, zhihu, $);
-    mather(/.*30edu\.com\.cn\/.+/, edu30, $);
-    mather(/.*docs\.qq\.com\/.+/, docqq, $);
+    modules.forEach(function (v) {
+      return mather(v.regexp, v, $);
+    });
   }
 
-  function getSelectedText$2() {
+  function getSelectedText() {
     if (siteGetSelectedText) return siteGetSelectedText();
     if (window.getSelection) return window.getSelection().toString();else if (document.getSelection) return document.getSelection();else if (document.selection) return document.selection.createRange().text;
     return "";
@@ -231,7 +226,7 @@
     initEvent($, ClipboardJS);
     initWebsite($);
     document.addEventListener("mouseup", function (e) {
-      var copyText = getSelectedText$2();
+      var copyText = getSelectedText();
       if (copyText) console.log(copyText);else return "";
       $("#_copy").remove();
       var template = "\n            <div id=\"_copy\"\n            style=\"left:".concat(e.pageX + 30, "px;top:").concat(e.pageY, "px;\"\n            data-clipboard-text=\"").concat(copyText, "\">\u590D\u5236</div>\n        ");

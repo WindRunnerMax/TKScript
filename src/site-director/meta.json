@@ -1,0 +1,20 @@
+{
+    "name": "🔥🔥🔥跳转链接直达🔥🔥🔥",
+    "namespace": "https://github.com/WindrunnerMax/TKScript",
+    "version": "1.0.2",
+    "description": "跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN",
+    "author": "Czy",
+    "include": [
+        "*://*google.com/*",
+        "*://*zhihu.com/*",
+        "*://*csdn.net/*"
+    ],
+    "license": "MIT License",
+    "grant": [
+        "unsafeWindow",
+        "GM_xmlhttpRequest"
+    ],
+    "require": [
+        "https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"
+    ]
+}

@@ -7,26 +7,21 @@ import edu30 from "./website/edu30.js";
 import docqq from "./website/docqq.js";
 
 let siteGetSelectedText = null;
+const modules = [doc88, sf, wk, leetcode, zhihu, edu30, docqq];
 
 function initWebsite($, ClipboardJS){
-    const mather = (regex, site, ...args) =>{
+    const mather = (regex, site, ...args) => {
         if(regex.test(window.location.href)) {
             site.init(...args);
             if(site.getSelectedText)  siteGetSelectedText = site.getSelectedText;
         };
     } 
-    mather(/.*doc88\.com\/.+/, doc88);
-    mather(/.*segmentfault\.com\/.+/, wk, $);
-    mather(/.*wk\.baidu\.com\/view\/.+/, wk, $);
-    mather(/.*leetcode-cn\.com\/problems\/.+/, leetcode, $);
-    mather(/.*zhihu\.com\/.+/, zhihu, $);
-    mather(/.*30edu\.com\.cn\/.+/, edu30, $);
-    mather(/.*docs\.qq\.com\/.+/, docqq, $);
+    modules.forEach(v => mather(v.regexp, v, $));
 }
 
 function getSelectedText() {
-    if (siteGetSelectedText) return siteGetSelectedText();
-    if (window.getSelection) return window.getSelection().toString();
+    if(siteGetSelectedText) return siteGetSelectedText();
+    if(window.getSelection) return window.getSelection().toString();
     else if(document.getSelection) return document.getSelection();
     else if(document.selection) return document.selection.createRange().text;
     return "";
