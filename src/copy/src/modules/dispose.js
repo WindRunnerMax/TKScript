@@ -5,9 +5,10 @@ import leetcode from "./website/leetcode.js";
 import zhihu from "./website/zhihu.js";
 import edu30 from "./website/edu30.js";
 import docqq from "./website/docqq.js";
+import boke112 from "./website/boke112.js";
 
 let siteGetSelectedText = null;
-const modules = [doc88, sf, wk, leetcode, zhihu, edu30, docqq];
+const modules = [doc88, sf, wk, leetcode, zhihu, edu30, docqq, boke112];
 
 function initWebsite($, ClipboardJS){
     const mather = (regex, site, ...args) => {

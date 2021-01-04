@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.7
+// @version     2.1.8
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -16,6 +16,7 @@
 // @include     *://www.zhihu.com/*
 // @include     *://z.30edu.com.cn/*
 // @include     *://docs.qq.com/doc/*
+// @include     *://boke112.com/post/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -193,8 +194,19 @@
     }
   };
 
+  var website$7 = {
+    regexp: /boke112/,
+    init: function init($) {
+      $("body").on("click", function (e) {
+        return false;
+      });
+      var template = "\n            <style>\n                :not(input):not(textarea)::selection {\n                    background-color: #2440B3 !important;\n                    color: #fff !important;\n                }\n\n                :not(input):not(textarea)::-moz-selection {\n                    background-color: #2440B3 !important;\n                    color: #fff !important;\n                }\n            </style>\n        ";
+      $("body").append(template.replace(/\s*/, " "));
+    }
+  };
+
   var siteGetSelectedText = null;
-  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6];
+  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6, website$7];
 
   function initWebsite($, ClipboardJS) {
     var mather = function mather(regex, site) {
@@ -229,7 +241,7 @@
       var copyText = getSelectedText();
       if (copyText) console.log(copyText);else return "";
       $("#_copy").remove();
-      var template = "\n            <div id=\"_copy\"\n            style=\"left:".concat(e.pageX + 30, "px;top:").concat(e.pageY, "px;\"\n            data-clipboard-text=\"").concat(copyText, "\">\u590D\u5236</div>\n        ");
+      var template = "\n            <div id=\"_copy\"\n            style=\"left:".concat(e.pageX + 30, "px;top:").concat(e.pageY, "px;\"\n            data-clipboard-text=\"").concat(copyText.replace(/"/g, "&quot;"), "\">\u590D\u5236</div>\n        ");
       $("body").append(template);
       $("#_copy").on("mousedown", function (event) {
         event.stopPropagation();

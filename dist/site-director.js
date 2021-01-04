@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥跳转链接直达🔥🔥🔥
-// @description 链接直达，去掉确定跳转链接页面
+// @description 跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.1
+// @version     1.0.2
 // @author      Czy
 // @include     *://*google.com/*
 // @include     *://*zhihu.com/*

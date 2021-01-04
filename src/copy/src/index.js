@@ -15,7 +15,7 @@ import { initWebsite, getSelectedText } from "./modules/dispose.js"
         var template = `
             <div id="_copy"
             style="left:${e.pageX + 30}px;top:${e.pageY}px;"
-            data-clipboard-text="${copyText}">复制</div>
+            data-clipboard-text="${copyText.replace(/"/g, "&quot;")}">复制</div>
         `;
         $("body").append(template);
         $("#_copy").on("mousedown", (event) => {
