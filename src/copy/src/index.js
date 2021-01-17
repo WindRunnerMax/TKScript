@@ -30,7 +30,6 @@ import { initWebsite, getSelectedText } from "./modules/dispose.js"
 })();
 
 /**
- * https://www.wenku.zone/
  * http://wenku.baiduvvv.com/
  * https://www.huiyingwu.com/1718/
  */
