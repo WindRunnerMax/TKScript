@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.8
+// @version     2.1.9
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -17,6 +17,7 @@
 // @include     *://z.30edu.com.cn/*
 // @include     *://docs.qq.com/doc/*
 // @include     *://boke112.com/post/*
+// @include     *://www.yuque.com/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -205,8 +206,15 @@
     }
   };
 
+  var website$8 = {
+    regexp: /yuque/,
+    init: function init($) {
+      $("body").append("<style>#_copy{display: none !important;}</style>");
+    }
+  };
+
   var siteGetSelectedText = null;
-  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6, website$7];
+  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6, website$7, website$8];
 
   function initWebsite($, ClipboardJS) {
     var mather = function mather(regex, site) {
@@ -253,7 +261,6 @@
     });
   })();
   /**
-   * https://www.wenku.zone/
    * http://wenku.baiduvvv.com/
    * https://www.huiyingwu.com/1718/
    */

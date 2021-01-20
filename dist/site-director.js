@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥跳转链接直达🔥🔥🔥
 // @description 跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.2
+// @version     1.0.3
 // @author      Czy
 // @include     *://*google.com/*
 // @include     *://*zhihu.com/*
@@ -58,15 +58,17 @@
   var website$1 = {
     regexp: /zhihu/,
     init: function init($) {
-      $("a").each(function (i, v) {
-        var regexp = /https:\/\/link.zhihu.com\/\?target=(.*)/;
+      window.onload = function () {
+        $("a").each(function (i, v) {
+          var regexp = /https:\/\/link.zhihu.com\/\?target=(.*)/;
 
-        if (v.href.match(regexp)) {
-          v.href = v.href.replace(regexp, function ($0, $1) {
-            return decodeURIComponent($1);
-          });
-        }
-      });
+          if (v.href.match(regexp)) {
+            v.href = v.href.replace(regexp, function ($0, $1) {
+              return decodeURIComponent($1);
+            });
+          }
+        });
+      };
     }
   };
 
