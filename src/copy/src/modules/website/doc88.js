@@ -14,7 +14,7 @@ const website = {
         // })
         GM_xmlhttpRequest({
             method: "GET",
-            url: "https://static.doc88.com/resources/js/modules/main-v1.min.js?v=1.29",
+            url: "https://static.doc88.com/resources/js/modules/main-v1.min.js?v=1.90",
             onload: function(response) {
                 path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
             }

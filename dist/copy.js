@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.9
+// @version     2.1.10
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://www.51test.net/show/*
@@ -66,20 +66,26 @@
       $("#_copy").remove();
     });
 
-    document.oncopy = function () {};
+    document.oncopy = function (e) {
+      return e.stopPropagation();
+    };
+
+    document.body.oncopy = function (e) {
+      return e.stopPropagation();
+    };
 
     $("body").on("copy", function (e) {
       e.stopPropagation();
       return true;
     });
-    ClipboardJS.prototype.on('success', function (e) {
+    ClipboardJS.prototype.on("success", function (e) {
       $("#_copy").html("复制成功");
       setTimeout(function () {
         return $("#_copy").fadeOut(1000);
       }, 1000);
       e.clearSelection();
     });
-    ClipboardJS.prototype.on('error', function (e) {
+    ClipboardJS.prototype.on("error", function (e) {
       $("#_copy").html("复制失败");
       setTimeout(function () {
         return $("#_copy").fadeOut(1000);
@@ -102,7 +108,7 @@
       // })
       GM_xmlhttpRequest({
         method: "GET",
-        url: "https://static.doc88.com/resources/js/modules/main-v1.min.js?v=1.29",
+        url: "https://static.doc88.com/resources/js/modules/main-v1.min.js?v=1.90",
         onload: function onload(response) {
           path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
         }
@@ -196,7 +202,7 @@
   };
 
   var website$7 = {
-    regexp: /boke112/,
+    regexp: new RegExp(".+://boke112.com/post/.+"),
     init: function init($) {
       $("body").on("click", function (e) {
         return false;
@@ -207,7 +213,7 @@
   };
 
   var website$8 = {
-    regexp: /yuque/,
+    regexp: new RegExp(".+://www.yuque.com/.+"),
     init: function init($) {
       $("body").append("<style>#_copy{display: none !important;}</style>");
     }

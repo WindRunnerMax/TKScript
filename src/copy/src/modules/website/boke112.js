@@ -1,6 +1,6 @@
 
 const website = {
-    regexp: /boke112/,
+    regexp: new RegExp(".+://boke112.com/post/.+"),
     init: function($) {
         $("body").on("click", e => false);
         const template = `
