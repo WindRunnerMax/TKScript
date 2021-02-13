@@ -7,9 +7,10 @@ import edu30 from "./website/edu30.js";
 import docqq from "./website/docqq.js";
 import boke112 from "./website/boke112.js";
 import yuque from "./website/yuque.js";
+import common from "./website/common.js";
 
 let siteGetSelectedText = null;
-const modules = [doc88, sf, wk, leetcode, zhihu, edu30, docqq, boke112, yuque];
+const modules = [doc88, sf, wk, leetcode, zhihu, edu30, docqq, boke112, yuque, common];
 
 function initWebsite($, ClipboardJS){
     const mather = (regex, site, ...args) => {
