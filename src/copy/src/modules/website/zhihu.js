@@ -2,7 +2,7 @@
 const website = {
     regexp: /.*zhihu\.com\/.+/,
     init: function($) {
-        $("body").append("<style>#_copy{display: none !important;}</style>");
+        $("body").append(`<style id="copy-hide" >#_copy{display: none !important;}</style>`);
     }
 } 
 
