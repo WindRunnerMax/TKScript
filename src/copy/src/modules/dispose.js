@@ -8,10 +8,26 @@ import edu30 from "./website/edu30.js";
 import docqq from "./website/docqq.js";
 import boke112 from "./website/boke112.js";
 import yuque from "./website/yuque.js";
+import diyifanwen from "./website/diyifanwen.js";
+import mbalib from "./website/mbalib.js";
 import common from "./website/common.js";
 
 let siteGetSelectedText = null;
-const modules = [doc88, sf, wk, leetcode, zhihu, zhihuReader, edu30, docqq, boke112, yuque, common];
+const modules = [
+    doc88, 
+    sf, 
+    wk, 
+    leetcode, 
+    zhihu, 
+    zhihuReader, 
+    edu30, 
+    docqq, 
+    boke112, 
+    yuque, 
+    diyifanwen,
+    mbalib,
+    common,
+];
 
 function initWebsite($, ClipboardJS){
     const mather = (regex, site, ...args) => {
@@ -23,11 +39,11 @@ function initWebsite($, ClipboardJS){
     modules.forEach(v => mather(v.regexp, v, $));
 }
 
-function getSelectedText() {
+function getSelectedText() {
     if(siteGetSelectedText) return siteGetSelectedText();
-    if(window.getSelection) return window.getSelection().toString();
-    else if(document.getSelection) return document.getSelection();
-    else if(document.selection) return document.selection.createRange().text;
+    if(window.getSelection) return window.getSelection().toString();
+    else if(document.getSelection) return document.getSelection();
+    else if(document.selection) return document.selection.createRange().text;
     return "";
 }
 
