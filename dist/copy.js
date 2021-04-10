@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.14
+// @version     2.1.15
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -22,6 +22,7 @@
 // @include     *://www.commandlinux.com/*
 // @include     *://*.diyifanwen.com/*
 // @include     *://*.mbalib.com/*
+// @include     *://*.cnitpm.com/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -158,7 +159,7 @@
   };
 
   var website$4 = {
-    regexp: /.*zhihu\.com\/.+/,
+    regexp: /.*zhihu\.com\/.*/,
     init: function init($) {
       $("body").append("<style id=\"copy-hide\" >#_copy{display: none !important;}</style>");
     }
@@ -258,6 +259,19 @@
   };
 
   var website$c = {
+    regexp: /cnitpm/,
+    init: function init($) {
+      window.onload = function () {
+        var container = $("body");
+        container.attr("oncopy", "");
+        container.attr("oncontextmenu", "");
+        container.attr("onselectstart", "");
+        $("body").append("<style id=\"copy-hide\" >#_copy{display: none !important;}</style>");
+      };
+    }
+  };
+
+  var website$d = {
     regexp: new RegExp("commandlinux|cnki"),
     init: function init($) {
       $("body").append("<style>#_copy{display: none !important;}</style>");
@@ -265,7 +279,7 @@
   };
 
   var siteGetSelectedText = null;
-  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c];
+  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$d];
 
   function initWebsite($, ClipboardJS) {
     var mather = function mather(regex, site) {

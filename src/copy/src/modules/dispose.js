@@ -10,6 +10,7 @@ import boke112 from "./website/boke112.js";
 import yuque from "./website/yuque.js";
 import diyifanwen from "./website/diyifanwen.js";
 import mbalib from "./website/mbalib.js";
+import cnitpm from "./website/cnitpm.js";
 import common from "./website/common.js";
 
 let siteGetSelectedText = null;
@@ -26,6 +27,7 @@ const modules = [
     yuque, 
     diyifanwen,
     mbalib,
+    cnitpm,
     common,
 ];
 
