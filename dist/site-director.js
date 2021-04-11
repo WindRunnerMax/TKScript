@@ -68,6 +68,7 @@
           if (cur.nodeName === "A") {
             if (regexp.test(cur.href)) {
               var url = decodeURIComponent(/.*link.zhihu.com\/\?target=(.*)/.exec(cur.href)[1]);
+              console.log(url);
               window.open(url);
               return false;
             }
