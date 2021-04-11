@@ -1,8 +1,9 @@
+import common from "./common.js";
 
 const website = {
     regexp: /.*zhihu\.com\/pub\/reader\/.+/,
     init: function($) {
-        $("#copy-hide").remove();
+        setTimeout(common.showButton, 500, $)
     }
 } 
 

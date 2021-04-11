@@ -1,8 +1,9 @@
+import common from "./common.js";
 
 const website = {
     regexp: /.*docs\.qq\.com\/.+/,
     init: function($) {
-        const hide = () => $("body").append("<style>#_copy{display: none !important;}</style>");
+        const hide = () => common.hideButton($);
         if(unsafeWindow.pad){
             if(unsafeWindow.pad.editor._docEnv.copyable === true) hide();
             unsafeWindow.pad.editor._docEnv.copyable = true;

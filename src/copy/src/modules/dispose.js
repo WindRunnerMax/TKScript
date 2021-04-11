@@ -1,16 +1,15 @@
 import doc88 from "./website/doc88.js";
 import sf from "./website/sf.js";
 import wk from "./website/wk.js";
-import leetcode from "./website/leetcode.js";
 import zhihu from "./website/zhihu.js";
 import zhihuReader from "./website/zhihu-reader.js";
 import edu30 from "./website/edu30.js";
 import docqq from "./website/docqq.js";
 import boke112 from "./website/boke112.js";
-import yuque from "./website/yuque.js";
 import diyifanwen from "./website/diyifanwen.js";
 import mbalib from "./website/mbalib.js";
 import cnitpm from "./website/cnitpm.js";
+import mihoyo from "./website/mihoyo.js";
 import common from "./website/common.js";
 
 let siteGetSelectedText = null;
@@ -18,16 +17,15 @@ const modules = [
     doc88, 
     sf, 
     wk, 
-    leetcode, 
     zhihu, 
     zhihuReader, 
     edu30, 
     docqq, 
     boke112, 
-    yuque, 
     diyifanwen,
     mbalib,
     cnitpm,
+    mihoyo,
     common,
 ];
 

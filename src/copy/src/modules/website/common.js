@@ -1,8 +1,14 @@
 
 const website = {
-    regexp: new RegExp("commandlinux|cnki"),
+    regexp: new RegExp("commandlinux|cnki|leetcode-cn|yuque"),
     init: function($) {
-        $("body").append("<style>#_copy{display: none !important;}</style>");
+        $("body").append(`<style id="copy-hide">#_copy{display: none !important;}</style>`);
+    },
+    hideButton: function($){
+        this.init($);
+    },
+    showButton: function($){
+        $("#copy-hide").remove();
     }
 } 
 

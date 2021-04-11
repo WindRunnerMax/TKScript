@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.1.15
+// @version     2.2.0
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -23,6 +23,7 @@
 // @include     *://*.diyifanwen.com/*
 // @include     *://*.mbalib.com/*
 // @include     *://*.cnitpm.com/*
+// @include     *://bbs.mihoyo.com/ys/obc/*
 // @license     GPL License
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
@@ -139,8 +140,22 @@
   };
 
   var website$2 = {
+    regexp: new RegExp("commandlinux|cnki|leetcode-cn|yuque"),
+    init: function init($) {
+      $("body").append("<style id=\"copy-hide\">#_copy{display: none !important;}</style>");
+    },
+    hideButton: function hideButton($) {
+      this.init($);
+    },
+    showButton: function showButton($) {
+      $("#copy-hide").remove();
+    }
+  };
+
+  var website$3 = {
     regexp: /.*wk\.baidu\.com\/view\/.+/,
     init: function init($) {
+      website$2.hideButton($);
       $(window).on("load", function (e) {
         $(".sf-edu-wenku-vw-container").attr("style", "");
         $(".sfa-body").on("selectstart", function (e) {
@@ -151,24 +166,17 @@
     }
   };
 
-  var website$3 = {
-    regexp: /.*leetcode-cn\.com\/problems\/.+/,
-    init: function init($) {
-      $("body").append("<style>#_copy{display: none !important;}</style>");
-    }
-  };
-
   var website$4 = {
     regexp: /.*zhihu\.com\/.*/,
     init: function init($) {
-      $("body").append("<style id=\"copy-hide\" >#_copy{display: none !important;}</style>");
+      website$2.hideButton($);
     }
   };
 
   var website$5 = {
     regexp: /.*zhihu\.com\/pub\/reader\/.+/,
     init: function init($) {
-      $("#copy-hide").remove();
+      setTimeout(website$2.showButton, 500, $);
     }
   };
 
@@ -193,7 +201,7 @@
     regexp: /.*docs\.qq\.com\/.+/,
     init: function init($) {
       var hide = function hide() {
-        return $("body").append("<style>#_copy{display: none !important;}</style>");
+        return website$2.hideButton($);
       };
 
       if (unsafeWindow.pad) {
@@ -225,13 +233,6 @@
   };
 
   var website$9 = {
-    regexp: new RegExp(".+://www.yuque.com/.+"),
-    init: function init($) {
-      $("body").append("<style>#_copy{display: none !important;}</style>");
-    }
-  };
-
-  var website$a = {
     regexp: /diyifanwen/,
     init: function init($) {
       setTimeout(function () {
@@ -246,7 +247,7 @@
     }
   };
 
-  var website$b = {
+  var website$a = {
     regexp: /mbalib/,
     init: function init($) {
       window.onload = function () {
@@ -258,28 +259,34 @@
     }
   };
 
-  var website$c = {
+  var website$b = {
     regexp: /cnitpm/,
     init: function init($) {
+      website$2.hideButton($);
+
       window.onload = function () {
         var container = $("body");
         container.attr("oncopy", "");
         container.attr("oncontextmenu", "");
         container.attr("onselectstart", "");
-        $("body").append("<style id=\"copy-hide\" >#_copy{display: none !important;}</style>");
       };
     }
   };
 
-  var website$d = {
-    regexp: new RegExp("commandlinux|cnki"),
+  var website$c = {
+    regexp: new RegExp(".+bbs.mihoyo.com/ys/obc.+"),
     init: function init($) {
-      $("body").append("<style>#_copy{display: none !important;}</style>");
+      website$2.hideButton($);
+      $(".detail__content").on("copy", function (e) {
+        return e.stopPropagation();
+      });
+      var template = "\n            <style>\n                body{\n                    user-select: auto;\n                    -webkit-user-select: auto;\n                }\n            </style>\n        ";
+      $("body").append(template.replace(/\s*/, " "));
     }
   };
 
   var siteGetSelectedText = null;
-  var modules = [website, website$1, website$2, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$d];
+  var modules = [website, website$1, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$2];
 
   function initWebsite($, ClipboardJS) {
     var mather = function mather(regex, site) {
