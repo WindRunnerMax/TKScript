@@ -2,14 +2,22 @@
 const website = {
     regexp: /zhihu/,
     init: function($) {
-        window.onload = () => {
-            $("a").each((i, v) => {
-                const regexp = /https:\/\/link.zhihu.com\/\?target=(.*)/;
-                if(v.href.match(regexp)) {
-                    v.href = v.href.replace(regexp, ($0, $1) => decodeURIComponent($1));
+        $(document).on("click", (e) => {
+           let cur = e.target;
+           const regexp = /.*link.zhihu.com\/\?target=(.*)/;
+           for(let i=0; i<5; ++i){
+               if(!cur) break;
+               if(cur.nodeName === "A"){
+                   if(regexp.test(cur.href)){
+                       const url = decodeURIComponent(/.*link.zhihu.com\/\?target=(.*)/.exec(cur.href)[1]);
+                       window.open(url);
+                       return false;
+                    }
+                    break;
                 }
-            });
-        }
+               cur = cur.parentNode;
+            }
+        });
     }
 }
 

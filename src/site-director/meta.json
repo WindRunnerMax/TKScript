@@ -1,7 +1,7 @@
 {
     "name": "🔥🔥🔥跳转链接直达🔥🔥🔥",
     "namespace": "https://github.com/WindrunnerMax/TKScript",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN",
     "author": "Czy",
     "include": [
