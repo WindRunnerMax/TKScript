@@ -22,36 +22,57 @@ const config = {
 
 }
 
-export default [{
-    input: "./src/copy/src/index.js",
-    output: {
-        file: "./dist/copy.js",
-        format: "iife",
-        name: "copyModule"
+const metas = {
+    copy: {
+        input: "./dist/meta/blank.js",
+        output: {
+            file: "./dist/meta/copy.meta.js",
+            format: "es",
+            name: "copyMetaModule"
+        },
+        plugins: [
+            metablock({
+                file: "./src/copy/meta.json"
+            })
+        ]
+    }
+};
+
+const scripts = {
+    copy: {
+        input: "./src/copy/src/index.js",
+        output: {
+            file: "./dist/copy.js",
+            format: "iife",
+            name: "copyModule"
+        },
+        plugins: [
+            postcss(config.postcss),
+            babel(config.babel),
+            // uglify(),
+            metablock({
+                file: "./src/copy/meta.json"
+            })
+        ]
     },
-    plugins: [
-        postcss(config.postcss),
-        babel(config.babel),
-        // uglify(),
-        metablock({
-            file: "./src/copy/meta.json"
-        })
-    ]
-},{
-    input: "./src/site-director/src/index.js",
-    output: {
-        file: "./dist/site-director.js",
-        format: "iife",
-        name: "linkModule"
-    },
-    plugins: [
-        postcss(config.postcss),
-        babel(config.babel),
-        // uglify(),
-        metablock({
-            file: "./src/site-director/meta.json"
-        })
-    ]
-}];
+    siteDirector: {
+        input: "./src/site-director/src/index.js",
+        output: {
+            file: "./dist/site-director.js",
+            format: "iife",
+            name: "linkModule"
+        },
+        plugins: [
+            postcss(config.postcss),
+            babel(config.babel),
+            // uglify(),
+            metablock({
+                file: "./src/site-director/meta.json"
+            })
+        ]
+    }
+};
+
+export default [...Object.values(metas), ...Object.values(scripts)];
 
 // https://segmentfault.com/a/1190000010628352
