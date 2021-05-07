@@ -25,7 +25,12 @@
 // @include     *://*.cnitpm.com/*
 // @include     *://bbs.mihoyo.com/ys/obc/*
 // @include     *://www.ruiwen.com/*
+// @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
+// @installURL  https://github.com/WindrunnerMax/TKScript
+// @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/copy.meta.js
+// @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/copy.js
+// @run-at      document-end
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
 // @connect     static.doc88.com

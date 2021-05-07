@@ -27,7 +27,13 @@
         "*://bbs.mihoyo.com/ys/obc/*",
         "*://www.ruiwen.com/*"
     ],
+    "supportURL": "https://github.com/WindrunnerMax/TKScript/issues",
     "license": "GPL License",
+    "installURL": "https://github.com/WindrunnerMax/TKScript",
+    "updateURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/copy.meta.js",
+    "updateURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/copy.meta.js",
+    "downloadURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/copy.js",
+    "run-at": "document-end",
     "grant": [
         "unsafeWindow",
         "GM_xmlhttpRequest"
