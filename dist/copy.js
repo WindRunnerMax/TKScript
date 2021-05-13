@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.2.2
+// @version     2.2.3
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -25,6 +25,7 @@
 // @include     *://*.cnitpm.com/*
 // @include     *://bbs.mihoyo.com/ys/obc/*
 // @include     *://www.ruiwen.com/*
+// @include     *://www.uemeds.cn/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -291,8 +292,17 @@
     }
   };
 
+  var website$d = {
+    regexp: new RegExp(".+www.uemeds.cn/.+"),
+    init: function init($) {
+      website$2.hideButton($);
+      var template = "\n            <style>\n                .detail-main{\n                    user-select: auto;\n                    -webkit-user-select: auto;\n                }\n            </style>\n        ";
+      $("body").append(template.replace(/\s*/, " "));
+    }
+  };
+
   var siteGetSelectedText = null;
-  var modules = [website, website$1, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$2];
+  var modules = [website, website$1, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$d, website$2];
 
   function initWebsite($, ClipboardJS) {
     var mather = function mather(regex, site) {

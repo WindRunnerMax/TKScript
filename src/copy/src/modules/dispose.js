@@ -10,6 +10,7 @@ import diyifanwen from "./website/diyifanwen.js";
 import mbalib from "./website/mbalib.js";
 import cnitpm from "./website/cnitpm.js";
 import mihoyo from "./website/mihoyo.js";
+import uemeds from "./website/uemeds.js";
 import common from "./website/common.js";
 
 let siteGetSelectedText = null;
@@ -26,6 +27,7 @@ const modules = [
     mbalib,
     cnitpm,
     mihoyo,
+    uemeds,
     common,
 ];
 
