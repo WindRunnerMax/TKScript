@@ -2,7 +2,7 @@
 const website = {
     regexp: new RegExp(".+://boke112.com/post/.+"),
     init: function($) {
-        $("body").on("click", e => false);
+        $("body").on("click", () => false);
         const template = `
             <style>
                 :not(input):not(textarea)::selection {
@@ -18,6 +18,6 @@ const website = {
         `;
         $("body").append(template.replace(/\s*/, " "));
     }
-} 
+};
 
 export default website;
