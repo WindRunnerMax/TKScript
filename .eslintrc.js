@@ -14,7 +14,14 @@ module.exports = {
     "globals": {
         "window": true,
         "unsafeWindow": true,
-        "GM_xmlhttpRequest": true
+        "GM_xmlhttpRequest": true,
+        "console": true,
+        "process": true,
+        "setTimeout": true,
+        "setInterval": true,
+        "clearTimeout": true,
+        "clearInterval": true,
+        "Promise": true
     },
     "rules": {
         // 分号
