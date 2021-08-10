@@ -14,6 +14,6 @@ const website = {
         `;
         $("body").append(template.replace(/\s*/, " "));
     }
-} 
+}; 
 
 export default website;

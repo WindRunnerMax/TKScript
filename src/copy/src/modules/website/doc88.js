@@ -3,7 +3,7 @@ let path = "";
 
 const website = {
     regexp: /.*doc88\.com\/.+/,
-    init: function($) {
+    init: function() {
         // GM_xmlhttpRequest({
         //     method: "GET",
         //     url: "https://res.doc88.com/assets/js/v2.js",
@@ -18,7 +18,7 @@ const website = {
             onload: function(response) {
                 path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
             }
-        })
+        });
     },
     getSelectedText: function(){
         let select = unsafeWindow;
@@ -27,6 +27,6 @@ const website = {
         });
         return select;
     }
-} 
+}; 
 
 export default website;

@@ -12,7 +12,9 @@ module.exports = {
         "sourceType": "module",
     },
     "globals": {
-        "window": true
+        "window": true,
+        "unsafeWindow": true,
+        "GM_xmlhttpRequest": true
     },
     "rules": {
         // 分号

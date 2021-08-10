@@ -5,6 +5,6 @@ const website = {
     init: function($) {
         common.hideButton($);
     }
-} 
+}; 
 
 export default website;

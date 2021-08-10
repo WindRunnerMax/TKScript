@@ -10,6 +10,6 @@ const website = {
     showButton: function($){
         $("#copy-hide").remove();
     }
-} 
+}; 
 
 export default website;

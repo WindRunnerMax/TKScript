@@ -18,6 +18,6 @@ const website = {
         }
         return void 0;
     }
-} 
+}; 
 
 export default website;

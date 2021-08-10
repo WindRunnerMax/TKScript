@@ -5,12 +5,12 @@ const website = {
     init: function($) {
         common.hideButton($);
         window.onload = () => {
-            let container = $("body");
+            const container = $("body");
             container.attr("oncopy", "");
             container.attr("oncontextmenu", "");
             container.attr("onselectstart", "");
-        }
+        };
     }
-} 
+}; 
 
 export default website;
