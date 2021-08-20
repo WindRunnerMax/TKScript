@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.2.5
+// @version     2.2.6
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -122,7 +122,7 @@
       // })
       GM_xmlhttpRequest({
         method: "GET",
-        url: "https://static.doc88.com/resources/js/modules/main-v1.min.js?v=1.90",
+        url: "https://static.doc88.com/resources/js/modules/main-v2.min.js?v=2.78",
         onload: function onload(response) {
           path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
         }
@@ -232,7 +232,7 @@
   var website$8 = {
     regexp: new RegExp(".+://boke112.com/post/.+"),
     init: function init($) {
-      $("body").on("click", function (e) {
+      $("body").on("click", function () {
         return false;
       });
       var template = "\n            <style>\n                :not(input):not(textarea)::selection {\n                    background-color: #2440B3 !important;\n                    color: #fff !important;\n                }\n\n                :not(input):not(textarea)::-moz-selection {\n                    background-color: #2440B3 !important;\n                    color: #fff !important;\n                }\n            </style>\n        ";
