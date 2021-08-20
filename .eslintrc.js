@@ -12,7 +12,16 @@ module.exports = {
         "sourceType": "module",
     },
     "globals": {
-        "window": true
+        "window": true,
+        "unsafeWindow": true,
+        "GM_xmlhttpRequest": true,
+        "console": true,
+        "process": true,
+        "setTimeout": true,
+        "setInterval": true,
+        "clearTimeout": true,
+        "clearInterval": true,
+        "Promise": true
     },
     "rules": {
         // 分号

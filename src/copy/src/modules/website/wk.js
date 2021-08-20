@@ -9,9 +9,9 @@ const website = {
               $(".sfa-body").on("selectstart", function (e) {
                   e.stopPropagation();
                   return true;
-            })
+            });
         });
     }
-} 
+}; 
 
 export default website;

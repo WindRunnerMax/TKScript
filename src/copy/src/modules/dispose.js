@@ -31,13 +31,13 @@ const modules = [
     common,
 ];
 
-function initWebsite($, ClipboardJS){
+function initWebsite($){
     const mather = (regex, site, ...args) => {
         if(regex.test(window.location.href)) {
             site.init(...args);
             if(site.getSelectedText)  siteGetSelectedText = site.getSelectedText;
-        };
-    } 
+        }
+    }; 
     modules.forEach(v => mather(v.regexp, v, $));
 }
 
@@ -50,4 +50,4 @@ function getSelectedText() {
 }
 
 
-export { initWebsite, getSelectedText }
+export { initWebsite, getSelectedText };
