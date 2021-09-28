@@ -5,7 +5,6 @@ const website = {
         window.onload = () => {
             const iframes = document.getElementsByTagName("iframe");
             if(iframes.length === 2){
-                console.log(iframes[1].contentWindow.document);
                 const body = $(iframes[1].contentWindow.document.querySelector("body"));
                 body.attr("oncopy", "");
                 body.attr("oncontextmenu", "");

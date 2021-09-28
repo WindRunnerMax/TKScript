@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.2.6
+// @version     2.2.7
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -27,6 +27,7 @@
 // @include     *://www.ruiwen.com/*
 // @include     *://www.uemeds.cn/*
 // @include     *://www.oh100.com/*
+// @include     *://www.aiyuke.com/news/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -76,7 +77,7 @@
   styleInject(css_248z);
 
   function initEvent($, ClipboardJS) {
-    $("body").on("mousedown", function (e) {
+    $("body").on("mousedown", function () {
       $("#_copy").remove();
     });
 
@@ -120,11 +121,12 @@
       //         path = /<textarea[\s\S]*?Viewer.([\S]*?)\+[\S]*?\/textarea>/.exec(view())[1];
       //     }
       // })
+      $("body").append("<style id=\"copy-hide\">#left-menu{display: none !important;}</style>");
       GM_xmlhttpRequest({
         method: "GET",
         url: "https://static.doc88.com/resources/js/modules/main-v2.min.js?v=2.78",
         onload: function onload(response) {
-          path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
+          path = /<textarea[\s\S]+>'\+([\S]*?)\+"<\/textarea>/.exec(response.responseText)[1];
         }
       });
     },
@@ -141,7 +143,7 @@
     regexp: /.*segmentfault\.com\/.+/,
     init: function init($) {
       $("body").addClass("_sf_adjust_body");
-      $("body").on("click", function (e) {
+      $("body").on("click", function () {
         $("body").css("padding-right", 0);
       });
     }
@@ -164,7 +166,7 @@
     regexp: /.*wk\.baidu\.com\/view\/.+/,
     init: function init($) {
       website$2.hideButton($);
-      $(window).on("load", function (e) {
+      $(window).on("load", function () {
         $(".sf-edu-wenku-vw-container").attr("style", "");
         $(".sfa-body").on("selectstart", function (e) {
           e.stopPropagation();
@@ -195,7 +197,6 @@
         var iframes = document.getElementsByTagName("iframe");
 
         if (iframes.length === 2) {
-          console.log(iframes[1].contentWindow.document);
           var body = $(iframes[1].contentWindow.document.querySelector("body"));
           body.attr("oncopy", "");
           body.attr("oncontextmenu", "");
@@ -242,7 +243,7 @@
 
   var website$9 = {
     regexp: /diyifanwen/,
-    init: function init($) {
+    init: function init() {
       setTimeout(function () {
         document.oncopy = function (e) {
           return e.stopPropagation();
@@ -302,10 +303,18 @@
     }
   };
 
-  var siteGetSelectedText = null;
-  var modules = [website, website$1, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$d, website$2];
+  var website$e = {
+    regexp: new RegExp(".+aiyuke.com/news/.+"),
+    init: function init($) {
+      website$2.hideButton($);
+      $(".news_content_body").css("user-select", "auto");
+    }
+  };
 
-  function initWebsite($, ClipboardJS) {
+  var siteGetSelectedText = null;
+  var modules = [website, website$1, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$d, website$e, website$2];
+
+  function initWebsite($) {
     var mather = function mather(regex, site) {
       if (regex.test(window.location.href)) {
         for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {

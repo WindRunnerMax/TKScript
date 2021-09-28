@@ -3,7 +3,7 @@ let path = "";
 
 const website = {
     regexp: /.*doc88\.com\/.+/,
-    init: function() {
+    init: function($) {
         // GM_xmlhttpRequest({
         //     method: "GET",
         //     url: "https://res.doc88.com/assets/js/v2.js",
@@ -12,11 +12,12 @@ const website = {
         //         path = /<textarea[\s\S]*?Viewer.([\S]*?)\+[\S]*?\/textarea>/.exec(view())[1];
         //     }
         // })
+        $("body").append(`<style id="copy-hide">#left-menu{display: none !important;}</style>`);
         GM_xmlhttpRequest({
             method: "GET",
             url: "https://static.doc88.com/resources/js/modules/main-v2.min.js?v=2.78",
             onload: function(response) {
-                path = /<textarea[\s\S]+>'\+([\S]*?)\+\"<\/textarea>/.exec(response.responseText)[1];
+                path = /<textarea[\s\S]+>'\+([\S]*?)\+"<\/textarea>/.exec(response.responseText)[1];
             }
         });
     },
