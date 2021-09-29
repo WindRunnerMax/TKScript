@@ -76,7 +76,7 @@
   var css_248z = "#_copy{width:60px;height:30px;background:#4c98f7;color:#fff;position:absolute;z-index:1000;display:flex;justify-content:center;align-items:center;border-radius:3px;font-size:13px;cursor:pointer}#select-tooltip,#sfModal,.modal-backdrop,div[id^=reader-helper]{display:none!important}.modal-open{overflow:auto!important}._sf_adjust_body{padding-right:0!important}";
   styleInject(css_248z);
 
-  function initEvent($, ClipboardJS) {
+  var initEvent = function initEvent($, ClipboardJS) {
     $("body").on("mousedown", function () {
       $("#_copy").remove();
     });
@@ -107,7 +107,7 @@
       }, 1000);
       e.clearSelection();
     });
-  }
+  };
 
   var path = "";
   var website = {

@@ -1,6 +1,6 @@
 import "./style.css";
-import { initEvent } from "./modules/event.js";
-import { initWebsite, getSelectedText } from "./modules/dispose.js";
+import { initEvent } from "./event.js";
+import { initWebsite, getSelectedText } from "./dispose.js";
 
 (function() {
     const $ = window.$;

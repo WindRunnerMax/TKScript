@@ -1,4 +1,4 @@
-function initEvent($, ClipboardJS) {
+export const initEvent = ($, ClipboardJS) => {
     $("body").on("mousedown", () => {
         $("#_copy").remove();
     });
@@ -20,5 +20,3 @@ function initEvent($, ClipboardJS) {
         e.clearSelection();
     });
 }
-
-export { initEvent };
