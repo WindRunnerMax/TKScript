@@ -1,6 +1,6 @@
 
 const website = {
-    regexp: new RegExp("commandlinux|cnki|leetcode-cn|ruiwen|oh100|fwsir|wenxm|unjs"),
+    regexp: new RegExp("commandlinux|cnki|leetcode-cn|ruiwen|oh100|fwsir|wenxm|unjs|ahsrst"),
     init: function($) {
         $("body").append(`<style id="copy-hide">#_copy{display: none !important;}</style>`);
     },
