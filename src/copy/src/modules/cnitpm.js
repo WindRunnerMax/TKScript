@@ -1,9 +1,9 @@
-import common from "./common.js";
+import utils from "../utils";
 
 const website = {
     regexp: /cnitpm/,
     init: function($) {
-        common.hideButton($);
+        utils.hideButton($);
         window.onload = () => {
             const container = $("body");
             container.attr("oncopy", "");

@@ -19,4 +19,4 @@ export const initEvent = ($, ClipboardJS) => {
         setTimeout(() => $("#_copy").fadeOut(1000), 1000);
         e.clearSelection();
     });
-}
+};

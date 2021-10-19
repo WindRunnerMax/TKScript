@@ -1,15 +1,10 @@
+import utils from "../utils";
 
 const website = {
     regexp: new RegExp("commandlinux|cnki|leetcode-cn|ruiwen|oh100|fwsir|wenxm|unjs|ahsrst|yjbys"),
     init: function($) {
-        $("body").append(`<style id="copy-hide">#_copy{display: none !important;}</style>`);
+        utils.hideButton($);
     },
-    hideButton: function($){
-        this.init($);
-    },
-    showButton: function($){
-        $("#copy-hide").remove();
-    }
 }; 
 
 export default website;

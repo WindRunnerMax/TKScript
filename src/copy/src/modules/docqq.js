@@ -1,9 +1,9 @@
-import common from "./common.js";
+import utils from "../utils";
 
 const website = {
     regexp: /.*docs\.qq\.com\/.+/,
     init: function($) {
-        const hide = () => common.hideButton($);
+        const hide = () => utils.hideButton($);
         if(unsafeWindow.pad){
             if(unsafeWindow.pad.editor._docEnv.copyable === true) hide();
             unsafeWindow.pad.editor._docEnv.copyable = true;

@@ -1,9 +1,9 @@
-import common from "./common.js";
+import utils from "../utils";
 
 const website = {
     regexp: new RegExp(".+www.uemeds.cn/.+"),
     init: function($) {
-        common.hideButton($);
+        utils.hideButton($);
         const template = `
             <style>
                 .detail-main{

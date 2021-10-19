@@ -1,9 +1,9 @@
-import common from "./common.js";
+import utils from "../utils";
 
 const website = {
     regexp: /.*zhihu\.com\/pub\/reader\/.+/,
     init: function($) {
-        setTimeout(common.showButton, 500, $);
+        setTimeout(utils.showButton, 500, $);
     }
 }; 
 

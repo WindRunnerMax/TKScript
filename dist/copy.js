@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     2.2.10
+// @version     2.3.1
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -33,6 +33,11 @@
 // @include     *://www.unjs.com/*
 // @include     *://www.ahsrst.cn/*
 // @include     *://*.yjbys.com/*
+// @include     *://*.qidian.com/*
+// @include     *://*.zongheng.com/*
+// @include     *://*.17k.com/*
+// @include     *://*.ciweimao.com/*
+// @include     *://book.qq.com/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -154,23 +159,64 @@
     }
   };
 
-  var website$2 = {
-    regexp: new RegExp("commandlinux|cnki|leetcode-cn|ruiwen|oh100|fwsir|wenxm|unjs|ahsrst|yjbys"),
-    init: function init($) {
-      $("body").append("<style id=\"copy-hide\">#_copy{display: none !important;}</style>");
-    },
+  var utils = {
     hideButton: function hideButton($) {
-      this.init($);
+      $("body").append("<style id=\"copy-hide\">#_copy{display: none !important;}</style>");
     },
     showButton: function showButton($) {
       $("#copy-hide").remove();
+    },
+    enableUserSelect: function enableUserSelect($, selector) {
+      var inline = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var cur = $(selector);
+
+      if (inline) {
+        cur.css("user-select", "auto !important");
+        cur.css("-webkit-user-select", "auto !important");
+      } else {
+        var template = "\n                <style>\n                    ".concat(selector, "{\n                        user-select: auto !important;\n                        -webkit-user-select: auto !important;\n                    }\n                </style>\n            ");
+        $("body").append(template.replace(/\s*/, " "));
+      }
+    },
+    enableOnSelectStart: function enableOnSelectStart($, selector) {
+      $(selector).on("selectstart", function (e) {
+        e.stopPropagation();
+        return true;
+      });
+    },
+    enableOnContextMenu: function enableOnContextMenu($, selector) {
+      $(selector).on("contextmenu", function (e) {
+        e.stopPropagation();
+        return true;
+      });
+    },
+    enableOnCopy: function enableOnCopy($, selector) {
+      $(selector).on("copy", function (e) {
+        e.stopPropagation();
+        return true;
+      });
+    },
+    enableOnKeyDown: function enableOnKeyDown($, selector) {
+      $(selector).on("keydown", function (e) {
+        if (e.key === "c" && e.ctrlKey) {
+          e.stopPropagation();
+          return true;
+        }
+      });
+    },
+    removeAttributes: function removeAttributes($, selector) {
+      var attr = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      var dom = $(selector);
+      attr.forEach(function (item) {
+        return dom.removeAttr(item);
+      });
     }
   };
 
-  var website$3 = {
+  var website$2 = {
     regexp: /.*wk\.baidu\.com\/view\/.+/,
     init: function init($) {
-      website$2.hideButton($);
+      utils.hideButton($);
       $(window).on("load", function () {
         $(".sf-edu-wenku-vw-container").attr("style", "");
         $(".sfa-body").on("selectstart", function (e) {
@@ -181,21 +227,21 @@
     }
   };
 
-  var website$4 = {
+  var website$3 = {
     regexp: /.*zhihu\.com\/.*/,
     init: function init($) {
-      website$2.hideButton($);
+      utils.hideButton($);
+    }
+  };
+
+  var website$4 = {
+    regexp: /.*zhihu\.com\/pub\/reader\/.+/,
+    init: function init($) {
+      setTimeout(utils.showButton, 500, $);
     }
   };
 
   var website$5 = {
-    regexp: /.*zhihu\.com\/pub\/reader\/.+/,
-    init: function init($) {
-      setTimeout(website$2.showButton, 500, $);
-    }
-  };
-
-  var website$6 = {
     regexp: /.*30edu\.com\.cn\/.+/,
     init: function init($) {
       window.onload = function () {
@@ -211,11 +257,11 @@
     }
   };
 
-  var website$7 = {
+  var website$6 = {
     regexp: /.*docs\.qq\.com\/.+/,
     init: function init($) {
       var hide = function hide() {
-        return website$2.hideButton($);
+        return utils.hideButton($);
       };
 
       if (unsafeWindow.pad) {
@@ -235,7 +281,7 @@
     }
   };
 
-  var website$8 = {
+  var website$7 = {
     regexp: new RegExp(".+://boke112.com/post/.+"),
     init: function init($) {
       $("body").on("click", function () {
@@ -246,7 +292,7 @@
     }
   };
 
-  var website$9 = {
+  var website$8 = {
     regexp: /diyifanwen/,
     init: function init() {
       setTimeout(function () {
@@ -261,7 +307,7 @@
     }
   };
 
-  var website$a = {
+  var website$9 = {
     regexp: /mbalib/,
     init: function init($) {
       window.onload = function () {
@@ -273,10 +319,10 @@
     }
   };
 
-  var website$b = {
+  var website$a = {
     regexp: /cnitpm/,
     init: function init($) {
-      website$2.hideButton($);
+      utils.hideButton($);
 
       window.onload = function () {
         var container = $("body");
@@ -287,10 +333,10 @@
     }
   };
 
-  var website$c = {
+  var website$b = {
     regexp: new RegExp(".+bbs.mihoyo.com/ys/obc.+"),
     init: function init($) {
-      website$2.hideButton($);
+      utils.hideButton($);
       $(".detail__content").on("copy", function (e) {
         return e.stopPropagation();
       });
@@ -299,25 +345,86 @@
     }
   };
 
-  var website$d = {
+  var website$c = {
     regexp: new RegExp(".+www.uemeds.cn/.+"),
     init: function init($) {
-      website$2.hideButton($);
+      utils.hideButton($);
       var template = "\n            <style>\n                .detail-main{\n                    user-select: auto;\n                    -webkit-user-select: auto;\n                }\n            </style>\n        ";
       $("body").append(template.replace(/\s*/, " "));
     }
   };
 
-  var website$e = {
+  var website$d = {
     regexp: new RegExp(".+aiyuke.com/news/.+"),
     init: function init($) {
-      website$2.hideButton($);
+      utils.hideButton($);
       $(".news_content_body").css("user-select", "auto");
     }
   };
 
+  var website$e = {
+    regexp: new RegExp("qidian"),
+    init: function init($) {
+      utils.hideButton($);
+      utils.enableUserSelect($, "body");
+      utils.enableOnCopy($, ".main-read-container");
+      utils.enableOnContextMenu($, ".main-read-container");
+    }
+  };
+
+  var website$f = {
+    regexp: new RegExp("zongheng"),
+    init: function init($) {
+      utils.removeAttributes($, ".reader_box", ["style", "unselectable", "onselectstart"]);
+      utils.hideButton($);
+      utils.enableOnKeyDown($, "body");
+      utils.enableUserSelect($, ".reader_box .content p");
+      utils.enableOnCopy($, ".content");
+      utils.enableOnContextMenu($, "body");
+      utils.enableOnSelectStart($, ".content");
+    }
+  };
+
+  var website$g = {
+    regexp: new RegExp("17k"),
+    init: function init($) {
+      utils.hideButton($);
+      utils.enableOnCopy($, ".readAreaBox .p");
+    }
+  };
+
+  var website$h = {
+    regexp: new RegExp("ciweimao"),
+    init: function init($) {
+      utils.hideButton($);
+      utils.enableUserSelect($, "#J_BookRead");
+      utils.enableOnCopy($, "#J_BookCnt");
+      utils.enableOnContextMenu($, "body");
+      utils.enableOnSelectStart($, "#J_BookCnt");
+    }
+  };
+
+  var website$i = {
+    regexp: new RegExp("book\\.qq"),
+    init: function init($) {
+      utils.hideButton($);
+      utils.enableUserSelect($, "body");
+      utils.enableOnCopy($, "body");
+      utils.enableOnContextMenu($, "body");
+      utils.enableOnSelectStart($, "body");
+    }
+  };
+
+  var website$j = {
+    regexp: new RegExp("commandlinux|cnki|leetcode-cn|ruiwen|oh100|fwsir|wenxm|unjs|ahsrst|yjbys"),
+    init: function init($) {
+      utils.hideButton($);
+    }
+  };
+
+  var websites = [website, website$1, website$2, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$d, website$e, website$f, website$g, website$h, website$i, website$j];
+
   var siteGetSelectedText = null;
-  var modules = [website, website$1, website$3, website$4, website$5, website$6, website$7, website$8, website$9, website$a, website$b, website$c, website$d, website$e, website$2];
 
   function initWebsite($) {
     var mather = function mather(regex, site) {
@@ -331,7 +438,7 @@
       }
     };
 
-    modules.forEach(function (v) {
+    websites.forEach(function (v) {
       return mather(v.regexp, v, $);
     });
   }

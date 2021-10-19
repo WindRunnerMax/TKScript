@@ -1,9 +1,9 @@
-import common from "./common.js";
+import utils from "../utils";
 
 const website = {
     regexp: /.*zhihu\.com\/.*/,
     init: function($) {
-        common.hideButton($);
+        utils.hideButton($);
     }
 }; 
 

@@ -1,9 +1,9 @@
-import common from "./common.js";
+import utils from "../utils";
 
 const website = {
     regexp: new RegExp(".+aiyuke.com/news/.+"),
     init: function($) {
-        common.hideButton($);
+        utils.hideButton($);
         $(".news_content_body").css("user-select", "auto");
     }
 }; 
