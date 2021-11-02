@@ -1,2 +1,3 @@
 backup
 node_modules
+*.log

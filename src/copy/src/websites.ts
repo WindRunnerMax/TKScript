@@ -19,15 +19,21 @@ import ciweimao from "./modules/ciweimao";
 import qqbook from "./modules/qqbook";
 import common from "./modules/common";
 
-export default [
-    doc88, 
-    sf, 
-    wk, 
-    zhihu, 
-    zhihuReader, 
-    edu30, 
-    docqq, 
-    boke112, 
+export interface Website {
+    regexp: RegExp;
+    init: ($: JQueryStatic) => void;
+    getSelectedText?: () => string;
+}
+
+const websites: Website[] = [
+    doc88,
+    sf,
+    wk,
+    zhihu,
+    zhihuReader,
+    edu30,
+    docqq,
+    boke112,
     diyifanwen,
     mbalib,
     cnitpm,
@@ -41,3 +47,5 @@ export default [
     qqbook,
     common,
 ];
+
+export default websites;

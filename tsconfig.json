@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "strict": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators":true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "declaration": false,
+    "baseUrl": ".",
+    "paths": {},
+    "types": [
+      "@types/node",
+      "@types/jquery",
+    ],
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

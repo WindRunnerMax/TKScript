@@ -12,7 +12,6 @@
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
 // ==/UserScript==
-
 (function () {
   'use strict';
 
@@ -48,7 +47,7 @@
   var css_248z = "";
   styleInject(css_248z);
 
-  var website = {
+  var website$2 = {
     regexp: /google/,
     init: function init($) {
       $("#res a").attr("target", "_blank");
@@ -82,7 +81,7 @@
     }
   };
 
-  var website$2 = {
+  var website = {
     regexp: /csdn/,
     init: function init($) {
       $("#article_content  a:not([name])").each(function (i, v) {
@@ -93,7 +92,7 @@
     }
   };
 
-  var modules = [website, website$1, website$2];
+  var modules = [website$2, website$1, website];
 
   (function () {
     var $ = window.$;

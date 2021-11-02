@@ -1,11 +1,12 @@
 import utils from "../utils";
+import { Website } from "../websites";
 
-const website = {
+const website: Website = {
     regexp: new RegExp("17k"),
-    init: function($) {
+    init: $ => {
         utils.hideButton($);
         utils.enableOnCopy($, ".readAreaBox .p");
-    }
-}; 
+    },
+};
 
 export default website;

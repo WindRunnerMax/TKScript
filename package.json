@@ -2,21 +2,45 @@
   "name": "TKScript",
   "version": "1.0.0",
   "description": "油猴插件",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/WindrunnerMax/TKScript"
+  },
   "scripts": {
     "build": "rollup -c"
   },
   "author": "Czy",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "@babel/preset-typescript": "^7.15.0",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@types/jquery": "^3.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "clipboard": "^2.0.8",
     "eslint": "^7.32.0",
-    "install": "^0.13.0",
-    "npm": "^6.14.5",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.1.0",
+    "jquery": "^3.6.0",
+    "jsdom": "^17.0.0",
+    "postcss": "^8.3.11",
+    "prettier": "^2.3.2",
     "rollup": "^2.18.2",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-postcss": "^3.1.2",
-    "rollup-plugin-uglify": "^6.0.4",
-    "rollup-plugin-userscript-metablock": "^0.2.5"
+    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-userscript-metablock": "^0.3.1",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.2"
   }
 }

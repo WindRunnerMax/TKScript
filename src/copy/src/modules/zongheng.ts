@@ -1,8 +1,9 @@
 import utils from "../utils";
+import { Website } from "../websites";
 
-const website = {
+const website: Website = {
     regexp: new RegExp("zongheng"),
-    init: function($) {
+    init: function ($) {
         utils.removeAttributes($, ".reader_box", ["style", "unselectable", "onselectstart"]);
         utils.hideButton($);
         utils.enableOnKeyDown($, "body");
@@ -10,7 +11,7 @@ const website = {
         utils.enableOnCopy($, ".content");
         utils.enableOnContextMenu($, "body");
         utils.enableOnSelectStart($, ".content");
-    }
-}; 
+    },
+};
 
 export default website;

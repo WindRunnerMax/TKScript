@@ -1,16 +1,16 @@
 export default {
-    hideButton: function($){
+    hideButton: ($: JQueryStatic): void => {
         $("body").append(`<style id="copy-hide">#_copy{display: none !important;}</style>`);
     },
-    showButton: function($){
+    showButton: ($: JQueryStatic): void => {
         $("#copy-hide").remove();
     },
-    enableUserSelect: function($, selector, inline = false){
+    enableUserSelect: ($: JQueryStatic, selector: string, inline = false): void => {
         const cur = $(selector);
-        if(inline){
+        if (inline) {
             cur.css("user-select", "auto !important");
             cur.css("-webkit-user-select", "auto !important");
-        }else{
+        } else {
             const template = `
                 <style>
                     ${selector}{
@@ -22,34 +22,34 @@ export default {
             $("body").append(template.replace(/\s*/, " "));
         }
     },
-    enableOnSelectStart: function($, selector){
+    enableOnSelectStart: ($: JQueryStatic, selector: string): void => {
         $(selector).on("selectstart", e => {
             e.stopPropagation();
             return true;
         });
     },
-    enableOnContextMenu: function($, selector){
+    enableOnContextMenu: ($: JQueryStatic, selector: string): void => {
         $(selector).on("contextmenu", e => {
             e.stopPropagation();
             return true;
         });
     },
-    enableOnCopy: function($, selector){
+    enableOnCopy: ($: JQueryStatic, selector: string): void => {
         $(selector).on("copy", e => {
             e.stopPropagation();
             return true;
         });
     },
-    enableOnKeyDown: function($, selector){
+    enableOnKeyDown: ($: JQueryStatic, selector: string): void => {
         $(selector).on("keydown", e => {
-            if(e.key === "c" && e.ctrlKey){
+            if (e.key === "c" && e.ctrlKey) {
                 e.stopPropagation();
                 return true;
             }
         });
     },
-    removeAttributes: function($, selector, attr = []){
+    removeAttributes: ($: JQueryStatic, selector: string, attr: string[] = []): void => {
         const dom = $(selector);
         attr.forEach(item => dom.removeAttr(item));
     },
-}; 
+};
