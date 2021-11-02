@@ -39,7 +39,9 @@
         "*://*.17k.com/*",
         "*://*.ciweimao.com/*",
         "*://book.qq.com/*",
-        "*://*.360doc.com/content/*"
+        "*://*.360doc.com/content/*",
+        "*://*.850500.com/news/*",
+        "*://utaten.com/lyric/*"
     ],
     "supportURL": "https://github.com/WindrunnerMax/TKScript/issues",
     "license": "GPL License",

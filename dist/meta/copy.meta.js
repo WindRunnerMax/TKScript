@@ -39,6 +39,8 @@
 // @include     *://*.ciweimao.com/*
 // @include     *://book.qq.com/*
 // @include     *://*.360doc.com/content/*
+// @include     *://*.850500.com/news/*
+// @include     *://utaten.com/lyric/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript

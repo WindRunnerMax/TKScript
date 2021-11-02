@@ -8,8 +8,8 @@ export default {
     enableUserSelect: ($: JQueryStatic, selector: string, inline = false): void => {
         const cur = $(selector);
         if (inline) {
-            cur.css("user-select", "auto !important");
-            cur.css("-webkit-user-select", "auto !important");
+            cur.css("user-select", "auto");
+            cur.css("-webkit-user-select", "auto");
         } else {
             const template = `
                 <style>

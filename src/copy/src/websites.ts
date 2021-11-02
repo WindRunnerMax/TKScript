@@ -17,6 +17,7 @@ import zongheng from "./modules/zongheng";
 import k17 from "./modules/17k";
 import ciweimao from "./modules/ciweimao";
 import qqbook from "./modules/qqbook";
+import utaten from "./modules/utaten";
 import common from "./modules/common";
 
 export interface Website {
@@ -45,6 +46,7 @@ const websites: Website[] = [
     k17,
     ciweimao,
     qqbook,
+    utaten,
     common,
 ];
 

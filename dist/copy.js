@@ -39,6 +39,8 @@
 // @include     *://*.ciweimao.com/*
 // @include     *://book.qq.com/*
 // @include     *://*.360doc.com/content/*
+// @include     *://*.850500.com/news/*
+// @include     *://utaten.com/lyric/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -109,7 +111,7 @@
   };
 
   var path = "";
-  var website$j = {
+  var website$k = {
       regexp: /.*doc88\.com\/.+/,
       init: function ($) {
           // GM_xmlhttpRequest({
@@ -138,7 +140,7 @@
       },
   };
 
-  var website$i = {
+  var website$j = {
       regexp: /.*segmentfault\.com\/.+/,
       init: function ($) {
           $("body").addClass("_sf_adjust_body");
@@ -159,8 +161,8 @@
           if (inline === void 0) { inline = false; }
           var cur = $(selector);
           if (inline) {
-              cur.css("user-select", "auto !important");
-              cur.css("-webkit-user-select", "auto !important");
+              cur.css("user-select", "auto");
+              cur.css("-webkit-user-select", "auto");
           }
           else {
               var template = "\n                <style>\n                    " + selector + "{\n                        user-select: auto !important;\n                        -webkit-user-select: auto !important;\n                    }\n                </style>\n            ";
@@ -200,7 +202,7 @@
       },
   };
 
-  var website$h = {
+  var website$i = {
       regexp: /.*wk\.baidu\.com\/view\/.+/,
       init: function ($) {
           utils.hideButton($);
@@ -214,21 +216,21 @@
       },
   };
 
-  var website$g = {
+  var website$h = {
       regexp: /.*zhihu\.com\/.*/,
       init: function ($) {
           utils.hideButton($);
       },
   };
 
-  var website$f = {
+  var website$g = {
       regexp: /.*zhihu\.com\/pub\/reader\/.+/,
       init: function ($) {
           setTimeout(utils.showButton, 500, $);
       },
   };
 
-  var website$e = {
+  var website$f = {
       regexp: /.*30edu\.com\.cn\/.+/,
       init: function ($) {
           window.onload = function () {
@@ -243,7 +245,7 @@
       },
   };
 
-  var website$d = {
+  var website$e = {
       regexp: /.*docs\.qq\.com\/.+/,
       init: function ($) {
           var hide = function () { return utils.hideButton($); };
@@ -265,7 +267,7 @@
       },
   };
 
-  var website$c = {
+  var website$d = {
       regexp: new RegExp(".+://boke112.com/post/.+"),
       init: function ($) {
           $("body").on("click", function () { return false; });
@@ -274,7 +276,7 @@
       },
   };
 
-  var website$b = {
+  var website$c = {
       regexp: /diyifanwen/,
       init: function () {
           setTimeout(function () {
@@ -284,7 +286,7 @@
       },
   };
 
-  var website$a = {
+  var website$b = {
       regexp: /mbalib/,
       init: function ($) {
           window.onload = function () {
@@ -296,7 +298,7 @@
       },
   };
 
-  var website$9 = {
+  var website$a = {
       regexp: /cnitpm/,
       init: function ($) {
           utils.hideButton($);
@@ -309,7 +311,7 @@
       },
   };
 
-  var website$8 = {
+  var website$9 = {
       regexp: new RegExp(".+bbs.mihoyo.com/ys/obc.+"),
       init: function ($) {
           utils.hideButton($);
@@ -319,7 +321,7 @@
       },
   };
 
-  var website$7 = {
+  var website$8 = {
       regexp: new RegExp(".+www.uemeds.cn/.+"),
       init: function ($) {
           utils.hideButton($);
@@ -328,7 +330,7 @@
       },
   };
 
-  var website$6 = {
+  var website$7 = {
       regexp: new RegExp(".+aiyuke.com/news/.+"),
       init: function ($) {
           utils.hideButton($);
@@ -336,7 +338,7 @@
       },
   };
 
-  var website$5 = {
+  var website$6 = {
       regexp: new RegExp("qidian"),
       init: function ($) {
           utils.hideButton($);
@@ -346,7 +348,7 @@
       },
   };
 
-  var website$4 = {
+  var website$5 = {
       regexp: new RegExp("zongheng"),
       init: function ($) {
           utils.removeAttributes($, ".reader_box", ["style", "unselectable", "onselectstart"]);
@@ -359,7 +361,7 @@
       },
   };
 
-  var website$3 = {
+  var website$4 = {
       regexp: new RegExp("17k"),
       init: function ($) {
           utils.hideButton($);
@@ -367,7 +369,7 @@
       },
   };
 
-  var website$2 = {
+  var website$3 = {
       regexp: new RegExp("ciweimao"),
       init: function ($) {
           utils.hideButton($);
@@ -378,7 +380,7 @@
       },
   };
 
-  var website$1 = {
+  var website$2 = {
       regexp: new RegExp("book\\.qq"),
       init: function ($) {
           utils.hideButton($);
@@ -386,6 +388,15 @@
           utils.enableOnCopy($, "body");
           utils.enableOnContextMenu($, "body");
           utils.enableOnSelectStart($, "body");
+      },
+  };
+
+  var website$1 = {
+      regexp: new RegExp("utaten"),
+      init: function ($) {
+          utils.removeAttributes($, "body", ["oncontextmenu", "onselectstart"]);
+          utils.hideButton($);
+          utils.enableUserSelect($, ".lyricBody", true);
       },
   };
 
@@ -402,6 +413,7 @@
           "ahsrst",
           "yjbys",
           "360doc",
+          "850500",
       ].join("|")),
       init: function ($) {
           utils.hideButton($);
@@ -409,6 +421,7 @@
   };
 
   var websites = [
+      website$k,
       website$j,
       website$i,
       website$h,
