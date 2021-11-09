@@ -16,7 +16,7 @@ const website: Website = {
         $("body").append(`<style id="copy-hide">#left-menu{display: none !important;}</style>`);
         GM_xmlhttpRequest({
             method: "GET",
-            url: "https://static.doc88.com/resources/js/modules/main-v2.min.js?v=2.78",
+            url: "https://res1.doc88.com/resources/js/modules/main-v2.min.js?v=2.90",
             onload: function (response) {
                 path = /<textarea[\s\S]+>'\+([\S]*?)\+"<\/textarea>/.exec(response.responseText)[1];
             },
