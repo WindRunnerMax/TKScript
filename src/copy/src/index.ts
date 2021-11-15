@@ -5,8 +5,8 @@ import { initWebsite, getSelectedText } from "./dispose";
 (function () {
     const $ = window.$;
     const ClipboardJS = window.ClipboardJS; // https://clipboardjs.com/#example-text
-    initEvent($);
-    initWebsite($);
+    const websiteConfig = initWebsite($);
+    initEvent($, websiteConfig);
     document.addEventListener("mouseup", e => {
         const copyText = getSelectedText();
         if (copyText) console.log(copyText);

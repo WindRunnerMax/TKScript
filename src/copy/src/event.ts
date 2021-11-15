@@ -1,11 +1,15 @@
-export const initEvent = ($: JQueryStatic): void => {
+import { WebsiteConfig } from "./websites";
+
+export const initEvent = ($: JQueryStatic, websiteConfig: WebsiteConfig): void => {
     $("body").on("mousedown", () => $("#_copy").remove());
-    document.oncopy = e => e.stopPropagation();
-    document.body.oncopy = e => e.stopPropagation();
-    $("body").on("copy", e => {
-        e.stopPropagation();
-        return true;
-    });
+    if (websiteConfig.initCopyEvent) {
+        document.oncopy = e => e.stopPropagation();
+        document.body.oncopy = e => e.stopPropagation();
+        $("body").on("copy", e => {
+            e.stopPropagation();
+            return true;
+        });
+    }
 };
 
 export const bindClipboardEvent = (clipboard: ClipboardJS): void => {

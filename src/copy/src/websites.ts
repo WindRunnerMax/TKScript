@@ -20,7 +20,11 @@ import qqbook from "./modules/qqbook";
 import utaten from "./modules/utaten";
 import common from "./modules/common";
 
+export interface WebsiteConfig {
+    initCopyEvent?: boolean;
+}
 export interface Website {
+    config?: WebsiteConfig;
     regexp: RegExp;
     init: ($: JQueryStatic) => void;
     getSelectedText?: () => string;

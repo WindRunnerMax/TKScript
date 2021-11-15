@@ -3,17 +3,25 @@ import { Website } from "../websites";
 
 const website: Website = {
     regexp: /.*docs\.qq\.com\/.+/,
+    config: {
+        initCopyEvent: false,
+    },
     init: function ($) {
-        const hide = () => utils.hideButton($);
-        if (unsafeWindow.pad) {
-            if (unsafeWindow.pad.editor._docEnv.copyable === true) hide();
-            unsafeWindow.pad.editor._docEnv.copyable = true;
-        } else {
-            hide();
-        }
+        window.onload = () => {
+            if (unsafeWindow.pad) {
+                if (unsafeWindow.pad.editor._docEnv.copyable === true) {
+                    this.getSelectedText = null;
+                    utils.hideButton($);
+                }
+                unsafeWindow.pad.editor._docEnv.copyable = true;
+            } else {
+                utils.hideButton($);
+            }
+        };
     },
     getSelectedText: function () {
         if (unsafeWindow.pad) {
+            unsafeWindow.pad.editor._docEnv.copyable = true;
             unsafeWindow.pad.editor.clipboardManager.copy();
             return unsafeWindow.pad.editor.clipboardManager.customClipboard.plain;
         }

@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.0.3
+// @version     3.0.4
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -89,14 +89,16 @@
   var css_248z = "#_copy{align-items:center;background:#4c98f7;border-radius:3px;color:#fff;cursor:pointer;display:flex;font-size:13px;height:30px;justify-content:center;position:absolute;width:60px;z-index:1000}#select-tooltip,#sfModal,.modal-backdrop,div[id^=reader-helper]{display:none!important}.modal-open{overflow:auto!important}._sf_adjust_body{padding-right:0!important}";
   styleInject(css_248z);
 
-  var initEvent = function ($) {
+  var initEvent = function ($, websiteConfig) {
       $("body").on("mousedown", function () { return $("#_copy").remove(); });
-      document.oncopy = function (e) { return e.stopPropagation(); };
-      document.body.oncopy = function (e) { return e.stopPropagation(); };
-      $("body").on("copy", function (e) {
-          e.stopPropagation();
-          return true;
-      });
+      if (websiteConfig.initCopyEvent) {
+          document.oncopy = function (e) { return e.stopPropagation(); };
+          document.body.oncopy = function (e) { return e.stopPropagation(); };
+          $("body").on("copy", function (e) {
+              e.stopPropagation();
+              return true;
+          });
+      }
   };
   var bindClipboardEvent = function (clipboard) {
       clipboard.on("success", function (e) {
@@ -248,19 +250,27 @@
 
   var website$e = {
       regexp: /.*docs\.qq\.com\/.+/,
+      config: {
+          initCopyEvent: false,
+      },
       init: function ($) {
-          var hide = function () { return utils.hideButton($); };
-          if (unsafeWindow.pad) {
-              if (unsafeWindow.pad.editor._docEnv.copyable === true)
-                  hide();
-              unsafeWindow.pad.editor._docEnv.copyable = true;
-          }
-          else {
-              hide();
-          }
+          var _this = this;
+          window.onload = function () {
+              if (unsafeWindow.pad) {
+                  if (unsafeWindow.pad.editor._docEnv.copyable === true) {
+                      _this.getSelectedText = null;
+                      utils.hideButton($);
+                  }
+                  unsafeWindow.pad.editor._docEnv.copyable = true;
+              }
+              else {
+                  utils.hideButton($);
+              }
+          };
       },
       getSelectedText: function () {
           if (unsafeWindow.pad) {
+              unsafeWindow.pad.editor._docEnv.copyable = true;
               unsafeWindow.pad.editor.clipboardManager.copy();
               return unsafeWindow.pad.editor.clipboardManager.customClipboard.plain;
           }
@@ -353,6 +363,7 @@
       regexp: new RegExp("zongheng"),
       init: function ($) {
           utils.removeAttributes($, ".reader_box", ["style", "unselectable", "onselectstart"]);
+          utils.removeAttributes($, ".reader_main", ["style", "unselectable", "onselectstart"]);
           utils.hideButton($);
           utils.enableOnKeyDown($, "body");
           utils.enableUserSelect($, ".reader_box .content p");
@@ -448,14 +459,22 @@
 
   var siteGetSelectedText = null;
   var initWebsite = function ($) {
+      var websiteConfig = {
+          initCopyEvent: true,
+      };
       var mather = function (regex, website) {
           if (regex.test(window.location.href)) {
               website.init($);
+              if (website.config)
+                  websiteConfig = Object.assign(websiteConfig, website.config);
               if (website.getSelectedText)
                   siteGetSelectedText = website.getSelectedText;
+              return true;
           }
+          return false;
       };
-      websites.forEach(function (website) { return mather(website.regexp, website); });
+      websites.some(function (website) { return mather(website.regexp, website); });
+      return websiteConfig;
   };
   var getSelectedText = function () {
       if (siteGetSelectedText)
@@ -472,8 +491,8 @@
   (function () {
       var $ = window.$;
       var ClipboardJS = window.ClipboardJS; // https://clipboardjs.com/#example-text
-      initEvent($);
-      initWebsite($);
+      var websiteConfig = initWebsite($);
+      initEvent($, websiteConfig);
       document.addEventListener("mouseup", function (e) {
           var copyText = getSelectedText();
           if (copyText)

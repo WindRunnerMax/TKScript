@@ -1,15 +1,22 @@
-import websites, { Website } from "./websites";
+import websites, { Website, WebsiteConfig } from "./websites";
 
 let siteGetSelectedText: () => string | null = null;
 
-const initWebsite = ($: JQueryStatic): void => {
+const initWebsite = ($: JQueryStatic): WebsiteConfig => {
+    let websiteConfig: WebsiteConfig = {
+        initCopyEvent: true,
+    };
     const mather = (regex: RegExp, website: Website) => {
         if (regex.test(window.location.href)) {
             website.init($);
+            if (website.config) websiteConfig = Object.assign(websiteConfig, website.config);
             if (website.getSelectedText) siteGetSelectedText = website.getSelectedText;
+            return true;
         }
+        return false;
     };
-    websites.forEach(website => mather(website.regexp, website));
+    websites.some(website => mather(website.regexp, website));
+    return websiteConfig;
 };
 
 const getSelectedText = (): string => {
