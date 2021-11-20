@@ -19,6 +19,7 @@ module.exports = {
             extends: ["plugin:@typescript-eslint/recommended"],
         },
     ],
+    ignorePatterns: ["node_modules", "build", "dist", "coverage"],
     rules: {
         // 分号
         "semi": "error",

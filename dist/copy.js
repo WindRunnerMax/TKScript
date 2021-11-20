@@ -58,12 +58,10 @@
   'use strict';
 
   function styleInject(css, ref) {
-    if (ref === void 0) ref = {};
+    if ( ref === void 0 ) ref = {};
     var insertAt = ref.insertAt;
 
-    if (!css || typeof document === 'undefined') {
-      return;
-    }
+    if (!css || typeof document === 'undefined') { return; }
 
     var head = document.head || document.getElementsByTagName('head')[0];
     var style = document.createElement('style');
@@ -168,7 +166,7 @@
               cur.css("-webkit-user-select", "auto");
           }
           else {
-              var template = "\n                <style>\n                    " + selector + "{\n                        user-select: auto !important;\n                        -webkit-user-select: auto !important;\n                    }\n                </style>\n            ";
+              var template = "\n                <style>\n                    ".concat(selector, "{\n                        user-select: auto !important;\n                        -webkit-user-select: auto !important;\n                    }\n                </style>\n            ");
               $("body").append(template.replace(/\s*/, " "));
           }
       },
@@ -500,7 +498,7 @@
           else
               return "";
           $("#_copy").remove();
-          var template = "\n            <div id=\"_copy\"\n            style=\"left:" + (e.pageX + 30) + "px;top:" + e.pageY + "px;\"\n            data-clipboard-text=\"" + copyText.replace(/"/g, "&quot;") + "\">\u590D\u5236</div>\n        ";
+          var template = "\n            <div id=\"_copy\"\n            style=\"left:".concat(e.pageX + 30, "px;top:").concat(e.pageY, "px;\"\n            data-clipboard-text=\"").concat(copyText.replace(/"/g, "&quot;"), "\">\u590D\u5236</div>\n        ");
           $("body").append(template);
           $("#_copy").on("mousedown", function (event) { return event.stopPropagation(); });
           $("#_copy").on("mouseup", function (event) { return event.stopPropagation(); });
@@ -512,4 +510,4 @@
    * https://www.huiyingwu.com/1718/
    */
 
-}());
+})();

@@ -17,7 +17,7 @@ const config = {
                 "@babel/env",
                 {
                     modules: false,
-                    targets: "last 2 versions, ie >= 10",
+                    targets: "last 2 versions, ie > 10",
                 },
             ],
         ],
