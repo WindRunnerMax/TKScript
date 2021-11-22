@@ -17,6 +17,7 @@ const website: Website = {
             "360doc",
             "850500",
             "jianbiaoku",
+            "kt250",
         ].join("|")
     ),
     init: function ($) {
