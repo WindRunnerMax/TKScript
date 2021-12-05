@@ -1,9 +1,23 @@
+const stopJQueryPropagation = (
+    event: JQuery.TriggeredEvent<HTMLElement, undefined, HTMLElement, HTMLElement>
+) => {
+    event.stopPropagation();
+    // event.stopImmediatePropagation(); // 即停且阻止该元素后`on`同类事件触发
+    return true; // 若为 `false` 则会 `preventDefault` `stopPropagation`
+};
+
+const stopNativePropagation = (event: Event) => event.stopPropagation();
+
 export default {
     hideButton: ($: JQueryStatic): void => {
         $("body").append(`<style id="copy-hide">#_copy{display: none !important;}</style>`);
     },
     showButton: ($: JQueryStatic): void => {
         $("#copy-hide").remove();
+    },
+    removeAttributes: ($: JQueryStatic, selector: string, attr: string[] = []): void => {
+        const dom = $(selector);
+        attr.forEach(item => dom.removeAttr(item));
     },
     enableUserSelect: ($: JQueryStatic, selector: string, inline = false): void => {
         const cur = $(selector);
@@ -23,33 +37,29 @@ export default {
         }
     },
     enableOnSelectStart: ($: JQueryStatic, selector: string): void => {
-        $(selector).on("selectstart", e => {
-            e.stopPropagation();
-            return true;
-        });
+        $(selector).on("selectstart", stopJQueryPropagation);
     },
     enableOnContextMenu: ($: JQueryStatic, selector: string): void => {
-        $(selector).on("contextmenu", e => {
-            e.stopPropagation();
-            return true;
-        });
+        $(selector).on("contextmenu", stopJQueryPropagation);
     },
     enableOnCopy: ($: JQueryStatic, selector: string): void => {
-        $(selector).on("copy", e => {
-            e.stopPropagation();
-            return true;
-        });
+        $(selector).on("copy", stopJQueryPropagation);
     },
     enableOnKeyDown: ($: JQueryStatic, selector: string): void => {
         $(selector).on("keydown", e => {
-            if (e.key === "c" && e.ctrlKey) {
-                e.stopPropagation();
-                return true;
-            }
+            if (e.key === "c" && e.ctrlKey) return stopJQueryPropagation(e);
         });
     },
-    removeAttributes: ($: JQueryStatic, selector: string, attr: string[] = []): void => {
-        const dom = $(selector);
-        attr.forEach(item => dom.removeAttr(item));
+    enableOnSelectStartByCapture: (): void => {
+        document.addEventListener("selectstart", stopNativePropagation, true);
+    },
+    enableOnContextMenuByCapture: (): void => {
+        document.addEventListener("contextmenu", stopNativePropagation, true);
+    },
+    enableOnCopyByCapture: (): void => {
+        document.addEventListener("copy", stopNativePropagation, true);
+    },
+    enableOnKeyDownByCapture: (): void => {
+        document.addEventListener("keydown", stopNativePropagation, true);
     },
 };
