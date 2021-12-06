@@ -18,6 +18,7 @@ const website: Website = {
             "850500",
             "jianbiaoku",
             "kt250",
+            "kejudati",
         ].join("|")
     ),
     init: function ($) {

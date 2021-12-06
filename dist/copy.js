@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.0.6
+// @version     3.0.7
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -43,6 +43,7 @@
 // @include     *://utaten.com/lyric/*
 // @include     *://*.jianbiaoku.com/*
 // @include     *://*.kt250.com/*
+// @include     *://www.kejudati.com/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -152,12 +153,23 @@
       },
   };
 
+  var stopJQueryPropagation = function (event) {
+      event.stopPropagation();
+      // event.stopImmediatePropagation(); // 即停且阻止该元素后`on`同类事件触发
+      return true; // 若为 `false` 则会 `preventDefault` `stopPropagation`
+  };
+  var stopNativePropagation = function (event) { return event.stopPropagation(); };
   var utils = {
       hideButton: function ($) {
           $("body").append("<style id=\"copy-hide\">#_copy{display: none !important;}</style>");
       },
       showButton: function ($) {
           $("#copy-hide").remove();
+      },
+      removeAttributes: function ($, selector, attr) {
+          if (attr === void 0) { attr = []; }
+          var dom = $(selector);
+          attr.forEach(function (item) { return dom.removeAttr(item); });
       },
       enableUserSelect: function ($, selector, inline) {
           if (inline === void 0) { inline = false; }
@@ -172,35 +184,31 @@
           }
       },
       enableOnSelectStart: function ($, selector) {
-          $(selector).on("selectstart", function (e) {
-              e.stopPropagation();
-              return true;
-          });
+          $(selector).on("selectstart", stopJQueryPropagation);
       },
       enableOnContextMenu: function ($, selector) {
-          $(selector).on("contextmenu", function (e) {
-              e.stopPropagation();
-              return true;
-          });
+          $(selector).on("contextmenu", stopJQueryPropagation);
       },
       enableOnCopy: function ($, selector) {
-          $(selector).on("copy", function (e) {
-              e.stopPropagation();
-              return true;
-          });
+          $(selector).on("copy", stopJQueryPropagation);
       },
       enableOnKeyDown: function ($, selector) {
           $(selector).on("keydown", function (e) {
-              if (e.key === "c" && e.ctrlKey) {
-                  e.stopPropagation();
-                  return true;
-              }
+              if (e.key === "c" && e.ctrlKey)
+                  return stopJQueryPropagation(e);
           });
       },
-      removeAttributes: function ($, selector, attr) {
-          if (attr === void 0) { attr = []; }
-          var dom = $(selector);
-          attr.forEach(function (item) { return dom.removeAttr(item); });
+      enableOnSelectStartByCapture: function () {
+          document.addEventListener("selectstart", stopNativePropagation, true);
+      },
+      enableOnContextMenuByCapture: function () {
+          document.addEventListener("contextmenu", stopNativePropagation, true);
+      },
+      enableOnCopyByCapture: function () {
+          document.addEventListener("copy", stopNativePropagation, true);
+      },
+      enableOnKeyDownByCapture: function () {
+          document.addEventListener("keydown", stopNativePropagation, true);
       },
   };
 
@@ -433,6 +441,7 @@
           "850500",
           "jianbiaoku",
           "kt250",
+          "kejudati",
       ].join("|")),
       init: function ($) {
           utils.hideButton($);
