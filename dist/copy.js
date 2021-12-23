@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.0.9
+// @version     3.0.10
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/link*
@@ -431,7 +431,60 @@
           utils.enableOnKeyDownByCapture();
           $("head").append("<style>@media print { body{ display:block; } }</style>");
       },
+      getSelectedText: function () {
+          if (window.getSelection && window.getSelection().toString()) {
+              return window.getSelection().toString();
+          }
+          var result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
+          if (result)
+              return result[1];
+          return "";
+      },
   };
+  // `tips`
+  // /static/ndpcwenku/static/ndview/js/common/components.{hash}.js selectedTextTrim
+  // button: search translate
+  /*
+  var weakSet = new WeakSet();
+  var pathRouter = ["root"];
+
+  var deepScanObject = (origin, deep, maxDeep) => {
+      if(deep > maxDeep) return ;
+      for(let item in origin) {
+          try{
+              const value = origin[item];
+              if(value && typeof(value) === "object") {
+                  if(weakSet.has(value)) continue;
+                  weakSet.add(value);
+                  pathRouter.push(item);
+                  deepScanObject(value, deep + 1, maxDeep);
+                  pathRouter.pop();
+              }else{
+                  const regexp = /以熔体流动速率/;
+                  if(regexp.test(item) || regexp.test(value)){
+                      console.log(
+                          pathRouter.join("/") + "/" + item,
+                          "================",
+                          value
+                      )
+                  }
+              }
+          }catch(e){
+              console.warn(e)
+          }
+
+      }
+  }
+
+  deepScanObject.toString = () => "";
+
+  console.log("start");
+
+  deepScanObject(window, 0, 10)
+  // deepScanObject({a : 1, b: { c : 1 } }, 0, 2)
+
+  console.log("finish");
+  */
 
   var website = {
       regexp: new RegExp([
@@ -505,9 +558,9 @@
           return siteGetSelectedText();
       if (window.getSelection)
           return window.getSelection().toString();
-      else if (document.getSelection)
+      if (document.getSelection)
           return document.getSelection().toString();
-      else if (document.selection)
+      if (document.selection)
           return document.selection.createRange().text;
       return "";
   };
