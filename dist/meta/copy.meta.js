@@ -5,6 +5,7 @@
 // @version     3.0.10
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
+// @include     *://wenku.baidu.com/share/*
 // @include     *://wenku.baidu.com/link*
 // @include     *://www.51test.net/show/*
 // @include     *://www.xuexi.la/*

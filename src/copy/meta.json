@@ -6,6 +6,7 @@
     "author": "Czy",
     "include": [
         "*://wenku.baidu.com/view/*",
+        "*://wenku.baidu.com/share/*",
         "*://wenku.baidu.com/link*",
         "*://www.51test.net/show/*",
         "*://www.xuexi.la/*",
