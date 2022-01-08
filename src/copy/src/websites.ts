@@ -19,6 +19,7 @@ import ciweimao from "./modules/ciweimao";
 import qqbook from "./modules/qqbook";
 import utaten from "./modules/utaten";
 import baiduwk from "./modules/baiduwk";
+import xiaohongshu from "./modules/xiaohongshu";
 import common from "./modules/common";
 
 export interface WebsiteConfig {
@@ -53,6 +54,7 @@ const websites: Website[] = [
     qqbook,
     utaten,
     baiduwk,
+    xiaohongshu,
     common,
 ];
 
