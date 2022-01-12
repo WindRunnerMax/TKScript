@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥跳转链接直达🔥🔥🔥
 // @description 跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.4
+// @version     1.1.0
 // @author      Czy
 // @include     *://*google.com/*
 // @include     *://*zhihu.com/*
@@ -46,68 +46,70 @@
   styleInject(css_248z);
 
   var website$2 = {
-    regexp: /google/,
-    init: function init($) {
-      $("#res a").attr("target", "_blank");
-    }
+      regexp: /google/,
+      init: function ($) {
+          $("#res a").attr("target", "_blank");
+      },
+  };
+
+  var utils = {
+      directByBlockEvent: function (event) {
+          event.stopPropagation();
+          event.preventDefault();
+      },
+      directByCapture: function (el) {
+          var _this = this;
+          el.addEventListener("click", function (e) { return _this.directByBlockEvent(e); });
+      },
   };
 
   var website$1 = {
-    regexp: /zhihu/,
-    init: function init($) {
-      $(document).on("click", function (e) {
-        var cur = e.target;
-        var regexp = /.*link.zhihu.com\/\?target=(.*)/;
-
-        for (var i = 0; i < 5; ++i) {
-          if (!cur) break;
-
-          if (cur.nodeName === "A") {
-            if (regexp.test(cur.href)) {
-              var url = decodeURIComponent(/.*link.zhihu.com\/\?target=(.*)/.exec(cur.href)[1]);
-              console.log(url);
-              window.open(url);
-              return false;
-            }
-
-            break;
-          }
-
-          cur = cur.parentNode;
-        }
-      });
-    }
+      regexp: /zhihu/,
+      init: function ($) {
+          document.body.addEventListener("click", function (e) {
+              var cur = e.target;
+              var regexp = /.*link.zhihu.com\/\?target=(.*)/;
+              for (var i = 0; i < 5; ++i) {
+                  if (!cur)
+                      break;
+                  if (cur.nodeName === "A") {
+                      if (regexp.test(cur.href)) {
+                          var url = decodeURIComponent(/.*link.zhihu.com\/\?target=(.*)/.exec(cur.href)[1]);
+                          console.log(url);
+                          window.open(url);
+                          utils.directByBlockEvent(e);
+                      }
+                      break;
+                  }
+                  cur = cur.parentNode;
+              }
+          }, true);
+      },
   };
 
   var website = {
-    regexp: /csdn/,
-    init: function init($) {
-      $("#article_content  a:not([name])").each(function (i, v) {
-        var a = document.createElement("a");
-        a.innerHTML = "<span onclick=\"window.open('".concat(v.href, "')\">").concat(v.innerText, "</>");
-        v.replaceWith(a);
-      });
-    }
+      regexp: /csdn/,
+      init: function ($) {
+          $("#article_content  a:not([name])").each(function (i, v) {
+              var el = v;
+              var a = document.createElement("a");
+              a.innerHTML = "<span onclick=\"window.open('".concat(el.href, "')\">").concat(el.innerText, "</>");
+              v.replaceWith(a);
+          });
+      },
   };
 
-  var modules = [website$2, website$1, website];
+  var websites = [website$2, website$1, website];
 
-  (function () {
-    var $ = window.$;
-
-    var mather = function mather(regex, site) {
-      if (regex.test(window.location.href)) {
-        for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-          args[_key - 2] = arguments[_key];
-        }
-
-        site.init.apply(site, args);
-      }
-    };
-
-    modules.forEach(function (v) {
-      return mather(v.regexp, v, $);
-    });
-  })();
+  (function ($) {
+      var mather = function (regex, website) {
+          if (regex.test(window.location.href)) {
+              website.init($);
+              return true;
+          }
+          return false;
+      };
+      websites.some(function (website) { return mather(website.regexp, website); });
+  })($);
 
 })();

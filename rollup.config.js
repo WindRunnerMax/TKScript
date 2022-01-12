@@ -62,7 +62,7 @@ const scripts = {
         ],
     },
     siteDirector: {
-        input: "./src/site-director/src/index.js",
+        input: "./src/site-director/src/index.ts",
         output: {
             file: "./dist/site-director.js",
             format: "iife",
@@ -71,6 +71,10 @@ const scripts = {
         plugins: [
             postcss(config.postcss),
             babel(config.babel),
+            ts({
+                tsconfig: path.resolve(__dirname, "./tsconfig.json"),
+                extensions: [".ts"],
+            }),
             // uglify(),
             metablock({
                 file: "./src/site-director/meta.json",
