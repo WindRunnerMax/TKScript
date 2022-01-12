@@ -20,6 +20,7 @@ import qqbook from "./modules/qqbook";
 import utaten from "./modules/utaten";
 import baiduwk from "./modules/baiduwk";
 import xiaohongshu from "./modules/xiaohongshu";
+import leetcode from "./modules/leetcode";
 import common from "./modules/common";
 
 export interface WebsiteConfig {
@@ -55,6 +56,7 @@ const websites: Website[] = [
     utaten,
     baiduwk,
     xiaohongshu,
+    leetcode,
     common,
 ];
 

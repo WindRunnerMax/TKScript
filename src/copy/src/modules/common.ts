@@ -6,7 +6,6 @@ const website: Website = {
         [
             "commandlinux",
             "cnki",
-            "leetcode-cn",
             "ruiwen",
             "oh100",
             "fwsir",
