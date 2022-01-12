@@ -8,6 +8,9 @@
 // @include     *://*zhihu.com/*
 // @include     *://*csdn.net/*
 // @license     MIT License
+// @installURL  https://github.com/WindrunnerMax/TKScript
+// @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/site-director.meta.js
+// @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/site-director.js
 // @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
@@ -65,7 +68,7 @@
 
   var website$1 = {
       regexp: /zhihu/,
-      init: function ($) {
+      init: function () {
           document.body.addEventListener("click", function (e) {
               var cur = e.target;
               var regexp = /.*link.zhihu.com\/\?target=(.*)/;

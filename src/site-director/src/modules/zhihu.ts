@@ -3,7 +3,7 @@ import utils from "./utils";
 
 const website: Website = {
     regexp: /zhihu/,
-    init: function ($) {
+    init: function () {
         document.body.addEventListener(
             "click",
             e => {

@@ -38,6 +38,19 @@ const metas = {
             }),
         ],
     },
+    siteDirector: {
+        input: "./meta/blank.js",
+        output: {
+            file: "./dist/meta/site-director.meta.js",
+            format: "es",
+            name: "copyMetaModule",
+        },
+        plugins: [
+            metablock({
+                file: "./src/site-director/meta.json",
+            }),
+        ],
+    },
 };
 
 const scripts = {
