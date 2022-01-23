@@ -19,6 +19,6 @@
         "GM_xmlhttpRequest"
     ],
     "require": [
-        "https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"
+        "https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"
     ]
 }
