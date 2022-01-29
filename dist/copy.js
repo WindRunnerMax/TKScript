@@ -52,8 +52,8 @@
 // @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/copy.meta.js
 // @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/copy.js
 // @run-at      document-end
-// @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
-// @require     https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js
+// @require     https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
+// @require     https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.8/clipboard.min.js
 // @connect     res1.doc88.com
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
