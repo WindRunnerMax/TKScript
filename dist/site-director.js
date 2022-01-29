@@ -2,16 +2,18 @@
 // @name        🔥🔥🔥跳转链接直达🔥🔥🔥
 // @description 跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.1.0
+// @version     1.2.0
 // @author      Czy
 // @include     *://*google.com/*
-// @include     *://*zhihu.com/*
-// @include     *://*csdn.net/*
+// @include     *://link.zhihu.com/*
+// @include     *://link.csdn.net/*
 // @license     MIT License
+// @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @installURL  https://github.com/WindrunnerMax/TKScript
 // @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/site-director.meta.js
 // @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/site-director.js
-// @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
+// @require     https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
+// @run-at      document-start
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
 // ==/UserScript==
@@ -51,54 +53,35 @@
   var website$2 = {
       regexp: /google/,
       init: function ($) {
-          $("#res a").attr("target", "_blank");
-      },
-  };
-
-  var utils = {
-      directByBlockEvent: function (event) {
-          event.stopPropagation();
-          event.preventDefault();
-      },
-      directByCapture: function (el) {
-          var _this = this;
-          el.addEventListener("click", function (e) { return _this.directByBlockEvent(e); });
+          document.addEventListener("DOMContentLoaded", function () { return $("#res a").attr("target", "_blank"); });
       },
   };
 
   var website$1 = {
       regexp: /zhihu/,
       init: function () {
-          document.body.addEventListener("click", function (e) {
-              var cur = e.target;
-              var regexp = /.*link.zhihu.com\/\?target=(.*)/;
-              for (var i = 0; i < 5; ++i) {
-                  if (!cur)
-                      break;
-                  if (cur.nodeName === "A") {
-                      if (regexp.test(cur.href)) {
-                          var url = decodeURIComponent(/.*link.zhihu.com\/\?target=(.*)/.exec(cur.href)[1]);
-                          console.log(url);
-                          window.open(url);
-                          utils.directByBlockEvent(e);
-                      }
-                      break;
-                  }
-                  cur = cur.parentNode;
+          var result = /.*link.zhihu.com\/\?target=(.*)/.exec(location.href);
+          if (result) {
+              var url = decodeURIComponent(result[1]);
+              if (url) {
+                  console.log(url);
+                  location.href = url;
               }
-          }, true);
+          }
       },
   };
 
   var website = {
       regexp: /csdn/,
-      init: function ($) {
-          $("#article_content  a:not([name])").each(function (i, v) {
-              var el = v;
-              var a = document.createElement("a");
-              a.innerHTML = "<span onclick=\"window.open('".concat(el.href, "')\">").concat(el.innerText, "</>");
-              v.replaceWith(a);
-          });
+      init: function () {
+          var result = /.*link.csdn.net\/\?target=(.*)/.exec(location.href);
+          if (result) {
+              var url = decodeURIComponent(result[1]);
+              if (url) {
+                  console.log(url);
+                  location.href = url;
+              }
+          }
       },
   };
 

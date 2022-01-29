@@ -3,7 +3,7 @@ import { Website } from "../websites";
 const website: Website = {
     regexp: /google/,
     init: function ($) {
-        $("#res a").attr("target", "_blank");
+        document.addEventListener("DOMContentLoaded", () => $("#res a").attr("target", "_blank"));
     },
 };
 
