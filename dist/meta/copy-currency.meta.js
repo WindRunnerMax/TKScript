@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制(通用)🔥🔥🔥
 // @description 文本选中复制通用版本，适用于大多数网站
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.0
+// @version     1.0.1
 // @author      Czy
 // @include     http://*/*
 // @include     https://*/*

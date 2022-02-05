@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制(通用)🔥🔥🔥
 // @description 文本选中复制通用版本，适用于大多数网站
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.0
+// @version     1.0.1
 // @author      Czy
 // @include     http://*/*
 // @include     https://*/*
@@ -24,7 +24,13 @@
             var style = document.createElement("style");
             style.id = id;
             style.innerHTML = css;
-            document.getElementsByTagName("head")[0].appendChild(style);
+            var head = document.getElementsByTagName("head")[0];
+            if (head) {
+                head.appendChild(style);
+            }
+            else {
+                window.onload = function () { return document.getElementsByTagName("head")[0].appendChild(style); };
+            }
         },
         removeCSS: function (id) {
             document.getElementsByTagName("head")[0].removeChild(document.getElementById(id));
