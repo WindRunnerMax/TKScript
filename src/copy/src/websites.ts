@@ -21,6 +21,7 @@ import utaten from "./modules/utaten";
 import baiduwk from "./modules/baiduwk";
 import xiaohongshu from "./modules/xiaohongshu";
 import leetcode from "./modules/leetcode";
+import csdn from "./modules/csdn";
 import common from "./modules/common";
 
 export interface WebsiteConfig {
@@ -57,6 +58,7 @@ const websites: Website[] = [
     baiduwk,
     xiaohongshu,
     leetcode,
+    csdn,
     common,
 ];
 

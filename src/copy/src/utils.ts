@@ -20,8 +20,8 @@ export default {
         attr.forEach(item => dom.removeAttr(item));
     },
     enableUserSelect: ($: JQueryStatic, selector: string, inline = false): void => {
-        const cur = $(selector);
         if (inline) {
+            const cur = $(selector);
             cur.css("user-select", "auto");
             cur.css("-webkit-user-select", "auto");
         } else {
