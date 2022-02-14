@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.1.3
+// @version     3.1.4
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/share/*
@@ -48,6 +48,7 @@
 // @include     *://*.xiaohongshu.com/discovery/*
 // @include     *://*.baibeike.com/*
 // @include     *://*blog.csdn.net/*
+// @include     *://*bilibili.com/read/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -118,7 +119,7 @@
   };
 
   var path = "";
-  var website$o = {
+  var website$p = {
       regexp: /.*doc88\.com\/.+/,
       init: function ($) {
           // GM_xmlhttpRequest({
@@ -147,7 +148,7 @@
       },
   };
 
-  var website$n = {
+  var website$o = {
       regexp: /.*segmentfault\.com\/.+/,
       init: function ($) {
           $("body").addClass("_sf_adjust_body");
@@ -216,7 +217,7 @@
       },
   };
 
-  var website$m = {
+  var website$n = {
       regexp: /.*wk\.baidu\.com\/view\/.+/,
       init: function ($) {
           utils.hideButton($);
@@ -230,21 +231,21 @@
       },
   };
 
-  var website$l = {
+  var website$m = {
       regexp: /.*zhihu\.com\/.*/,
       init: function ($) {
           utils.hideButton($);
       },
   };
 
-  var website$k = {
+  var website$l = {
       regexp: /.*zhihu\.com\/pub\/reader\/.+/,
       init: function ($) {
           setTimeout(utils.showButton, 500, $);
       },
   };
 
-  var website$j = {
+  var website$k = {
       regexp: /.*30edu\.com\.cn\/.+/,
       init: function ($) {
           window.onload = function () {
@@ -260,7 +261,7 @@
   };
 
   var restrictCopying = true;
-  var website$i = {
+  var website$j = {
       regexp: /.*docs\.qq\.com\/.+/,
       config: {
           initCopyEvent: false,
@@ -295,7 +296,7 @@
       },
   };
 
-  var website$h = {
+  var website$i = {
       regexp: new RegExp(".+://boke112.com/post/.+"),
       init: function ($) {
           $("body").on("click", function () { return false; });
@@ -304,7 +305,7 @@
       },
   };
 
-  var website$g = {
+  var website$h = {
       regexp: /diyifanwen/,
       init: function () {
           setTimeout(function () {
@@ -314,7 +315,7 @@
       },
   };
 
-  var website$f = {
+  var website$g = {
       regexp: /mbalib/,
       init: function ($) {
           window.onload = function () {
@@ -326,7 +327,7 @@
       },
   };
 
-  var website$e = {
+  var website$f = {
       regexp: /cnitpm/,
       init: function ($) {
           utils.hideButton($);
@@ -339,7 +340,7 @@
       },
   };
 
-  var website$d = {
+  var website$e = {
       regexp: new RegExp(".+bbs.mihoyo.com/ys/obc.+"),
       init: function ($) {
           utils.hideButton($);
@@ -349,7 +350,7 @@
       },
   };
 
-  var website$c = {
+  var website$d = {
       regexp: new RegExp(".+www.uemeds.cn/.+"),
       init: function ($) {
           utils.hideButton($);
@@ -358,7 +359,7 @@
       },
   };
 
-  var website$b = {
+  var website$c = {
       regexp: new RegExp(".+aiyuke.com/news/.+"),
       init: function ($) {
           utils.hideButton($);
@@ -366,7 +367,7 @@
       },
   };
 
-  var website$a = {
+  var website$b = {
       regexp: new RegExp("qidian"),
       init: function ($) {
           utils.hideButton($);
@@ -376,7 +377,7 @@
       },
   };
 
-  var website$9 = {
+  var website$a = {
       regexp: new RegExp("zongheng"),
       init: function ($) {
           utils.removeAttributes($, ".reader_box", ["style", "unselectable", "onselectstart"]);
@@ -390,7 +391,7 @@
       },
   };
 
-  var website$8 = {
+  var website$9 = {
       regexp: new RegExp("17k"),
       init: function ($) {
           utils.hideButton($);
@@ -398,7 +399,7 @@
       },
   };
 
-  var website$7 = {
+  var website$8 = {
       regexp: new RegExp("ciweimao"),
       init: function ($) {
           utils.hideButton($);
@@ -409,7 +410,7 @@
       },
   };
 
-  var website$6 = {
+  var website$7 = {
       regexp: new RegExp("book\\.qq"),
       init: function ($) {
           utils.hideButton($);
@@ -420,7 +421,7 @@
       },
   };
 
-  var website$5 = {
+  var website$6 = {
       regexp: new RegExp("utaten"),
       init: function ($) {
           utils.removeAttributes($, "body", ["oncontextmenu", "onselectstart"]);
@@ -429,7 +430,7 @@
       },
   };
 
-  var website$4 = {
+  var website$5 = {
       regexp: new RegExp("wenku.baidu.com/view/.*"),
       init: function ($) {
           utils.enableOnKeyDownByCapture();
@@ -446,7 +447,7 @@
       },
   };
 
-  var website$3 = {
+  var website$4 = {
       regexp: new RegExp("xiaohongshu"),
       init: function ($) {
           utils.hideButton($);
@@ -455,7 +456,7 @@
       },
   };
 
-  var website$2 = {
+  var website$3 = {
       regexp: new RegExp("leetcode"),
       init: function ($) {
           utils.hideButton($);
@@ -463,12 +464,20 @@
       },
   };
 
-  var website$1 = {
+  var website$2 = {
       regexp: /csdn/,
       init: function ($) {
           utils.hideButton($);
           utils.enableOnCopyByCapture();
           utils.enableUserSelect($, "*");
+      },
+  };
+
+  var website$1 = {
+      regexp: new RegExp("bilibili"),
+      init: function ($) {
+          utils.hideButton($);
+          utils.enableOnCopyByCapture();
       },
   };
 
@@ -496,6 +505,7 @@
   };
 
   var websites = [
+      website$p,
       website$o,
       website$n,
       website$m,
