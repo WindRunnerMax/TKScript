@@ -1,5 +1,7 @@
 # TKScript
 
+如果觉得不错，点个`star`吧 😃  
+
 `TamperMonkey`油猴脚本，`GreasyFork`[主页链接](https://greasyfork.org/zh-CN/users/584991-windrunnermax)。
 
 * `dist`: 打包后模块。
