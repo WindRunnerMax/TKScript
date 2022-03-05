@@ -23,6 +23,7 @@ import xiaohongshu from "./modules/xiaohongshu";
 import leetcode from "./modules/leetcode";
 import csdn from "./modules/csdn";
 import bilibili from "./modules/bilibili";
+import cnki from "./modules/cnki";
 import common from "./modules/common";
 
 export interface WebsiteConfig {
@@ -61,6 +62,7 @@ const websites: Website[] = [
     leetcode,
     csdn,
     bilibili,
+    cnki,
     common,
 ];
 
