@@ -5,7 +5,7 @@ const website: Website = {
     regexp: new RegExp("leetcode"),
     init: function ($) {
         utils.hideButton($);
-        utils.enableOnCopyByCapture();
+        utils.enableOnCopy($, "#lc-home");
     },
 };
 
