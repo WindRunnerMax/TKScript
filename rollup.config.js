@@ -70,7 +70,7 @@ const scripts = {
     copy: {
         input: "./src/copy/src/index.ts",
         output: {
-            file: "./dist/copy.js",
+            file: "./dist/copy.user.js",
             format: "iife",
             name: "copyModule",
         },
@@ -90,7 +90,7 @@ const scripts = {
     copyCurrency: {
         input: "./src/copy-currency/src/index.ts",
         output: {
-            file: "./dist/copy-currency.js",
+            file: "./dist/copy-currency.user.js",
             format: "iife",
             name: "copyModule",
         },
@@ -110,7 +110,7 @@ const scripts = {
     siteDirector: {
         input: "./src/site-director/src/index.ts",
         output: {
-            file: "./dist/site-director.js",
+            file: "./dist/site-director.user.js",
             format: "iife",
             name: "linkModule",
         },
