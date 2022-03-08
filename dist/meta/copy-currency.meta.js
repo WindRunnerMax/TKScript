@@ -10,7 +10,7 @@
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
 // @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/copy-currency.meta.js
-// @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/copy-currency.js
+// @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/copy-currency.user.js
 // @run-at      document-start
 // @grant       GM_registerMenuCommand
 // @grant       GM_unregisterMenuCommand

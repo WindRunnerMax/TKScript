@@ -56,7 +56,7 @@
     "license": "GPL License",
     "installURL": "https://github.com/WindrunnerMax/TKScript",
     "updateURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/copy.meta.js",
-    "downloadURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/copy.js",
+    "downloadURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/copy.user.js",
     "run-at": "document-end",
     "grant": [
         "unsafeWindow",

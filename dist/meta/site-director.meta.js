@@ -12,7 +12,7 @@
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @installURL  https://github.com/WindrunnerMax/TKScript
 // @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/meta/site-director.meta.js
-// @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/site-director.js
+// @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript/dist/site-director.user.js
 // @require     https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // @run-at      document-start
 // @grant       unsafeWindow
