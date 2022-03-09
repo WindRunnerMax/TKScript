@@ -4,9 +4,6 @@
 
 某些网站例如某度文库、道客某某等都不允许用户选中文本进行复制，作为一个搞前端的，就感觉离谱，文本都下载到本地了，还不让我复制，于是为了更好的学(复)习(制)，实现了一个脚本去解决这些限制。  
 
-模块化构建(未压缩)，全部源码请参阅此处 [`https://github.com/WindrunnerMax/TKScript`](https://github.com/WindrunnerMax/TKScript) ，如果觉得不错，点个`star`吧 😃   
-不经常上`GreasyFork`，如果有问题还请移步`issue: https://github.com/WindrunnerMax/TKScript/issues`，感谢理解 😃  
-
 ## 描述
 首先来看一下效果图，依旧是以某度文库、道客某某为例展示效果，点击复制按钮即可成功复制。
 
