@@ -20,8 +20,7 @@
 
 ## Release
 
-如果想`clone`版本库自行打包脚本，请使用`pnpm`，如果不需要这步操作，可以直接在下方表格点击安装按钮即可安装打包好的脚本。   
-版本库中`dist`为打包目录，其中仅`copy`、`site-director`、`copy-currency`脚本需`rollup`打包使用，其他脚本直接安装即可。
+如果想`clone`版本库自行打包脚本，请使用`pnpm`，如果不需要这步操作，可以直接在上方表格点击安装按钮即可安装打包好的脚本。版本库中`dist`为打包目录，其中仅`copy`、`site-director`、`copy-currency`脚本需`rollup`打包使用，其他脚本直接安装即可。
 
 ```bash
 $ pnpm install
