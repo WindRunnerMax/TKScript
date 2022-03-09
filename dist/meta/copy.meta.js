@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.1.6
+// @version     3.1.7
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/share/*
@@ -56,8 +56,8 @@
 // @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/meta/copy.meta.js
 // @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/copy.user.js
 // @run-at      document-end
-// @require     https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
-// @require     https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.8/clipboard.min.js
+// @require     https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js
+// @require     https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/clipboard.js/2.0.10/clipboard.min.js
 // @connect     res1.doc88.com
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
