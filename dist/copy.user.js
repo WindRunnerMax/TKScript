@@ -509,6 +509,7 @@
           "kt250",
           "kejudati",
           "baibeike",
+          "yuque",
       ].join("|")),
       init: function ($) {
           utils.hideButton($);
