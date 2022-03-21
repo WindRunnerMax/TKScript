@@ -15,7 +15,7 @@ const website: Website = {
                 "<div id='template-close'>关闭</div>",
                 "</div>",
                 "<iframe id='copy-template-iframe' src=" +
-                    url.replace("view", "share") +
+                    url.replace("view", "share").split("?")[0] +
                     "?share_api=1&width=800" +
                     "></iframe>",
                 "</div>",
