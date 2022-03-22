@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.2.0
+// @version     3.2.1
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/share/*
@@ -58,7 +58,7 @@
 // @run-at      document-end
 // @require     https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js
 // @require     https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/clipboard.js/2.0.10/clipboard.min.js
-// @connect     res1.doc88.com
+// @connect     static.doc88.com
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
 // ==/UserScript==
@@ -134,9 +134,9 @@
           $("body").append("<style id=\"copy-hide\">#left-menu{display: none !important;}</style>");
           GM_xmlhttpRequest({
               method: "GET",
-              url: "https://res1.doc88.com/resources/js/modules/main-v2.min.js?v=2.90",
+              url: "https://static.doc88.com/resources/js/modules/main-v2.min.js?v=2.45",
               onload: function (response) {
-                  path = /<textarea[\s\S]+>'\+([\S]*?)\+"<\/textarea>/.exec(response.responseText)[1];
+                  path = /\("#cp_textarea"\).val\(([\S]*?)\);/.exec(response.responseText)[1];
               },
           });
       },
