@@ -5,9 +5,20 @@
 // `window.webpackJson Hook` `document-start` `grant connect`
 /*
 unsafeWindow.webpackJsonp = [];
-unsafeWindow.webpackJsonp.push = () => {};
+const hookedPush = function(...args){
+    console.log(args);
+}
+unsafeWindow.webpackJsonp.push = hookedPush;
+Object.defineProperty(unsafeWindow.webpackJsonp, "push", {
+    get: function () {
+        return hookedPush;
+    },
+    set: function (_) {
+        return hookedPush;
+    },
+});
 setTimeout(() => {
-    delete unsafeWindow.webpackJsonp.push;
+    unsafeWindow.webpackJsonp = [];
     window.$.getScript("https://wkstatic.bdimg.com/static/ndpcwenku/static/ndview/js/views/creader.7eb11c074c703be69e06.js", () => {
         window.$.getScript("https://wkstatic.bdimg.com/static/ndpcwenku/static/ndview/js/common/common.a1efaf8d33ff1572ad92.js", () => {
             GM_xmlhttpRequest({

@@ -28,7 +28,7 @@ import common from "./modules/common";
 
 export interface WebsiteConfig {
     initCopyEvent?: boolean;
-    runAt?: "document-stat" | "document-end";
+    runAt?: "document-start" | "document-end";
 }
 export interface Website {
     config?: WebsiteConfig;

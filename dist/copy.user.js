@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.2.2
+// @version     3.3.0
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/share/*
@@ -435,55 +435,85 @@
   };
 
   var website$6 = {
-      regexp: new RegExp("wenku.baidu.com/.*"),
+      config: {
+          runAt: "document-start",
+      },
+      regexp: new RegExp("wenku.baidu.com/view/.*"),
       init: function ($) {
           utils.hideButton($);
+          utils.enableOnCopyByCapture();
           $("head").append("<style>@media print { body{ display:block; } }</style>");
-          var url = location.href;
-          if (/view/.test(url)) {
-              var templateHTML_1 = [
+          var canvasDataGroup = [];
+          document.createElement = new Proxy(document.createElement, {
+              apply: function (target, thisArg, argumentsList) {
+                  var element = Reflect.apply(target, thisArg, argumentsList);
+                  if (argumentsList[0] === "canvas") {
+                      var tmpData_1 = {
+                          canvas: element,
+                          data: [],
+                      };
+                      element.getContext("2d").fillText = function () {
+                          var args = [];
+                          for (var _i = 0; _i < arguments.length; _i++) {
+                              args[_i] = arguments[_i];
+                          }
+                          tmpData_1.data.push(args);
+                          originObject.context2DPrototype.fillText.apply(this, args);
+                      };
+                      canvasDataGroup.push(tmpData_1);
+                  }
+                  return element;
+              },
+          });
+          var templateCSS = [
+              "<style id='copy-template-css'>",
+              "body{overflow: hidden !important}",
+              "#copy-template-html{position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center;z-index: 999999; background: rgba(0,0,0,0.5);}",
+              "#copy-template-html > .template-container{height: 80%; width: 80%; background: #fff; }",
+              ".template-container > .title-container{display: flex; align-items: center; justify-content: space-between;padding: 10px;border-bottom: 1px solid #eee;}",
+              "#copy-template-text{height: 100%; width: 100%;position: relative; overflow: auto;background: #fff;}",
+              "#copy-template-html #template-close{cursor: pointer;}",
+              "</style>",
+          ].join("");
+          var render = function () {
+              canvasDataGroup = canvasDataGroup.filter(function (item) { return item.canvas.id; });
+              var templateText = canvasDataGroup.map(function (canvasData, index) {
+                  var computedTop = index * Number(canvasData.canvas.clientHeight);
+                  var textItem = canvasData.data.map(function (item) {
+                      return "<div style=\"position: absolute; left: ".concat(item[1], "px; top: ").concat(item[2] + computedTop, "px\">").concat(item[0], "</div>");
+                  });
+                  return textItem.join("");
+              });
+              var templateHTML = [
                   "<div id='copy-template-html'>",
                   "<div class='template-container'>",
                   "<div class='title-container'>",
                   "<div>请自行复制</div>",
                   "<div id='template-close'>关闭</div>",
                   "</div>",
-                  "<iframe id='copy-template-iframe' src=" +
-                      url.replace("view", "share").split("?")[0] +
-                      "?share_api=1&width=800" +
-                      "></iframe>",
+                  "<div id='copy-template-text'>",
+                  templateText.join(""),
+                  "</div>",
                   "</div>",
                   "</div>",
               ].join("");
-              var templateCSS_1 = [
-                  "<style id='copy-template-css'>",
-                  "body{overflow: hidden !important}",
-                  "#copy-template-html{position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center;z-index: 999999;}",
-                  "#copy-template-html > .template-container{height: 80%; width: 80%;border: 1px solid #eee;background: #fff;}",
-                  ".template-container > .title-container{display: flex; align-items: center; justify-content: space-between;padding: 10px;border-bottom: 1px solid #eee;}",
-                  "#copy-template-iframe{height: 100%; width: 100%;border: none;}",
-                  "#copy-template-html #template-close{cursor: pointer;}",
-                  "</style>",
-              ].join("");
-              var show = function () {
-                  $("body").append(templateHTML_1);
-                  $("body").append(templateCSS_1);
-                  var closeButton = document.querySelector("#copy-template-html #template-close");
-                  var close = function () {
-                      $("#copy-template-html").remove();
-                      $("#copy-template-css").remove();
-                      closeButton.removeEventListener("click", close);
-                  };
-                  closeButton.addEventListener("click", close);
+              $("body").append(templateHTML);
+              $("body").append(templateCSS);
+              var closeButton = document.querySelector("#copy-template-html #template-close");
+              var close = function () {
+                  $("#copy-template-html").remove();
+                  $("#copy-template-css").remove();
+                  closeButton.removeEventListener("click", close);
               };
-              $("head").append("<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff;}</style>");
-              $("body").append("<div id='copy-btn-wk'>复制</div>");
-              $("#copy-btn-wk").on("click", show);
-          }
-          else if (/share/.test(url)) {
-              utils.enableOnKeyDownByCapture();
-              $("head").append("<style>.shadow-bg{position: absolute !important; left: unset !important; bottom: unset !important;}</style>"); // 兼容
-          }
+              closeButton.addEventListener("click", close);
+          };
+          $("head").append("<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>");
+          $("body").append("<div id='copy-btn-wk'>复制</div>");
+          $("#copy-btn-wk").on("click", render);
+          var originObject = {
+              context2DPrototype: unsafeWindow.document.createElement("canvas").getContext("2d")
+                  .__proto__,
+          };
       },
   };
 
