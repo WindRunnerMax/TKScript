@@ -55,7 +55,7 @@
 // @installURL  https://github.com/WindrunnerMax/TKScript
 // @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/meta/copy.meta.js
 // @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/copy.user.js
-// @run-at      document-end
+// @run-at      document-start
 // @require     https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js
 // @require     https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/clipboard.js/2.0.10/clipboard.min.js
 // @connect     static.doc88.com
@@ -556,7 +556,6 @@
   };
 
   var websites = [
-      website$q,
       website$p,
       website$o,
       website$n,
@@ -578,6 +577,7 @@
       website$7,
       website$6,
       website$5,
+      website$q,
       website$4,
       website$3,
       website$2,
@@ -589,12 +589,18 @@
   var initWebsite = function ($) {
       var websiteConfig = {
           initCopyEvent: true,
+          runAt: "document-end",
       };
       var mather = function (regex, website) {
           if (regex.test(window.location.href)) {
-              website.init($);
               if (website.config)
                   websiteConfig = Object.assign(websiteConfig, website.config);
+              if (websiteConfig.runAt === "document-end") {
+                  document.addEventListener("DOMContentLoaded", function () { return website.init($); });
+              }
+              else {
+                  website.init($);
+              }
               if (website.getSelectedText)
                   siteGetSelectedText = website.getSelectedText;
               return true;

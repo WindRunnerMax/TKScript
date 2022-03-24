@@ -28,6 +28,7 @@ import common from "./modules/common";
 
 export interface WebsiteConfig {
     initCopyEvent?: boolean;
+    runAt?: "document-stat" | "document-end";
 }
 export interface Website {
     config?: WebsiteConfig;
@@ -37,7 +38,6 @@ export interface Website {
 }
 
 const websites: Website[] = [
-    doc88,
     sf,
     wk,
     zhihu,
@@ -59,6 +59,7 @@ const websites: Website[] = [
     utaten,
     baiduwk,
     xiaohongshu,
+    doc88,
     leetcode,
     csdn,
     bilibili,

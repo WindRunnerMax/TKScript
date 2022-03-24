@@ -55,7 +55,7 @@
 // @installURL  https://github.com/WindrunnerMax/TKScript
 // @updateURL   https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/meta/copy.meta.js
 // @downloadURL https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/copy.user.js
-// @run-at      document-end
+// @run-at      document-start
 // @require     https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js
 // @require     https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/clipboard.js/2.0.10/clipboard.min.js
 // @connect     static.doc88.com

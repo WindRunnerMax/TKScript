@@ -12,6 +12,7 @@
     "strictNullChecks": false,
     "declaration": false,
     "baseUrl": ".",
+    "newLine": "lf",
     "paths": {},
     "types": [
       "@types/node",

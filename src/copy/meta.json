@@ -57,7 +57,7 @@
     "installURL": "https://github.com/WindrunnerMax/TKScript",
     "updateURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/meta/copy.meta.js",
     "downloadURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/copy.user.js",
-    "run-at": "document-end",
+    "run-at": "document-start",
     "grant": [
         "unsafeWindow",
         "GM_xmlhttpRequest"

@@ -5,11 +5,16 @@ let siteGetSelectedText: () => string | null = null;
 const initWebsite = ($: JQueryStatic): WebsiteConfig => {
     let websiteConfig: WebsiteConfig = {
         initCopyEvent: true,
+        runAt: "document-end",
     };
     const mather = (regex: RegExp, website: Website) => {
         if (regex.test(window.location.href)) {
-            website.init($);
             if (website.config) websiteConfig = Object.assign(websiteConfig, website.config);
+            if (websiteConfig.runAt === "document-end") {
+                document.addEventListener("DOMContentLoaded", () => website.init($));
+            } else {
+                website.init($);
+            }
             if (website.getSelectedText) siteGetSelectedText = website.getSelectedText;
             return true;
         }
