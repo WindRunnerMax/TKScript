@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.2.1
+// @version     3.2.2
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/share/*
@@ -119,6 +119,10 @@
       });
   };
 
+  /**
+   * 外部引用`static.doc88.com`声明
+   * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
+   */
   var path = "";
   var website$q = {
       regexp: /.*doc88\.com\/.+/,
@@ -309,10 +313,9 @@
   var website$i = {
       regexp: /diyifanwen/,
       init: function () {
-          setTimeout(function () {
-              document.oncopy = function (e) { return e.stopPropagation(); };
-              document.body.oncopy = function (e) { return e.stopPropagation(); };
-          }, 1000);
+          utils.hideButton($);
+          utils.enableOnCopyByCapture();
+          utils.enableOnKeyDownByCapture();
       },
   };
 
@@ -434,6 +437,7 @@
   var website$6 = {
       regexp: new RegExp("wenku.baidu.com/.*"),
       init: function ($) {
+          utils.hideButton($);
           $("head").append("<style>@media print { body{ display:block; } }</style>");
           var url = location.href;
           if (/view/.test(url)) {

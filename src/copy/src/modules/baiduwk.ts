@@ -4,6 +4,7 @@ import { Website } from "../websites";
 const website: Website = {
     regexp: new RegExp("wenku.baidu.com/.*"),
     init: function ($) {
+        utils.hideButton($);
         $("head").append(`<style>@media print { body{ display:block; } }</style>`);
         const url = location.href;
         if (/view/.test(url)) {

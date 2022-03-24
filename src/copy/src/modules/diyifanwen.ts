@@ -1,12 +1,12 @@
+import utils from "../utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: /diyifanwen/,
     init: function () {
-        setTimeout(() => {
-            document.oncopy = e => e.stopPropagation();
-            document.body.oncopy = e => e.stopPropagation();
-        }, 1000);
+        utils.hideButton($);
+        utils.enableOnCopyByCapture();
+        utils.enableOnKeyDownByCapture();
     },
 };
 
