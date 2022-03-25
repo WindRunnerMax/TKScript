@@ -1,15 +1,17 @@
 import { WebsiteConfig } from "./websites";
 
 export const initEvent = ($: JQueryStatic, websiteConfig: WebsiteConfig): void => {
-    $("body").on("mousedown", () => $("#_copy").remove());
-    if (websiteConfig.initCopyEvent) {
-        document.oncopy = e => e.stopPropagation();
-        document.body.oncopy = e => e.stopPropagation();
-        $("body").on("copy", e => {
-            e.stopPropagation();
-            return true;
-        });
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+        $("body").on("mousedown", () => $("#_copy").remove());
+        if (websiteConfig.initCopyEvent) {
+            document.oncopy = e => e.stopPropagation();
+            document.body.oncopy = e => e.stopPropagation();
+            $("body").on("copy", e => {
+                e.stopPropagation();
+                return true;
+            });
+        }
+    });
 };
 
 export const bindClipboardEvent = (clipboard: ClipboardJS): void => {
