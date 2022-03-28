@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.3.1
+// @version     3.3.2
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/share/*
@@ -442,10 +442,12 @@
       },
       regexp: new RegExp("wenku.baidu.com/view/.*"),
       init: function ($) {
-          utils.hideButton($);
-          utils.enableOnCopyByCapture();
           $("head").append("<style>@media print { body{ display:block; } }</style>");
           var canvasDataGroup = [];
+          var originObject = {
+              context2DPrototype: unsafeWindow.document.createElement("canvas").getContext("2d")
+                  .__proto__,
+          };
           document.createElement = new Proxy(document.createElement, {
               apply: function (target, thisArg, argumentsList) {
                   var element = Reflect.apply(target, thisArg, argumentsList);
@@ -465,6 +467,19 @@
                       canvasDataGroup.push(tmpData_1);
                   }
                   return element;
+              },
+          });
+          var pageData = {};
+          Object.defineProperty(unsafeWindow, "pageData", {
+              set: function (v) { return (pageData = v); },
+              get: function () {
+                  if (!pageData.vipInfo)
+                      return (pageData.vipInfo = {});
+                  pageData.vipInfo.global_svip_status = 1;
+                  pageData.vipInfo.global_vip_status = 1;
+                  pageData.vipInfo.isVip = 1;
+                  pageData.vipInfo.isWenkuVip = 1;
+                  return pageData;
               },
           });
           var templateCSS = [
@@ -512,10 +527,15 @@
           $("head").append("<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>");
           $("body").append("<div id='copy-btn-wk'>复制</div>");
           $("#copy-btn-wk").on("click", render);
-          var originObject = {
-              context2DPrototype: unsafeWindow.document.createElement("canvas").getContext("2d")
-                  .__proto__,
-          };
+      },
+      getSelectedText: function () {
+          if (window.getSelection && window.getSelection().toString()) {
+              return window.getSelection().toString();
+          }
+          var result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
+          if (result)
+              return result[1];
+          return "";
       },
   };
 

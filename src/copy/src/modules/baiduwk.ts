@@ -7,12 +7,14 @@ const website: Website = {
     },
     regexp: new RegExp("wenku.baidu.com/view/.*"),
     init: function ($) {
-        utils.hideButton($);
-        utils.enableOnCopyByCapture();
         $("head").append(`<style>@media print { body{ display:block; } }</style>`);
         type TextData = [arg1: string, ...rest: number[]];
         type CanvasDataConstruction = { canvas: Element; data: TextData[] };
         let canvasDataGroup: CanvasDataConstruction[] = [];
+        const originObject = {
+            context2DPrototype: unsafeWindow.document.createElement("canvas").getContext("2d")
+                .__proto__,
+        };
         document.createElement = new Proxy(document.createElement, {
             apply: function (target, thisArg, argumentsList) {
                 const element = Reflect.apply(target, thisArg, argumentsList);
@@ -28,6 +30,18 @@ const website: Website = {
                     canvasDataGroup.push(tmpData);
                 }
                 return element;
+            },
+        });
+        let pageData: Record<string, Record<string, number>> = {};
+        Object.defineProperty(unsafeWindow, "pageData", {
+            set: v => (pageData = v),
+            get: function () {
+                if (!pageData.vipInfo) return (pageData.vipInfo = {});
+                pageData.vipInfo.global_svip_status = 1;
+                pageData.vipInfo.global_vip_status = 1;
+                pageData.vipInfo.isVip = 1;
+                pageData.vipInfo.isWenkuVip = 1;
+                return pageData;
             },
         });
 
@@ -82,11 +96,14 @@ const website: Website = {
         );
         $("body").append("<div id='copy-btn-wk'>复制</div>");
         $("#copy-btn-wk").on("click", render);
-
-        const originObject = {
-            context2DPrototype: unsafeWindow.document.createElement("canvas").getContext("2d")
-                .__proto__,
-        };
+    },
+    getSelectedText: (): string => {
+        if (window.getSelection && window.getSelection().toString()) {
+            return window.getSelection().toString();
+        }
+        const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
+        if (result) return result[1];
+        return "";
     },
 };
 
