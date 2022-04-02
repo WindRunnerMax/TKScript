@@ -91,11 +91,13 @@ const website: Website = {
             };
             closeButton.addEventListener("click", close);
         };
-        $("head").append(
-            `<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>`
-        );
-        $("body").append("<div id='copy-btn-wk'>复制</div>");
-        $("#copy-btn-wk").on("click", render);
+        document.addEventListener("DOMContentLoaded", () => {
+            $("head").append(
+                `<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>`
+            );
+            $("body").append("<div id='copy-btn-wk'>复制</div>");
+            $("#copy-btn-wk").on("click", render);
+        });
     },
     getSelectedText: (): string => {
         if (window.getSelection && window.getSelection().toString()) {

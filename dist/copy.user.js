@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.3.2
+// @version     3.3.3
 // @author      Czy
 // @include     *://wenku.baidu.com/view/*
 // @include     *://wenku.baidu.com/share/*
@@ -524,9 +524,11 @@
               };
               closeButton.addEventListener("click", close);
           };
-          $("head").append("<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>");
-          $("body").append("<div id='copy-btn-wk'>复制</div>");
-          $("#copy-btn-wk").on("click", render);
+          document.addEventListener("DOMContentLoaded", function () {
+              $("head").append("<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>");
+              $("body").append("<div id='copy-btn-wk'>复制</div>");
+              $("#copy-btn-wk").on("click", render);
+          });
       },
       getSelectedText: function () {
           if (window.getSelection && window.getSelection().toString()) {
