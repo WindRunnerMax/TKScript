@@ -5,7 +5,7 @@ const website: Website = {
     config: {
         runAt: "document-start",
     },
-    regexp: new RegExp("wenku.baidu.com/view/.*"),
+    regexp: new RegExp("wenku.baidu.com/(view|link).*"),
     init: function ($) {
         $("head").append(`<style>@media print { body{ display:block; } }</style>`);
         type TextData = [arg1: string, ...rest: number[]];
