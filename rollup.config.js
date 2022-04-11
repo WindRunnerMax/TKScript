@@ -22,6 +22,10 @@ const buildConfig = {
             ],
         ],
     },
+    ts: {
+        tsconfig: path.resolve(__dirname, "tsconfig.json"),
+        extensions: [".ts"],
+    },
 };
 
 const scriptConfig = [
@@ -83,10 +87,7 @@ export default [
         plugins: [
             postcss(buildConfig.postcss),
             babel(buildConfig.babel),
-            ts({
-                tsconfig: path.resolve(__dirname, "tsconfig.json"),
-                extensions: [".ts"],
-            }),
+            ts(buildConfig.ts),
             // uglify(),
             metablock({ file: item.meta.metaFile }),
         ],
