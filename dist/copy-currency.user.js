@@ -1,11 +1,13 @@
 // ==UserScript==
-// @name        🔥🔥🔥文本选中复制(通用)🔥🔥🔥
-// @description 文本选中复制通用版本，适用于大多数网站
+// @name    🔥🔥🔥文本选中复制(通用)🔥🔥🔥
+// @name:en Text Copy Universal
+// @description    文本选中复制通用版本，适用于大多数网站
+// @description:en Text copy general version, suitable for most websites.
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.1
+// @version     1.0.2
 // @author      Czy
-// @include     http://*/*
-// @include     https://*/*
+// @match       http://*/*
+// @match       https://*/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript

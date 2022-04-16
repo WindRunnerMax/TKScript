@@ -1,10 +1,16 @@
 {
-    "name": "🔥🔥🔥文本选中复制(通用)🔥🔥🔥",
+    "name": {
+        "default": "🔥🔥🔥文本选中复制(通用)🔥🔥🔥",
+        "en": "Text Copy Universal"
+      },
     "namespace": "https://github.com/WindrunnerMax/TKScript",
-    "version": "1.0.1",
-    "description": "文本选中复制通用版本，适用于大多数网站",
+    "version": "1.0.2",
+    "description": {
+        "default": "文本选中复制通用版本，适用于大多数网站",
+        "en": "Text copy general version, suitable for most websites."
+      },
     "author": "Czy",
-    "include": [
+    "match": [
         "http://*/*",
         "https://*/*"
     ],
