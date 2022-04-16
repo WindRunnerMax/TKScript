@@ -6,7 +6,7 @@
 // @description:en    Text copy general version, suitable for most websites.
 // @description:zh-CN 文本选中复制通用版本，适用于大多数网站
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.2
+// @version     1.0.3
 // @author      Czy
 // @match       http://*/*
 // @match       https://*/*
