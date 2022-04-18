@@ -20,6 +20,7 @@ const website: Website = {
             "kejudati",
             "baibeike",
             "yuque",
+            "cnrencai",
         ].join("|")
     ),
     init: function ($) {
