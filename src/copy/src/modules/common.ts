@@ -21,10 +21,14 @@ const website: Website = {
             "baibeike",
             "yuque",
             "cnrencai",
+            "kodiplayer",
         ].join("|")
     ),
     init: function ($) {
         utils.hideButton($);
+        utils.enableUserSelect($, "*");
+        utils.enableOnCopyByCapture();
+        utils.enableOnKeyDownByCapture();
     },
 };
 
