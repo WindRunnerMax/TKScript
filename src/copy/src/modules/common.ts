@@ -28,7 +28,6 @@ const website: Website = {
         utils.hideButton($);
         utils.enableUserSelect($, "*");
         utils.enableOnCopyByCapture();
-        utils.enableOnKeyDownByCapture();
     },
 };
 
