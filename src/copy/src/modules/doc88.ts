@@ -17,13 +17,21 @@ const website: Website = {
         //         path = /<textarea[\s\S]*?Viewer.([\S]*?)\+[\S]*?\/textarea>/.exec(view())[1];
         //     }
         // })
-        $("body").append(`<style id="copy-hide">#left-menu{display: none !important;}</style>`);
+        $("body").append(
+            `<style id="copy-element-hide">#left-menu{display: none !important;}</style>`
+        );
         GM_xmlhttpRequest({
             method: "GET",
-            url: "https://static.doc88.com/resources/js/modules/main-v2.min.js?v=2.45",
+            url: "https://res3.doc88.com/resources/js/modules/main-v2.min.js?v=2.56",
             onload: function (response) {
-                path = /\("#cp_textarea"\).val\(([\S]*?)\);/.exec(response.responseText)[1];
+                const result = /\("#cp_textarea"\).val\(([\S]*?)\);/.exec(response.responseText);
+                if (result) path = result[1];
             },
+        });
+        window.addEventListener("load", () => {
+            const cpFn = unsafeWindow.copyText.toString();
+            const fnResult = /<textarea[\s\S]*?>'\+([\S]*?)\+"<\/textarea>/.exec(cpFn);
+            if (fnResult) path = fnResult[1];
         });
     },
     getSelectedText: (): string => {
@@ -31,6 +39,11 @@ const website: Website = {
         path.split(".").forEach((v: string) => {
             select = select[v];
         });
+        if (!select) {
+            unsafeWindow.Config.vip = 1;
+            unsafeWindow.Config.logined = 1;
+            $("#copy-element-hide").remove();
+        }
         return select;
     },
 };

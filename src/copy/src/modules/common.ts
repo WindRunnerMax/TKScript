@@ -22,6 +22,7 @@ const website: Website = {
             "yuque",
             "cnrencai",
             "kodiplayer",
+            "tongxiehui",
         ].join("|")
     ),
     init: function ($) {
