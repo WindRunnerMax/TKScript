@@ -23,6 +23,7 @@ const website: Website = {
             "cnrencai",
             "kodiplayer",
             "tongxiehui",
+            "ndPureView",
         ].join("|")
     ),
     init: function ($) {

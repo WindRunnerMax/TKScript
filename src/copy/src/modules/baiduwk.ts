@@ -1,4 +1,3 @@
-import utils from "../utils";
 import { Website } from "../websites";
 
 const website: Website = {
