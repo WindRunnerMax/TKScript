@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@babel/core': ^7.15.5
@@ -38,26 +38,26 @@ devDependencies:
   '@rollup/plugin-json': registry.npmmirror.com/@rollup/plugin-json/4.1.0_rollup@2.60.0
   '@rollup/plugin-node-resolve': registry.npmmirror.com/@rollup/plugin-node-resolve/13.0.6_rollup@2.60.0
   '@types/jquery': registry.npmmirror.com/@types/jquery/3.5.8
-  '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_d00b196ac5df1286ea7e45797bebddbc
-  '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/4.33.0_eslint@7.32.0+typescript@4.5.2
+  '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_2afrs2wf34jin2t6iv4xx265xq
+  '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/4.33.0_zntrekxpj44l2oq5bhpza7geyi
   babel-core: registry.nlark.com/babel-core/7.0.0-bridge.0_@babel+core@7.16.0
   babel-jest: registry.npmmirror.com/babel-jest/23.6.0_babel-core@7.0.0-bridge.0
   clipboard: registry.nlark.com/clipboard/2.0.8
   eslint: registry.npmmirror.com/eslint/7.32.0
   eslint-config-prettier: registry.nlark.com/eslint-config-prettier/8.3.0_eslint@7.32.0
-  eslint-plugin-jest: registry.npmmirror.com/eslint-plugin-jest/24.7.0_2da712defe3c3d483336ef1879e5f55b
-  eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/3.4.1_6e975bd57c7acf028c1a9ddbbf60c898
+  eslint-plugin-jest: registry.npmmirror.com/eslint-plugin-jest/24.7.0_fwtrfxx6hq6uqmzw54mhtzpvlm
+  eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/3.4.1_n2lvxvl4plhqfda2txn36ygita
   jest: registry.npmmirror.com/jest/27.3.1
   jquery: registry.nlark.com/jquery/3.6.0
   jsdom: registry.npmmirror.com/jsdom/17.0.0
   postcss: registry.npmmirror.com/postcss/8.3.11
   prettier: registry.nlark.com/prettier/2.4.1
   rollup: registry.npmmirror.com/rollup/2.60.0
-  rollup-plugin-babel: registry.npmmirror.com/rollup-plugin-babel/4.4.0_@babel+core@7.16.0+rollup@2.60.0
+  rollup-plugin-babel: registry.npmmirror.com/rollup-plugin-babel/4.4.0_s5sxy53mgg7zgx54iaxqqhu6wm
   rollup-plugin-postcss: registry.npmmirror.com/rollup-plugin-postcss/4.0.1_postcss@8.3.11
-  rollup-plugin-typescript2: registry.npmmirror.com/rollup-plugin-typescript2/0.30.0_rollup@2.60.0+typescript@4.5.2
+  rollup-plugin-typescript2: registry.npmmirror.com/rollup-plugin-typescript2/0.30.0_il6w57is5aywbb4egmwd7bd7hy
   rollup-plugin-userscript-metablock: registry.npmmirror.com/rollup-plugin-userscript-metablock/0.3.1
-  ts-jest: registry.npmmirror.com/ts-jest/27.0.7_9c352fe8ccc2be965804f3cbe24c9cac
+  ts-jest: registry.npmmirror.com/ts-jest/27.0.7_tq2s72gmyk7jmwae6pf6ete4vq
   typescript: registry.npmmirror.com/typescript/4.5.2
 
 packages:
@@ -109,7 +109,7 @@ packages:
       detect-indent: registry.nlark.com/detect-indent/4.0.0
       jsesc: registry.nlark.com/jsesc/1.3.0
       lodash: 4.17.21
-      source-map: registry.nlark.com/source-map/0.5.7
+      source-map: registry.npmmirror.com/source-map/0.5.7
       trim-right: registry.npmmirror.com/trim-right/1.0.1
     dev: true
 
@@ -495,7 +495,7 @@ packages:
     dependencies:
       callsites: registry.nlark.com/callsites/3.1.0
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
-      source-map: registry.nlark.com/source-map/0.6.1
+      source-map: registry.npmmirror.com/source-map/0.6.1
     dev: true
 
   registry.nlark.com/@nodelib/fs.scandir/2.1.5:
@@ -1098,7 +1098,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       mdn-data: registry.nlark.com/mdn-data/2.0.14
-      source-map: registry.nlark.com/source-map/0.6.1
+      source-map: registry.npmmirror.com/source-map/0.6.1
     dev: true
 
   registry.nlark.com/cssesc/3.0.0:
@@ -1311,7 +1311,7 @@ packages:
       esutils: registry.nlark.com/esutils/2.0.3
       optionator: registry.nlark.com/optionator/0.8.3
     optionalDependencies:
-      source-map: registry.nlark.com/source-map/0.6.1
+      source-map: registry.npmmirror.com/source-map/0.6.1
     dev: true
 
   registry.nlark.com/eslint-config-prettier/8.3.0_eslint@7.32.0:
@@ -3234,13 +3234,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  registry.nlark.com/source-map/0.7.3:
-    resolution: {integrity: sha1-UwL4FpAxc1ImVECS5kmB91F1A4M=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/source-map/download/source-map-0.7.3.tgz?cache=0&sync_timestamp=1624608021767&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsource-map%2Fdownload%2Fsource-map-0.7.3.tgz}
-    name: source-map
-    version: 0.7.3
-    engines: {node: '>= 8'}
-    dev: true
-
   registry.nlark.com/spdx-correct/3.1.1:
     resolution: {integrity: sha1-3s6BrJweZxPl99G28X1Gj6U9iak=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/spdx-correct/download/spdx-correct-3.1.1.tgz}
     name: spdx-correct
@@ -3977,6 +3970,8 @@ packages:
     version: 7.16.4
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': registry.npmmirror.com/@babel/types/7.16.0
     dev: true
 
   registry.npmmirror.com/@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression/7.16.2_@babel+core@7.16.0:
@@ -5339,7 +5334,7 @@ packages:
       '@types/yargs-parser': registry.npmmirror.com/@types/yargs-parser/20.2.1
     dev: true
 
-  registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_d00b196ac5df1286ea7e45797bebddbc:
+  registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_2afrs2wf34jin2t6iv4xx265xq:
     resolution: {integrity: sha1-wk3HyAacdwa8QNmfb6h+3LIAUnY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@typescript-eslint/eslint-plugin/download/@typescript-eslint/eslint-plugin-4.33.0.tgz}
     id: registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0
     name: '@typescript-eslint/eslint-plugin'
@@ -5353,8 +5348,8 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/experimental-utils': registry.npmmirror.com/@typescript-eslint/experimental-utils/4.33.0_eslint@7.32.0+typescript@4.5.2
-      '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/4.33.0_eslint@7.32.0+typescript@4.5.2
+      '@typescript-eslint/experimental-utils': registry.npmmirror.com/@typescript-eslint/experimental-utils/4.33.0_zntrekxpj44l2oq5bhpza7geyi
+      '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/4.33.0_zntrekxpj44l2oq5bhpza7geyi
       '@typescript-eslint/scope-manager': registry.npmmirror.com/@typescript-eslint/scope-manager/4.33.0
       debug: registry.npmmirror.com/debug/4.3.2
       eslint: registry.npmmirror.com/eslint/7.32.0
@@ -5368,7 +5363,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmmirror.com/@typescript-eslint/experimental-utils/4.33.0_eslint@7.32.0+typescript@4.5.2:
+  registry.npmmirror.com/@typescript-eslint/experimental-utils/4.33.0_zntrekxpj44l2oq5bhpza7geyi:
     resolution: {integrity: sha1-byp4akIJ+iIimJ6TgLUzGygQ9/0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@typescript-eslint/experimental-utils/download/@typescript-eslint/experimental-utils-4.33.0.tgz?cache=0&sync_timestamp=1637372199864&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40typescript-eslint%2Fexperimental-utils%2Fdownload%2F%40typescript-eslint%2Fexperimental-utils-4.33.0.tgz}
     id: registry.npmmirror.com/@typescript-eslint/experimental-utils/4.33.0
     name: '@typescript-eslint/experimental-utils'
@@ -5389,7 +5384,7 @@ packages:
       - typescript
     dev: true
 
-  registry.npmmirror.com/@typescript-eslint/parser/4.33.0_eslint@7.32.0+typescript@4.5.2:
+  registry.npmmirror.com/@typescript-eslint/parser/4.33.0_zntrekxpj44l2oq5bhpza7geyi:
     resolution: {integrity: sha1-3+eXVw2WlOVgUo0Y7srYbIx0SJk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@typescript-eslint/parser/download/@typescript-eslint/parser-4.33.0.tgz}
     id: registry.npmmirror.com/@typescript-eslint/parser/4.33.0
     name: '@typescript-eslint/parser'
@@ -5512,6 +5507,8 @@ packages:
       babel-core: registry.nlark.com/babel-core/7.0.0-bridge.0_@babel+core@7.16.0
       babel-plugin-istanbul: registry.npmmirror.com/babel-plugin-istanbul/4.1.6
       babel-preset-jest: registry.nlark.com/babel-preset-jest/23.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/babel-jest/27.3.1_@babel+core@7.16.0:
@@ -5545,6 +5542,8 @@ packages:
       find-up: registry.npmmirror.com/find-up/2.1.0
       istanbul-lib-instrument: registry.npmmirror.com/istanbul-lib-instrument/1.10.2
       test-exclude: registry.nlark.com/test-exclude/4.2.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/babel-plugin-istanbul/6.1.1:
@@ -5617,6 +5616,8 @@ packages:
       babel-types: registry.npmmirror.com/babel-types/6.26.0
       babylon: registry.nlark.com/babylon/6.18.0
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/babel-traverse/6.26.0:
@@ -5633,6 +5634,8 @@ packages:
       globals: registry.npmmirror.com/globals/9.18.0
       invariant: registry.nlark.com/invariant/2.2.4
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/babel-types/6.26.0:
@@ -5855,6 +5858,11 @@ packages:
     resolution: {integrity: sha1-XRKFFd8TT/Mn6QpMk/Tgd6U2NB8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/debug/download/debug-2.6.9.tgz}
     name: debug
     version: 2.6.9
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: registry.npmmirror.com/ms/2.0.0
     dev: true
@@ -5901,7 +5909,7 @@ packages:
     version: 8.0.0
     dev: true
 
-  registry.npmmirror.com/eslint-plugin-jest/24.7.0_2da712defe3c3d483336ef1879e5f55b:
+  registry.npmmirror.com/eslint-plugin-jest/24.7.0_fwtrfxx6hq6uqmzw54mhtzpvlm:
     resolution: {integrity: sha1-IGrAgzhB5Z43UXCxX40JVSGcSIk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-jest/download/eslint-plugin-jest-24.7.0.tgz}
     id: registry.npmmirror.com/eslint-plugin-jest/24.7.0
     name: eslint-plugin-jest
@@ -5914,15 +5922,15 @@ packages:
       '@typescript-eslint/eslint-plugin':
         optional: true
     dependencies:
-      '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_d00b196ac5df1286ea7e45797bebddbc
-      '@typescript-eslint/experimental-utils': registry.npmmirror.com/@typescript-eslint/experimental-utils/4.33.0_eslint@7.32.0+typescript@4.5.2
+      '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_2afrs2wf34jin2t6iv4xx265xq
+      '@typescript-eslint/experimental-utils': registry.npmmirror.com/@typescript-eslint/experimental-utils/4.33.0_zntrekxpj44l2oq5bhpza7geyi
       eslint: registry.npmmirror.com/eslint/7.32.0
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: true
 
-  registry.npmmirror.com/eslint-plugin-prettier/3.4.1_6e975bd57c7acf028c1a9ddbbf60c898:
+  registry.npmmirror.com/eslint-plugin-prettier/3.4.1_n2lvxvl4plhqfda2txn36ygita:
     resolution: {integrity: sha1-6d2yAO+289Bf/oOxZlpxavSjh+U=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-prettier/download/eslint-plugin-prettier-3.4.1.tgz}
     id: registry.npmmirror.com/eslint-plugin-prettier/3.4.1
     name: eslint-plugin-prettier
@@ -6104,7 +6112,7 @@ packages:
     dev: true
 
   registry.npmmirror.com/fsevents/2.3.2:
-    resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fsevents/download/fsevents-2.3.2.tgz}
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fsevents/-/fsevents-2.3.2.tgz}
     name: fsevents
     version: 2.3.2
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -6301,6 +6309,8 @@ packages:
       babylon: registry.nlark.com/babylon/6.18.0
       istanbul-lib-coverage: registry.npmmirror.com/istanbul-lib-coverage/1.2.1
       semver: registry.nlark.com/semver/5.7.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/istanbul-lib-instrument/4.0.3:
@@ -6340,7 +6350,7 @@ packages:
     dependencies:
       debug: registry.npmmirror.com/debug/4.3.2
       istanbul-lib-coverage: registry.npmmirror.com/istanbul-lib-coverage/3.2.0
-      source-map: registry.nlark.com/source-map/0.6.1
+      source-map: registry.npmmirror.com/source-map/0.6.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7315,7 +7325,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  registry.npmmirror.com/rollup-plugin-babel/4.4.0_@babel+core@7.16.0+rollup@2.60.0:
+  registry.npmmirror.com/rollup-plugin-babel/4.4.0_s5sxy53mgg7zgx54iaxqqhu6wm:
     resolution: {integrity: sha1-0VvSWUZqnRrMvbL+L/8XxS0DCss=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rollup-plugin-babel/download/rollup-plugin-babel-4.4.0.tgz?cache=0&sync_timestamp=1637286211186&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Frollup-plugin-babel%2Fdownload%2Frollup-plugin-babel-4.4.0.tgz}
     id: registry.npmmirror.com/rollup-plugin-babel/4.4.0
     name: rollup-plugin-babel
@@ -7358,7 +7368,7 @@ packages:
       - ts-node
     dev: true
 
-  registry.npmmirror.com/rollup-plugin-typescript2/0.30.0_rollup@2.60.0+typescript@4.5.2:
+  registry.npmmirror.com/rollup-plugin-typescript2/0.30.0_il6w57is5aywbb4egmwd7bd7hy:
     resolution: {integrity: sha1-HMmawjCb9LnQo+vbwgAq7NVgg9M=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rollup-plugin-typescript2/download/rollup-plugin-typescript2-0.30.0.tgz}
     id: registry.npmmirror.com/rollup-plugin-typescript2/0.30.0
     name: rollup-plugin-typescript2
@@ -7435,7 +7445,28 @@ packages:
     version: 0.5.21
     dependencies:
       buffer-from: registry.nlark.com/buffer-from/1.1.2
-      source-map: registry.nlark.com/source-map/0.6.1
+      source-map: registry.npmmirror.com/source-map/0.6.1
+    dev: true
+
+  registry.npmmirror.com/source-map/0.5.7:
+    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.5.7.tgz}
+    name: source-map
+    version: 0.5.7
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  registry.npmmirror.com/source-map/0.6.1:
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.6.1.tgz}
+    name: source-map
+    version: 0.6.1
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  registry.npmmirror.com/source-map/0.7.3:
+    resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.7.3.tgz}
+    name: source-map
+    version: 0.7.3
+    engines: {node: '>= 8'}
     dev: true
 
   registry.npmmirror.com/spdx-license-ids/3.0.11:
@@ -7582,7 +7613,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  registry.npmmirror.com/ts-jest/27.0.7_9c352fe8ccc2be965804f3cbe24c9cac:
+  registry.npmmirror.com/ts-jest/27.0.7_tq2s72gmyk7jmwae6pf6ete4vq:
     resolution: {integrity: sha1-+3yMjLVSarNxvBsj0G50VlLMotA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ts-jest/download/ts-jest-27.0.7.tgz}
     id: registry.npmmirror.com/ts-jest/27.0.7
     name: ts-jest
@@ -7647,7 +7678,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': registry.npmmirror.com/@types/istanbul-lib-coverage/2.0.3
       convert-source-map: registry.nlark.com/convert-source-map/1.8.0
-      source-map: registry.nlark.com/source-map/0.7.3
+      source-map: registry.npmmirror.com/source-map/0.7.3
     dev: true
 
   registry.npmmirror.com/valid-url/1.0.9:
