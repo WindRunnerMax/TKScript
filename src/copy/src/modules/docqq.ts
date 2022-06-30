@@ -1,8 +1,6 @@
 import utils from "../utils";
 import { Website } from "../websites";
 
-let restrictCopying = true;
-
 const website: Website = {
     regexp: /.*docs\.qq\.com\/.+/,
     config: {
@@ -10,26 +8,18 @@ const website: Website = {
     },
     init: function ($) {
         window.onload = () => {
-            if (unsafeWindow.pad) {
-                if (unsafeWindow.pad.editor._docEnv.copyable === true) {
-                    // 不限制复制
-                    restrictCopying = false;
-                    utils.hideButton($);
-                } else {
-                    unsafeWindow.pad.editor._docEnv.copyable = true;
-                }
-            } else {
-                restrictCopying = false;
-                utils.hideButton($);
-            }
+            utils.hideButton($);
         };
     },
     getSelectedText: function () {
-        if (!restrictCopying) return "";
-        if (unsafeWindow.pad) {
-            unsafeWindow.pad.editor._docEnv.copyable = true;
-            unsafeWindow.pad.editor.clipboardManager.copy();
-            return unsafeWindow.pad.editor.clipboardManager.customClipboard.plain;
+        if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
+            utils.showButton($);
+            const editor = unsafeWindow.pad.editor;
+            editor._docEnv.copyable = true;
+            editor.clipboardManager.copy();
+            const result: string = editor.clipboardManager.customClipboard.plain;
+            editor._docEnv.copyable = false;
+            return result;
         }
         return "";
     },
