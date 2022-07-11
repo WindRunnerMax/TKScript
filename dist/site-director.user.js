@@ -2,12 +2,14 @@
 // @name        🔥🔥🔥跳转链接直达🔥🔥🔥
 // @description 跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN、简书
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.2.2
+// @version     1.2.3
 // @author      Czy
-// @include     *://*google.com/*
+// @include     *://*.google.com/*
 // @include     *://link.zhihu.com/*
 // @include     *://link.csdn.net/*
+// @include     *://link.juejin.cn*
 // @include     *://www.jianshu.com/go-wild*
+// @include     *://mail.qq.com/cgi-bin/readtemplate*
 // @license     MIT License
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -51,14 +53,14 @@
   var css_248z = "";
   styleInject(css_248z);
 
-  var website$3 = {
+  var website$5 = {
       regexp: /google/,
       init: function ($) {
           document.addEventListener("DOMContentLoaded", function () { return $("#res a").attr("target", "_blank"); });
       },
   };
 
-  var website$2 = {
+  var website$4 = {
       regexp: /zhihu/,
       init: function () {
           var result = /.*link.zhihu.com\/\?target=(.*)/.exec(location.href);
@@ -72,7 +74,7 @@
       },
   };
 
-  var website$1 = {
+  var website$3 = {
       regexp: /csdn/,
       init: function () {
           var result = /.*link.csdn.net\/\?target=(.*)/.exec(location.href);
@@ -86,7 +88,7 @@
       },
   };
 
-  var website = {
+  var website$2 = {
       regexp: /jianshu/,
       init: function () {
           var result = /.*jianshu.com\/go-wild.*url=(.*)/.exec(location.href);
@@ -100,7 +102,27 @@
       },
   };
 
-  var websites = [website$3, website$2, website$1, website];
+  var website$1 = {
+      regexp: /mail\.qq/,
+      init: function () {
+          var result = new URL(location.href).searchParams.get("gourl");
+          if (result) {
+              location.href = decodeURIComponent(result);
+          }
+      },
+  };
+
+  var website = {
+      regexp: /link\.juejin/,
+      init: function () {
+          var result = new URL(location.href).searchParams.get("target");
+          if (result) {
+              location.href = decodeURIComponent(result);
+          }
+      },
+  };
+
+  var websites = [website$5, website$4, website$3, website$2, website$1, website];
 
   (function ($) {
       var mather = function (regex, website) {
