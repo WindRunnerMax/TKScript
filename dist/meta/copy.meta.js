@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.3.12
+// @version     3.3.13
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -55,6 +55,9 @@
 // @match       *://*.kodiplayer.cn/*
 // @match       *://tongxiehui.net/*
 // @match       *://*.jianshu.com/p/*
+// @match       *://*.linovelib.com/novel/*
+// @match       *://*.wjx.cn/*
+// @match       *://*.wjx.top/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript

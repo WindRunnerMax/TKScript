@@ -60,6 +60,10 @@ export default {
         document.addEventListener("copy", stopNativePropagation, true);
     },
     enableOnKeyDownByCapture: (): void => {
-        document.addEventListener("keydown", stopNativePropagation, true);
+        document.addEventListener(
+            "keydown",
+            e => e.ctrlKey && e.key.toLocaleUpperCase() === "C" && e.stopPropagation(),
+            true
+        );
     },
 };

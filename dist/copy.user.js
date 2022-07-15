@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.3.12
+// @version     3.3.13
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -55,6 +55,9 @@
 // @match       *://*.kodiplayer.cn/*
 // @match       *://tongxiehui.net/*
 // @match       *://*.jianshu.com/p/*
+// @match       *://*.linovelib.com/novel/*
+// @match       *://*.wjx.cn/*
+// @match       *://*.wjx.top/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -131,7 +134,7 @@
    * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
    */
   var path = "";
-  var website$q = {
+  var website$r = {
       regexp: /.*doc88\.com\/.+/,
       init: function ($) {
           // GM_xmlhttpRequest({
@@ -173,7 +176,7 @@
       },
   };
 
-  var website$p = {
+  var website$q = {
       regexp: /.*segmentfault\.com\/.+/,
       init: function ($) {
           $("body").addClass("_sf_adjust_body");
@@ -238,11 +241,11 @@
           document.addEventListener("copy", stopNativePropagation, true);
       },
       enableOnKeyDownByCapture: function () {
-          document.addEventListener("keydown", stopNativePropagation, true);
+          document.addEventListener("keydown", function (e) { return e.ctrlKey && e.key.toLocaleUpperCase() === "C" && e.stopPropagation(); }, true);
       },
   };
 
-  var website$o = {
+  var website$p = {
       regexp: /.*wk\.baidu\.com\/view\/.+/,
       init: function ($) {
           utils.hideButton($);
@@ -256,21 +259,21 @@
       },
   };
 
-  var website$n = {
+  var website$o = {
       regexp: /.*zhihu\.com\/.*/,
       init: function ($) {
           utils.hideButton($);
       },
   };
 
-  var website$m = {
+  var website$n = {
       regexp: /.*zhihu\.com\/pub\/reader\/.+/,
       init: function ($) {
           setTimeout(utils.showButton, 500, $);
       },
   };
 
-  var website$l = {
+  var website$m = {
       regexp: /.*30edu\.com\.cn\/.+/,
       init: function ($) {
           window.onload = function () {
@@ -285,7 +288,7 @@
       },
   };
 
-  var website$k = {
+  var website$l = {
       regexp: /.*docs\.qq\.com\/.+/,
       config: {
           initCopyEvent: false,
@@ -309,7 +312,7 @@
       },
   };
 
-  var website$j = {
+  var website$k = {
       regexp: new RegExp(".+://boke112.com/post/.+"),
       init: function ($) {
           $("body").on("click", function () { return false; });
@@ -318,7 +321,7 @@
       },
   };
 
-  var website$i = {
+  var website$j = {
       regexp: /diyifanwen/,
       init: function () {
           utils.hideButton($);
@@ -327,7 +330,7 @@
       },
   };
 
-  var website$h = {
+  var website$i = {
       regexp: /mbalib/,
       init: function ($) {
           window.onload = function () {
@@ -339,7 +342,7 @@
       },
   };
 
-  var website$g = {
+  var website$h = {
       regexp: /cnitpm/,
       init: function ($) {
           utils.hideButton($);
@@ -352,7 +355,7 @@
       },
   };
 
-  var website$f = {
+  var website$g = {
       regexp: new RegExp(".+bbs.mihoyo.com/ys/obc.+"),
       init: function ($) {
           utils.hideButton($);
@@ -362,7 +365,7 @@
       },
   };
 
-  var website$e = {
+  var website$f = {
       regexp: new RegExp(".+www.uemeds.cn/.+"),
       init: function ($) {
           utils.hideButton($);
@@ -371,7 +374,7 @@
       },
   };
 
-  var website$d = {
+  var website$e = {
       regexp: new RegExp(".+aiyuke.com/news/.+"),
       init: function ($) {
           utils.hideButton($);
@@ -379,7 +382,7 @@
       },
   };
 
-  var website$c = {
+  var website$d = {
       regexp: new RegExp("qidian"),
       init: function ($) {
           utils.hideButton($);
@@ -389,7 +392,7 @@
       },
   };
 
-  var website$b = {
+  var website$c = {
       regexp: new RegExp("zongheng"),
       init: function ($) {
           utils.removeAttributes($, ".reader_box", ["style", "unselectable", "onselectstart"]);
@@ -403,7 +406,7 @@
       },
   };
 
-  var website$a = {
+  var website$b = {
       regexp: new RegExp("17k"),
       init: function ($) {
           utils.hideButton($);
@@ -411,7 +414,7 @@
       },
   };
 
-  var website$9 = {
+  var website$a = {
       regexp: new RegExp("ciweimao"),
       init: function ($) {
           utils.hideButton($);
@@ -422,7 +425,7 @@
       },
   };
 
-  var website$8 = {
+  var website$9 = {
       regexp: new RegExp("book\\.qq"),
       init: function ($) {
           utils.hideButton($);
@@ -433,7 +436,7 @@
       },
   };
 
-  var website$7 = {
+  var website$8 = {
       regexp: new RegExp("utaten"),
       init: function ($) {
           utils.hideButton($);
@@ -442,7 +445,7 @@
       },
   };
 
-  var website$6 = {
+  var website$7 = {
       config: {
           runAt: "document-start",
       },
@@ -547,7 +550,7 @@
       },
   };
 
-  var website$5 = {
+  var website$6 = {
       regexp: new RegExp("xiaohongshu"),
       init: function ($) {
           utils.hideButton($);
@@ -556,7 +559,7 @@
       },
   };
 
-  var website$4 = {
+  var website$5 = {
       regexp: new RegExp("leetcode"),
       init: function ($) {
           utils.hideButton($);
@@ -564,7 +567,7 @@
       },
   };
 
-  var website$3 = {
+  var website$4 = {
       regexp: /csdn/,
       init: function ($) {
           utils.hideButton($);
@@ -573,7 +576,7 @@
       },
   };
 
-  var website$2 = {
+  var website$3 = {
       regexp: new RegExp("bilibili"),
       init: function ($) {
           utils.hideButton($);
@@ -581,7 +584,7 @@
       },
   };
 
-  var website$1 = {
+  var website$2 = {
       regexp: new RegExp("cnki"),
       init: function ($) {
           utils.hideButton($);
@@ -591,7 +594,7 @@
       },
   };
 
-  var website = {
+  var website$1 = {
       regexp: new RegExp([
           "commandlinux",
           "cnki",
@@ -614,6 +617,7 @@
           "tongxiehui",
           "ndPureView",
           "jianshu",
+          "linovelib",
       ].join("|")),
       init: function ($) {
           utils.hideButton($);
@@ -622,7 +626,20 @@
       },
   };
 
+  var website = {
+      regexp: new RegExp(["wjx"].join("|")),
+      init: function ($) {
+          utils.hideButton($);
+          utils.enableUserSelect($, "*");
+          utils.enableOnCopyByCapture();
+          utils.enableOnKeyDownByCapture();
+          utils.enableOnSelectStartByCapture();
+          utils.enableOnContextMenuByCapture();
+      },
+  };
+
   var websites = [
+      website$q,
       website$p,
       website$o,
       website$n,
@@ -643,8 +660,8 @@
       website$8,
       website$7,
       website$6,
+      website$r,
       website$5,
-      website$q,
       website$4,
       website$3,
       website$2,

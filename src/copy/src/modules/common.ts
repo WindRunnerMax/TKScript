@@ -25,6 +25,7 @@ const website: Website = {
             "tongxiehui",
             "ndPureView",
             "jianshu",
+            "linovelib",
         ].join("|")
     ),
     init: function ($) {

@@ -25,6 +25,7 @@ import csdn from "./modules/csdn";
 import bilibili from "./modules/bilibili";
 import cnki from "./modules/cnki";
 import common from "./modules/common";
+import commonEnhance from "./modules/common-e";
 
 export interface WebsiteConfig {
     initCopyEvent?: boolean;
@@ -65,6 +66,7 @@ const websites: Website[] = [
     bilibili,
     cnki,
     common,
+    commonEnhance,
 ];
 
 export default websites;
