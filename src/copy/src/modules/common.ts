@@ -26,6 +26,7 @@ const website: Website = {
             "ndPureView",
             "jianshu",
             "linovelib",
+            "chazidian",
         ].join("|")
     ),
     init: function ($) {
