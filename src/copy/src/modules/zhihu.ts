@@ -5,6 +5,7 @@ const website: Website = {
     regexp: /.*zhihu\.com\/.*/,
     init: function ($) {
         utils.hideButton($);
+        utils.enableUserSelect($, "*");
     },
 };
 
