@@ -9,8 +9,7 @@ import { initWebsite, getSelectedText } from "./dispose";
     initEvent($, websiteConfig);
     document.addEventListener("mouseup", e => {
         const copyText = getSelectedText();
-        if (copyText) console.log(copyText);
-        else return "";
+        if (!copyText) return "";
         $("#_copy").remove();
         const template = `
             <div id="_copy"
