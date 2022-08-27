@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     3.3.21
+// @version     3.4.1
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -25,7 +25,7 @@
 // @match       *://*.diyifanwen.com/*
 // @match       *://*.mbalib.com/*
 // @match       *://*.cnitpm.com/*
-// @match       *://bbs.mihoyo.com/ys/obc/*
+// @match       *://bbs.mihoyo.com/ys/*
 // @match       *://*.ruiwen.com/*
 // @match       *://www.uemeds.cn/*
 // @match       *://www.oh100.com/*
@@ -64,6 +64,7 @@
 // @match       *://*.wenmi.com/article/*
 // @match       *://yuedu.baidu.com/*
 // @match       *://www.inrrp.com.cn/*
+// @match       *://fanyi.baidu.com/mtpe/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -238,12 +239,15 @@
           });
       },
       enableOnSelectStartByCapture: function () {
+          window.addEventListener("selectstart", stopNativePropagation, true);
           document.addEventListener("selectstart", stopNativePropagation, true);
       },
       enableOnContextMenuByCapture: function () {
+          window.addEventListener("contextmenu", stopNativePropagation, true);
           document.addEventListener("contextmenu", stopNativePropagation, true);
       },
       enableOnCopyByCapture: function () {
+          window.addEventListener("copy", stopNativePropagation, true);
           document.addEventListener("copy", stopNativePropagation, true);
       },
       enableOnKeyDownByCapture: function () {
@@ -363,12 +367,12 @@
   };
 
   var website$g = {
-      regexp: new RegExp(".+bbs.mihoyo.com/ys/obc.+"),
+      regexp: new RegExp(".+bbs.mihoyo.com/.+"),
       init: function ($) {
           utils.hideButton($);
-          $(".detail__content").on("copy", function (e) { return e.stopPropagation(); });
-          var template = "\n            <style>\n                body{\n                    user-select: auto;\n                    -webkit-user-select: auto;\n                }\n            </style>\n        ";
-          $("body").append(template.replace(/\s*/, " "));
+          utils.enableOnCopyByCapture();
+          utils.enableOnSelectStartByCapture();
+          utils.enableUserSelect($, "*");
       },
   };
 
@@ -630,7 +634,7 @@
           "zgbk",
           "wenmi",
           "yuedu\\.baidu",
-          "inrrp"
+          "inrrp",
       ].join("|")),
       init: function ($) {
           utils.hideButton($);
@@ -640,7 +644,7 @@
   };
 
   var website = {
-      regexp: new RegExp(["wjx"].join("|")),
+      regexp: new RegExp(["wjx", "fanyi\\.baidu"].join("|")),
       init: function ($) {
           utils.hideButton($);
           utils.enableUserSelect($, "*");

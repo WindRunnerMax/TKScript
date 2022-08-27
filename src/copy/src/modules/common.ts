@@ -31,7 +31,7 @@ const website: Website = {
             "zgbk",
             "wenmi",
             "yuedu\\.baidu",
-            "inrrp"
+            "inrrp",
         ].join("|")
     ),
     init: function ($) {

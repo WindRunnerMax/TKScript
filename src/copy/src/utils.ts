@@ -51,12 +51,15 @@ export default {
         });
     },
     enableOnSelectStartByCapture: (): void => {
+        window.addEventListener("selectstart", stopNativePropagation, true);
         document.addEventListener("selectstart", stopNativePropagation, true);
     },
     enableOnContextMenuByCapture: (): void => {
+        window.addEventListener("contextmenu", stopNativePropagation, true);
         document.addEventListener("contextmenu", stopNativePropagation, true);
     },
     enableOnCopyByCapture: (): void => {
+        window.addEventListener("copy", stopNativePropagation, true);
         document.addEventListener("copy", stopNativePropagation, true);
     },
     enableOnKeyDownByCapture: (): void => {
