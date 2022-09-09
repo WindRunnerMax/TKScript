@@ -32,6 +32,7 @@ const website: Website = {
             "wenmi",
             "yuedu\\.baidu",
             "inrrp",
+            "shubaoc",
         ].join("|")
     ),
     init: function ($) {
