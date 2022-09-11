@@ -34,10 +34,10 @@ const scriptConfig = [
         meta: {
             input: "./meta/blank.js",
             output: "./dist/meta/copy.meta.js",
-            metaFile: "./src/copy/meta.json",
+            metaFile: "./packages/copy/meta.json",
         },
         script: {
-            input: "./src/copy/src/index.ts",
+            input: "./packages/copy/src/index.ts",
             output: "./dist/copy.user.js",
         },
     },
@@ -46,10 +46,10 @@ const scriptConfig = [
         meta: {
             input: "./meta/blank.js",
             output: "./dist/meta/copy-currency.meta.js",
-            metaFile: "./src/copy-currency/meta.json",
+            metaFile: "./packages/copy-currency/meta.json",
         },
         script: {
-            input: "./src/copy-currency/src/index.ts",
+            input: "./packages/copy-currency/src/index.ts",
             output: "./dist/copy-currency.user.js",
         },
     },
@@ -58,10 +58,10 @@ const scriptConfig = [
         meta: {
             input: "./meta/blank.js",
             output: "./dist/meta/site-director.meta.js",
-            metaFile: "./src/site-director/meta.json",
+            metaFile: "./packages/site-director/meta.json",
         },
         script: {
-            input: "./src/site-director/src/index.ts",
+            input: "./packages/site-director/src/index.ts",
             output: "./dist/site-director.user.js",
         },
     },
