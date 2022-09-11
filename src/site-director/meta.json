@@ -15,8 +15,6 @@
     "license": "MIT License",
     "supportURL": "https://github.com/WindrunnerMax/TKScript/issues",
     "installURL": "https://github.com/WindrunnerMax/TKScript",
-    "updateURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/meta/site-director.meta.js",
-    "downloadURL": "https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@master/dist/site-director.user.js",
     "grant": [
         "unsafeWindow",
         "GM_xmlhttpRequest"

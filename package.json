@@ -8,7 +8,7 @@
     "url": "git://github.com/WindrunnerMax/TKScript"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "./build.sh"
   },
   "author": "Czy",
   "license": "MIT",
