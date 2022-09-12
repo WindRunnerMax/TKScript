@@ -8,7 +8,7 @@
     "url": "git://github.com/WindrunnerMax/TKScript"
   },
   "scripts": {
-    "build": "./build.sh"
+    "build": "./publish.sh"
   },
   "author": "Czy",
   "license": "MIT",
