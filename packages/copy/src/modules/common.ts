@@ -34,6 +34,7 @@ const website: Website = {
             "inrrp",
             "shubaoc",
             "51cto",
+            "ximalaya",
         ].join("|")
     ),
     init: function ($) {
