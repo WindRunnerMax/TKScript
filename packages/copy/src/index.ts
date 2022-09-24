@@ -1,6 +1,4 @@
-import "./styles/app.css";
-import "./styles/style.css";
-import { initBaseEvent } from "./event";
+import { initBaseEvent, initBaseStyle } from "./init";
 import { initWebsite, getSelectedText } from "./dispose";
 import instance from "./utils/instance";
 import { isEmptyContent } from "./utils/copy";
@@ -8,6 +6,7 @@ import { isEmptyContent } from "./utils/copy";
 (function () {
     const websiteConfig = initWebsite();
     initBaseEvent(websiteConfig);
+    initBaseStyle();
     document.addEventListener("mouseup", e => {
         const content = getSelectedText();
         if (isEmptyContent(content)) {

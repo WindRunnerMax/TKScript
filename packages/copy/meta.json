@@ -79,6 +79,5 @@
         "unsafeWindow",
         "GM_xmlhttpRequest"
     ],
-    "require": [],
     "connect": "res3.doc88.com"
 }

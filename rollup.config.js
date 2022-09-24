@@ -39,6 +39,7 @@ const scriptConfig = [
         script: {
             input: "./packages/copy/src/index.ts",
             output: "./dist/copy.user.js",
+            injectCss: false,
         },
     },
     {
@@ -85,7 +86,7 @@ export default [
             name: item.name + "Module",
         },
         plugins: [
-            postcss(buildConfig.postcss),
+            postcss({ ...buildConfig.postcss, inject: item.script.injectCss }),
             babel(buildConfig.babel),
             ts(buildConfig.ts),
             // uglify(),
