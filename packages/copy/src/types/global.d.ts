@@ -1,8 +1,3 @@
-declare interface Window {
-    $: JQueryStatic;
-    ClipboardJS: typeof import("clipboard");
-}
-
 declare interface Document {
     selection: {
         createRange: () => {

@@ -1,3 +1,4 @@
+import dom from "../utils/dom";
 import { Website } from "../websites";
 
 const website: Website = {
@@ -5,8 +6,8 @@ const website: Website = {
         runAt: "document-start",
     },
     regexp: new RegExp("wenku.baidu.com/(view|link).*"),
-    init: function ($) {
-        $("head").append(`<style>@media print { body{ display:block; } }</style>`);
+    init: function () {
+        dom.append("head", `<style>@media print { body{ display:block; } }</style>`);
         type TextData = [arg1: string, ...rest: number[]];
         type CanvasDataConstruction = { canvas: Element; data: TextData[] };
         let canvasDataGroup: CanvasDataConstruction[] = [];
@@ -80,22 +81,24 @@ const website: Website = {
                 "</div>",
                 "</div>",
             ].join("");
-            $("body").append(templateHTML);
-            $("body").append(templateCSS);
+            dom.append("body", templateHTML);
+            dom.append("body", templateCSS);
             const closeButton = document.querySelector("#copy-template-html #template-close");
             const close = () => {
-                $("#copy-template-html").remove();
-                $("#copy-template-css").remove();
+                dom.remove("#copy-template-html");
+                dom.remove("#copy-template-css");
                 closeButton.removeEventListener("click", close);
             };
             closeButton.addEventListener("click", close);
         };
         document.addEventListener("DOMContentLoaded", () => {
-            $("head").append(
+            dom.append(
+                "head",
                 `<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>`
             );
-            $("body").append("<div id='copy-btn-wk'>复制</div>");
-            $("#copy-btn-wk").on("click", render);
+            dom.append("body", "<div id='copy-btn-wk'>复制</div>");
+            const btn = dom.query("#copy-btn-wk");
+            btn && (btn.onclick = render);
         });
     },
     getSelectedText: (): string => {

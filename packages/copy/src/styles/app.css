@@ -1,29 +1,17 @@
-#_copy {
+.__copy-button {
     width: 60px;
     height: 30px;
     background: #4C98F7;
     color: #fff;
     position: absolute;
-    z-index: 1000;
+    z-index: -1000;
+    opacity: 0;
+    visibility: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 3px;
     font-size: 13px;
     cursor: pointer;
-}
-
-div[id^=reader-helper], 
-#sfModal, 
-.modal-backdrop, 
-#select-tooltip{
-    display: none !important;
-}
-
-.modal-open{
-    overflow: auto !important;
-}
-
-._sf_adjust_body{
-    padding-right: 0 !important;
+    transition: all 0.3s;
 }

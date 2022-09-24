@@ -34,7 +34,7 @@ export interface WebsiteConfig {
 export interface Website {
     config?: WebsiteConfig;
     regexp: RegExp;
-    init: ($: JQueryStatic) => void;
+    init: () => void;
     getSelectedText?: () => string;
 }
 

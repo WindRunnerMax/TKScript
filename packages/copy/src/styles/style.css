@@ -1,0 +1,14 @@
+div[id^=reader-helper], 
+#sfModal, 
+.modal-backdrop, 
+#select-tooltip{
+    display: none !important;
+}
+
+.modal-open{
+    overflow: auto !important;
+}
+
+._sf_adjust_body{
+    padding-right: 0 !important;
+}

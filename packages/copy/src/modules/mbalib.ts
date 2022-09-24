@@ -1,13 +1,15 @@
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: /mbalib/,
-    init: function ($) {
+    init: function () {
         window.onload = () => {
-            const container = $("#fullScreenContainer");
-            container.attr("oncopy", "");
-            container.attr("oncontextmenu", "");
-            container.attr("onselectstart", "");
+            utils.removeAttributes("fullScreenContainer", [
+                "oncopy",
+                "oncontextmenu",
+                "onselectstart",
+            ]);
         };
     },
 };

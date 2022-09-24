@@ -1,15 +1,12 @@
-import utils from "../utils";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: /cnitpm/,
-    init: function ($) {
-        utils.hideButton($);
+    init: function () {
+        utils.hideButton();
         window.onload = () => {
-            const container = $("body");
-            container.attr("oncopy", "");
-            container.attr("oncontextmenu", "");
-            container.attr("onselectstart", "");
+            utils.removeAttributes("body", ["oncopy", "oncontextmenu", "onselectstart"]);
         };
     },
 };

@@ -1,13 +1,13 @@
-import utils from "../utils";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: new RegExp(".+bbs.mihoyo.com/.+"),
-    init: function ($) {
-        utils.hideButton($);
+    init: function () {
+        utils.hideButton();
         utils.enableOnCopyByCapture();
         utils.enableOnSelectStartByCapture();
-        utils.enableUserSelect($, "*");
+        utils.enableUserSelectByCSS();
     },
 };
 

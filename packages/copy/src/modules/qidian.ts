@@ -1,13 +1,13 @@
-import utils from "../utils";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: new RegExp("qidian"),
-    init: function ($) {
-        utils.hideButton($);
-        utils.enableUserSelect($, "body");
-        utils.enableOnCopy($, ".main-read-container");
-        utils.enableOnContextMenu($, ".main-read-container");
+    init: function () {
+        utils.hideButton();
+        utils.enableUserSelectByCSS();
+        utils.enableOnCopy(".main-read-container");
+        utils.enableOnContextMenu(".main-read-container");
     },
 };
 

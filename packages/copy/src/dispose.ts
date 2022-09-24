@@ -1,19 +1,21 @@
+import { DOM_READY, DOM_STAGE } from "./constant/constant";
+import { CopyParams } from "./utils/copy";
 import websites, { Website, WebsiteConfig } from "./websites";
 
-let siteGetSelectedText: () => string | null = null;
+let siteGetSelectedText: () => CopyParams | null = null;
 
-const initWebsite = ($: JQueryStatic): WebsiteConfig => {
+const initWebsite = (): WebsiteConfig => {
     let websiteConfig: WebsiteConfig = {
         initCopyEvent: true,
-        runAt: "document-end",
+        runAt: DOM_STAGE.END,
     };
     const mather = (regex: RegExp, website: Website) => {
         if (regex.test(window.location.href)) {
             if (website.config) websiteConfig = Object.assign(websiteConfig, website.config);
-            if (websiteConfig.runAt === "document-end") {
-                document.addEventListener("DOMContentLoaded", () => website.init($));
+            if (websiteConfig.runAt === DOM_STAGE.END) {
+                document.addEventListener(DOM_READY, () => website.init());
             } else {
-                website.init($);
+                website.init();
             }
             if (website.getSelectedText) siteGetSelectedText = website.getSelectedText;
             return true;
@@ -24,7 +26,7 @@ const initWebsite = ($: JQueryStatic): WebsiteConfig => {
     return websiteConfig;
 };
 
-const getSelectedText = (): string => {
+const getSelectedText = (): CopyParams => {
     if (siteGetSelectedText) return siteGetSelectedText();
     if (window.getSelection) return window.getSelection().toString();
     if (document.getSelection) return document.getSelection().toString();

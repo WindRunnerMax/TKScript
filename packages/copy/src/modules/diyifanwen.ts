@@ -1,10 +1,10 @@
-import utils from "../utils";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: /diyifanwen/,
     init: function () {
-        utils.hideButton($);
+        utils.hideButton();
         utils.enableOnCopyByCapture();
         utils.enableOnKeyDownByCapture();
     },

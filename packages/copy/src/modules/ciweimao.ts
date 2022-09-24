@@ -1,14 +1,14 @@
-import utils from "../utils";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: new RegExp("ciweimao"),
-    init: function ($) {
-        utils.hideButton($);
-        utils.enableUserSelect($, "#J_BookRead");
-        utils.enableOnCopy($, "#J_BookCnt");
-        utils.enableOnContextMenu($, "body");
-        utils.enableOnSelectStart($, "#J_BookCnt");
+    init: function () {
+        utils.hideButton();
+        utils.enableUserSelectByCSS();
+        utils.enableOnCopy("#J_BookCnt");
+        utils.enableOnContextMenu("body");
+        utils.enableOnSelectStart("#J_BookCnt");
     },
 };
 

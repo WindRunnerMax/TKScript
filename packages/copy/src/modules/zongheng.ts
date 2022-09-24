@@ -1,17 +1,17 @@
-import utils from "../utils";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: new RegExp("zongheng"),
-    init: function ($) {
-        utils.removeAttributes($, ".reader_box", ["style", "unselectable", "onselectstart"]);
-        utils.removeAttributes($, ".reader_main", ["style", "unselectable", "onselectstart"]);
-        utils.hideButton($);
-        utils.enableOnKeyDown($, "body");
-        utils.enableUserSelect($, ".reader_box .content p");
-        utils.enableOnCopy($, ".content");
-        utils.enableOnContextMenu($, "body");
-        utils.enableOnSelectStart($, ".content");
+    init: function () {
+        utils.removeAttributes(".reader_box", ["style", "unselectable", "onselectstart"]);
+        utils.removeAttributes(".reader_main", ["style", "unselectable", "onselectstart"]);
+        utils.hideButton();
+        utils.enableOnKeyDown("body");
+        utils.enableUserSelectByCSS();
+        utils.enableOnCopy(".content");
+        utils.enableOnContextMenu("body");
+        utils.enableOnSelectStart(".content");
     },
 };
 

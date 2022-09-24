@@ -1,4 +1,4 @@
-import utils from "../utils";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
@@ -6,14 +6,14 @@ const website: Website = {
     config: {
         initCopyEvent: false,
     },
-    init: function ($) {
+    init: function () {
         window.onload = () => {
-            utils.hideButton($);
+            utils.hideButton();
         };
     },
     getSelectedText: function () {
         if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
-            utils.showButton($);
+            utils.showButton();
             const editor = unsafeWindow.pad.editor;
             editor._docEnv.copyable = true;
             editor.clipboardManager.copy();

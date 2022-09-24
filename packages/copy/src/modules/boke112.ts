@@ -1,9 +1,11 @@
+import dom from "../utils/dom";
+import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
     regexp: new RegExp(".+://boke112.com/post/.+"),
-    init: function ($) {
-        $("body").on("click", () => false);
+    init: function () {
+        utils.enableOnCopyByCapture();
         const template = `
             <style>
                 :not(input):not(textarea)::selection {
@@ -17,7 +19,7 @@ const website: Website = {
                 }
             </style>
         `;
-        $("body").append(template.replace(/\s*/, " "));
+        dom.append("head", template);
     },
 };
 

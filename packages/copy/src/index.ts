@@ -1,29 +1,16 @@
-import "./style.css";
-import { initEvent, bindClipboardEvent } from "./event";
+import "./styles/app.css";
+import "./styles/style.css";
+import { initBaseEvent } from "./event";
 import { initWebsite, getSelectedText } from "./dispose";
+import instance from "./utils/instance";
+import { isEmptyContent } from "./utils/copy";
 
 (function () {
-    const $ = window.$;
-    const ClipboardJS = window.ClipboardJS; // https://clipboardjs.com/#example-text
-    const websiteConfig = initWebsite($);
-    initEvent($, websiteConfig);
+    const websiteConfig = initWebsite();
+    initBaseEvent(websiteConfig);
     document.addEventListener("mouseup", e => {
-        const copyText = getSelectedText();
-        if (!copyText) return "";
-        $("#_copy").remove();
-        const template = `
-            <div id="_copy"
-            style="left:${e.pageX + 30}px;top:${e.pageY}px;"
-            data-clipboard-text="${copyText.replace(/"/g, "&quot;")}">复制</div>
-        `;
-        $("body").append(template);
-        $("#_copy").on("mousedown", event => event.stopPropagation());
-        $("#_copy").on("mouseup", event => event.stopPropagation());
-        const clipboard = new ClipboardJS("#_copy");
-        bindClipboardEvent(clipboard);
+        const content = getSelectedText();
+        if (isEmptyContent(content)) return "";
+        instance.onCopy(content, e);
     });
 })();
-
-/**
- * https://www.huiyingwu.com/1718/
- */

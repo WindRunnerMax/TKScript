@@ -1,28 +1,15 @@
+import { COPY, DOM_READY, MOUSE_DOWN } from "./constant/constant";
+import instance from "./utils/instance";
 import { WebsiteConfig } from "./websites";
 
-export const initEvent = ($: JQueryStatic, websiteConfig: WebsiteConfig): void => {
-    document.addEventListener("DOMContentLoaded", () => {
-        $("body").on("mousedown", () => $("#_copy").remove());
+export const initBaseEvent = (websiteConfig: WebsiteConfig): void => {
+    document.addEventListener(DOM_READY, () => {
+        document.addEventListener(MOUSE_DOWN, () => instance.hide());
         if (websiteConfig.initCopyEvent) {
             document.oncopy = e => e.stopPropagation();
             document.body.oncopy = e => e.stopPropagation();
-            $("body").on("copy", e => {
-                e.stopPropagation();
-                return true;
-            });
+            document.addEventListener(COPY, e => e.stopPropagation());
+            document.body.addEventListener(COPY, e => e.stopPropagation());
         }
-    });
-};
-
-export const bindClipboardEvent = (clipboard: ClipboardJS): void => {
-    clipboard.on("success", e => {
-        $("#_copy").html("复制成功");
-        setTimeout(() => $("#_copy").fadeOut(1000), 1000);
-        e.clearSelection();
-    });
-    clipboard.on("error", e => {
-        $("#_copy").html("复制失败");
-        setTimeout(() => $("#_copy").fadeOut(1000), 1000);
-        e.clearSelection();
     });
 };

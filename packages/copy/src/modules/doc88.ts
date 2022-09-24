@@ -1,3 +1,4 @@
+import dom from "../utils/dom";
 import { Website } from "../websites";
 
 /**
@@ -8,7 +9,7 @@ import { Website } from "../websites";
 let path = "";
 const website: Website = {
     regexp: /.*doc88\.com\/.+/,
-    init: $ => {
+    init: () => {
         // GM_xmlhttpRequest({
         //     method: "GET",
         //     url: "https://res.doc88.com/assets/js/v2.js",
@@ -17,7 +18,8 @@ const website: Website = {
         //         path = /<textarea[\s\S]*?Viewer.([\S]*?)\+[\S]*?\/textarea>/.exec(view())[1];
         //     }
         // })
-        $("body").append(
+        dom.append(
+            "body",
             `<style id="copy-element-hide">#left-menu{display: none !important;}</style>`
         );
         GM_xmlhttpRequest({
@@ -42,7 +44,7 @@ const website: Website = {
         if (!select) {
             unsafeWindow.Config.vip = 1;
             unsafeWindow.Config.logined = 1;
-            $("#copy-element-hide").remove();
+            dom.remove("#copy-element-hide");
         }
         return select;
     },
