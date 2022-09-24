@@ -1,10 +1,8 @@
-import { COPY, DOM_READY, MOUSE_DOWN } from "./constant/constant";
-import instance from "./utils/instance";
+import { COPY, DOM_READY } from "./constant/constant";
 import { WebsiteConfig } from "./websites";
 
 export const initBaseEvent = (websiteConfig: WebsiteConfig): void => {
     document.addEventListener(DOM_READY, () => {
-        document.addEventListener(MOUSE_DOWN, () => instance.hide());
         if (websiteConfig.initCopyEvent) {
             document.oncopy = e => e.stopPropagation();
             document.body.oncopy = e => e.stopPropagation();

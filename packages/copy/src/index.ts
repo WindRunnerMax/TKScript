@@ -10,7 +10,10 @@ import { isEmptyContent } from "./utils/copy";
     initBaseEvent(websiteConfig);
     document.addEventListener("mouseup", e => {
         const content = getSelectedText();
-        if (isEmptyContent(content)) return "";
+        if (isEmptyContent(content)) {
+            instance.hide();
+            return "";
+        }
         instance.onCopy(content, e);
     });
 })();

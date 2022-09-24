@@ -1,6 +1,7 @@
 import { copy, CopyParams } from "./copy";
 
 let dom: null | HTMLDivElement = null;
+let isReadyToHidden = false;
 
 const instance = {
     id: "__copy",
@@ -10,24 +11,30 @@ const instance = {
             const container = document.createElement("div");
             container.id = this.id;
             container.className = this.className;
+            container.innerText = "复制";
+            container.onmousedown = event => event.stopPropagation();
+            container.onmouseup = event => event.stopPropagation();
             dom = container;
             document.body.appendChild(dom);
         }
         return dom as HTMLDivElement;
     },
     show: function (event: MouseEvent): void {
+        if (isReadyToHidden) return void 0;
         const dom = this.getInstance();
         dom.style.left = `${event.pageX + 30}px`;
         dom.style.top = `${event.pageY}px`;
         dom.style.opacity = "1";
-        dom.style.visibility = "visible";
         dom.style.zIndex = "1000";
     },
     hide: function (): void {
         const dom = this.getInstance();
         dom.style.opacity = "0";
-        dom.style.visibility = "hidden";
-        setTimeout(() => (dom.style.zIndex = "-10000"), 350);
+        isReadyToHidden = true;
+        setTimeout(() => {
+            dom.style.zIndex = "-10000";
+            isReadyToHidden = false;
+        }, 350);
     },
     onCopy: function (content: CopyParams, event: MouseEvent): void {
         const dom = this.getInstance();
