@@ -2,7 +2,6 @@ import doc88 from "./modules/doc88";
 import sf from "./modules/sf";
 import wk from "./modules/wk";
 import zhihu from "./modules/zhihu";
-import zhihuReader from "./modules/zhihu-reader";
 import edu30 from "./modules/edu30";
 import docqq from "./modules/docqq";
 import boke112 from "./modules/boke112";
@@ -26,6 +25,7 @@ import bilibili from "./modules/bilibili";
 import cnki from "./modules/cnki";
 import common from "./modules/common";
 import commonEnhance from "./modules/common-e";
+import { CopyParams } from "./utils/copy";
 
 export interface WebsiteConfig {
     initCopyEvent?: boolean;
@@ -35,14 +35,13 @@ export interface Website {
     config?: WebsiteConfig;
     regexp: RegExp;
     init: () => void;
-    getSelectedText?: () => string;
+    getSelectedText?: () => CopyParams;
 }
 
 const websites: Website[] = [
     sf,
     wk,
     zhihu,
-    zhihuReader,
     edu30,
     docqq,
     boke112,

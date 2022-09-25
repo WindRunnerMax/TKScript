@@ -6,6 +6,7 @@ const website: Website = {
     init: function () {
         utils.hideButton();
         utils.enableUserSelectByCSS();
+        utils.enableOnCopyByCapture();
     },
 };
 
