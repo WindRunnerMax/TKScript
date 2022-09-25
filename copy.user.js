@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.0.0
+// @version     6.0.1
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -91,7 +91,7 @@
     var DOM_READY = "DOMContentLoaded";
     var PAGE_LOADED = "load";
     var COPY = "copy";
-    var SELECT_START = "copy";
+    var SELECT_START = "selectstart";
     var CONTEXT_MENU = "contextmenu";
     var KEY_DOWN = "keydown";
 
@@ -148,7 +148,7 @@
      * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
      */
     var path = "";
-    var website$r = {
+    var website$q = {
         regexp: /.*doc88\.com\/.+/,
         init: function () {
             // GM_xmlhttpRequest({
@@ -190,7 +190,7 @@
         },
     };
 
-    var website$q = {
+    var website$p = {
         regexp: /.*segmentfault\.com\/.+/,
         init: function () {
             var body = dom$1.query("body");
@@ -202,6 +202,7 @@
     };
 
     var TEXT_PLAIN = "text/plain";
+    var TEXT_HTML = "text/html";
     var downgradeCopy = function (text) {
         var textarea = document.createElement("textarea");
         textarea.style.position = "fixed";
@@ -217,19 +218,19 @@
         return isString(data) ? !data : !data[TEXT_PLAIN];
     };
     var copy = function (data) {
-        var _a, _b;
+        var _a;
         var params = isString(data) ? (_a = {}, _a[TEXT_PLAIN] = data, _a) : data;
         var plainText = params[TEXT_PLAIN];
         if (!plainText)
             return false;
         if (navigator.clipboard) {
-            var clipboardItems = [];
-            for (var _i = 0, _c = Object.entries(params); _i < _c.length; _i++) {
-                var _d = _c[_i], key = _d[0], value = _d[1];
+            var dataItems = {};
+            for (var _i = 0, _b = Object.entries(params); _i < _b.length; _i++) {
+                var _c = _b[_i], key = _c[0], value = _c[1];
                 var blob = new Blob([value], { type: key });
-                clipboardItems.push(new ClipboardItem((_b = {}, _b[key] = blob, _b)));
+                dataItems[key] = blob;
             }
-            navigator.clipboard.write(clipboardItems).catch(function () {
+            navigator.clipboard.write([new ClipboardItem(dataItems)]).catch(function () {
                 downgradeCopy(plainText);
             });
         }
@@ -361,7 +362,7 @@
         },
     };
 
-    var website$p = {
+    var website$o = {
         regexp: /.*wk\.baidu\.com\/view\/.+/,
         init: function () {
             utils.hideButton();
@@ -372,18 +373,12 @@
         },
     };
 
-    var website$o = {
+    var website$n = {
         regexp: /.*zhihu\.com\/.*/,
         init: function () {
             utils.hideButton();
             utils.enableUserSelectByCSS();
-        },
-    };
-
-    var website$n = {
-        regexp: /.*zhihu\.com\/pub\/reader\/.+/,
-        init: function () {
-            setTimeout(utils.showButton, 500);
+            utils.enableOnCopyByCapture();
         },
     };
 
@@ -411,14 +406,19 @@
             };
         },
         getSelectedText: function () {
+            var _a;
             if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
                 utils.showButton();
                 var editor = unsafeWindow.pad.editor;
                 editor._docEnv.copyable = true;
                 editor.clipboardManager.copy();
-                var result = editor.clipboardManager.customClipboard.plain;
+                var plainText = editor.clipboardManager.customClipboard.plain;
+                var htmlText = editor.clipboardManager.customClipboard.html;
                 editor._docEnv.copyable = false;
-                return result;
+                return _a = {},
+                    _a[TEXT_PLAIN] = plainText,
+                    _a[TEXT_HTML] = htmlText,
+                    _a;
             }
             return "";
         },
@@ -758,7 +758,6 @@
     };
 
     var websites = [
-        website$q,
         website$p,
         website$o,
         website$n,
@@ -779,7 +778,7 @@
         website$8,
         website$7,
         website$6,
-        website$r,
+        website$q,
         website$5,
         website$4,
         website$3,
