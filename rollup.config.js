@@ -1,6 +1,6 @@
 import postcss from "rollup-plugin-postcss";
-import babel from "rollup-plugin-babel";
-// import { uglify } from "rollup-plugin-uglify";
+import babel from "@rollup/plugin-babel";
+// import { terser } from "rollup-plugin-terser";
 import metablock from "rollup-plugin-userscript-metablock";
 import ts from "rollup-plugin-typescript2";
 import path from "path";
@@ -17,10 +17,11 @@ const buildConfig = {
                 "@babel/env",
                 {
                     modules: false,
-                    targets: "last 2 versions, ie > 10",
+                    targets: { chrome: "66", ie: "11" },
                 },
             ],
         ],
+        babelHelpers: "runtime",
     },
     ts: {
         tsconfig: path.resolve(__dirname, "tsconfig.json"),
@@ -89,10 +90,8 @@ export default [
             postcss({ ...buildConfig.postcss, inject: item.script.injectCss }),
             babel(buildConfig.babel),
             ts(buildConfig.ts),
-            // uglify(),
+            // terser({ format: { comments: true } }),
             metablock({ file: item.meta.metaFile }),
         ],
     })),
 ];
-
-// https://segmentfault.com/a/1190000010628352
