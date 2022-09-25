@@ -40,3 +40,25 @@ deepScanObject(window, 0, 10)
 
 console.log("finish");
 */
+
+/**
+// read - clipboard
+
+ */
+
+// setTimeout(() => {
+//     navigator.clipboard.read().then(res => {
+//         for (const item of res) {
+//             const types = item.types;
+//             for (const type of types) {
+//                 item.getType(type).then(data => {
+//                     const reader = new FileReader();
+//                     reader.readAsText(data, "utf-8");
+//                     reader.onload = () => {
+//                         console.info(type, reader.result);
+//                     };
+//                 });
+//             }
+//         }
+//     });
+// }, 2000);

@@ -31,12 +31,12 @@ export const copy = (data: CopyParams): boolean => {
     const plainText = params[TEXT_PLAIN];
     if (!plainText) return false;
     if (navigator.clipboard) {
-        const clipboardItems: ClipboardItem[] = [];
+        const dataItems: Record<string, Blob> = {};
         for (const [key, value] of Object.entries(params)) {
             const blob = new Blob([value], { type: key });
-            clipboardItems.push(new ClipboardItem({ [key]: blob }));
+            dataItems[key] = blob;
         }
-        navigator.clipboard.write(clipboardItems).catch(() => {
+        navigator.clipboard.write([new ClipboardItem(dataItems)]).catch(() => {
             downgradeCopy(plainText);
         });
     } else {
