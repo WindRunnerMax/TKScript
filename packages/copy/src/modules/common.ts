@@ -35,6 +35,7 @@ const website: Website = {
             "shubaoc",
             "51cto",
             "ximalaya",
+            "xiexiebang",
         ].join("|")
     ),
     init: function () {
