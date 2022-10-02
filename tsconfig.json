@@ -16,7 +16,6 @@
     "paths": {},
     "types": [
       "@types/node",
-      "@types/jquery",
     ],
   },
   "exclude": [

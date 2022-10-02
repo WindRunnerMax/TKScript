@@ -12,15 +12,7 @@ const buildConfig = {
     },
     babel: {
         exclude: ["node_modules/**"],
-        presets: [
-            [
-                "@babel/env",
-                {
-                    modules: false,
-                    targets: { chrome: "66", ie: "11" },
-                },
-            ],
-        ],
+        presets: [["@babel/env", { modules: false, targets: { chrome: "66", ie: "11" } }]],
         babelHelpers: "runtime",
     },
     ts: {
@@ -53,6 +45,7 @@ const scriptConfig = [
         script: {
             input: "./packages/copy-currency/src/index.ts",
             output: "./dist/copy-currency.user.js",
+            injectCss: false,
         },
     },
     {
@@ -65,6 +58,7 @@ const scriptConfig = [
         script: {
             input: "./packages/site-director/src/index.ts",
             output: "./dist/site-director.user.js",
+            injectCss: false,
         },
     },
 ];

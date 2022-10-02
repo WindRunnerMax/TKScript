@@ -8,11 +8,9 @@ specifiers:
   '@rollup/plugin-commonjs': ^20.0.0
   '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^13.0.4
-  '@types/jquery': ^3.5.8
   '@typescript-eslint/eslint-plugin': ^4.30.0
   '@typescript-eslint/parser': ^4.30.0
   babel-core: ^7.0.0-bridge.0
-  clipboard: ^2.0.8
   eslint: ^7.32.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^3.4.0
@@ -33,11 +31,9 @@ devDependencies:
   '@rollup/plugin-commonjs': registry.npmmirror.com/@rollup/plugin-commonjs/20.0.0_rollup@2.60.0
   '@rollup/plugin-json': registry.npmmirror.com/@rollup/plugin-json/4.1.0_rollup@2.60.0
   '@rollup/plugin-node-resolve': registry.npmmirror.com/@rollup/plugin-node-resolve/13.0.6_rollup@2.60.0
-  '@types/jquery': registry.npmmirror.com/@types/jquery/3.5.8
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_d00b196ac5df1286ea7e45797bebddbc
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/4.33.0_eslint@7.32.0+typescript@4.5.2
   babel-core: registry.nlark.com/babel-core/7.0.0-bridge.0_@babel+core@7.16.0
-  clipboard: registry.nlark.com/clipboard/2.0.8
   eslint: registry.npmmirror.com/eslint/7.32.0
   eslint-config-prettier: registry.nlark.com/eslint-config-prettier/8.3.0_eslint@7.32.0
   eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/3.4.1_6e975bd57c7acf028c1a9ddbbf60c898
@@ -536,16 +532,6 @@ packages:
       supports-color: registry.npmmirror.com/supports-color/7.2.0
     dev: true
 
-  registry.nlark.com/clipboard/2.0.8:
-    resolution: {integrity: sha1-/8bBA90pZ6gwBfP2GXaqRlWkzbo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/clipboard/download/clipboard-2.0.8.tgz}
-    name: clipboard
-    version: 2.0.8
-    dependencies:
-      good-listener: registry.nlark.com/good-listener/1.2.2
-      select: registry.nlark.com/select/1.1.2
-      tiny-emitter: registry.nlark.com/tiny-emitter/2.1.0
-    dev: true
-
   registry.nlark.com/color-convert/2.0.1:
     resolution: {integrity: sha1-ctOmjVmMm9s68q0ehPIdiWq9TeM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/color-convert/download/color-convert-2.0.1.tgz}
     name: color-convert
@@ -670,12 +656,6 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       object-keys: registry.nlark.com/object-keys/1.1.1
-    dev: true
-
-  registry.nlark.com/delegate/3.2.0:
-    resolution: {integrity: sha1-tmtxwxWFIuirV0T3INjKDCr1kWY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/delegate/download/delegate-3.2.0.tgz}
-    name: delegate
-    version: 3.2.0
     dev: true
 
   registry.nlark.com/doctrine/3.0.0:
@@ -984,14 +964,6 @@ packages:
       ignore: registry.npmmirror.com/ignore/5.1.9
       merge2: registry.nlark.com/merge2/1.4.1
       slash: registry.nlark.com/slash/3.0.0
-    dev: true
-
-  registry.nlark.com/good-listener/1.2.2:
-    resolution: {integrity: sha1-1TswzfkxPf+33JoNR3CWqm0UXFA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/good-listener/download/good-listener-1.2.2.tgz}
-    name: good-listener
-    version: 1.2.2
-    dependencies:
-      delegate: registry.nlark.com/delegate/3.2.0
     dev: true
 
   registry.nlark.com/has-flag/3.0.0:
@@ -1934,12 +1906,6 @@ packages:
     version: 5.1.2
     dev: true
 
-  registry.nlark.com/select/1.1.2:
-    resolution: {integrity: sha1-DnNQrN7ICxEIUoeG7B1EGNEbOW0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/select/download/select-1.1.2.tgz}
-    name: select
-    version: 1.1.2
-    dev: true
-
   registry.nlark.com/semver/6.3.0:
     resolution: {integrity: sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/semver/download/semver-6.3.0.tgz}
     name: semver
@@ -2055,12 +2021,6 @@ packages:
     resolution: {integrity: sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/timsort/download/timsort-0.3.0.tgz}
     name: timsort
     version: 0.3.0
-    dev: true
-
-  registry.nlark.com/tiny-emitter/2.1.0:
-    resolution: {integrity: sha1-HRpW7fxRxD6GPLtTgqcjMONVVCM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/tiny-emitter/download/tiny-emitter-2.1.0.tgz}
-    name: tiny-emitter
-    version: 2.1.0
     dev: true
 
   registry.nlark.com/to-fast-properties/2.0.0:
@@ -3629,14 +3589,6 @@ packages:
     version: 0.0.50
     dev: true
 
-  registry.npmmirror.com/@types/jquery/3.5.8:
-    resolution: {integrity: sha1-g7+8305iXFRxWQ+ScDwGqtsFKgk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/jquery/download/@types/jquery-3.5.8.tgz}
-    name: '@types/jquery'
-    version: 3.5.8
-    dependencies:
-      '@types/sizzle': registry.npmmirror.com/@types/sizzle/2.3.3
-    dev: true
-
   registry.npmmirror.com/@types/json-schema/7.0.9:
     resolution: {integrity: sha1-l+3JA36gw4WFMgsolk3eOznkZg0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/json-schema/download/@types/json-schema-7.0.9.tgz}
     name: '@types/json-schema'
@@ -3655,12 +3607,6 @@ packages:
     version: 1.17.1
     dependencies:
       '@types/node': registry.npmmirror.com/@types/node/16.11.9
-    dev: true
-
-  registry.npmmirror.com/@types/sizzle/2.3.3:
-    resolution: {integrity: sha1-/14vGQKWnTBSJaBHyKD9XJFc6+8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/sizzle/download/@types/sizzle-2.3.3.tgz}
-    name: '@types/sizzle'
-    version: 2.3.3
     dev: true
 
   registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_d00b196ac5df1286ea7e45797bebddbc:
