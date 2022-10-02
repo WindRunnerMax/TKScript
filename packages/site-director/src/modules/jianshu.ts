@@ -7,7 +7,6 @@ const website: Website = {
         if (result) {
             const url = decodeURIComponent(result[1]);
             if (url) {
-                console.log(url);
                 location.href = url;
             }
         }

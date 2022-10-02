@@ -1,4 +1,3 @@
-import "./style.css";
 import google from "./modules/google";
 import zhihu from "./modules/zhihu";
 import csdn from "./modules/csdn";
@@ -8,7 +7,7 @@ import juejin from "./modules/juejin";
 
 export interface Website {
     regexp: RegExp;
-    init: ($: JQueryStatic) => void;
+    init: () => void;
 }
 
 const websites: Website[] = [google, zhihu, csdn, jianshu, qqMail, juejin];
