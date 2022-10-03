@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
+// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.0.2
+// @version     6.1.0
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -70,6 +70,7 @@
 // @match       *://www.ximalaya.com/*
 // @match       *://*.tianqi.com/*
 // @match       *://*.xiexiebang.com/*
+// @match       *://*.docin.com/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -149,7 +150,7 @@
      * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
      */
     var path = "";
-    var website$q = {
+    var website$r = {
         regexp: /.*doc88\.com\/.+/,
         init: function () {
             // GM_xmlhttpRequest({
@@ -191,7 +192,7 @@
         },
     };
 
-    var website$p = {
+    var website$q = {
         regexp: /.*segmentfault\.com\/.+/,
         init: function () {
             var body = dom$1.query("body");
@@ -252,8 +253,8 @@
                 container.id = this.id;
                 container.className = this.className;
                 container.innerText = "复制";
-                container.onmousedown = function (event) { return event.stopPropagation(); };
-                container.onmouseup = function (event) { return event.stopPropagation(); };
+                container.addEventListener("mouseup", function (e) { return e.stopPropagation(); }, true);
+                container.addEventListener("mousedown", function (e) { return e.stopPropagation(); }, true);
                 dom = container;
                 document.body.appendChild(dom);
             }
@@ -363,7 +364,7 @@
         },
     };
 
-    var website$o = {
+    var website$p = {
         regexp: /.*wk\.baidu\.com\/view\/.+/,
         init: function () {
             utils.hideButton();
@@ -374,7 +375,7 @@
         },
     };
 
-    var website$n = {
+    var website$o = {
         regexp: /.*zhihu\.com\/.*/,
         init: function () {
             utils.hideButton();
@@ -383,7 +384,7 @@
         },
     };
 
-    var website$m = {
+    var website$n = {
         regexp: /.*30edu\.com\.cn\/.+/,
         init: function () {
             window.onload = function () {
@@ -396,7 +397,7 @@
         },
     };
 
-    var website$l = {
+    var website$m = {
         regexp: /.*docs\.qq\.com\/.+/,
         config: {
             initCopyEvent: false,
@@ -425,7 +426,7 @@
         },
     };
 
-    var website$k = {
+    var website$l = {
         regexp: new RegExp(".+://boke112.com/post/.+"),
         init: function () {
             utils.enableOnCopyByCapture();
@@ -434,7 +435,7 @@
         },
     };
 
-    var website$j = {
+    var website$k = {
         regexp: /diyifanwen/,
         init: function () {
             utils.hideButton();
@@ -443,7 +444,7 @@
         },
     };
 
-    var website$i = {
+    var website$j = {
         regexp: /mbalib/,
         init: function () {
             window.onload = function () {
@@ -456,7 +457,7 @@
         },
     };
 
-    var website$h = {
+    var website$i = {
         regexp: /cnitpm/,
         init: function () {
             utils.hideButton();
@@ -466,7 +467,7 @@
         },
     };
 
-    var website$g = {
+    var website$h = {
         regexp: new RegExp(".+bbs.mihoyo.com/.+"),
         init: function () {
             utils.hideButton();
@@ -476,7 +477,7 @@
         },
     };
 
-    var website$f = {
+    var website$g = {
         regexp: new RegExp(".+www.uemeds.cn/.+"),
         init: function () {
             utils.hideButton();
@@ -484,7 +485,7 @@
         },
     };
 
-    var website$e = {
+    var website$f = {
         regexp: new RegExp(".+aiyuke.com/news/.+"),
         init: function () {
             utils.hideButton();
@@ -492,7 +493,7 @@
         },
     };
 
-    var website$d = {
+    var website$e = {
         regexp: new RegExp("qidian"),
         init: function () {
             utils.hideButton();
@@ -502,7 +503,7 @@
         },
     };
 
-    var website$c = {
+    var website$d = {
         regexp: new RegExp("zongheng"),
         init: function () {
             utils.removeAttributes(".reader_box", ["style", "unselectable", "onselectstart"]);
@@ -516,7 +517,7 @@
         },
     };
 
-    var website$b = {
+    var website$c = {
         regexp: new RegExp("17k"),
         init: function () {
             utils.hideButton();
@@ -524,7 +525,7 @@
         },
     };
 
-    var website$a = {
+    var website$b = {
         regexp: new RegExp("ciweimao"),
         init: function () {
             utils.hideButton();
@@ -535,7 +536,7 @@
         },
     };
 
-    var website$9 = {
+    var website$a = {
         regexp: new RegExp("book\\.qq"),
         init: function () {
             utils.hideButton();
@@ -546,7 +547,7 @@
         },
     };
 
-    var website$8 = {
+    var website$9 = {
         regexp: new RegExp("utaten"),
         init: function () {
             utils.hideButton();
@@ -555,7 +556,7 @@
         },
     };
 
-    var website$7 = {
+    var website$8 = {
         config: {
             runAt: "document-start",
         },
@@ -661,7 +662,7 @@
         },
     };
 
-    var website$6 = {
+    var website$7 = {
         regexp: new RegExp("xiaohongshu"),
         init: function () {
             utils.hideButton();
@@ -670,7 +671,7 @@
         },
     };
 
-    var website$5 = {
+    var website$6 = {
         regexp: new RegExp("leetcode"),
         init: function () {
             utils.hideButton();
@@ -678,7 +679,7 @@
         },
     };
 
-    var website$4 = {
+    var website$5 = {
         regexp: /csdn/,
         init: function () {
             utils.hideButton();
@@ -687,7 +688,7 @@
         },
     };
 
-    var website$3 = {
+    var website$4 = {
         regexp: new RegExp("bilibili"),
         init: function () {
             utils.hideButton();
@@ -695,13 +696,32 @@
         },
     };
 
-    var website$2 = {
+    var website$3 = {
         regexp: new RegExp("cnki"),
         init: function () {
             utils.hideButton();
             utils.enableOnContextMenuByCapture();
             utils.enableOnKeyDownByCapture();
             utils.enableOnCopyByCapture();
+        },
+    };
+
+    var website$2 = {
+        regexp: new RegExp("docin.com/.*"),
+        config: {
+            initCopyEvent: false,
+            captureInstance: true,
+            delay: 100,
+        },
+        init: function () {
+            window.addEventListener(PAGE_LOADED, function () { var _a; return (_a = dom$1.query("#j_select")) === null || _a === void 0 ? void 0 : _a.click(); });
+            dom$1.append("head", "<style>#reader-copy-el{display: none;}</style>");
+        },
+        getSelectedText: function () {
+            if (unsafeWindow.docinReader && unsafeWindow.docinReader.searchTextStr) {
+                return unsafeWindow.docinReader.searchTextStr;
+            }
+            return "";
         },
     };
 
@@ -760,6 +780,7 @@
     };
 
     var websites = [
+        website$q,
         website$p,
         website$o,
         website$n,
@@ -779,8 +800,8 @@
         website$9,
         website$8,
         website$7,
+        website$r,
         website$6,
-        website$q,
         website$5,
         website$4,
         website$3,
@@ -794,6 +815,8 @@
         var websiteConfig = {
             initCopyEvent: true,
             runAt: DOM_STAGE.END,
+            captureInstance: false,
+            delay: 0,
         };
         var mather = function (regex, website) {
             if (regex.test(window.location.href)) {
@@ -831,13 +854,16 @@
         initBaseEvent(websiteConfig);
         initBaseStyle();
         document.addEventListener("mouseup", function (e) {
-            var content = getSelectedText();
-            if (isEmptyContent(content)) {
-                instance.hide();
-                return "";
-            }
-            instance.onCopy(content, e);
-        });
+            var handler = function () {
+                var content = getSelectedText();
+                if (isEmptyContent(content)) {
+                    instance.hide();
+                    return "";
+                }
+                instance.onCopy(content, e);
+            };
+            websiteConfig.delay ? setTimeout(handler, websiteConfig.delay) : handler();
+        }, websiteConfig.captureInstance);
     })();
 
 })();
