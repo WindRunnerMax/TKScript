@@ -14,11 +14,8 @@
     "baseUrl": ".",
     "newLine": "lf",
     "paths": {},
-    "types": [
-      "@types/node",
-    ],
+    "types": [ "@types/node" ],
+    "jsx": "react-jsx",
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": [ "node_modules" ]
 }
