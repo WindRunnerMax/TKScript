@@ -12,8 +12,8 @@ const instance = {
             container.id = this.id;
             container.className = this.className;
             container.innerText = "复制";
-            container.onmousedown = event => event.stopPropagation();
-            container.onmouseup = event => event.stopPropagation();
+            container.addEventListener("mouseup", e => e.stopPropagation(), true);
+            container.addEventListener("mousedown", e => e.stopPropagation(), true);
             dom = container;
             document.body.appendChild(dom);
         }

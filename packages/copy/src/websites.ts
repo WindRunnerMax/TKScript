@@ -23,6 +23,7 @@ import leetcode from "./modules/leetcode";
 import csdn from "./modules/csdn";
 import bilibili from "./modules/bilibili";
 import cnki from "./modules/cnki";
+import docin from "./modules/docin";
 import common from "./modules/common";
 import commonEnhance from "./modules/common-e";
 import { CopyParams } from "./utils/copy";
@@ -30,6 +31,8 @@ import { CopyParams } from "./utils/copy";
 export interface WebsiteConfig {
     initCopyEvent?: boolean;
     runAt?: "document-start" | "document-end";
+    captureInstance?: boolean;
+    delay?: number;
 }
 export interface Website {
     config?: WebsiteConfig;
@@ -64,6 +67,7 @@ const websites: Website[] = [
     csdn,
     bilibili,
     cnki,
+    docin,
     common,
     commonEnhance,
 ];

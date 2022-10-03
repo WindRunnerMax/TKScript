@@ -8,6 +8,8 @@ const initWebsite = (): WebsiteConfig => {
     let websiteConfig: WebsiteConfig = {
         initCopyEvent: true,
         runAt: DOM_STAGE.END,
+        captureInstance: false,
+        delay: 0,
     };
     const mather = (regex: RegExp, website: Website) => {
         if (regex.test(window.location.href)) {
