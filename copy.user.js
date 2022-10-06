@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.0
+// @version     6.1.1
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -205,12 +205,20 @@
 
     var TEXT_PLAIN = "text/plain";
     var TEXT_HTML = "text/html";
-    var downgradeCopy = function (text) {
+    var downgradeCopy = function (data) {
         var textarea = document.createElement("textarea");
+        textarea.addEventListener(COPY, function (event) {
+            for (var _i = 0, _a = Object.entries(data); _i < _a.length; _i++) {
+                var _b = _a[_i], key = _b[0], value = _b[1];
+                event.clipboardData.setData(key, value);
+            }
+            event.stopPropagation();
+            event.preventDefault();
+        }, true);
         textarea.style.position = "fixed";
         textarea.style.left = "-999px";
         textarea.style.top = "-999px";
-        textarea.value = text;
+        textarea.value = data[TEXT_PLAIN];
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand("copy");
@@ -225,7 +233,7 @@
         var plainText = params[TEXT_PLAIN];
         if (!plainText)
             return false;
-        if (navigator.clipboard) {
+        if (navigator.clipboard && window.ClipboardItem) {
             var dataItems = {};
             for (var _i = 0, _b = Object.entries(params); _i < _b.length; _i++) {
                 var _c = _b[_i], key = _c[0], value = _c[1];
@@ -233,11 +241,11 @@
                 dataItems[key] = blob;
             }
             navigator.clipboard.write([new ClipboardItem(dataItems)]).catch(function () {
-                downgradeCopy(plainText);
+                downgradeCopy(params);
             });
         }
         else {
-            downgradeCopy(plainText);
+            downgradeCopy(params);
         }
         return true;
     };
