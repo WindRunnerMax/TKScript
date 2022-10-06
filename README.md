@@ -26,3 +26,8 @@
 $ pnpm install
 $ pnpm run build
 ```
+
+## Contributors
+<a href="https://github.com/WindrunnerMax/TKScript/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=WindrunnerMax/TKScript" />
+</a>
