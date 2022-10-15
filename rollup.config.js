@@ -1,8 +1,7 @@
 import postcss from "rollup-plugin-postcss";
-import babel from "@rollup/plugin-babel";
+import esbuild from "rollup-plugin-esbuild";
 // import { terser } from "rollup-plugin-terser";
 import metablock from "rollup-plugin-userscript-metablock";
-import ts from "rollup-plugin-typescript2";
 import path from "path";
 
 const buildConfig = {
@@ -10,14 +9,12 @@ const buildConfig = {
         minimize: true,
         extensions: [".css"],
     },
-    babel: {
-        exclude: ["node_modules/**"],
-        presets: [["@babel/env", { modules: false, targets: { chrome: "66", ie: "11" } }]],
-        babelHelpers: "runtime",
-    },
-    ts: {
+    esbuild: {
+        exclude: [/node_modules/],
+        sourceMap: false,
+        target: "es2015",
+        minify: false,
         tsconfig: path.resolve(__dirname, "tsconfig.json"),
-        extensions: [".ts"],
     },
 };
 
@@ -82,8 +79,7 @@ export default [
         },
         plugins: [
             postcss({ ...buildConfig.postcss, inject: item.script.injectCss }),
-            babel(buildConfig.babel),
-            ts(buildConfig.ts),
+            esbuild(buildConfig.esbuild),
             // terser({ format: { comments: true } }),
             metablock({ file: item.meta.metaFile }),
         ],
