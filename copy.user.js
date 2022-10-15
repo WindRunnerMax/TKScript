@@ -250,7 +250,7 @@
           const container = document.createElement("div");
           container.id = this.id;
           container.className = this.className;
-          container.innerText = "\u590D\u5236";
+          container.innerText = "复制";
           container.addEventListener("mouseup", (e) => e.stopPropagation(), true);
           container.addEventListener("mousedown", (e) => e.stopPropagation(), true);
           dom = container;
@@ -629,8 +629,8 @@
             "<div id='copy-template-html'>",
             "<div class='template-container'>",
             "<div class='title-container'>",
-            "<div>\u8BF7\u81EA\u884C\u590D\u5236</div>",
-            "<div id='template-close'>\u5173\u95ED</div>",
+            "<div>请自行复制</div>",
+            "<div id='template-close'>关闭</div>",
             "</div>",
             "<div id='copy-template-text'>",
             templateText.join(""),
@@ -653,7 +653,7 @@
             "head",
             `<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>`
           );
-          dom$1.append("body", "<div id='copy-btn-wk'>\u590D\u5236</div>");
+          dom$1.append("body", "<div id='copy-btn-wk'>复制</div>");
           const btn = dom$1.query("#copy-btn-wk");
           btn && (btn.onclick = render);
         });

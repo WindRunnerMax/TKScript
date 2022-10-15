@@ -48,8 +48,8 @@
       {
         status: 1 /* CLOSE */,
         storageKey: "selectstart-and-copy",
-        openName: "\u2705 \u542F\u52A8\u89E3\u9664\u590D\u5236\u9650\u5236",
-        closeName: "\u274C \u5173\u95ED\u89E3\u9664\u590D\u5236\u9650\u5236",
+        openName: "✅ 启动解除复制限制",
+        closeName: "❌ 关闭解除复制限制",
         openFunction: () => {
           document.addEventListener("selectstart", stopNativePropagation, true);
           document.addEventListener("copy", stopNativePropagation, true);
@@ -67,16 +67,16 @@
       {
         status: 1 /* CLOSE */,
         storageKey: "contextmenu",
-        openName: "\u2705 \u542F\u52A8\u89E3\u9664\u53F3\u952E\u9650\u5236",
-        closeName: "\u274C \u5173\u95ED\u89E3\u9664\u53F3\u952E\u9650\u5236",
+        openName: "✅ 启动解除右键限制",
+        closeName: "❌ 关闭解除右键限制",
         openFunction: () => document.addEventListener("contextmenu", stopNativePropagation, true),
         closeFunction: () => document.removeEventListener("contextmenu", stopNativePropagation, true)
       },
       {
         status: 1 /* CLOSE */,
         storageKey: "keydown",
-        openName: "\u2705 \u542F\u52A8\u89E3\u9664\u952E\u76D8\u9650\u5236",
-        closeName: "\u274C \u5173\u95ED\u89E3\u9664\u952E\u76D8\u9650\u5236",
+        openName: "✅ 启动解除键盘限制",
+        closeName: "❌ 关闭解除键盘限制",
         openFunction: () => document.addEventListener("keydown", stopNativePropagation, true),
         closeFunction: () => document.removeEventListener("keydown", stopNativePropagation, true)
       }
