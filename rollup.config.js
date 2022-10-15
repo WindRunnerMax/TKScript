@@ -14,6 +14,7 @@ const buildConfig = {
         sourceMap: false,
         target: "es2015",
         minify: false,
+        charset: "utf8",
         tsconfig: path.resolve(__dirname, "tsconfig.json"),
     },
 };
