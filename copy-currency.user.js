@@ -22,109 +22,101 @@
     'use strict';
 
     var utils = {
-        insertCSS: function (id, css) {
-            var style = document.createElement("style");
-            style.id = id;
-            style.innerHTML = css;
-            var head = document.getElementsByTagName("head")[0];
-            if (head) {
-                head.appendChild(style);
-            }
-            else {
-                window.onload = function () { return document.getElementsByTagName("head")[0].appendChild(style); };
-            }
-        },
-        removeCSS: function (id) {
-            document.getElementsByTagName("head")[0].removeChild(document.getElementById(id));
-        },
+      insertCSS: (id, css) => {
+        const style = document.createElement("style");
+        style.id = id;
+        style.innerHTML = css;
+        const head = document.getElementsByTagName("head")[0];
+        if (head) {
+          head.appendChild(style);
+        } else {
+          window.onload = () => document.getElementsByTagName("head")[0].appendChild(style);
+        }
+      },
+      removeCSS: (id) => {
+        document.getElementsByTagName("head")[0].removeChild(document.getElementById(id));
+      }
     };
 
-    var BUTTON_STATUS;
-    (function (BUTTON_STATUS) {
-        BUTTON_STATUS[BUTTON_STATUS["OPEN"] = 0] = "OPEN";
-        BUTTON_STATUS[BUTTON_STATUS["CLOSE"] = 1] = "CLOSE";
-    })(BUTTON_STATUS || (BUTTON_STATUS = {}));
-    var STORAGE_VALUE = {
-        OPEN: "true",
-        CLOSE: "false",
+    const STORAGE_VALUE = {
+      OPEN: "true",
+      CLOSE: "false"
     };
-    var STORAGE_KEY_PREFIX = "copy-currency--";
-    var stopNativePropagation = function (event) { return event.stopPropagation(); };
-    var controllerMapper = [
-        {
-            status: BUTTON_STATUS.CLOSE,
-            storageKey: "selectstart-and-copy",
-            openName: "✅ 启动解除复制限制",
-            closeName: "❌ 关闭解除复制限制",
-            openFunction: function () {
-                document.addEventListener("selectstart", stopNativePropagation, true);
-                document.addEventListener("copy", stopNativePropagation, true);
-                utils.insertCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy", "*{user-select: auto !important;-webkit-user-select: auto !important;}");
-            },
-            closeFunction: function () {
-                document.removeEventListener("selectstart", stopNativePropagation, true);
-                document.removeEventListener("copy", stopNativePropagation, true);
-                utils.removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
-            },
+    const STORAGE_KEY_PREFIX = "copy-currency--";
+    const stopNativePropagation = (event) => event.stopPropagation();
+    const controllerMapper = [
+      {
+        status: 1 /* CLOSE */,
+        storageKey: "selectstart-and-copy",
+        openName: "\u2705 \u542F\u52A8\u89E3\u9664\u590D\u5236\u9650\u5236",
+        closeName: "\u274C \u5173\u95ED\u89E3\u9664\u590D\u5236\u9650\u5236",
+        openFunction: () => {
+          document.addEventListener("selectstart", stopNativePropagation, true);
+          document.addEventListener("copy", stopNativePropagation, true);
+          utils.insertCSS(
+            STORAGE_KEY_PREFIX + "selectstart-and-copy",
+            "*{user-select: auto !important;-webkit-user-select: auto !important;}"
+          );
         },
-        {
-            status: BUTTON_STATUS.CLOSE,
-            storageKey: "contextmenu",
-            openName: "✅ 启动解除右键限制",
-            closeName: "❌ 关闭解除右键限制",
-            openFunction: function () { return document.addEventListener("contextmenu", stopNativePropagation, true); },
-            closeFunction: function () {
-                return document.removeEventListener("contextmenu", stopNativePropagation, true);
-            },
-        },
-        {
-            status: BUTTON_STATUS.CLOSE,
-            storageKey: "keydown",
-            openName: "✅ 启动解除键盘限制",
-            closeName: "❌ 关闭解除键盘限制",
-            openFunction: function () { return document.addEventListener("keydown", stopNativePropagation, true); },
-            closeFunction: function () { return document.removeEventListener("keydown", stopNativePropagation, true); },
-        },
+        closeFunction: () => {
+          document.removeEventListener("selectstart", stopNativePropagation, true);
+          document.removeEventListener("copy", stopNativePropagation, true);
+          utils.removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
+        }
+      },
+      {
+        status: 1 /* CLOSE */,
+        storageKey: "contextmenu",
+        openName: "\u2705 \u542F\u52A8\u89E3\u9664\u53F3\u952E\u9650\u5236",
+        closeName: "\u274C \u5173\u95ED\u89E3\u9664\u53F3\u952E\u9650\u5236",
+        openFunction: () => document.addEventListener("contextmenu", stopNativePropagation, true),
+        closeFunction: () => document.removeEventListener("contextmenu", stopNativePropagation, true)
+      },
+      {
+        status: 1 /* CLOSE */,
+        storageKey: "keydown",
+        openName: "\u2705 \u542F\u52A8\u89E3\u9664\u952E\u76D8\u9650\u5236",
+        closeName: "\u274C \u5173\u95ED\u89E3\u9664\u952E\u76D8\u9650\u5236",
+        openFunction: () => document.addEventListener("keydown", stopNativePropagation, true),
+        closeFunction: () => document.removeEventListener("keydown", stopNativePropagation, true)
+      }
     ];
-    var menuIds = [];
-    var switchFunctions = [];
-    var batchUpdateButtons = function () {
-        controllerMapper.forEach(function (item, index) {
-            GM_unregisterMenuCommand(menuIds[index]);
-            if (item.status === BUTTON_STATUS.OPEN) {
-                menuIds[index] = GM_registerMenuCommand(item.closeName, switchFunctions[index]);
-            }
-            else {
-                menuIds[index] = GM_registerMenuCommand(item.openName, switchFunctions[index]);
-            }
-        });
+    const menuIds = [];
+    const switchFunctions = [];
+    const batchUpdateButtons = () => {
+      controllerMapper.forEach((item, index) => {
+        GM_unregisterMenuCommand(menuIds[index]);
+        if (item.status === 0 /* OPEN */) {
+          menuIds[index] = GM_registerMenuCommand(item.closeName, switchFunctions[index]);
+        } else {
+          menuIds[index] = GM_registerMenuCommand(item.openName, switchFunctions[index]);
+        }
+      });
     };
-    (function () {
-        controllerMapper.forEach(function (item) {
-            var localHookInfo = localStorage.getItem(STORAGE_KEY_PREFIX + item.storageKey);
-            var switchButtonStatus = function () {
-                if (item.status === BUTTON_STATUS.OPEN) {
-                    item.status = BUTTON_STATUS.CLOSE;
-                    item.closeFunction();
-                    localStorage.setItem(STORAGE_KEY_PREFIX + item.storageKey, STORAGE_VALUE.CLOSE);
-                }
-                else {
-                    item.status = BUTTON_STATUS.OPEN;
-                    item.openFunction();
-                    localStorage.setItem(STORAGE_KEY_PREFIX + item.storageKey, STORAGE_VALUE.OPEN);
-                }
-                batchUpdateButtons();
-            };
-            switchFunctions.push(switchButtonStatus);
-            if (localHookInfo === STORAGE_VALUE.OPEN) {
-                item.status = BUTTON_STATUS.OPEN;
-                item.openFunction();
-            }
-            else {
-                item.status = BUTTON_STATUS.CLOSE;
-            }
-        });
-        batchUpdateButtons();
+    (function() {
+      controllerMapper.forEach((item) => {
+        const localHookInfo = localStorage.getItem(STORAGE_KEY_PREFIX + item.storageKey);
+        const switchButtonStatus = () => {
+          if (item.status === 0 /* OPEN */) {
+            item.status = 1 /* CLOSE */;
+            item.closeFunction();
+            localStorage.setItem(STORAGE_KEY_PREFIX + item.storageKey, STORAGE_VALUE.CLOSE);
+          } else {
+            item.status = 0 /* OPEN */;
+            item.openFunction();
+            localStorage.setItem(STORAGE_KEY_PREFIX + item.storageKey, STORAGE_VALUE.OPEN);
+          }
+          batchUpdateButtons();
+        };
+        switchFunctions.push(switchButtonStatus);
+        if (localHookInfo === STORAGE_VALUE.OPEN) {
+          item.status = 0 /* OPEN */;
+          item.openFunction();
+        } else {
+          item.status = 1 /* CLOSE */;
+        }
+      });
+      batchUpdateButtons();
     })();
 
 })();

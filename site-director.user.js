@@ -20,89 +20,88 @@
 (function () {
     'use strict';
 
-    var website$5 = {
-        regexp: /google/,
-        init: function () {
-            document.addEventListener("DOMContentLoaded", function () {
-                return document
-                    .querySelectorAll("#res a")
-                    .forEach(function (item) { return item.setAttribute("target", "_blank"); });
-            });
-        },
+    const website$5 = {
+      regexp: /google/,
+      init: function() {
+        document.addEventListener(
+          "DOMContentLoaded",
+          () => document.querySelectorAll("#res a").forEach((item) => item.setAttribute("target", "_blank"))
+        );
+      }
     };
 
-    var website$4 = {
-        regexp: /zhihu/,
-        init: function () {
-            var result = /.*link.zhihu.com\/\?target=(.*)/.exec(location.href);
-            if (result) {
-                var url = decodeURIComponent(result[1]);
-                if (url) {
-                    console.log(url);
-                    location.href = url;
-                }
-            }
-        },
+    const website$4 = {
+      regexp: /zhihu/,
+      init: function() {
+        const result = /.*link.zhihu.com\/\?target=(.*)/.exec(location.href);
+        if (result) {
+          const url = decodeURIComponent(result[1]);
+          if (url) {
+            console.log(url);
+            location.href = url;
+          }
+        }
+      }
     };
 
-    var website$3 = {
-        regexp: /csdn/,
-        init: function () {
-            var result = /.*link.csdn.net\/\?target=(.*)/.exec(location.href);
-            if (result) {
-                var url = decodeURIComponent(result[1]);
-                if (url) {
-                    console.log(url);
-                    location.href = url;
-                }
-            }
-        },
+    const website$3 = {
+      regexp: /csdn/,
+      init: function() {
+        const result = /.*link.csdn.net\/\?target=(.*)/.exec(location.href);
+        if (result) {
+          const url = decodeURIComponent(result[1]);
+          if (url) {
+            console.log(url);
+            location.href = url;
+          }
+        }
+      }
     };
 
-    var website$2 = {
-        regexp: /jianshu/,
-        init: function () {
-            var result = /.*jianshu.com\/go-wild.*url=(.*)/.exec(location.href);
-            if (result) {
-                var url = decodeURIComponent(result[1]);
-                if (url) {
-                    location.href = url;
-                }
-            }
-        },
+    const website$2 = {
+      regexp: /jianshu/,
+      init: function() {
+        const result = /.*jianshu.com\/go-wild.*url=(.*)/.exec(location.href);
+        if (result) {
+          const url = decodeURIComponent(result[1]);
+          if (url) {
+            location.href = url;
+          }
+        }
+      }
     };
 
-    var website$1 = {
-        regexp: /mail\.qq/,
-        init: function () {
-            var result = new URL(location.href).searchParams.get("gourl");
-            if (result) {
-                location.href = decodeURIComponent(result);
-            }
-        },
+    const website$1 = {
+      regexp: /mail\.qq/,
+      init: function() {
+        const result = new URL(location.href).searchParams.get("gourl");
+        if (result) {
+          location.href = decodeURIComponent(result);
+        }
+      }
     };
 
-    var website = {
-        regexp: /link\.juejin/,
-        init: function () {
-            var result = new URL(location.href).searchParams.get("target");
-            if (result) {
-                location.href = decodeURIComponent(result);
-            }
-        },
+    const website = {
+      regexp: /link\.juejin/,
+      init: function() {
+        const result = new URL(location.href).searchParams.get("target");
+        if (result) {
+          location.href = decodeURIComponent(result);
+        }
+      }
     };
 
-    var websites = [website$5, website$4, website$3, website$2, website$1, website];
+    const websites = [website$5, website$4, website$3, website$2, website$1, website];
 
-    (function () {
-        var mather = function (regex, website) {
-            if (regex.test(window.location.href)) {
-                website.init();
-                return true;
-            }
-            return false;
-        };
-        websites.some(function (website) { return mather(website.regexp, website); });
+    (() => {
+      const mather = (regex, website) => {
+        if (regex.test(window.location.href)) {
+          website.init();
+          return true;
+        }
+        return false;
+      };
+      websites.some((website) => mather(website.regexp, website));
     })();
 
 })();
