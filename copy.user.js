@@ -144,6 +144,10 @@
       });
     };
 
+    /*!
+     * 外部引用`static.doc88.com`声明
+     * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
+     */
     let path = "";
     const website$r = {
       regexp: /.*doc88\.com\/.+/,
