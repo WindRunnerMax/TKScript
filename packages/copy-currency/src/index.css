@@ -1,14 +1,26 @@
 .__copy-currency-container{
     position: fixed;
-    left: -145px;
-    bottom: 50px;
+    left: -150px;
+    bottom: 0px;
     width: 150px;
     display: flex;
     flex-direction: column;
     border-radius: 3px;
     background-color: #4C98F7;
-    transition: left .3s;
+    transition: all .3s;
     z-index: 9999999999;
+}
+
+.__copy-currency-container::before{
+    content: "";
+    position: absolute;
+    right: -6px;
+    top: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #4C98F7;
+    cursor: pointer;
 }
 
 .__copy-currency-container:hover{
