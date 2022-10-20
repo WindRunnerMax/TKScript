@@ -6,7 +6,7 @@
 // @description:en    Text copy general version, suitable for most websites.
 // @description:zh-CN 文本选中复制通用版本，适用于大多数网站
 // @namespace  https://github.com/WindrunnerMax/TKScript
-// @version    1.1.0
+// @version    1.1.1
 // @author     Czy
 // @match      http://*/*
 // @match      https://*/*
@@ -48,7 +48,7 @@
     }
   }
 
-  var css_248z = ".__copy-currency-container{background-color:#4c98f7;border-radius:3px;bottom:50px;display:flex;flex-direction:column;left:-145px;position:fixed;transition:left .3s;width:150px;z-index:9999999999}.__copy-currency-container:hover{left:0}.__copy-currency-container>.__copy-currency-button{border:1px solid #fff;border-radius:3px;color:#fff!important;cursor:pointer;font-size:12px!important;margin:5px;padding:5px 3px 5px 4px;text-align:center;user-select:none;z-index:9999999999}";
+  var css_248z = ".__copy-currency-container{background-color:#4c98f7;border-radius:3px;bottom:0;display:flex;flex-direction:column;left:-150px;position:fixed;transition:all .3s;width:150px;z-index:9999999999}.__copy-currency-container:before{background-color:#4c98f7;border-radius:20px;content:\"\";cursor:pointer;height:20px;position:absolute;right:-6px;top:calc(50% - 10px);width:20px}.__copy-currency-container:hover{left:0}.__copy-currency-container>.__copy-currency-button{border:1px solid #fff;border-radius:3px;color:#fff!important;cursor:pointer;font-size:12px!important;margin:5px;padding:5px 3px 5px 4px;text-align:center;user-select:none;z-index:9999999999}";
   styleInject(css_248z);
 
   const STORAGE_VALUE = {
