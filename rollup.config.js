@@ -43,7 +43,6 @@ const scriptConfig = [
         script: {
             input: "./packages/copy-currency/src/index.ts",
             output: "./dist/copy-currency.user.js",
-            injectCss: false,
         },
     },
     {

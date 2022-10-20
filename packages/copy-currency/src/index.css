@@ -1,0 +1,29 @@
+.__copy-currency-container{
+    position: fixed;
+    left: -145px;
+    bottom: 50px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    background-color: #4C98F7;
+    transition: left .3s;
+    z-index: 9999999999;
+}
+
+.__copy-currency-container:hover{
+    left: 0;
+}
+
+.__copy-currency-container > .__copy-currency-button{
+    font-size: 12px !important;
+    margin: 5px;
+    cursor: pointer;
+    color: #fff !important;
+    border: 1px solid #fff;
+    padding: 5px 3px 5px 4px;
+    user-select: none;
+    border-radius: 3px;
+    z-index: 9999999999;
+    text-align: center;
+}
