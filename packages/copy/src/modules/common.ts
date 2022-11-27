@@ -37,6 +37,7 @@ const website: Website = {
             "ximalaya",
             "xiexiebang",
             "ddwk8",
+            "php\\.cn",
         ].join("|")
     ),
     init: function () {
