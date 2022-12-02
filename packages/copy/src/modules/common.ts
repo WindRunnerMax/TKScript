@@ -38,6 +38,8 @@ const website: Website = {
             "xiexiebang",
             "ddwk8",
             "php\\.cn",
+            "fanqienovel\\.com/reader",
+            "cooco\\.net\\.cn",
         ].join("|")
     ),
     init: function () {
