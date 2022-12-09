@@ -40,6 +40,7 @@ const website: Website = {
             "php\\.cn",
             "fanqienovel\\.com/reader",
             "cooco\\.net\\.cn",
+            "mobiletrain",
         ].join("|")
     ),
     init: function () {
