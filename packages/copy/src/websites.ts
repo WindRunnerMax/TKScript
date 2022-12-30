@@ -26,6 +26,7 @@ import cnki from "./modules/cnki";
 import docin from "./modules/docin";
 import common from "./modules/common";
 import commonEnhance from "./modules/common-e";
+import commonPreLoad from "./modules/common-p";
 import { CopyParams } from "./utils/copy";
 
 export interface WebsiteConfig {
@@ -70,6 +71,7 @@ const websites: Website[] = [
     docin,
     common,
     commonEnhance,
+    commonPreLoad,
 ];
 
 export default websites;
