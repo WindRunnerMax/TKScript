@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.7
+// @version     6.1.8
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -135,7 +135,7 @@
     };
 
     const initBaseEvent = (websiteConfig) => {
-      document.addEventListener(DOM_READY, () => {
+      window.addEventListener(DOM_READY, () => {
         if (websiteConfig.initCopyEvent) {
           document.oncopy = (e) => e.stopPropagation();
           document.body.oncopy = (e) => e.stopPropagation();
@@ -145,7 +145,7 @@
       });
     };
     const initBaseStyle = () => {
-      document.addEventListener(DOM_READY, () => {
+      window.addEventListener(DOM_READY, () => {
         dom$1.append("head", `<style>${css_248z$1}</style>`);
         dom$1.append("head", `<style>${css_248z}</style>`);
       });
@@ -867,7 +867,7 @@
           if (website.config)
             websiteConfig = Object.assign(websiteConfig, website.config);
           if (websiteConfig.runAt === DOM_STAGE.END) {
-            document.addEventListener(DOM_READY, () => website.init());
+            window.addEventListener(DOM_READY, () => website.init());
           } else {
             website.init();
           }
@@ -896,7 +896,7 @@
       const websiteConfig = initWebsite();
       initBaseEvent(websiteConfig);
       initBaseStyle();
-      document.addEventListener(
+      window.addEventListener(
         "mouseup",
         (e) => {
           const handler = () => {
