@@ -15,7 +15,7 @@ const initWebsite = (): WebsiteConfig => {
         if (regex.test(window.location.href)) {
             if (website.config) websiteConfig = Object.assign(websiteConfig, website.config);
             if (websiteConfig.runAt === DOM_STAGE.END) {
-                document.addEventListener(DOM_READY, () => website.init());
+                window.addEventListener(DOM_READY, () => website.init());
             } else {
                 website.init();
             }

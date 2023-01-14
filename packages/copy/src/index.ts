@@ -1,5 +1,5 @@
 import { initBaseEvent, initBaseStyle } from "./init";
-import { initWebsite, getSelectedText } from "./dispose";
+import { initWebsite, getSelectedText } from "./deploy";
 import instance from "./utils/instance";
 import { isEmptyContent } from "./utils/copy";
 
@@ -7,7 +7,7 @@ import { isEmptyContent } from "./utils/copy";
     const websiteConfig = initWebsite();
     initBaseEvent(websiteConfig);
     initBaseStyle();
-    document.addEventListener(
+    window.addEventListener(
         "mouseup",
         e => {
             const handler = () => {
