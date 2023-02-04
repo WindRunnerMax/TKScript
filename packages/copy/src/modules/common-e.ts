@@ -2,7 +2,7 @@ import utils from "../utils/utils";
 import { Website } from "../websites";
 
 const website: Website = {
-    regexp: new RegExp(["wjx", "fanyi\\.baidu", "tianqi"].join("|")),
+    regexp: new RegExp(["wjx", "fanyi\\.baidu", "tianqi", "rrdynb", "fuwu7"].join("|")),
     init: function () {
         utils.hideButton();
         utils.enableUserSelectByCSS();
