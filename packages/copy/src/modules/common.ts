@@ -41,6 +41,7 @@ const website: Website = {
             "fanqienovel\\.com/reader",
             "cooco\\.net\\.cn",
             "mobiletrain",
+            "xiangqiqipu",
         ].join("|")
     ),
     init: function () {
