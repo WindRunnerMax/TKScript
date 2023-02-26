@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥跳转链接直达🔥🔥🔥
 // @description 跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN、简书
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.3.1
+// @version     1.3.2
 // @author      Czy
 // @match       *://*.google.com/*
 // @match       *://*.google.com.*/*
