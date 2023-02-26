@@ -4,10 +4,10 @@ const website: Website = {
     regexp: /google/,
     init: function () {
         const isScholar = window.location.host.startsWith("scholar");
-
+        const selector = isScholar ? "#gs_bdy_ccl .gs_rt a" : "#res a";
         document.addEventListener("DOMContentLoaded", () =>
             document
-                .querySelectorAll(isScholar ? "#gs_bdy_ccl a" : "#res a")
+                .querySelectorAll(selector)
                 .forEach(item => item.setAttribute("target", "_blank"))
         );
     },
