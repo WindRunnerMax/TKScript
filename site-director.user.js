@@ -2,14 +2,15 @@
 // @name        🔥🔥🔥跳转链接直达🔥🔥🔥
 // @description 跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN、简书
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.3.0
+// @version     1.3.1
 // @author      Czy
-// @include     *://*.google.com/*
-// @include     *://link.zhihu.com/*
-// @include     *://link.csdn.net/*
-// @include     *://link.juejin.cn*
-// @include     *://www.jianshu.com/go-wild*
-// @include     *://mail.qq.com/cgi-bin/readtemplate*
+// @match       *://*.google.com/*
+// @match       *://*.google.com.*/*
+// @match       *://link.zhihu.com/*
+// @match       *://link.csdn.net/*
+// @match       *://link.juejin.cn/*
+// @match       *://www.jianshu.com/go-wild/*
+// @match       *://mail.qq.com/cgi-bin/readtemplate/*
 // @license     MIT License
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -23,15 +24,16 @@
     const website$5 = {
       regexp: /google/,
       init: function() {
+        const isScholar = window.location.host.startsWith("scholar");
         document.addEventListener(
           "DOMContentLoaded",
-          () => document.querySelectorAll("#res a").forEach((item) => item.setAttribute("target", "_blank"))
+          () => document.querySelectorAll(isScholar ? "#gs_bdy_ccl a" : "#res a").forEach((item) => item.setAttribute("target", "_blank"))
         );
       }
     };
 
     const website$4 = {
-      regexp: /zhihu/,
+      regexp: /link\.zhihu/,
       init: function() {
         const result = /.*link.zhihu.com\/\?target=(.*)/.exec(location.href);
         if (result) {
