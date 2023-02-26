@@ -1,7 +1,7 @@
 import { Website } from "../websites";
 
 const website: Website = {
-    regexp: /zhihu/,
+    regexp: /link\.zhihu/,
     init: function () {
         const result = /.*link.zhihu.com\/\?target=(.*)/.exec(location.href);
         if (result) {

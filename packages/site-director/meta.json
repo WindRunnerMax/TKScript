@@ -9,9 +9,9 @@
         "*://*.google.com.*/*",
         "*://link.zhihu.com/*",
         "*://link.csdn.net/*",
-        "*://link.juejin.cn*",
-        "*://www.jianshu.com/go-wild*",
-        "*://mail.qq.com/cgi-bin/readtemplate*"
+        "*://link.juejin.cn/*",
+        "*://www.jianshu.com/go-wild/*",
+        "*://mail.qq.com/cgi-bin/readtemplate/*"
     ],
     "license": "MIT License",
     "supportURL": "https://github.com/WindrunnerMax/TKScript/issues",
