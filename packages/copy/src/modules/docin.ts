@@ -14,8 +14,8 @@ const website: Website = {
         dom.append("head", "<style>#reader-copy-el{display: none;}</style>");
     },
     getSelectedText: function () {
-        if (unsafeWindow.docinReader && unsafeWindow.docinReader.searchTextStr) {
-            return unsafeWindow.docinReader.searchTextStr;
+        if (unsafeWindow.docinReader && unsafeWindow.docinReader.st) {
+            return unsafeWindow.docinReader.st;
         }
         return "";
     },
