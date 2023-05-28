@@ -1,4 +1,4 @@
-import { COPY } from "../constant/constant";
+import { COPY } from "../constant/event";
 import { isString } from "./is";
 
 type CopyData = {

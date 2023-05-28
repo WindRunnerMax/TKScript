@@ -1,4 +1,4 @@
-import { DOM_READY, DOM_STAGE } from "./constant/constant";
+import { DOM_READY, DOM_STAGE } from "./constant/event";
 import { CopyParams } from "./utils/copy";
 import websites, { Website, WebsiteConfig } from "./websites";
 

@@ -1,5 +1,5 @@
-import { DOM_STAGE } from "../constant/constant";
-import utils from "../utils/utils";
+import { DOM_STAGE } from "../constant/event";
+import utils from "../utils/event";
 import { Website } from "../websites";
 
 const website: Website = {

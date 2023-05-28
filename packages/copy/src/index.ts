@@ -2,13 +2,14 @@ import { initBaseEvent, initBaseStyle } from "./init";
 import { initWebsite, getSelectedText } from "./deploy";
 import instance from "./utils/instance";
 import { isEmptyContent } from "./utils/copy";
+import { MOUSE_UP } from "./constant/event";
 
 (function () {
     const websiteConfig = initWebsite();
     initBaseEvent(websiteConfig);
     initBaseStyle();
     window.addEventListener(
-        "mouseup",
+        MOUSE_UP,
         e => {
             const handler = () => {
                 const content = getSelectedText();

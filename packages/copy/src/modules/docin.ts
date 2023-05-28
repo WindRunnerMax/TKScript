@@ -1,4 +1,4 @@
-import { PAGE_LOADED } from "../constant/constant";
+import { PAGE_LOADED } from "../constant/event";
 import dom from "../utils/dom";
 import { Website } from "../websites";
 

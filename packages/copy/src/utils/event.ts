@@ -1,11 +1,12 @@
-import { CONTEXT_MENU, COPY, KEY_DOWN, PAGE_LOADED, SELECT_START } from "../constant/constant";
+import { CONTEXT_MENU, COPY, KEY_DOWN, PAGE_LOADED, SELECT_START } from "../constant/event";
 import instance from "./instance";
 import { isString } from "./is";
 
-const stopNativePropagation = (event: Event) => {
+export const stopNativePropagation = (event: Event): void => {
     // event.stopImmediatePropagation(); // 即停且阻止该元素在此事件绑定之后的`on`同类事件触发
     event.stopPropagation(); // 阻止该元素继续冒泡后的`on`同类事件触发
 };
+
 export default {
     hideButton: (): void => {
         instance.disable();
@@ -58,8 +59,8 @@ export default {
         document.addEventListener(CONTEXT_MENU, stopNativePropagation, true);
     },
     enableOnCopyByCapture: (): void => {
-        window.addEventListener("copy", stopNativePropagation, true);
-        document.addEventListener("copy", stopNativePropagation, true);
+        window.addEventListener(COPY, stopNativePropagation, true);
+        document.addEventListener(COPY, stopNativePropagation, true);
     },
     enableOnKeyDownByCapture: (): void => {
         document.addEventListener(

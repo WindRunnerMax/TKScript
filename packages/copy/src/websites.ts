@@ -1,3 +1,4 @@
+import { CopyParams } from "./utils/copy";
 import doc88 from "./modules/doc88";
 import sf from "./modules/sf";
 import wk from "./modules/wk";
@@ -24,10 +25,10 @@ import csdn from "./modules/csdn";
 import bilibili from "./modules/bilibili";
 import cnki from "./modules/cnki";
 import docin from "./modules/docin";
+import youdao from "./modules/youdao";
 import common from "./modules/common";
 import commonEnhance from "./modules/common-e";
 import commonPreLoad from "./modules/common-p";
-import { CopyParams } from "./utils/copy";
 
 export interface WebsiteConfig {
     initCopyEvent?: boolean;
@@ -69,6 +70,7 @@ const websites: Website[] = [
     bilibili,
     cnki,
     docin,
+    youdao,
     common,
     commonEnhance,
     commonPreLoad,

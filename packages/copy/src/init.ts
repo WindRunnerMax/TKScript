@@ -1,6 +1,6 @@
 import appStyle from "./styles/app.css";
 import baseStyle from "./styles/style.css";
-import { COPY, DOM_READY } from "./constant/constant";
+import { COPY, DOM_READY } from "./constant/event";
 import { WebsiteConfig } from "./websites";
 import dom from "./utils/dom";
 
