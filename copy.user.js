@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.11
+// @version     6.1.12
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -81,6 +81,7 @@
 // @match       *://*.rrdynb.com/*
 // @match       *://*.fuwu7.com/*
 // @match       *://*.xiangqiqipu.com/*
+// @match       *://note.youdao.com/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -102,6 +103,9 @@
     };
     const DOM_READY = "DOMContentLoaded";
     const PAGE_LOADED = "load";
+    const MOUSE_UP = "mouseup";
+    const MOUSE_DOWN = "mousedown";
+    const MOUSE_MOVE = "mousemove";
     const COPY = "copy";
     const SELECT_START = "selectstart";
     const CONTEXT_MENU = "contextmenu";
@@ -159,7 +163,7 @@
      * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
      */
     let path = "";
-    const website$s = {
+    const website$t = {
       regexp: /.*doc88\.com\/.+/,
       init: () => {
         dom$1.append(
@@ -196,7 +200,7 @@
       }
     };
 
-    const website$r = {
+    const website$s = {
       regexp: /.*segmentfault\.com\/.+/,
       init: function() {
         const body = dom$1.query("body");
@@ -364,8 +368,8 @@
         document.addEventListener(CONTEXT_MENU, stopNativePropagation, true);
       },
       enableOnCopyByCapture: () => {
-        window.addEventListener("copy", stopNativePropagation, true);
-        document.addEventListener("copy", stopNativePropagation, true);
+        window.addEventListener(COPY, stopNativePropagation, true);
+        document.addEventListener(COPY, stopNativePropagation, true);
       },
       enableOnKeyDownByCapture: () => {
         document.addEventListener(
@@ -376,7 +380,7 @@
       }
     };
 
-    const website$q = {
+    const website$r = {
       regexp: /.*wk\.baidu\.com\/view\/.+/,
       init: function() {
         utils.hideButton();
@@ -387,7 +391,7 @@
       }
     };
 
-    const website$p = {
+    const website$q = {
       regexp: /.*zhihu\.com\/.*/,
       init: function() {
         utils.hideButton();
@@ -396,7 +400,7 @@
       }
     };
 
-    const website$o = {
+    const website$p = {
       regexp: /.*30edu\.com\.cn\/.+/,
       init: function() {
         window.onload = () => {
@@ -409,7 +413,7 @@
       }
     };
 
-    const website$n = {
+    const website$o = {
       regexp: /.*docs\.qq\.com\/.+/,
       config: {
         initCopyEvent: false
@@ -437,7 +441,7 @@
       }
     };
 
-    const website$m = {
+    const website$n = {
       regexp: new RegExp(".+://boke112.com/post/.+"),
       init: function() {
         utils.enableOnCopyByCapture();
@@ -458,7 +462,7 @@
       }
     };
 
-    const website$l = {
+    const website$m = {
       regexp: /diyifanwen/,
       init: function() {
         utils.hideButton();
@@ -467,7 +471,7 @@
       }
     };
 
-    const website$k = {
+    const website$l = {
       regexp: /mbalib/,
       init: function() {
         window.onload = () => {
@@ -480,7 +484,7 @@
       }
     };
 
-    const website$j = {
+    const website$k = {
       regexp: /cnitpm/,
       init: function() {
         utils.hideButton();
@@ -490,7 +494,7 @@
       }
     };
 
-    const website$i = {
+    const website$j = {
       regexp: new RegExp(".+bbs.mihoyo.com/.+"),
       init: function() {
         utils.hideButton();
@@ -500,7 +504,7 @@
       }
     };
 
-    const website$h = {
+    const website$i = {
       regexp: new RegExp(".+www.uemeds.cn/.+"),
       init: function() {
         utils.hideButton();
@@ -508,7 +512,7 @@
       }
     };
 
-    const website$g = {
+    const website$h = {
       regexp: new RegExp(".+aiyuke.com/news/.+"),
       init: function() {
         utils.hideButton();
@@ -516,7 +520,7 @@
       }
     };
 
-    const website$f = {
+    const website$g = {
       regexp: new RegExp("qidian"),
       init: function() {
         utils.hideButton();
@@ -526,7 +530,7 @@
       }
     };
 
-    const website$e = {
+    const website$f = {
       regexp: new RegExp("zongheng"),
       init: function() {
         utils.removeAttributes(".reader_box", ["style", "unselectable", "onselectstart"]);
@@ -540,7 +544,7 @@
       }
     };
 
-    const website$d = {
+    const website$e = {
       regexp: new RegExp("17k"),
       init: () => {
         utils.hideButton();
@@ -548,7 +552,7 @@
       }
     };
 
-    const website$c = {
+    const website$d = {
       regexp: new RegExp("ciweimao"),
       init: function() {
         utils.hideButton();
@@ -559,7 +563,7 @@
       }
     };
 
-    const website$b = {
+    const website$c = {
       regexp: new RegExp("book\\.qq"),
       init: function() {
         utils.hideButton();
@@ -570,7 +574,7 @@
       }
     };
 
-    const website$a = {
+    const website$b = {
       regexp: new RegExp("utaten"),
       init: function() {
         utils.hideButton();
@@ -579,7 +583,7 @@
       }
     };
 
-    const website$9 = {
+    const website$a = {
       config: {
         runAt: "document-start"
       },
@@ -683,7 +687,7 @@
       }
     };
 
-    const website$8 = {
+    const website$9 = {
       regexp: new RegExp("xiaohongshu"),
       init: function() {
         utils.hideButton();
@@ -692,7 +696,7 @@
       }
     };
 
-    const website$7 = {
+    const website$8 = {
       regexp: new RegExp("leetcode"),
       init: function() {
         utils.hideButton();
@@ -700,7 +704,7 @@
       }
     };
 
-    const website$6 = {
+    const website$7 = {
       regexp: /csdn/,
       init: function() {
         utils.hideButton();
@@ -709,7 +713,7 @@
       }
     };
 
-    const website$5 = {
+    const website$6 = {
       regexp: new RegExp("bilibili"),
       init: function() {
         utils.hideButton();
@@ -717,7 +721,7 @@
       }
     };
 
-    const website$4 = {
+    const website$5 = {
       regexp: new RegExp("cnki"),
       init: function() {
         utils.hideButton();
@@ -727,7 +731,7 @@
       }
     };
 
-    const website$3 = {
+    const website$4 = {
       regexp: new RegExp("docin.com/.*"),
       config: {
         initCopyEvent: false,
@@ -746,6 +750,15 @@
           return unsafeWindow.docinReader.st;
         }
         return "";
+      }
+    };
+
+    const website$3 = {
+      regexp: /note\.youdao\.com\/newEditorV1\/bulb\.html.*/,
+      init: function() {
+        utils.hideButton();
+        document.addEventListener(MOUSE_DOWN, stopNativePropagation, true);
+        document.addEventListener(MOUSE_MOVE, stopNativePropagation, true);
       }
     };
 
@@ -827,6 +840,7 @@
     };
 
     const websites = [
+      website$s,
       website$r,
       website$q,
       website$p,
@@ -846,8 +860,8 @@
       website$b,
       website$a,
       website$9,
+      website$t,
       website$8,
-      website$s,
       website$7,
       website$6,
       website$5,
@@ -901,7 +915,7 @@
       initBaseEvent(websiteConfig);
       initBaseStyle();
       window.addEventListener(
-        "mouseup",
+        MOUSE_UP,
         (e) => {
           const handler = () => {
             const content = getSelectedText();
