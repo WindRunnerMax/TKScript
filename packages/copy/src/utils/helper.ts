@@ -60,3 +60,16 @@ setTimeout(() => {
     });
 }, 2000);
 */
+
+/**
+// remove - listeners
+function removeAllEventListeners(element) {
+  const listeners = getEventListeners(element);
+  Object.keys(listeners).forEach((event) => {
+    listeners[event].forEach((listener) => {
+      element.removeEventListener(event, listener.listener);
+    });
+  });
+}
+removeAllEventListeners($0);
+*/
