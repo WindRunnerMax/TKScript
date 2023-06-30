@@ -6,7 +6,7 @@
 // @description:en    Text copy general version, suitable for most websites.
 // @description:zh-CN 文本选中复制通用版本，适用于大多数网站
 // @namespace  https://github.com/WindrunnerMax/TKScript
-// @version    1.1.1
+// @version    1.1.2
 // @author     Czy
 // @match      http://*/*
 // @match      https://*/*
@@ -121,16 +121,16 @@
       openName: "✅ 启动解除复制限制",
       closeName: "❌ 关闭解除复制限制",
       openFunction: () => {
-        document.addEventListener("selectstart", stopNativePropagation, true);
-        document.addEventListener("copy", stopNativePropagation, true);
+        window.addEventListener("selectstart", stopNativePropagation, true);
+        window.addEventListener("copy", stopNativePropagation, true);
         utils.insertCSS(
           STORAGE_KEY_PREFIX + "selectstart-and-copy",
           "*{user-select: auto !important;-webkit-user-select: auto !important;}"
         );
       },
       closeFunction: () => {
-        document.removeEventListener("selectstart", stopNativePropagation, true);
-        document.removeEventListener("copy", stopNativePropagation, true);
+        window.removeEventListener("selectstart", stopNativePropagation, true);
+        window.removeEventListener("copy", stopNativePropagation, true);
         utils.removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
       }
     },
@@ -139,16 +139,16 @@
       storageKey: "contextmenu",
       openName: "✅ 启动解除右键限制",
       closeName: "❌ 关闭解除右键限制",
-      openFunction: () => document.addEventListener("contextmenu", stopNativePropagation, true),
-      closeFunction: () => document.removeEventListener("contextmenu", stopNativePropagation, true)
+      openFunction: () => window.addEventListener("contextmenu", stopNativePropagation, true),
+      closeFunction: () => window.removeEventListener("contextmenu", stopNativePropagation, true)
     },
     {
       status: BUTTON_STATUS.CLOSE,
       storageKey: "keydown",
       openName: "✅ 启动解除键盘限制",
       closeName: "❌ 关闭解除键盘限制",
-      openFunction: () => document.addEventListener("keydown", stopNativePropagation, true),
-      closeFunction: () => document.removeEventListener("keydown", stopNativePropagation, true)
+      openFunction: () => window.addEventListener("keydown", stopNativePropagation, true),
+      closeFunction: () => window.removeEventListener("keydown", stopNativePropagation, true)
     }
   ];
   (function() {
