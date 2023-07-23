@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.15
+// @version     6.1.17
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -17,7 +17,7 @@
 // @match       *://segmentfault.com/*
 // @match       *://wk.baidu.com/view/*
 // @match       *://leetcode-cn.com/problems/*
-// @match       *://www.zhihu.com/*
+// @match       *://*.zhihu.com/*
 // @match       *://z.30edu.com.cn/*
 // @match       *://docs.qq.com/doc/*
 // @match       *://boke112.com/post/*
@@ -83,6 +83,7 @@
 // @match       *://*.xiangqiqipu.com/*
 // @match       *://note.youdao.com/*
 // @match       *://*.163.com/*
+// @match       *://*.aipiaxi.com/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -398,6 +399,26 @@
         utils.hideButton();
         utils.enableUserSelectByCSS();
         utils.enableOnCopyByCapture();
+        if (location.hostname === "zhuanlan.zhihu.com") {
+          const removeFocalPointModal = (mutationsList) => {
+            for (const mutation of mutationsList) {
+              const addedNodes = mutation.addedNodes;
+              for (let i = 0; i < addedNodes.length; i++) {
+                const target = addedNodes[i];
+                if (target.nodeType != 1)
+                  return void 0;
+                if (target instanceof HTMLDivElement && target.querySelector("[data-focus-scope-start]")) {
+                  const element = target.querySelector("[data-focus-scope-start]");
+                  element && element.parentElement && element.parentElement.parentElement && element.parentElement.parentElement.removeChild(
+                    element.parentElement
+                  );
+                }
+              }
+            }
+          };
+          const observer = new MutationObserver(removeFocalPointModal);
+          observer.observe(document, { childList: true, subtree: true });
+        }
       }
     };
 
@@ -805,7 +826,8 @@
           "cooco\\.net\\.cn",
           "mobiletrain",
           "xiangqiqipu",
-          "m\\.163\\.com"
+          "m\\.163\\.com",
+          "aipiaxi"
         ].join("|")
       ),
       init: function() {
