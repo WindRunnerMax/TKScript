@@ -43,6 +43,7 @@ const website: Website = {
             "mobiletrain",
             "xiangqiqipu",
             "m\\.163\\.com",
+            "aipiaxi",
         ].join("|")
     ),
     init: function () {
