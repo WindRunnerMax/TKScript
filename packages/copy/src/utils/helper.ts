@@ -63,13 +63,38 @@ setTimeout(() => {
 
 /**
 // remove - listeners
-function removeAllEventListeners(element) {
-  const listeners = getEventListeners(element);
-  Object.keys(listeners).forEach((event) => {
-    listeners[event].forEach((listener) => {
-      element.removeEventListener(event, listener.listener);
+function removeAllEventListeners(element, ancestor = false) {
+    const listeners = getEventListeners(element);
+    Object.keys(listeners).forEach(event => {
+        listeners[event].forEach(listener => {
+            element.removeEventListener(event, listener.listener, {
+                capture: listener.useCapture,
+                once: listener.once,
+                passive: listener.passive,
+            });
+        });
     });
-  });
+    ancestor && element === document && window && removeAllEventListeners(window, ancestor);
+    ancestor &&
+        element &&
+        element.parentNode &&
+        removeAllEventListeners(element.parentNode, ancestor);
 }
-removeAllEventListeners($0);
+removeAllEventListeners($0, true);
+
+const elements = [...document.querySelectorAll("*")];
+for (const element of elements) {
+    element instanceof HTMLElement && removeAllEventListeners(element);
+}
+*/
+
+/**
+// remove - attributes
+const elements = [...document.querySelectorAll("*")];
+for (const element of elements) {
+    if (element instanceof HTMLElement) {
+        const attrs = element.getAttributeNames();
+        attrs.forEach(item => element.removeAttribute(item));
+    }
+}
 */

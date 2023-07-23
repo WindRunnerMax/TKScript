@@ -10,6 +10,7 @@
     "experimentalDecorators":true,
     "skipLibCheck": true,
     "strictNullChecks": false,
+    "downlevelIteration":true,
     "declaration": false,
     "baseUrl": ".",
     "newLine": "lf",
