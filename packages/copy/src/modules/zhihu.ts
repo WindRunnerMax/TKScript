@@ -37,3 +37,6 @@ const website: Website = {
 };
 
 export default website;
+
+// Force Focus `Login Button` // `focusout` Event Bubbles
+// https://github.com/adobe/react-spectrum/blob/e4bc3269fa41aa096700445c6bfa9c8620545e6a/packages/%40react-aria/focus/src/FocusScope.tsx#L179
