@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.18
+// @version     6.1.19
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -410,7 +410,7 @@
                   return void 0;
                 if (target instanceof HTMLDivElement && target.querySelector("[data-focus-scope-start]")) {
                   const element = target.querySelector("[data-focus-scope-start]");
-                  element && element.parentElement && element.parentElement.parentElement && element.parentElement.parentElement.removeChild(
+                  element && element.parentElement && element.parentElement.textContent.indexOf("立即登录/注册") > -1 && element.parentElement.parentElement && element.parentElement.parentElement.removeChild(
                     element.parentElement
                   );
                 }
