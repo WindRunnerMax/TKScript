@@ -22,6 +22,7 @@ const website: Website = {
                             const element = target.querySelector("[data-focus-scope-start]");
                             element &&
                                 element.parentElement &&
+                                element.parentElement.textContent.indexOf("立即登录/注册") > -1 &&
                                 element.parentElement.parentElement &&
                                 element.parentElement.parentElement.removeChild(
                                     element.parentElement
