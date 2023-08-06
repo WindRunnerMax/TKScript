@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.19
+// @version     6.1.20
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -439,7 +439,9 @@
     const website$o = {
       regexp: /.*docs\.qq\.com\/.+/,
       config: {
-        initCopyEvent: false
+        initCopyEvent: false,
+        captureInstance: true,
+        delay: 100
       },
       init: function() {
         window.onload = () => {
@@ -450,15 +452,25 @@
         if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
           utils.showButton();
           const editor = unsafeWindow.pad.editor;
-          editor._docEnv.copyable = true;
-          editor.clipboardManager.copy();
-          const plainText = editor.clipboardManager.customClipboard.plain;
-          const htmlText = editor.clipboardManager.customClipboard.html;
-          editor._docEnv.copyable = false;
-          return {
-            [TEXT_PLAIN]: plainText,
-            [TEXT_HTML]: htmlText
-          };
+          if (editor.getCopyContent) {
+            const content = editor.getCopyContent() || {};
+            const plainText = content.plain;
+            const htmlText = content.html;
+            return {
+              [TEXT_PLAIN]: plainText,
+              [TEXT_HTML]: htmlText
+            };
+          } else {
+            editor._docEnv.copyable = true;
+            editor.clipboardManager.copy();
+            const plainText = editor.clipboardManager.customClipboard.plain;
+            const htmlText = editor.clipboardManager.customClipboard.html;
+            editor._docEnv.copyable = false;
+            return {
+              [TEXT_PLAIN]: plainText,
+              [TEXT_HTML]: htmlText
+            };
+          }
         }
         return "";
       }
