@@ -6,6 +6,8 @@ const website: Website = {
     regexp: /.*docs\.qq\.com\/.+/,
     config: {
         initCopyEvent: false,
+        captureInstance: true,
+        delay: 100,
     },
     init: function () {
         window.onload = () => {
@@ -16,15 +18,25 @@ const website: Website = {
         if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
             utils.showButton();
             const editor = unsafeWindow.pad.editor;
-            editor._docEnv.copyable = true;
-            editor.clipboardManager.copy();
-            const plainText: string = editor.clipboardManager.customClipboard.plain;
-            const htmlText: string = editor.clipboardManager.customClipboard.html;
-            editor._docEnv.copyable = false;
-            return {
-                [TEXT_PLAIN]: plainText,
-                [TEXT_HTML]: htmlText,
-            };
+            if (editor.getCopyContent) {
+                const content = editor.getCopyContent() || {};
+                const plainText: string | undefined = content.plain;
+                const htmlText: string | undefined = content.html;
+                return {
+                    [TEXT_PLAIN]: plainText,
+                    [TEXT_HTML]: htmlText,
+                };
+            } else {
+                editor._docEnv.copyable = true;
+                editor.clipboardManager.copy();
+                const plainText: string | undefined = editor.clipboardManager.customClipboard.plain;
+                const htmlText: string | undefined = editor.clipboardManager.customClipboard.html;
+                editor._docEnv.copyable = false;
+                return {
+                    [TEXT_PLAIN]: plainText,
+                    [TEXT_HTML]: htmlText,
+                };
+            }
         }
         return "";
     },
