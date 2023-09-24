@@ -9,15 +9,18 @@
   },
   "scripts": {
     "dev": "rollup -c --watch",
-    "build": "./publish.sh"
+    "build": "./publish.sh",
+    "build:special": "cross-env CHANNEL=SPECIAL rollup -c"
   },
   "author": "Czy",
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-replace": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.15.10",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",

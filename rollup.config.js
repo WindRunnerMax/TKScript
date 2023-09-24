@@ -3,8 +3,14 @@ import esbuild from "rollup-plugin-esbuild";
 // import { terser } from "rollup-plugin-terser";
 import metablock from "rollup-plugin-userscript-metablock";
 import path from "path";
+import replace from "@rollup/plugin-replace";
 
 const buildConfig = {
+    replace: {
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+        "process.env.CHANNEL": JSON.stringify(process.env.CHANNEL),
+        "preventAssignment": true,
+    },
     postcss: {
         minimize: true,
         extensions: [".css"],
@@ -78,6 +84,7 @@ export default [
             name: item.name + "Module",
         },
         plugins: [
+            replace({ ...buildConfig.replace }),
             postcss({ ...buildConfig.postcss, inject: item.script.injectCss }),
             esbuild(buildConfig.esbuild),
             // terser({ format: { comments: true } }),
