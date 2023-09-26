@@ -1,24 +1,25 @@
 {
   "compilerOptions": {
     "target": "ES2015",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "strict": true,
     "importHelpers": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators":true,
+    "experimentalDecorators": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
-    "downlevelIteration":true,
+    "downlevelIteration": true,
     "declaration": false,
-    "baseUrl": ".",
+    "jsx": "react-jsx",
     "newLine": "lf",
+    "baseUrl": ".",
     "paths": {
       "copy/*": ["packages/copy/src/*"]
-    },
-    "types": [ "@types/node" ],
-    "jsx": "react-jsx",
+    }
   },
-  "exclude": [ "node_modules" ]
+  "include": ["packages/*/src"],
+  "exclude": ["node_modules"]
 }

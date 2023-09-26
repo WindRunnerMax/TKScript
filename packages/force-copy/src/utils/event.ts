@@ -1,4 +1,4 @@
-import { insertCSS, removeCSS } from "./css";
+import { insertCSS, removeCSS } from "./style";
 
 export const STORAGE_KEY_PREFIX = "___copy-currency--";
 
