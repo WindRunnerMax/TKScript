@@ -12,13 +12,24 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
+          fetch-depth: 0
           persist-credentials: false
+          
+      - name: install node-v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
 
-      - name: install and build
+      - name: install dependencies
         run: |
+          node -v
           npm install -g pnpm@6.24.3
-          pnpm install --filter=\!force-copy --no-frozen-lockfile
+          pnpm install --filter=\!force-copy
+
+      - name: build project
+        run: |
           pnpm run build:scripts
+
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

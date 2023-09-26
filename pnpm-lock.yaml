@@ -16,7 +16,6 @@ importers:
       eslint-plugin-prettier: 3.3.1
       eslint-plugin-react: ^7.27.0
       eslint-plugin-react-hooks: ^4.3.0
-      husky: ^7.0.4
       postcss: ^8.3.11
       prettier: ^2.3.2
       rollup: ^2.18.2
@@ -38,7 +37,6 @@ importers:
       eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/3.3.1_6e975bd57c7acf028c1a9ddbbf60c898
       eslint-plugin-react: registry.npmmirror.com/eslint-plugin-react/7.33.2_eslint@7.32.0
       eslint-plugin-react-hooks: registry.npmmirror.com/eslint-plugin-react-hooks/4.6.0_eslint@7.32.0
-      husky: registry.npmmirror.com/husky/7.0.4
       postcss: registry.npmmirror.com/postcss/8.3.11
       prettier: registry.nlark.com/prettier/2.4.1
       rollup: registry.npmmirror.com/rollup/2.60.0
@@ -4891,14 +4889,6 @@ packages:
     name: human-signals
     version: 2.1.0
     engines: {node: '>=10.17.0'}
-    dev: true
-
-  registry.npmmirror.com/husky/7.0.4:
-    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/husky/-/husky-7.0.4.tgz}
-    name: husky
-    version: 7.0.4
-    engines: {node: '>=12'}
-    hasBin: true
     dev: true
 
   registry.npmmirror.com/iconv-lite/0.4.24:
