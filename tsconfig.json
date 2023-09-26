@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2015",
     "module": "esnext",
     "strict": true,
     "importHelpers": true,
@@ -14,7 +14,9 @@
     "declaration": false,
     "baseUrl": ".",
     "newLine": "lf",
-    "paths": {},
+    "paths": {
+      "copy/*": ["packages/copy/src/*"]
+    },
     "types": [ "@types/node" ],
     "jsx": "react-jsx",
   },

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  width: 270px;
+
+  table {
+    td {
+      padding: 5px 10px;
+    }
+  }
+}
+
+.logo {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  img {
+    height: 20px;
+    margin-right: 3px;
+    width: 20px;
+  }
+}
+
+.moduleName {
+  margin-left: 25px;
+}

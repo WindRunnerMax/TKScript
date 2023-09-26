@@ -6,5 +6,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/WindrunnerMax/TKScript"
-  }
+  },
+  "sideEffects": false,
+  "files": [
+    "src"
+  ]
 }

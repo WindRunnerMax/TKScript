@@ -18,8 +18,14 @@ module.exports = {
       plugins: ["@typescript-eslint"],
       extends: ["plugin:@typescript-eslint/recommended"],
     },
+    {
+      files: ["*.tsx"],
+      parser: "@typescript-eslint/parser",
+      plugins: ["react", "react-hooks", "@typescript-eslint/eslint-plugin"],
+      extends: ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
+    },
   ],
-  ignorePatterns: ["node_modules", "build", "dist", "coverage"],
+  ignorePatterns: ["node_modules", "build", "dist", "coverage", "public"],
   rules: {
     // 分号
     "semi": "error",
@@ -33,5 +39,7 @@ module.exports = {
     "prefer-const": "error",
     // 允许console
     "no-console": "off",
+    // 关闭每个函数都要显式声明返回值
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
 };

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Force Copy",
+  "version": "1.0.0",
+  "description": "Force Copy Everything",
+  "icons": {
+    "16": "./static/favicon.png",
+    "32": "./static/favicon.png",
+    "48": "./static/favicon.png",
+    "128": "./static/favicon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "./static/favicon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["./static/*", "./inject.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "permissions": ["storage", "scripting", "tabs", "activeTab"]
+}
