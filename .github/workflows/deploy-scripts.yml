@@ -17,7 +17,7 @@ jobs:
       - name: install and build
         run: |
           npm install -g pnpm@6.24.3
-          pnpm install
+          pnpm install --filter=\!force-copy --no-frozen-lockfile
           pnpm run build:scripts
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
