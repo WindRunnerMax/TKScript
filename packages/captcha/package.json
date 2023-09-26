@@ -1,0 +1,10 @@
+{
+  "name": "captcha",
+  "version": "1.0.0",
+  "author": "Czy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/WindrunnerMax/TKScript"
+  }
+}

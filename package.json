@@ -1,15 +1,13 @@
 {
-  "name": "TKScript",
+  "name": "script",
   "version": "1.0.0",
-  "description": "油猴插件",
-  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/WindrunnerMax/TKScript"
   },
   "scripts": {
-    "dev": "rollup -c --watch",
-    "build": "./publish.sh",
+    "dev:scripts": "rollup -c --watch",
+    "build:scripts": "./publish-scripts.sh",
     "build:special": "cross-env CHANNEL=SPECIAL rollup -c"
   },
   "author": "Czy",
@@ -27,11 +25,20 @@
     "eslint-plugin-prettier": "^3.4.0",
     "postcss": "^8.3.11",
     "prettier": "^2.3.2",
+    "husky": "^7.0.4",
     "rollup": "^2.18.2",
     "rollup-plugin-esbuild": "^4.10.1",
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-userscript-metablock": "^0.3.1",
     "typescript": "^4.4.2"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{css,scss,less}": [
+      "stylelint --fix"
+    ]
   }
 }

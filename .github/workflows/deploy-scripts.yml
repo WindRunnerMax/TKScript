@@ -1,4 +1,4 @@
-name: publish gh-pages
+name: deploy-scripts gh-pages
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         run: |
           npm install -g pnpm@6.24.3
           pnpm install
-          pnpm run build
+          pnpm run build:scripts
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

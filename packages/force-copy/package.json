@@ -1,0 +1,37 @@
+{
+  "name": "force-copy",
+  "version": "1.0.0",
+  "author": "Czy",
+  "license": "MIT",
+  "scripts": {
+    "dev": "rm -rf build && rspack dev",
+    "build": "rm -rf build && rspack build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/WindrunnerMax/TKScript"
+  },
+  "dependencies": {
+    "@arco-design/web-react": "^2.50.0",
+    "laser-utils": "^0.0.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^0.2.5",
+    "@rspack/plugin-html": "^0.2.5",
+    "@types/chrome": "^0.0.241",
+    "@types/react": "^17.0.1",
+    "@types/react-dom": "^17.0.1",
+    "less": "^3.0.0",
+    "less-loader": "6.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{css,scss,less}": [
+      "stylelint --fix"
+    ]
+  }
+}
