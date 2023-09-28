@@ -31,49 +31,49 @@ import commonEnhance from "./modules/common-e";
 import commonPreLoad from "./modules/common-p";
 
 export interface WebsiteConfig {
-    initCopyEvent?: boolean;
-    runAt?: "document-start" | "document-end";
-    captureInstance?: boolean;
-    delay?: number;
+  initCopyEvent?: boolean;
+  runAt?: "document-start" | "document-end";
+  captureInstance?: boolean;
+  delay?: number;
 }
 export interface Website {
-    config?: WebsiteConfig;
-    regexp: RegExp;
-    init: () => void;
-    getSelectedText?: () => CopyParams;
+  config?: WebsiteConfig;
+  regexp: RegExp;
+  init: () => void;
+  getSelectedText?: () => CopyParams;
 }
 
 const websites: Website[] = [
-    sf,
-    wk,
-    zhihu,
-    edu30,
-    docqq,
-    boke112,
-    diyifanwen,
-    mbalib,
-    cnitpm,
-    mihoyo,
-    uemeds,
-    aiyuke,
-    qidian,
-    zongheng,
-    k17,
-    ciweimao,
-    qqbook,
-    utaten,
-    baiduwk,
-    xiaohongshu,
-    doc88,
-    leetcode,
-    csdn,
-    bilibili,
-    cnki,
-    docin,
-    youdao,
-    common,
-    commonEnhance,
-    commonPreLoad,
+  sf,
+  wk,
+  zhihu,
+  edu30,
+  docqq,
+  boke112,
+  diyifanwen,
+  mbalib,
+  cnitpm,
+  mihoyo,
+  uemeds,
+  aiyuke,
+  qidian,
+  zongheng,
+  k17,
+  ciweimao,
+  qqbook,
+  utaten,
+  baiduwk,
+  xiaohongshu,
+  doc88,
+  leetcode,
+  csdn,
+  bilibili,
+  cnki,
+  docin,
+  youdao,
+  common,
+  commonEnhance,
+  commonPreLoad,
 ];
 
 export default websites;

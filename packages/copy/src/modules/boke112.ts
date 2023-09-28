@@ -3,10 +3,10 @@ import utils from "../utils/event";
 import { Website } from "../websites";
 
 const website: Website = {
-    regexp: new RegExp(".+://boke112.com/post/.+"),
-    init: function () {
-        utils.enableOnCopyByCapture();
-        const template = `
+  regexp: new RegExp(".+://boke112.com/post/.+"),
+  init: function () {
+    utils.enableOnCopyByCapture();
+    const template = `
             <style>
                 :not(input):not(textarea)::selection {
                     background-color: #2440B3 !important;
@@ -19,8 +19,8 @@ const website: Website = {
                 }
             </style>
         `;
-        dom.append("head", template);
-    },
+    dom.append("head", template);
+  },
 };
 
 export default website;

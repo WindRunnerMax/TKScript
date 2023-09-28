@@ -6,8 +6,8 @@ import qqMail from "./modules/qq-mail";
 import juejin from "./modules/juejin";
 
 export interface Website {
-    regexp: RegExp;
-    init: () => void;
+  regexp: RegExp;
+  init: () => void;
 }
 
 const websites: Website[] = [google, zhihu, csdn, jianshu, qqMail, juejin];

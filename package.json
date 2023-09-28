@@ -11,7 +11,8 @@
     "dev:scripts": "rollup -c --watch",
     "build:scripts": "./publish-scripts.sh",
     "dev:force-copy": "pnpm run dev --filter force-copy",
-    "build:force-copy": "pnpm run build --filter force-copy"
+    "build:force-copy": "pnpm run build --filter force-copy",
+    "lint-es": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore ."
   },
   "author": "Czy",
   "license": "MIT",

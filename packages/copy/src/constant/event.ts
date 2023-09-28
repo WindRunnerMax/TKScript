@@ -1,6 +1,6 @@
 export const DOM_STAGE = {
-    START: "document-start" as const,
-    END: "document-end" as const,
+  START: "document-start" as const,
+  END: "document-end" as const,
 };
 export const DOM_READY = "DOMContentLoaded";
 export const PAGE_LOADED = "load";
