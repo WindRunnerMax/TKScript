@@ -69,7 +69,8 @@ importers:
       '@types/chrome': ^0.0.241
       '@types/react': ^17.0.1
       '@types/react-dom': ^17.0.1
-      laser-utils: 0.0.2-alpha.4
+      copy: 'workspace: *'
+      laser-utils: 0.0.2-alpha.6
       less: ^3.0.0
       less-loader: 6.0.0
       react: ^17.0.1
@@ -78,7 +79,8 @@ importers:
       sass-loader: ^13.3.2
     dependencies:
       '@arco-design/web-react': registry.npmmirror.com/@arco-design/web-react/2.53.2_1879041859b6e8841a873f969bc7bfe3
-      laser-utils: registry.npmmirror.com/laser-utils/0.0.2-alpha.4
+      copy: link:../copy
+      laser-utils: registry.npmmirror.com/laser-utils/0.0.2-alpha.6
       react: registry.npmmirror.com/react/17.0.2
       react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
     devDependencies:
@@ -5351,10 +5353,10 @@ packages:
       object.values: registry.npmmirror.com/object.values/1.1.7
     dev: true
 
-  registry.npmmirror.com/laser-utils/0.0.2-alpha.4:
-    resolution: {integrity: sha512-JMC899d6iz2SwvwC0FItdnHW1i0nUh9ZrRaaEDcbYT2Oh5SQW5BPkrK5hiqJ2a3rI6fZxZms8hdUjwhMF3YXRA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/laser-utils/-/laser-utils-0.0.2-alpha.4.tgz}
+  registry.npmmirror.com/laser-utils/0.0.2-alpha.6:
+    resolution: {integrity: sha512-zLFwKOt0LofIIjw6mnAEdqL62Wt7k0zbj8qZEr1FcfxRsXkwW/5FclH3GMtCNgYQBwCSM30g3DuFj5gk1nwZ9w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/laser-utils/-/laser-utils-0.0.2-alpha.6.tgz}
     name: laser-utils
-    version: 0.0.2-alpha.4
+    version: 0.0.2-alpha.6
     dev: false
 
   registry.npmmirror.com/launch-editor/2.6.0:

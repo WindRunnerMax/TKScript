@@ -67,6 +67,7 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, "build"),
   },
+  devtool: false,
 };
 
 // https://www.rspack.dev/

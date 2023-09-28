@@ -23,9 +23,9 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["./static/*", "./inject.js"],
+      "resources": ["static/*", "inject.js"],
       "matches": ["<all_urls>"]
     }
   ],
-  "permissions": ["storage", "scripting", "tabs", "activeTab"]
+  "permissions": ["storage", "scripting", "activeTab"]
 }

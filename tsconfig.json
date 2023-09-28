@@ -17,7 +17,7 @@
     "newLine": "lf",
     "baseUrl": ".",
     "paths": {
-      "copy/*": ["packages/copy/src/*"]
+      "copy/*": ["packages/copy/*"]
     }
   },
   "include": ["packages/*/src"],
