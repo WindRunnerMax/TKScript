@@ -75,18 +75,12 @@
           controller.openFunction();
           controller.status = 0 /* OPEN */;
           button.textContent = controller.closeName;
-          localStorage.setItem(
-            STORAGE_KEY_PREFIX + controller.storageKey,
-            STORAGE_VALUE.OPEN
-          );
+          localStorage.setItem(STORAGE_KEY_PREFIX + controller.storageKey, STORAGE_VALUE.OPEN);
         } else {
           controller.closeFunction();
           controller.status = 1 /* CLOSE */;
           button.textContent = controller.openName;
-          localStorage.setItem(
-            STORAGE_KEY_PREFIX + controller.storageKey,
-            STORAGE_VALUE.CLOSE
-          );
+          localStorage.setItem(STORAGE_KEY_PREFIX + controller.storageKey, STORAGE_VALUE.CLOSE);
         }
       };
       handler();

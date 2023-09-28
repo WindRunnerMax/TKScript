@@ -410,9 +410,7 @@
                   return void 0;
                 if (target instanceof HTMLDivElement && target.querySelector("[data-focus-scope-start]")) {
                   const element = target.querySelector("[data-focus-scope-start]");
-                  element && element.parentElement && element.parentElement.textContent.indexOf("立即登录/注册") > -1 && element.parentElement.parentElement && element.parentElement.parentElement.removeChild(
-                    element.parentElement
-                  );
+                  element && element.parentElement && element.parentElement.textContent.indexOf("立即登录/注册") > -1 && element.parentElement.parentElement && element.parentElement.parentElement.removeChild(element.parentElement);
                 }
               }
             }
@@ -510,11 +508,7 @@
       regexp: /mbalib/,
       init: function() {
         window.onload = () => {
-          utils.removeAttributes("fullScreenContainer", [
-            "oncopy",
-            "oncontextmenu",
-            "onselectstart"
-          ]);
+          utils.removeAttributes("fullScreenContainer", ["oncopy", "oncontextmenu", "onselectstart"]);
         };
       }
     };
