@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@arco-design/web-react": "^2.50.0",
-    "laser-utils": "^0.0.2",
+    "laser-utils": "0.0.2-alpha.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

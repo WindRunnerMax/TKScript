@@ -2,7 +2,7 @@ import { FC, useLayoutEffect, useState } from "react";
 import { Switch } from "@arco-design/web-react";
 import style from "./index.module.scss";
 import { cs } from "laser-utils";
-import { POPUP_CONTENT_ACTION, PopupContentBridge, QUERY_STATE_KEY } from "@/bridge/popup-content";
+import { POPUP_CONTENT_ACTION, PopupContentBridge, QUERY_STATE_KEY } from "@/content/bridge/popup";
 
 export const App: FC = () => {
   const [copyState, setCopyState] = useState(false);

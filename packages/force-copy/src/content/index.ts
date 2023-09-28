@@ -4,7 +4,7 @@ import {
   QUERY_STATE_KEY,
   PopupContentAction,
   POPUP_CONTENT_RTN,
-} from "@/bridge/popup-content";
+} from "@/content/bridge/popup";
 import {
   STORAGE_KEY_PREFIX,
   disableContextMenuHook,
@@ -13,7 +13,7 @@ import {
   enableContextMenuHook,
   enableCopyHook,
   enableKeydownHook,
-} from "@/utils/event";
+} from "@/inject/utils/event";
 
 const ACTION = POPUP_CONTENT_ACTION;
 

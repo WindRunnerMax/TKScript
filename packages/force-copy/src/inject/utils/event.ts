@@ -1,6 +1,6 @@
 import { insertCSS, removeCSS } from "./style";
 
-export const STORAGE_KEY_PREFIX = "___copy-currency--";
+export const STORAGE_KEY_PREFIX = "__FORCE_COPY__";
 
 const stopNativePropagation = (event: Event) => event.stopPropagation();
 
