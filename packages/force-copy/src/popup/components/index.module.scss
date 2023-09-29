@@ -6,7 +6,7 @@
 .hr {
   margin: 5px 0;
   height: 1px;
-  background-color: #eee;
+  background-color: var(--color-border-3);
   width: 100%;
 }
 
@@ -42,11 +42,11 @@
   align-items: center;
   font-size: 12px;
   justify-content: end;
-  
+
   > a {
     cursor: pointer;
     color: var(--color-text-1);
-    margin-right: 7px;
+    margin-left: 7px;
     display: flex;
     align-items: center;
     text-decoration: none;

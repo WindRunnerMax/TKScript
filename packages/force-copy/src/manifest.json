@@ -4,14 +4,13 @@
   "version": "1.0.0",
   "description": "Force Copy Everything",
   "icons": {
-    "16": "./static/favicon.png",
-    "32": "./static/favicon.png",
-    "48": "./static/favicon.png",
-    "128": "./static/favicon.png"
+    "32": "./static/favicon.128.png",
+    "96": "./static/favicon.128.png",
+    "128": "./static/favicon.128.png"
   },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "./static/favicon.png"
+    "default_icon": "./static/favicon.128.png"
   },
   "content_scripts": [
     {

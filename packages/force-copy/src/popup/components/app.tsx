@@ -3,7 +3,8 @@ import { Switch, Grid } from "@arco-design/web-react";
 import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-react/icon";
 import styles from "./index.module.scss";
 import { cs } from "laser-utils";
-import { POPUP_CONTENT_ACTION, PopupContentBridge, QUERY_STATE_KEY } from "@/content/bridge/popup";
+import { POPUP_TO_CONTENT_REQUEST, PCBridge } from "@/bridge/popup-content";
+import { QUERY_STATE_TYPE } from "@/bridge/constant";
 const Row = Grid.Row;
 const Col = Grid.Col;
 
@@ -17,38 +18,38 @@ export const App: FC = () => {
 
   const onSwitchChange = (
     type:
-      | typeof POPUP_CONTENT_ACTION.MENU
-      | typeof POPUP_CONTENT_ACTION.KEYDOWN
-      | typeof POPUP_CONTENT_ACTION.COPY,
+      | typeof POPUP_TO_CONTENT_REQUEST.COPY_TYPE
+      | typeof POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE
+      | typeof POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE,
     checked: boolean,
     once = false
   ) => {
-    PopupContentBridge.postMessage({ type: type, payload: { checked, once } });
+    PCBridge.postToContent({ type: type, payload: { checked, once } });
   };
 
   useLayoutEffect(() => {
     const queue = [
-      { key: QUERY_STATE_KEY.STORAGE_COPY, state: setCopyState },
-      { key: QUERY_STATE_KEY.STORAGE_MENU, state: setMenuState },
-      { key: QUERY_STATE_KEY.STORAGE_KEYDOWN, state: setKeydownState },
-      { key: QUERY_STATE_KEY.SESSION_COPY, state: setCopyStateOnce },
-      { key: QUERY_STATE_KEY.SESSION_MENU, state: setMenuStateOnce },
-      { key: QUERY_STATE_KEY.SESSION_KEYDOWN, state: setKeydownStateOnce },
+      { key: QUERY_STATE_TYPE.COPY, state: setCopyState, once: false },
+      { key: QUERY_STATE_TYPE.MENU, state: setMenuState, once: false },
+      { key: QUERY_STATE_TYPE.KEYDOWN, state: setKeydownState, once: false },
+      { key: QUERY_STATE_TYPE.COPY, state: setCopyStateOnce, once: true },
+      { key: QUERY_STATE_TYPE.MENU, state: setMenuStateOnce, once: true },
+      { key: QUERY_STATE_TYPE.KEYDOWN, state: setKeydownStateOnce, once: true },
     ];
     queue.forEach(item => {
-      // PopupContentBridge.postMessage({
-      //   type: POPUP_CONTENT_ACTION.QUERY_STATE,
-      //   payload: item.key,
-      // }).then(r => {
-      //   r && item.state(r.payload);
-      // });
+      PCBridge.postToContent({
+        type: POPUP_TO_CONTENT_REQUEST.QUERY_STATE,
+        payload: { once: item.once, type: item.key },
+      }).then(r => {
+        r && item.state(r.payload);
+      });
     });
   }, []);
 
   return (
     <div className={cs(styles.container)}>
       <div className={cs(styles.captain)}>
-        <img src="./static/favicon.png" alt="" />
+        <img src="./static/favicon.128.png" alt="" />
         <span>Force Copy</span>
       </div>
 
@@ -76,7 +77,7 @@ export const App: FC = () => {
               checked={copyState}
               onChange={v => {
                 setCopyState(v);
-                onSwitchChange(POPUP_CONTENT_ACTION.COPY, v);
+                onSwitchChange(POPUP_TO_CONTENT_REQUEST.COPY_TYPE, v);
               }}
             />
           </Col>
@@ -86,7 +87,7 @@ export const App: FC = () => {
               checked={copyStateOnce}
               onChange={v => {
                 setCopyStateOnce(v);
-                onSwitchChange(POPUP_CONTENT_ACTION.COPY, v, true);
+                onSwitchChange(POPUP_TO_CONTENT_REQUEST.COPY_TYPE, v, true);
               }}
             />
           </Col>
@@ -101,7 +102,7 @@ export const App: FC = () => {
               checked={keydownState}
               onChange={v => {
                 setKeydownState(v);
-                onSwitchChange(POPUP_CONTENT_ACTION.KEYDOWN, v);
+                onSwitchChange(POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE, v);
               }}
             />
           </Col>
@@ -111,7 +112,7 @@ export const App: FC = () => {
               checked={keydownStateOnce}
               onChange={v => {
                 setKeydownStateOnce(v);
-                onSwitchChange(POPUP_CONTENT_ACTION.KEYDOWN, v, true);
+                onSwitchChange(POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE, v, true);
               }}
             />
           </Col>
@@ -126,7 +127,7 @@ export const App: FC = () => {
               checked={menuState}
               onChange={v => {
                 setMenuState(v);
-                onSwitchChange(POPUP_CONTENT_ACTION.MENU, v);
+                onSwitchChange(POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE, v);
               }}
             />
           </Col>
@@ -136,7 +137,7 @@ export const App: FC = () => {
               checked={menuStateOnce}
               onChange={v => {
                 setMenuStateOnce(v);
-                onSwitchChange(POPUP_CONTENT_ACTION.MENU, v, true);
+                onSwitchChange(POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE, v, true);
               }}
             />
           </Col>
