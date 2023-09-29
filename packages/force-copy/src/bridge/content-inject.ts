@@ -1,38 +1,46 @@
-export const CONTENT_INJECT_ACTION = {
-  COPY: "___COPY",
-  CONTEXT_MENU: "___CONTEXT_MENU",
-  KEY_DOWN: "___KEY_DOWN",
-} as const;
+import { CI_EXECUTION_KEY_TYPE } from "./constant";
 
-type ContentInjectAction = {
-  type:
-    | typeof CONTENT_INJECT_ACTION.CONTEXT_MENU
-    | typeof CONTENT_INJECT_ACTION.KEY_DOWN
-    | typeof CONTENT_INJECT_ACTION.COPY;
-  payload: boolean;
-};
+const EVENT_TYPE = process.env.EVENT_TYPE;
 
-const UNION_KEY = "___CONTENT_INJECT_UNION_KEY";
-type WithTagAction<T> = T & { UNION_KEY: typeof UNION_KEY };
+const CI_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE"] as const;
+export const CONTENT_TO_INJECT_REQUEST = CI_REQUEST_TYPE.reduce(
+  (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
+  {} as { [K in typeof CI_REQUEST_TYPE[number]]: `__${K}__` }
+);
 
-export class PopupContentBridge {
-  static async postMessage(data: ContentInjectAction) {
-    window.postMessage({ ...data, UNION_KEY }, location.origin);
+export type CI_REQUEST =
+  | {
+      type: typeof CONTENT_TO_INJECT_REQUEST.COPY_TYPE;
+      payload: CI_EXECUTION_KEY_TYPE;
+    }
+  | {
+      type: typeof CONTENT_TO_INJECT_REQUEST.KEYBOARD_TYPE;
+      payload: CI_EXECUTION_KEY_TYPE;
+    }
+  | {
+      type: typeof CONTENT_TO_INJECT_REQUEST.CONTEXT_MENU_TYPE;
+      payload: CI_EXECUTION_KEY_TYPE;
+    };
+
+export class CIBridge {
+  static postToInject(data: CI_REQUEST) {
+    window.dispatchEvent(new CustomEvent(EVENT_TYPE, { detail: data }));
   }
 
-  static onMessage(cb: (data: ContentInjectAction) => void) {
-    const handler = (event: MessageEvent<WithTagAction<ContentInjectAction>>) => {
-      if (event.origin === location.origin) {
-        const data = event.data;
-        if (data.UNION_KEY === UNION_KEY) cb(data);
+  static onContentMessage(cb: (data: CI_REQUEST) => void) {
+    const handler = (event: CustomEvent<CI_REQUEST>) => {
+      const data = event.detail as CI_REQUEST;
+      if (data && data.type && data.payload) {
+        cb(data);
       }
     };
-    window.addEventListener("message", handler);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    window.addEventListener(EVENT_TYPE, handler);
     return () => {
-      window.removeEventListener("message", handler);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      window.removeEventListener(EVENT_TYPE, handler);
     };
   }
 }
-
-// 1. window.addEventListener + window.postMessage
-// 2. document.addEventListener + document.dispatchEvent + CustomEvent

@@ -32,7 +32,7 @@ module.exports = {
   builtins: {
     define: {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-      "process.env.RANDOM_KEY": JSON.stringify(isDev ? "RANDOM_KEY" : getUniqueId()),
+      "process.env.EVENT_TYPE": JSON.stringify(isDev ? "EVENT_TYPE" : getUniqueId()),
     },
     pluginImport: [
       {

@@ -1,4 +1,4 @@
-import { QUERY_STATE_KEY_TYPE } from "./constant";
+import { PC_QUERY_STATE_KEY_TYPE } from "./constant";
 
 const PC_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE", "QUERY_STATE"] as const;
 export const POPUP_TO_CONTENT_REQUEST = PC_REQUEST_TYPE.reduce(
@@ -27,7 +27,7 @@ export type PC_REQUEST =
     }
   | {
       type: typeof POPUP_TO_CONTENT_REQUEST.QUERY_STATE;
-      payload: { type: QUERY_STATE_KEY_TYPE; once: boolean };
+      payload: { type: PC_QUERY_STATE_KEY_TYPE; once: boolean };
     };
 
 export type PC_RESPONSE = {

@@ -4,7 +4,7 @@ import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-re
 import styles from "./index.module.scss";
 import { cs } from "laser-utils";
 import { POPUP_TO_CONTENT_REQUEST, PCBridge } from "@/bridge/popup-content";
-import { QUERY_STATE_TYPE } from "@/bridge/constant";
+import { PC_QUERY_STATE_TYPE } from "@/bridge/constant";
 const Row = Grid.Row;
 const Col = Grid.Col;
 
@@ -29,12 +29,12 @@ export const App: FC = () => {
 
   useLayoutEffect(() => {
     const queue = [
-      { key: QUERY_STATE_TYPE.COPY, state: setCopyState, once: false },
-      { key: QUERY_STATE_TYPE.MENU, state: setMenuState, once: false },
-      { key: QUERY_STATE_TYPE.KEYDOWN, state: setKeydownState, once: false },
-      { key: QUERY_STATE_TYPE.COPY, state: setCopyStateOnce, once: true },
-      { key: QUERY_STATE_TYPE.MENU, state: setMenuStateOnce, once: true },
-      { key: QUERY_STATE_TYPE.KEYDOWN, state: setKeydownStateOnce, once: true },
+      { key: PC_QUERY_STATE_TYPE.COPY, state: setCopyState, once: false },
+      { key: PC_QUERY_STATE_TYPE.MENU, state: setMenuState, once: false },
+      { key: PC_QUERY_STATE_TYPE.KEYBOARD, state: setKeydownState, once: false },
+      { key: PC_QUERY_STATE_TYPE.COPY, state: setCopyStateOnce, once: true },
+      { key: PC_QUERY_STATE_TYPE.MENU, state: setMenuStateOnce, once: true },
+      { key: PC_QUERY_STATE_TYPE.KEYBOARD, state: setKeydownStateOnce, once: true },
     ];
     queue.forEach(item => {
       PCBridge.postToContent({
