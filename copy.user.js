@@ -312,6 +312,11 @@
       disable: function() {
         const dom2 = this.getInstance();
         dom2.style.display = "none";
+      },
+      destroy: function() {
+        const el = this.getInstance();
+        el.remove();
+        dom = null;
       }
     };
 
