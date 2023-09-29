@@ -45,7 +45,7 @@ module.exports = {
     rules: [
       { test: /\.svg$/, type: "asset" },
       {
-        test: /\.module.scss$/,
+        test: /\.(m|module).scss$/,
         use: [{ loader: "sass-loader" }],
         type: "css/module",
       },

@@ -17,7 +17,8 @@
     "laser-utils": "0.0.2-alpha.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "copy": "workspace: *"
+    "copy": "workspace: *",
+    "copy-currency": "workspace: *"
   },
   "devDependencies": {
     "@rspack/cli": "^0.2.5",

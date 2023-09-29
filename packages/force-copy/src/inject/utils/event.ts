@@ -1,33 +1,34 @@
-import { insertCSS, removeCSS } from "./style";
+import styles from "copy-currency/src/utils";
+import { CONTEXT_MENU, COPY, KEY_DOWN, SELECT_START } from "copy/src/constant/event";
 
-export const STORAGE_KEY_PREFIX = "__FORCE_COPY__";
+export const STYLE_ID = "__FORCE_COPY__";
 
 const stopNativePropagation = (event: Event) => event.stopPropagation();
 
 export const enableCopyHook = () => {
-  window.addEventListener("selectstart", stopNativePropagation, true);
-  window.addEventListener("copy", stopNativePropagation, true);
-  insertCSS(
-    STORAGE_KEY_PREFIX + "selectstart-and-copy",
+  window.addEventListener(SELECT_START, stopNativePropagation, true);
+  window.addEventListener(COPY, stopNativePropagation, true);
+  styles.insertCSS(
+    STYLE_ID,
     "*{user-select: auto !important;-webkit-user-select: auto !important;}"
   );
 };
 export const disableCopyHook = () => {
-  window.removeEventListener("selectstart", stopNativePropagation, true);
-  window.removeEventListener("copy", stopNativePropagation, true);
-  removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
+  window.removeEventListener(SELECT_START, stopNativePropagation, true);
+  window.removeEventListener(COPY, stopNativePropagation, true);
+  styles.removeCSS(STYLE_ID);
 };
 
 export const enableContextMenuHook = () => {
-  window.addEventListener("contextmenu", stopNativePropagation, true);
+  window.addEventListener(CONTEXT_MENU, stopNativePropagation, true);
 };
 export const disableContextMenuHook = () => {
-  window.removeEventListener("contextmenu", stopNativePropagation, true);
+  window.removeEventListener(CONTEXT_MENU, stopNativePropagation, true);
 };
 
 export const enableKeydownHook = () => {
-  window.addEventListener("keydown", stopNativePropagation, true);
+  window.addEventListener(KEY_DOWN, stopNativePropagation, true);
 };
 export const disableKeydownHook = () => {
-  window.removeEventListener("keydown", stopNativePropagation, true);
+  window.removeEventListener(KEY_DOWN, stopNativePropagation, true);
 };

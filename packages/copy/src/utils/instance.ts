@@ -52,5 +52,10 @@ const instance = {
     const dom = this.getInstance();
     dom.style.display = "none";
   },
+  destroy: function (): void {
+    const el = this.getInstance();
+    el.remove();
+    dom = null;
+  },
 };
 export default instance;

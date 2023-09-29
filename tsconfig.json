@@ -17,7 +17,8 @@
     "newLine": "lf",
     "baseUrl": ".",
     "paths": {
-      "copy/*": ["packages/copy/*"]
+      "copy/*": ["packages/copy/*"],
+      "copy-currency/*": ["packages/copy-currency/*"],
     }
   },
   "include": ["packages/*/src"],
