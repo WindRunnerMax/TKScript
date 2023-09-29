@@ -1,6 +1,8 @@
 const path = require("path");
 const { default: HtmlPlugin } = require("@rspack/plugin-html");
 const FilePlugin = require("./script/file");
+const { getUniqueId, isDev } = require("./script/utils");
+const ReloadPlugin = require("./script/reload");
 
 /**
  * @type {import('@rspack/cli').Configuration}
@@ -11,6 +13,7 @@ module.exports = {
     popup: "./src/popup/index.tsx",
     content: "./src/content/index.ts",
     inject: "./src/inject/index.ts",
+    worker: "./src/worker/index.ts",
   },
   plugins: [
     new HtmlPlugin({
@@ -19,6 +22,7 @@ module.exports = {
       inject: false,
     }),
     new FilePlugin(),
+    new ReloadPlugin(),
   ],
   resolve: {
     alias: {
@@ -28,6 +32,7 @@ module.exports = {
   builtins: {
     define: {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.RANDOM_KEY": JSON.stringify(isDev ? "RANDOM_KEY" : getUniqueId()),
     },
     pluginImport: [
       {

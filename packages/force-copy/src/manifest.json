@@ -27,5 +27,8 @@
       "matches": ["<all_urls>"]
     }
   ],
+  "background": {
+    "service_worker": "worker.js"
+  },
   "permissions": ["storage", "scripting", "activeTab"]
 }
