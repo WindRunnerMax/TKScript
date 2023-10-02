@@ -38,7 +38,7 @@ export type PC_RESPONSE = {
 export class PCBridge {
   static async postToContent(data: PC_REQUEST) {
     return new Promise<PC_RESPONSE | null>(resolve => {
-      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      chrome.tabs.query({ active: true, currentWindow: true }).then(tabs => {
         const tabId = tabs[0] && tabs[0].id;
         if (tabId) {
           chrome.tabs.sendMessage(tabId, data).then(resolve);

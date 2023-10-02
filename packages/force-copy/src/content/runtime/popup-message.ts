@@ -6,9 +6,11 @@ import {
   POPUP_TO_CONTENT_RESPONSE,
 } from "@/bridge/popup-content";
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
+import { logger } from "@/utils/logger";
 import { storage } from "laser-utils";
 
 export const onPopupMessage = (data: PC_REQUEST) => {
+  logger.info("Content Receive Popup Message", location.host, data);
   switch (data.type) {
     case POPUP_TO_CONTENT_REQUEST.COPY_TYPE: {
       CIBridge.postToInject({

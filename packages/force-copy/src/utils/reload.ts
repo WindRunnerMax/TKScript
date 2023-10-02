@@ -1,3 +1,5 @@
+import { logger } from "./logger";
+
 export const RELOAD_APP = "RELOAD_APP";
 
 export const sendReloadMsg = () => {
@@ -7,13 +9,13 @@ export const sendReloadMsg = () => {
       // 收到消息即重载
       ws.onmessage = () => {
         try {
-          chrome.runtime.sendMessage(RELOAD_APP);
+          chrome.runtime.id && chrome.runtime.sendMessage(RELOAD_APP);
         } catch (error) {
-          console.log("SEND MESSAGE ERROR", error);
+          logger.warning("SEND MESSAGE ERROR", error);
         }
       };
     } catch (error) {
-      console.log("CONNECT ERROR", error);
+      logger.warning("CONNECT ERROR", error);
     }
   }
 };
@@ -21,6 +23,6 @@ export const sendReloadMsg = () => {
 export const reloadApp = (msg: unknown) => {
   if (process.env.NODE_ENV === "development" && msg === RELOAD_APP) {
     chrome.runtime.reload();
-    console.log("RELOAD SUCCESS");
+    logger.warning("RELOAD SUCCESS");
   }
 };

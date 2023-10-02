@@ -32,7 +32,7 @@ export const initBaseEvents = () => {
 };
 
 export const stopNativePropagation = (event: Event) => event.stopPropagation();
-export const keyboardHandler = (e: KeyboardEvent) => {
+export const copyKeyboardHandler = (e: KeyboardEvent) => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLocaleUpperCase() === "C") {
     stopNativePropagation(e);
   }

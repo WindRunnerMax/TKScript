@@ -5,6 +5,11 @@ import { websites } from "./modules";
 import { initBaseEvents } from "./utils/events";
 import { CIBridge } from "@/bridge/content-inject";
 import { onContentMessage } from "./utils/content-msg";
+import { LOG_LEVEL, logger } from "@/utils/logger";
+
+if (process.env.NODE_ENV === "development") {
+  logger.setLevel(LOG_LEVEL.INFO);
+}
 
 (async (): Promise<void> => {
   initBaseEvents();

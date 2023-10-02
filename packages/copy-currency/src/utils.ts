@@ -12,6 +12,6 @@ export default {
   },
   removeCSS: (id: string): void => {
     const style = document.getElementById(id);
-    style && document.head.removeChild(style);
+    style && style.remove();
   },
 };
