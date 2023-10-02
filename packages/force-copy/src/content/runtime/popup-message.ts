@@ -1,10 +1,6 @@
 import { CI_EXECUTION_TYPE, PC_QUERY_STATE_TYPE } from "@/bridge/constant";
 import { CIBridge, CONTENT_TO_INJECT_REQUEST } from "@/bridge/content-inject";
-import {
-  PC_REQUEST,
-  POPUP_TO_CONTENT_REQUEST,
-  POPUP_TO_CONTENT_RESPONSE,
-} from "@/bridge/popup-content";
+import { PC_REQUEST, POPUP_TO_CONTENT_REQUEST } from "@/bridge/popup-content";
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { logger } from "@/utils/logger";
 import { storage } from "laser-utils";
@@ -49,20 +45,14 @@ export const onPopupMessage = (data: PC_REQUEST) => {
       break;
     }
     case POPUP_TO_CONTENT_REQUEST.QUERY_STATE: {
-      const STATE_MAP = {
-        [PC_QUERY_STATE_TYPE.COPY]: { key: COPY_TYPE },
-        [PC_QUERY_STATE_TYPE.MENU]: { key: CONTEXT_MENU_TYPE },
-        [PC_QUERY_STATE_TYPE.KEYBOARD]: { key: KEYBOARD_TYPE },
+      return {
+        [PC_QUERY_STATE_TYPE.COPY]: storage.local.get<boolean>(COPY_TYPE),
+        [PC_QUERY_STATE_TYPE.MENU]: storage.local.get<boolean>(CONTEXT_MENU_TYPE),
+        [PC_QUERY_STATE_TYPE.KEYBOARD]: storage.local.get<boolean>(KEYBOARD_TYPE),
+        [PC_QUERY_STATE_TYPE.COPY_ONCE]: storage.session.get<boolean>(COPY_TYPE),
+        [PC_QUERY_STATE_TYPE.MENU_ONCE]: storage.session.get<boolean>(CONTEXT_MENU_TYPE),
+        [PC_QUERY_STATE_TYPE.KEYBOARD_ONCE]: storage.session.get<boolean>(KEYBOARD_TYPE),
       };
-      for (const [key, value] of Object.entries(STATE_MAP)) {
-        if (key === data.payload.type)
-          return {
-            type: POPUP_TO_CONTENT_RESPONSE.STATE,
-            payload: data.payload.once
-              ? storage.session.get<boolean>(value.key)
-              : storage.local.get<boolean>(value.key),
-          };
-      }
     }
   }
 };

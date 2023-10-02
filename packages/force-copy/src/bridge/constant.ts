@@ -1,4 +1,11 @@
-const PC_QUERY_STATE_KEY = ["COPY", "MENU", "KEYBOARD"] as const;
+const PC_QUERY_STATE_KEY = [
+  "COPY",
+  "MENU",
+  "KEYBOARD",
+  "COPY_ONCE",
+  "MENU_ONCE",
+  "KEYBOARD_ONCE",
+] as const;
 export const PC_QUERY_STATE_TYPE = PC_QUERY_STATE_KEY.reduce(
   (acc, cur) => ({ ...acc, [cur]: cur }),
   {} as { [K in typeof PC_QUERY_STATE_KEY[number]]: K }

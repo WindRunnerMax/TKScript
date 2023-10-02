@@ -3,7 +3,11 @@ import { Switch, Grid } from "@arco-design/web-react";
 import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-react/icon";
 import styles from "./index.module.scss";
 import { cs } from "laser-utils";
-import { POPUP_TO_CONTENT_REQUEST, PCBridge } from "@/bridge/popup-content";
+import {
+  POPUP_TO_CONTENT_REQUEST,
+  PCBridge,
+  POPUP_TO_CONTENT_RESPONSE,
+} from "@/bridge/popup-content";
 import { PC_QUERY_STATE_TYPE } from "@/bridge/constant";
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -28,21 +32,23 @@ export const App: FC = () => {
   };
 
   useLayoutEffect(() => {
-    const queue = [
-      { key: PC_QUERY_STATE_TYPE.COPY, state: setCopyState, once: false },
-      { key: PC_QUERY_STATE_TYPE.MENU, state: setMenuState, once: false },
-      { key: PC_QUERY_STATE_TYPE.KEYBOARD, state: setKeydownState, once: false },
-      { key: PC_QUERY_STATE_TYPE.COPY, state: setCopyStateOnce, once: true },
-      { key: PC_QUERY_STATE_TYPE.MENU, state: setMenuStateOnce, once: true },
-      { key: PC_QUERY_STATE_TYPE.KEYBOARD, state: setKeydownStateOnce, once: true },
-    ];
-    queue.forEach(item => {
-      PCBridge.postToContent({
-        type: POPUP_TO_CONTENT_REQUEST.QUERY_STATE,
-        payload: { once: item.once, type: item.key },
-      }).then(r => {
-        r && item.state(r.payload);
-      });
+    const mapper: Record<string, typeof setCopyState> = {
+      [PC_QUERY_STATE_TYPE.COPY]: setCopyState,
+      [PC_QUERY_STATE_TYPE.MENU]: setMenuState,
+      [PC_QUERY_STATE_TYPE.KEYBOARD]: setKeydownState,
+      [PC_QUERY_STATE_TYPE.COPY_ONCE]: setCopyStateOnce,
+      [PC_QUERY_STATE_TYPE.MENU_ONCE]: setMenuStateOnce,
+      [PC_QUERY_STATE_TYPE.KEYBOARD_ONCE]: setKeydownStateOnce,
+    };
+    PCBridge.postToContent({
+      type: POPUP_TO_CONTENT_REQUEST.QUERY_STATE,
+    }).then(res => {
+      if (res.type === POPUP_TO_CONTENT_RESPONSE.STATE) {
+        for (const [key, value] of Object.entries(res.payload)) {
+          const handler = mapper[key];
+          handler && handler(value);
+        }
+      }
     });
   }, []);
 

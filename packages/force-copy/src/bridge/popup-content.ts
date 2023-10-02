@@ -27,12 +27,11 @@ export type PC_REQUEST =
     }
   | {
       type: typeof POPUP_TO_CONTENT_REQUEST.QUERY_STATE;
-      payload: { type: PC_QUERY_STATE_KEY_TYPE; once: boolean };
     };
 
 export type PC_RESPONSE = {
   type: typeof POPUP_TO_CONTENT_RESPONSE.STATE;
-  payload: boolean;
+  payload: { [K in PC_QUERY_STATE_KEY_TYPE]: boolean };
 };
 
 export class PCBridge {
