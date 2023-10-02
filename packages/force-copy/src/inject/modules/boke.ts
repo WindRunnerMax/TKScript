@@ -4,10 +4,10 @@ import { EVENTS_TYPE, EventBus } from "../utils/bus";
 import style from "copy-currency/src/utils";
 import { keyboardHandler, stopNativePropagation } from "../utils/events";
 
-const STYLE_ID = "__FORCE_COPY__";
+const STYLE_ID = "__NOT_SELECTION__";
 
-export const Generic: WebSite = {
-  regexp: /.*/,
+export const Boke: WebSite = {
+  regexp: /boke112\.com/,
   start(type) {
     if (type === COPY_TYPE) {
       EventBus.on(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
@@ -15,7 +15,13 @@ export const Generic: WebSite = {
       EventBus.once(EVENTS_TYPE.DOM_LOADED, () => {
         style.insertCSS(
           STYLE_ID,
-          "*{user-select: auto !important;-webkit-user-select: auto !important;}"
+          ":not(input):not(textarea)::selection {" +
+            "    background-color: #BEDAFF !important;" +
+            " }" +
+            " " +
+            ":not(input):not(textarea)::-moz-selection {" +
+            "     background-color: #BEDAFF !important;" +
+            "}"
         );
       });
     } else if (type === KEYBOARD_TYPE) {

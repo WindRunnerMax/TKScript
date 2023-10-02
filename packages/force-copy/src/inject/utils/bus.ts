@@ -6,6 +6,8 @@ const EVENTS = [
   "MOUSE_DOWN_CAPTURE",
   "MOUSE_UP_BUBBLE",
   "MOUSE_DOWN_BUBBLE",
+  "DOM_LOADED",
+  "LOADED",
   "OPEN_ACTION",
   "CLOSE_ACTION",
   "OPEN_ONCE_ACTION",
@@ -20,20 +22,25 @@ export const EVENTS_TYPE = EVENTS.reduce(
   {} as { [K in typeof EVENTS[number]]: `__${K}__` }
 );
 
+interface EventBusParams {
+  [EVENTS_TYPE.MOUSE_UP_CAPTURE]: MouseEvent;
+  [EVENTS_TYPE.MOUSE_DOWN_CAPTURE]: MouseEvent;
+  [EVENTS_TYPE.MOUSE_UP_BUBBLE]: MouseEvent;
+  [EVENTS_TYPE.MOUSE_DOWN_BUBBLE]: MouseEvent;
+  [EVENTS_TYPE.DOM_LOADED]: Event;
+  [EVENTS_TYPE.LOADED]: Event;
+  [EVENTS_TYPE.OPEN_ACTION]: ALL_ACTION_TYPE;
+  [EVENTS_TYPE.CLOSE_ACTION]: ALL_ACTION_TYPE;
+  [EVENTS_TYPE.OPEN_ONCE_ACTION]: ALL_ACTION_TYPE;
+  [EVENTS_TYPE.COPY_CAPTURE]: Event;
+  [EVENTS_TYPE.KEY_BOARD_CAPTURE]: KeyboardEvent;
+  [EVENTS_TYPE.CONTEXT_MENU_CAPTURE]: Event;
+  [EVENTS_TYPE.SELECT_START_CAPTURE]: Event;
+}
+
 declare module "laser-utils" {
-  interface EventBusType {
-    [EVENTS_TYPE.MOUSE_UP_CAPTURE]: MouseEvent;
-    [EVENTS_TYPE.MOUSE_DOWN_CAPTURE]: MouseEvent;
-    [EVENTS_TYPE.MOUSE_UP_BUBBLE]: MouseEvent;
-    [EVENTS_TYPE.MOUSE_DOWN_BUBBLE]: MouseEvent;
-    [EVENTS_TYPE.OPEN_ACTION]: ALL_ACTION_TYPE;
-    [EVENTS_TYPE.CLOSE_ACTION]: ALL_ACTION_TYPE;
-    [EVENTS_TYPE.OPEN_ONCE_ACTION]: ALL_ACTION_TYPE;
-    [EVENTS_TYPE.COPY_CAPTURE]: Event;
-    [EVENTS_TYPE.KEY_BOARD_CAPTURE]: KeyboardEvent;
-    [EVENTS_TYPE.CONTEXT_MENU_CAPTURE]: Event;
-    [EVENTS_TYPE.SELECT_START_CAPTURE]: Event;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface EventBusType extends EventBusParams {}
 }
 
 export const EventBus = new AbstractEventBus();

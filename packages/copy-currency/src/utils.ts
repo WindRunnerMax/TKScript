@@ -2,12 +2,12 @@ export default {
   insertCSS: (id: string, css: string): void => {
     const style = document.createElement("style");
     style.id = id;
-    style.innerHTML = css;
-    const [head] = document.getElementsByTagName("head");
-    if (head) {
-      head.appendChild(style);
+    style.innerText = css;
+    const [body] = document.getElementsByTagName("body");
+    if (body) {
+      body.appendChild(style);
     } else {
-      window.addEventListener("load", () => document.head.appendChild(style));
+      window.addEventListener("DOMContentLoaded", () => document.body.appendChild(style));
     }
   },
   removeCSS: (id: string): void => {

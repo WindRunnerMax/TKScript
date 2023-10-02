@@ -2,15 +2,19 @@ export const RELOAD_APP = "RELOAD_APP";
 
 export const sendReloadMsg = () => {
   if (process.env.NODE_ENV === "development") {
-    const ws = new WebSocket("ws://localhost:3333");
-    // 收到消息即重载
-    ws.onmessage = () => {
-      try {
-        chrome.runtime.sendMessage(RELOAD_APP);
-      } catch (error) {
-        console.log("SEND MESSAGE ERROR", error);
-      }
-    };
+    try {
+      const ws = new WebSocket("ws://localhost:3333");
+      // 收到消息即重载
+      ws.onmessage = () => {
+        try {
+          chrome.runtime.sendMessage(RELOAD_APP);
+        } catch (error) {
+          console.log("SEND MESSAGE ERROR", error);
+        }
+      };
+    } catch (error) {
+      console.log("CONNECT ERROR", error);
+    }
   }
 };
 

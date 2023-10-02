@@ -24,7 +24,7 @@ jobs:
         run: |
           node -v
           npm install -g pnpm@6.24.3
-          pnpm install --filter=\!force-copy
+          pnpm --filter=\!force-copy install
 
       - name: build project
         run: |

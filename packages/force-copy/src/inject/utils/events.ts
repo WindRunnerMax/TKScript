@@ -1,9 +1,11 @@
 import {
   CONTEXT_MENU,
   COPY,
+  DOM_READY,
   KEY_DOWN,
   MOUSE_DOWN,
   MOUSE_UP,
+  PAGE_LOADED,
   SELECT_START,
 } from "copy/src/constant/event";
 import { EVENTS_TYPE, EventBus } from "./bus";
@@ -25,4 +27,13 @@ export const initBaseEvents = () => {
     e => EventBus.emit(EVENTS_TYPE.SELECT_START_CAPTURE, e),
     true
   );
+  window.addEventListener(PAGE_LOADED, e => EventBus.emit(EVENTS_TYPE.LOADED, e), true);
+  window.addEventListener(DOM_READY, e => EventBus.emit(EVENTS_TYPE.DOM_LOADED, e), true);
+};
+
+export const stopNativePropagation = (event: Event) => event.stopPropagation();
+export const keyboardHandler = (e: KeyboardEvent) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLocaleUpperCase() === "C") {
+    stopNativePropagation(e);
+  }
 };

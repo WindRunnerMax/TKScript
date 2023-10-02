@@ -2,7 +2,7 @@ import { State } from "./types/state";
 import { storage } from "laser-utils";
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { websites } from "./modules";
-import { initBaseEvents } from "./utils/event";
+import { initBaseEvents } from "./utils/events";
 import { CIBridge } from "@/bridge/content-inject";
 import { onContentMessage } from "./utils/content-msg";
 
