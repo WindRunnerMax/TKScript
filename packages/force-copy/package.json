@@ -6,7 +6,8 @@
   "sideEffects": false,
   "scripts": {
     "dev": "cross-env NODE_ENV=development rspack build --watch",
-    "build": "rm -rf build && rspack build"
+    "build": "rm -rf build && rspack build",
+    "dev:rollup": "cross-env NODE_ENV=development rollup -wc"
   },
   "repository": {
     "type": "git",
@@ -14,13 +15,16 @@
   },
   "dependencies": {
     "@arco-design/web-react": "^2.50.0",
+    "copy": "workspace: *",
+    "copy-currency": "workspace: *",
     "laser-utils": "0.0.2-alpha.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "copy": "workspace: *",
-    "copy-currency": "workspace: *"
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^5.0.0",
+    "@rollup/plugin-html": "^1.0.2",
+    "@rollup/plugin-node-resolve": "^13.0.4",
     "@rspack/cli": "^0.2.5",
     "@rspack/plugin-html": "^0.2.5",
     "@types/chrome": "^0.0.241",
