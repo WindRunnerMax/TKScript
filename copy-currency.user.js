@@ -103,7 +103,7 @@
     },
     removeCSS: (id) => {
       const style = document.getElementById(id);
-      style && document.head.removeChild(style);
+      style && style.remove();
     }
   };
 
