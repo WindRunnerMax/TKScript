@@ -6,8 +6,6 @@ import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
 import dom from "copy/src/utils/instance";
 import { ALLOW_PAINT, AUTO_USER_SELECT, COPY_BUTTON_STYLE, STYLE_ID } from "../utils/styles";
 import { logger } from "@/utils/logger";
-import { delayExecute } from "../utils/delay";
-import { PAGE_LOADED } from "copy/src/constant/event";
 import { isString } from "laser-utils";
 
 let isMouseDown = false;
@@ -16,7 +14,7 @@ let curSelectedText = "";
 
 const onMouseDownCapture = () => {
   isMouseDown = true;
-  dom.hide();
+  dom.hide(false);
 };
 const onMouseUpCapture = () => {
   isMouseDown = false;
@@ -26,25 +24,42 @@ const init = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     window.Config && (window.Config.vip = 1) && (window.Config.logined = 1);
+    const hook = () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const api = window.Core.Annotation.api;
+      const keys = Object.keys(api).filter(key => isString(api[key]));
+      const duplication: Record<string, unknown> = {};
+      keys.forEach(key => {
+        duplication[key] = api[key];
+        Object.defineProperty(api, key, {
+          set: function (value) {
+            duplication[key] = value;
+            !isMouseDown && (curSelectedText = value);
+            !isMouseDown && logger.info("TEXT SETTER", value);
+            return true;
+          },
+          get: function () {
+            return duplication[key];
+          },
+        });
+      });
+    };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const api = window.Core.Annotation.api;
-    const keys = Object.keys(api).filter(key => isString(api[key]));
-    const duplication: Record<string, unknown> = {};
-    keys.forEach(key => {
-      duplication[key] = api[key];
-      Object.defineProperty(api, key, {
-        set: function (value) {
-          duplication[key] = value;
-          !isMouseDown && (curSelectedText = value);
-          !isMouseDown && logger.info("TEXT SETTER", value);
-          return true;
+    if (window.Core) {
+      hook();
+    } else {
+      let Core: unknown = undefined;
+      Object.defineProperty(window, "Core", {
+        configurable: true,
+        set: (value: unknown) => {
+          Core = value;
+          value && hook();
         },
-        get: function () {
-          return duplication[key];
-        },
+        get: () => Core,
       });
-    });
+    }
   } catch (error) {
     logger.warning("INIT TEXT ERROR", error);
   }
@@ -62,7 +77,7 @@ export const Doc88: WebSite = {
   regexp: /www\.doc88\.com/,
   start(type) {
     if (type === COPY_TYPE) {
-      delayExecute(init, PAGE_LOADED);
+      init();
       style.insertCSS(
         STYLE_ID,
         AUTO_USER_SELECT + ALLOW_PAINT + COPY_BUTTON_STYLE + "#left-menu{display:none !important;} "

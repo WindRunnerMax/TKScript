@@ -27,14 +27,16 @@ const instance = {
     dom.style.opacity = "1";
     dom.style.zIndex = "1000";
   },
-  hide: function (): void {
+  hide: function (keep: number | false = 350): void {
     const dom = this.getInstance();
     dom.style.opacity = "0";
-    isReadyToHidden = true;
-    setTimeout(() => {
-      dom.style.zIndex = "-10000";
-      isReadyToHidden = false;
-    }, 350);
+    if (keep) {
+      isReadyToHidden = true;
+      setTimeout(() => {
+        dom.style.zIndex = "-10000";
+        isReadyToHidden = false;
+      }, keep);
+    }
   },
   onCopy: function (content: CopyParams, event: MouseEvent): void {
     const dom = this.getInstance();

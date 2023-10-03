@@ -8,6 +8,9 @@ import { ALLOW_PAINT, AUTO_USER_SELECT, COPY_BUTTON_STYLE, STYLE_ID } from "../u
 import { logger } from "@/utils/logger";
 import { TEXT_HTML, TEXT_PLAIN } from "copy/src/utils/copy";
 
+const onMouseDown = () => {
+  dom.hide(false);
+};
 const onMouseUp = (event: MouseEvent) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -23,11 +26,11 @@ const onMouseUp = (event: MouseEvent) => {
       if (plainText) {
         dom.onCopy({ [TEXT_PLAIN]: plainText, [TEXT_HTML]: htmlText }, event);
       } else {
-        dom.hide();
+        dom.hide(false);
       }
     }
   } else {
-    dom.hide();
+    dom.hide(false);
   }
 };
 
@@ -37,6 +40,7 @@ export const QQDoc: WebSite = {
     if (type === COPY_TYPE) {
       style.insertCSS(STYLE_ID, AUTO_USER_SELECT + ALLOW_PAINT + COPY_BUTTON_STYLE);
       EventBus.on(EVENTS_TYPE.MOUSE_UP_BUBBLE, onMouseUp);
+      EventBus.on(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
       EventBus.on(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
       EventBus.on(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.on(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);
@@ -51,6 +55,7 @@ export const QQDoc: WebSite = {
       dom.destroy();
       style.removeCSS(STYLE_ID);
       EventBus.off(EVENTS_TYPE.MOUSE_UP_BUBBLE, onMouseUp);
+      EventBus.off(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
       EventBus.off(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
       EventBus.off(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.off(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);

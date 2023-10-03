@@ -6,6 +6,7 @@ import { initBaseEvents } from "./utils/events";
 import { CIBridge } from "@/bridge/content-inject";
 import { onContentMessage } from "./utils/content-msg";
 import { LOG_LEVEL, logger } from "@/utils/logger";
+import { DOM_STAGE } from "copy/src/constant/event";
 
 if (process.env.NODE_ENV === "development") {
   logger.setLevel(LOG_LEVEL.INFO);
@@ -24,8 +25,8 @@ if (process.env.NODE_ENV === "development") {
   const handler = websites.find(item => item.regexp.test(location.host)) || websites.slice(-1)[0];
   if (!handler) return void 0;
   handler.init && handler.init(state);
-  state.COPY && handler.start(COPY_TYPE);
-  state.KEYBOARD && handler.start(KEYBOARD_TYPE);
-  state.CONTEXT_MENU && handler.start(CONTEXT_MENU_TYPE);
+  state.COPY && handler.start(COPY_TYPE, DOM_STAGE.START);
+  state.KEYBOARD && handler.start(KEYBOARD_TYPE, DOM_STAGE.START);
+  state.CONTEXT_MENU && handler.start(CONTEXT_MENU_TYPE, DOM_STAGE.START);
   CIBridge.onContentMessage(onContentMessage(handler));
 })();

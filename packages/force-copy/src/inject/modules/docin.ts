@@ -14,6 +14,10 @@ const init = () => {
   el && el.click();
 };
 
+const onMouseDown = () => {
+  dom.hide(false);
+};
+
 const onMouseUp = (event: MouseEvent) => {
   const handler = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -23,7 +27,7 @@ const onMouseUp = (event: MouseEvent) => {
     if (text) {
       dom.onCopy(text, event);
     } else {
-      dom.hide();
+      dom.hide(false);
     }
   };
   setTimeout(handler, 100);
@@ -39,6 +43,7 @@ export const DocIn: WebSite = {
         AUTO_USER_SELECT + ALLOW_PAINT + COPY_BUTTON_STYLE + ".copy-tips{display:none !important;} "
       );
       EventBus.on(EVENTS_TYPE.MOUSE_UP_CAPTURE, onMouseUp);
+      EventBus.on(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
       EventBus.on(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
       EventBus.on(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.on(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);
@@ -53,6 +58,7 @@ export const DocIn: WebSite = {
       dom.destroy();
       style.removeCSS(STYLE_ID);
       EventBus.off(EVENTS_TYPE.MOUSE_UP_CAPTURE, onMouseUp);
+      EventBus.off(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
       EventBus.off(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
       EventBus.off(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.off(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);

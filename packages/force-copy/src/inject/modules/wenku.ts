@@ -11,7 +11,7 @@ let preSelectedText = "";
 let curSelectedText = "";
 
 const onMouseDown = () => {
-  dom.hide();
+  dom.hide(false);
 };
 const onMouseUp = (event: MouseEvent) => {
   try {
