@@ -288,14 +288,16 @@
         dom2.style.opacity = "1";
         dom2.style.zIndex = "1000";
       },
-      hide: function() {
+      hide: function(keep = 350) {
         const dom2 = this.getInstance();
         dom2.style.opacity = "0";
-        isReadyToHidden = true;
-        setTimeout(() => {
-          dom2.style.zIndex = "-10000";
-          isReadyToHidden = false;
-        }, 350);
+        if (keep) {
+          isReadyToHidden = true;
+          setTimeout(() => {
+            dom2.style.zIndex = "-10000";
+            isReadyToHidden = false;
+          }, keep);
+        }
       },
       onCopy: function(content, event) {
         const dom2 = this.getInstance();
