@@ -6,33 +6,51 @@ import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
 import dom from "copy/src/utils/instance";
 import { ALLOW_PAINT, AUTO_USER_SELECT, COPY_BUTTON_STYLE, STYLE_ID } from "../utils/styles";
 import { logger } from "@/utils/logger";
+import { delayExecute } from "../utils/delay";
+import { PAGE_LOADED } from "copy/src/constant/event";
+import { isString } from "laser-utils";
 
+let isMouseDown = false;
 let preSelectedText = "";
 let curSelectedText = "";
 
-const onMouseDown = () => {
+const onMouseDownCapture = () => {
+  isMouseDown = true;
   dom.hide();
 };
-const onMouseUp = (event: MouseEvent) => {
+const onMouseUpCapture = () => {
+  isMouseDown = false;
+};
+const init = () => {
   try {
-    const elements = document.querySelectorAll("#app > div");
-    for (const item of elements) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const vue = item.__vue__;
-      if (vue) {
-        const text = vue.$store.getters["readerPlugin/selectedTextTrim"];
-        text && (curSelectedText = text);
-        break;
-      }
-    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    window.Config && (window.Config.vip = 1) && (window.Config.logined = 1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const api = window.Core.Annotation.api;
+    const keys = Object.keys(api).filter(key => isString(api[key]));
+    const duplication: Record<string, unknown> = {};
+    keys.forEach(key => {
+      duplication[key] = api[key];
+      Object.defineProperty(api, key, {
+        set: function (value) {
+          duplication[key] = value;
+          !isMouseDown && (curSelectedText = value);
+          !isMouseDown && logger.info("TEXT SETTER", value);
+          return true;
+        },
+        get: function () {
+          return duplication[key];
+        },
+      });
+    });
   } catch (error) {
-    logger.warning("GET TEXT FAIL", error);
+    logger.warning("INIT TEXT ERROR", error);
   }
-  if (!curSelectedText) {
-    const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
-    result && result[1] && (curSelectedText = result[1]);
-  }
+};
+
+const onMouseUp = (event: MouseEvent) => {
   logger.info("SELECT", curSelectedText);
   if (curSelectedText && preSelectedText !== curSelectedText) {
     dom.onCopy(curSelectedText, event);
@@ -40,19 +58,18 @@ const onMouseUp = (event: MouseEvent) => {
   preSelectedText = curSelectedText;
 };
 
-export const Wenku: WebSite = {
-  regexp: /wenku\.baidu\.com/,
+export const Doc88: WebSite = {
+  regexp: /www\.doc88\.com/,
   start(type) {
     if (type === COPY_TYPE) {
+      delayExecute(init, PAGE_LOADED);
       style.insertCSS(
         STYLE_ID,
-        AUTO_USER_SELECT +
-          ALLOW_PAINT +
-          COPY_BUTTON_STYLE +
-          "#reader-helper{display:none !important;} "
+        AUTO_USER_SELECT + ALLOW_PAINT + COPY_BUTTON_STYLE + "#left-menu{display:none !important;} "
       );
       EventBus.on(EVENTS_TYPE.MOUSE_UP_BUBBLE, onMouseUp);
-      EventBus.on(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
+      EventBus.on(EVENTS_TYPE.MOUSE_UP_CAPTURE, onMouseUpCapture);
+      EventBus.on(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDownCapture);
       EventBus.on(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
       EventBus.on(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.on(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);
@@ -67,7 +84,8 @@ export const Wenku: WebSite = {
       dom.destroy();
       style.removeCSS(STYLE_ID);
       EventBus.off(EVENTS_TYPE.MOUSE_UP_BUBBLE, onMouseUp);
-      EventBus.off(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
+      EventBus.off(EVENTS_TYPE.MOUSE_UP_CAPTURE, onMouseUpCapture);
+      EventBus.off(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDownCapture);
       EventBus.off(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
       EventBus.off(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.off(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);

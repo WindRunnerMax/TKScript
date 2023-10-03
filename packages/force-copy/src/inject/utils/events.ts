@@ -27,8 +27,8 @@ export const initBaseEvents = () => {
     e => EventBus.emit(EVENTS_TYPE.SELECT_START_CAPTURE, e),
     true
   );
-  window.addEventListener(PAGE_LOADED, e => EventBus.emit(EVENTS_TYPE.LOADED, e), true);
   window.addEventListener(DOM_READY, e => EventBus.emit(EVENTS_TYPE.DOM_LOADED, e), true);
+  window.addEventListener(PAGE_LOADED, e => EventBus.emit(EVENTS_TYPE.PAGE_LOADED, e), true);
 };
 
 export const stopNativePropagation = (event: Event) => event.stopPropagation();

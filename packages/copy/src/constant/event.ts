@@ -3,6 +3,7 @@ export const DOM_STAGE = {
   END: "document-end" as const,
 };
 export const DOM_READY = "DOMContentLoaded";
+export const DOM_LOADED = DOM_READY;
 export const PAGE_LOADED = "load";
 export const MOUSE_UP = "mouseup";
 export const MOUSE_DOWN = "mousedown";
