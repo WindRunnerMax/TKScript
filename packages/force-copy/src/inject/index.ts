@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "development") {
       !!storage.local.get<boolean>(CONTEXT_MENU_TYPE) ||
       !!storage.session.get<boolean>(CONTEXT_MENU_TYPE),
   };
-  const handler = websites.find(item => item.regexp.test(location.href)) || websites.slice(-1)[0];
+  const handler = websites.find(item => item.regexp.test(location.host)) || websites.slice(-1)[0];
   if (!handler) return void 0;
   handler.init && handler.init(state);
   state.COPY && handler.start(COPY_TYPE);
