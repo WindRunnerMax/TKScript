@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development rspack build --watch",
     "build": "rm -rf build && rspack build",
-    "dev:rollup": "cross-env NODE_ENV=development rollup -wc"
+    "dev:rollup": "cross-env NODE_ENV=development rollup -wc",
+    "dev:firefox": "cross-env NODE_ENV=development PLATFORM=firefox rspack build --watch",
+    "build:firefox": "cross-env PLATFORM=firefox rm -rf build && rspack build"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,4 @@
+import { cross } from "@/utils/global";
 import { PC_QUERY_STATE_KEY_TYPE } from "./constant";
 
 const PC_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE", "QUERY_STATE"] as const;
@@ -37,10 +38,10 @@ export type PC_RESPONSE = {
 export class PCBridge {
   static async postToContent(data: PC_REQUEST) {
     return new Promise<PC_RESPONSE | null>(resolve => {
-      chrome.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+      cross.tabs.query({ active: true, currentWindow: true }).then(tabs => {
         const tabId = tabs[0] && tabs[0].id;
         if (tabId) {
-          chrome.tabs.sendMessage(tabId, data).then(resolve);
+          cross.tabs.sendMessage(tabId, data).then(resolve);
         } else {
           resolve(null);
         }
@@ -57,9 +58,9 @@ export class PCBridge {
       const rtn = cb(message);
       sendResponse(rtn || null);
     };
-    chrome.runtime.onMessage.addListener(handler);
+    cross.runtime.onMessage.addListener(handler);
     return () => {
-      chrome.runtime.onMessage.removeListener(handler);
+      cross.runtime.onMessage.removeListener(handler);
     };
   }
 }

@@ -10,10 +10,11 @@ import {
 } from "@/bridge/popup-content";
 import { PC_QUERY_STATE_TYPE } from "@/bridge/constant";
 import { I18n } from "../i18n";
+import { cross } from "@/utils/global";
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const i18n = new I18n(chrome.i18n.getUILanguage());
+const i18n = new I18n(cross.i18n.getUILanguage());
 
 export const App: FC = () => {
   const [copyState, setCopyState] = useState(false);
@@ -165,7 +166,7 @@ export const App: FC = () => {
           {i18n.t("Information.Help")}
         </a>
         {process.env.NODE_ENV === "development" && (
-          <a onClick={() => chrome.runtime.reload()}>
+          <a onClick={() => cross.runtime.reload()}>
             <IconRefresh />
             {i18n.t("Information.Reload")}
           </a>

@@ -1,3 +1,4 @@
+import { cross } from "./global";
 import { logger } from "./logger";
 
 export const RELOAD_APP = "RELOAD_APP";
@@ -9,7 +10,7 @@ export const onReceiveReloadMsg = () => {
       // 收到消息即重载
       ws.onmessage = () => {
         try {
-          chrome.runtime.id && chrome.runtime.sendMessage(RELOAD_APP);
+          cross.runtime.id && cross.runtime.sendMessage(RELOAD_APP);
         } catch (error) {
           logger.warning("SEND MESSAGE ERROR", error);
         }
@@ -22,7 +23,7 @@ export const onReceiveReloadMsg = () => {
 
 export const reloadApp = (msg: unknown) => {
   if (process.env.NODE_ENV === "development" && msg === RELOAD_APP) {
-    chrome.runtime.reload();
+    cross.runtime.reload();
     logger.warning("RELOAD SUCCESS");
   }
 };

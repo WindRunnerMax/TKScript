@@ -1,3 +1,4 @@
+import { decodeJSON, encodeJSON } from "laser-utils";
 import { CI_EXECUTION_KEY_TYPE } from "./constant";
 
 const EVENT_TYPE = process.env.EVENT_TYPE;
@@ -24,12 +25,12 @@ export type CI_REQUEST =
 
 export class CIBridge {
   static postToInject(data: CI_REQUEST) {
-    window.dispatchEvent(new CustomEvent(EVENT_TYPE, { detail: data }));
+    window.dispatchEvent(new CustomEvent(EVENT_TYPE, { detail: encodeJSON(data) }));
   }
 
   static onContentMessage(cb: (data: CI_REQUEST) => void) {
-    const handler = (event: CustomEvent<CI_REQUEST>) => {
-      const data = event.detail as CI_REQUEST;
+    const handler = (event: CustomEvent<string>) => {
+      const data = decodeJSON<CI_REQUEST>(event.detail);
       if (data && data.type && data.payload) {
         cb(data);
       }

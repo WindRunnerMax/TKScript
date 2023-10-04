@@ -9,7 +9,9 @@ const getUniqueId = (len = 10) => {
 
 const isDev = process.env.NODE_ENV === "development";
 const isProd = process.env.NODE_ENV === "production";
+const isFireFox = process.env.PLATFORM === "firefox";
 
 exports.isDev = isDev;
 exports.isProd = isProd;
+exports.isFireFox = isFireFox;
 exports.getUniqueId = getUniqueId;

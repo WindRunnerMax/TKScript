@@ -10,8 +10,10 @@
     "build": "npm run build:scripts",
     "dev:scripts": "rollup -c --watch",
     "build:scripts": "./publish-scripts.sh",
-    "dev:force-copy": "pnpm --filter force-copy run dev ",
+    "dev:force-copy": "pnpm --filter force-copy run dev",
     "build:force-copy": "pnpm --filter force-copy run build",
+    "dev:force-copy:firefox": "pnpm --filter force-copy run dev:firefox",
+    "build:force-copy:firefox": "pnpm --filter force-copy run build:firefox",
     "lint-es": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore ."
   },
   "author": "Czy",
