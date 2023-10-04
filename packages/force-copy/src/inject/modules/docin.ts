@@ -3,7 +3,7 @@ import { WebSite } from "../types/website";
 import { EVENTS_TYPE, EventBus } from "../utils/bus";
 import style from "copy-currency/src/utils";
 import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
-import dom from "copy/src/utils/instance";
+import instance from "copy/src/utils/instance";
 import { ALLOW_PAINT, AUTO_USER_SELECT, COPY_BUTTON_STYLE, STYLE_ID } from "../utils/styles";
 import { logger } from "@/utils/logger";
 import { delayExecute } from "../utils/delay";
@@ -15,7 +15,7 @@ const init = () => {
 };
 
 const onMouseDown = () => {
-  dom.hide(false);
+  instance.hide(false);
 };
 
 const onMouseUp = (event: MouseEvent) => {
@@ -25,9 +25,9 @@ const onMouseUp = (event: MouseEvent) => {
     const text = window.docinReader?.st || "";
     logger.info("SELECT", text);
     if (text) {
-      dom.onCopy(text, event);
+      instance.onCopy(text, event);
     } else {
-      dom.hide(false);
+      instance.hide(false);
     }
   };
   setTimeout(handler, 100);
@@ -55,7 +55,7 @@ export const DocIn: WebSite = {
   },
   close(type) {
     if (type === COPY_TYPE) {
-      dom.destroy();
+      instance.destroy();
       style.removeCSS(STYLE_ID);
       EventBus.off(EVENTS_TYPE.MOUSE_UP_CAPTURE, onMouseUp);
       EventBus.off(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);

@@ -6,16 +6,19 @@ let isReadyToHidden = false;
 const instance = {
   id: "__copy",
   className: "__copy-button",
+  init: function (name?: string) {
+    const container = document.createElement("div");
+    container.id = this.id;
+    container.className = this.className;
+    container.innerText = name || "复制";
+    container.addEventListener("mouseup", e => e.stopPropagation(), true);
+    container.addEventListener("mousedown", e => e.stopPropagation(), true);
+    dom = container;
+    document.body.appendChild(dom);
+  },
   getInstance: function (): HTMLDivElement {
     if (dom === null) {
-      const container = document.createElement("div");
-      container.id = this.id;
-      container.className = this.className;
-      container.innerText = "复制";
-      container.addEventListener("mouseup", e => e.stopPropagation(), true);
-      container.addEventListener("mousedown", e => e.stopPropagation(), true);
-      dom = container;
-      document.body.appendChild(dom);
+      this.init();
     }
     return dom as HTMLDivElement;
   },
