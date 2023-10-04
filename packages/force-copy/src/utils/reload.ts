@@ -2,7 +2,7 @@ import { logger } from "./logger";
 
 export const RELOAD_APP = "RELOAD_APP";
 
-export const sendReloadMsg = () => {
+export const onReceiveReloadMsg = () => {
   if (process.env.NODE_ENV === "development") {
     try {
       const ws = new WebSocket("ws://localhost:3333");

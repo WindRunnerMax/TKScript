@@ -9,8 +9,11 @@ import {
   POPUP_TO_CONTENT_RESPONSE,
 } from "@/bridge/popup-content";
 import { PC_QUERY_STATE_TYPE } from "@/bridge/constant";
+import { I18n } from "../i18n";
 const Row = Grid.Row;
 const Col = Grid.Col;
+
+const i18n = new I18n(chrome.i18n.getUILanguage());
 
 export const App: FC = () => {
   const [copyState, setCopyState] = useState(false);
@@ -56,7 +59,7 @@ export const App: FC = () => {
     <div className={cs(styles.container)}>
       <div className={cs(styles.captain)}>
         <img src="./static/favicon.128.png" alt="" />
-        <span>Force Copy</span>
+        <span>{i18n.t("Title")}</span>
       </div>
 
       <div className={styles.hr}></div>
@@ -64,18 +67,18 @@ export const App: FC = () => {
       <div className={styles.console}>
         <Row className={styles.copy}>
           <Col span={8} className={styles.name}>
-            Modules
+            {i18n.t("Captain.Modules")}
           </Col>
           <Col span={8} className={styles.switch}>
-            Start
+            {i18n.t("Captain.Start")}
           </Col>
           <Col span={8} className={styles.switch}>
-            Once
+            {i18n.t("Captain.Once")}
           </Col>
         </Row>
         <Row className={styles.copy}>
           <Col span={8} className={styles.name}>
-            Copy
+            {i18n.t("Operation.Copy")}
           </Col>
           <Col span={8} className={styles.switch}>
             <Switch
@@ -100,7 +103,7 @@ export const App: FC = () => {
         </Row>
         <Row className={styles.keyboard}>
           <Col span={8} className={styles.name}>
-            Keyboard
+            {i18n.t("Operation.Keyboard")}
           </Col>
           <Col span={8} className={styles.switch}>
             <Switch
@@ -125,7 +128,7 @@ export const App: FC = () => {
         </Row>
         <Row className={styles.menu}>
           <Col span={8} className={styles.moduleName}>
-            ContextMenu
+            {i18n.t("Operation.ContextMenu")}
           </Col>
           <Col span={8} className={styles.switch}>
             <Switch
@@ -155,16 +158,16 @@ export const App: FC = () => {
       <div className={styles.footer}>
         <a onClick={() => window.open("https://github.com/WindrunnerMax/TKScript")}>
           <IconGithub />
-          GitHub
+          {i18n.t("Information.GitHub")}
         </a>
         <a onClick={() => window.open("https://github.com/WindrunnerMax/TKScript")}>
           <IconQuestionCircle />
-          Help
+          {i18n.t("Information.Help")}
         </a>
         {process.env.NODE_ENV === "development" && (
           <a onClick={() => chrome.runtime.reload()}>
             <IconRefresh />
-            Reload
+            {i18n.t("Information.Reload")}
           </a>
         )}
       </div>
