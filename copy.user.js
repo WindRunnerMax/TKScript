@@ -222,7 +222,7 @@
         COPY,
         (event) => {
           for (const [key, value] of Object.entries(data)) {
-            event.clipboardData.setData(key, value);
+            event.clipboardData && event.clipboardData.setData(key, value);
           }
           event.stopPropagation();
           event.preventDefault();
@@ -945,9 +945,9 @@
       if (siteGetSelectedText)
         return siteGetSelectedText();
       if (window.getSelection)
-        return window.getSelection().toString();
+        return (window.getSelection() || "").toString();
       if (document.getSelection)
-        return document.getSelection().toString();
+        return (document.getSelection() || "").toString();
       if (document.selection)
         return document.selection.createRange().text;
       return "";
