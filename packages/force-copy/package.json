@@ -9,7 +9,7 @@
     "build": "rm -rf build && rspack build",
     "dev:rollup": "cross-env NODE_ENV=development rollup -wc",
     "dev:firefox": "cross-env NODE_ENV=development PLATFORM=firefox rspack build --watch",
-    "build:firefox": "cross-env PLATFORM=firefox rm -rf build && rspack build"
+    "build:firefox": "rm -rf build && cross-env PLATFORM=firefox rspack build"
   },
   "repository": {
     "type": "git",

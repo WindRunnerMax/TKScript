@@ -39,8 +39,9 @@ export class PCBridge {
   static async postToContent(data: PC_REQUEST) {
     return new Promise<PC_RESPONSE | null>(resolve => {
       cross.tabs.query({ active: true, currentWindow: true }).then(tabs => {
-        const tabId = tabs[0] && tabs[0].id;
-        if (tabId) {
+        const tab = tabs[0];
+        const tabId = tab && tab.id;
+        if (tabId && tab.url && !tab.url.startsWith("chrome://")) {
           cross.tabs.sendMessage(tabId, data).then(resolve);
         } else {
           resolve(null);

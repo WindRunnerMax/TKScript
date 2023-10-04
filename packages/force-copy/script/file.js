@@ -29,11 +29,16 @@ class FilesPlugin {
         __dirname,
         `../src/manifest/${isFireFox ? "firefox" : "chrome"}.json`
       );
+      const locales = path.join(__dirname, "../public/locales/");
       const resources = path.join(__dirname, "../public/static/");
+
       const manifestTarget = path.join(__dirname, "../build/manifest.json");
+      const localesTarget = path.join(__dirname, "../build/_locales/");
       const resourcesTarget = path.join(__dirname, "../build/static/");
+
       return Promise.all([
         exec(`cp ${manifest} ${manifestTarget}`),
+        exec(`cp -r ${locales} ${localesTarget}`),
         exec(`cp -r ${resources} ${resourcesTarget}`),
       ]);
     });

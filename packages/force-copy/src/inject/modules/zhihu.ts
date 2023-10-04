@@ -11,7 +11,7 @@ const init = () => {
   if (location.hostname === "zhuanlan.zhihu.com") {
     const elements = document.querySelectorAll("[data-focus-scope-start]");
     elements.forEach(node => {
-      if (node.textContent.indexOf("立即登录/注册") > -1) {
+      if ((node.textContent || "").indexOf("立即登录/注册") > -1) {
         node.parentElement ? node.parentElement.remove() : node.remove();
       }
     });
@@ -28,7 +28,7 @@ const init = () => {
             const element = target.querySelector("[data-focus-scope-start]");
             element &&
               element.parentElement &&
-              element.parentElement.textContent.indexOf("立即登录/注册") > -1 &&
+              (element.parentElement.textContent || "").indexOf("立即登录/注册") > -1 &&
               element.parentElement.parentElement &&
               element.parentElement.parentElement.removeChild(element.parentElement);
           }

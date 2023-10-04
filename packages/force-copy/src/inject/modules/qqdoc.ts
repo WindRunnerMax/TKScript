@@ -24,7 +24,7 @@ const onMouseUp = (event: MouseEvent) => {
       const htmlText: string | undefined = content.html;
       logger.info("SELECT", plainText);
       if (plainText) {
-        instance.onCopy({ [TEXT_PLAIN]: plainText, [TEXT_HTML]: htmlText }, event);
+        instance.onCopy({ [TEXT_PLAIN]: plainText, [TEXT_HTML]: htmlText || "" }, event);
       } else {
         instance.hide(false);
       }

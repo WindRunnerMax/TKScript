@@ -3,6 +3,7 @@
   "name": "Force Copy",
   "version": "1.0.0",
   "description": "Force Copy Everything",
+  "default_locale": "en",
   "icons": {
     "32": "./static/favicon.128.png",
     "96": "./static/favicon.128.png",

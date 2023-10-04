@@ -10,7 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "downlevelIteration": true,
     "declaration": false,
     "jsx": "react-jsx",

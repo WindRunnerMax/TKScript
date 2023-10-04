@@ -17,7 +17,7 @@ const downgradeCopy = (data: CopyData) => {
     COPY,
     event => {
       for (const [key, value] of Object.entries(data)) {
-        event.clipboardData.setData(key, value);
+        event.clipboardData && event.clipboardData.setData(key, value);
       }
       event.stopPropagation();
       event.preventDefault();

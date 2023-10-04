@@ -52,12 +52,12 @@ export const onPopupMessage = (data: PC_REQUEST) => {
       return {
         type: POPUP_TO_CONTENT_RESPONSE.STATE,
         payload: {
-          [PC_QUERY_STATE_TYPE.COPY]: storage.local.get<boolean>(COPY_TYPE),
-          [PC_QUERY_STATE_TYPE.MENU]: storage.local.get<boolean>(CONTEXT_MENU_TYPE),
-          [PC_QUERY_STATE_TYPE.KEYBOARD]: storage.local.get<boolean>(KEYBOARD_TYPE),
-          [PC_QUERY_STATE_TYPE.COPY_ONCE]: storage.session.get<boolean>(COPY_TYPE),
-          [PC_QUERY_STATE_TYPE.MENU_ONCE]: storage.session.get<boolean>(CONTEXT_MENU_TYPE),
-          [PC_QUERY_STATE_TYPE.KEYBOARD_ONCE]: storage.session.get<boolean>(KEYBOARD_TYPE),
+          [PC_QUERY_STATE_TYPE.COPY]: !!storage.local.get<boolean>(COPY_TYPE),
+          [PC_QUERY_STATE_TYPE.MENU]: !!storage.local.get<boolean>(CONTEXT_MENU_TYPE),
+          [PC_QUERY_STATE_TYPE.KEYBOARD]: !!storage.local.get<boolean>(KEYBOARD_TYPE),
+          [PC_QUERY_STATE_TYPE.COPY_ONCE]: !!storage.session.get<boolean>(COPY_TYPE),
+          [PC_QUERY_STATE_TYPE.MENU_ONCE]: !!storage.session.get<boolean>(CONTEXT_MENU_TYPE),
+          [PC_QUERY_STATE_TYPE.KEYBOARD_ONCE]: !!storage.session.get<boolean>(KEYBOARD_TYPE),
         },
       };
     }

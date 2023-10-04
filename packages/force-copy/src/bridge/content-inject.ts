@@ -1,7 +1,7 @@
 import { decodeJSON, encodeJSON } from "laser-utils";
 import { CI_EXECUTION_KEY_TYPE } from "./constant";
 
-const EVENT_TYPE = process.env.EVENT_TYPE;
+const EVENT_TYPE = process.env.EVENT_TYPE || "EVENT_TYPE_DG";
 
 const CI_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE"] as const;
 export const CONTENT_TO_INJECT_REQUEST = CI_REQUEST_TYPE.reduce(

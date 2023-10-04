@@ -47,7 +47,7 @@ export const App: FC = () => {
     PCBridge.postToContent({
       type: POPUP_TO_CONTENT_REQUEST.QUERY_STATE,
     }).then(res => {
-      if (res.type === POPUP_TO_CONTENT_RESPONSE.STATE) {
+      if (res && res.type === POPUP_TO_CONTENT_RESPONSE.STATE) {
         for (const [key, value] of Object.entries(res.payload)) {
           const handler = mapper[key];
           handler && handler(value);

@@ -2,7 +2,7 @@ import { DOM_READY, DOM_STAGE } from "./constant/event";
 import { CopyParams } from "./utils/copy";
 import websites, { Website, WebsiteConfig } from "./websites";
 
-let siteGetSelectedText: () => CopyParams | null = null;
+let siteGetSelectedText: (() => CopyParams) | null = null;
 
 const initWebsite = (): WebsiteConfig => {
   let websiteConfig: WebsiteConfig = {
@@ -30,8 +30,8 @@ const initWebsite = (): WebsiteConfig => {
 
 const getSelectedText = (): CopyParams => {
   if (siteGetSelectedText) return siteGetSelectedText();
-  if (window.getSelection) return window.getSelection().toString();
-  if (document.getSelection) return document.getSelection().toString();
+  if (window.getSelection) return (window.getSelection() || "").toString();
+  if (document.getSelection) return (document.getSelection() || "").toString();
   if (document.selection) return document.selection.createRange().text;
   return "";
 };
