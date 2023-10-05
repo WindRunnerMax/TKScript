@@ -30,5 +30,5 @@
   "background": {
     "service_worker": "worker.js"
   },
-  "permissions": ["storage", "scripting", "activeTab", "webNavigation"]
+  "permissions": ["activeTab"]
 }

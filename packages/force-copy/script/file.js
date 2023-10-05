@@ -1,6 +1,6 @@
 const thread = require("child_process");
 const path = require("path");
-const { isFireFox } = require("./utils");
+const { isGecko } = require("./utils");
 
 const exec = command => {
   return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ class FilesPlugin {
     compiler.hooks.make.tap("FilePlugin", compilation => {
       const manifest = path.join(
         __dirname,
-        `../src/manifest/${isFireFox ? "firefox" : "chrome"}.json`
+        `../src/manifest/${isGecko ? "gecko" : "chromium"}.json`
       );
       const resources = path.join(__dirname, "../public/static");
       !compilation.fileDependencies.has(manifest) && compilation.fileDependencies.add(manifest);
@@ -27,7 +27,7 @@ class FilesPlugin {
     compiler.hooks.done.tapPromise("FilePlugin", () => {
       const manifest = path.join(
         __dirname,
-        `../src/manifest/${isFireFox ? "firefox" : "chrome"}.json`
+        `../src/manifest/${isGecko ? "gecko" : "chromium"}.json`
       );
       const locales = path.join(__dirname, "../public/locales/");
       const resources = path.join(__dirname, "../public/static/");

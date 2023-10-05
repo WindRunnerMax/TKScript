@@ -12,8 +12,8 @@
     "build:scripts": "./publish-scripts.sh",
     "dev:force-copy": "pnpm --filter force-copy run dev",
     "build:force-copy": "pnpm --filter force-copy run build",
-    "dev:force-copy:firefox": "pnpm --filter force-copy run dev:firefox",
-    "build:force-copy:firefox": "pnpm --filter force-copy run build:firefox",
+    "dev:force-copy:gecko": "pnpm --filter force-copy run dev:gecko",
+    "build:force-copy:gecko": "pnpm --filter force-copy run build:gecko",
     "lint-es": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore ."
   },
   "author": "Czy",
