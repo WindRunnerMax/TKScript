@@ -7,6 +7,8 @@ import instance from "copy/src/utils/instance";
 import { ALLOW_PAINT, AUTO_USER_SELECT, COPY_BUTTON_STYLE, STYLE_ID } from "../utils/styles";
 import { logger } from "@/utils/logger";
 import { isString } from "laser-utils";
+import { delayExecute } from "../utils/delay";
+import { PAGE_LOADED } from "copy/src/constant/event";
 
 let isMouseDown = false;
 let preSelectedText = "";
@@ -49,6 +51,10 @@ const init = () => {
     // @ts-ignore
     if (window.Core) {
       hook();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+    } else if (window.Core === null) {
+      delayExecute(hook, PAGE_LOADED);
     } else {
       let Core: unknown = undefined;
       Object.defineProperty(window, "Core", {
