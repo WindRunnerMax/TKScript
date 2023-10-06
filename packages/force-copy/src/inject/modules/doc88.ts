@@ -54,7 +54,7 @@ const init = () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
     } else if (window.Core === null) {
-      delayExecute(hook, PAGE_LOADED);
+      delayExecute(PAGE_LOADED).then(hook);
     } else {
       let Core: unknown = undefined;
       Object.defineProperty(window, "Core", {

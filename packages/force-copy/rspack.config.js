@@ -32,6 +32,7 @@ module.exports = {
   builtins: {
     define: {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
       "process.env.EVENT_TYPE": JSON.stringify(isDev ? "EVENT_TYPE" : getUniqueId()),
     },
     pluginImport: [

@@ -37,7 +37,7 @@ export const DocIn: WebSite = {
   regexp: /www\.docin\.com/,
   start(type) {
     if (type === COPY_TYPE) {
-      delayExecute(init, PAGE_LOADED);
+      delayExecute(PAGE_LOADED).then(init);
       style.insertCSS(
         STYLE_ID,
         AUTO_USER_SELECT + ALLOW_PAINT + COPY_BUTTON_STYLE + ".copy-tips{display:none !important;} "

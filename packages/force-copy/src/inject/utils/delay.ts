@@ -2,20 +2,25 @@ import { DOM_READY, PAGE_LOADED } from "copy/src/constant/event";
 import { EVENTS_TYPE, EventBus } from "./bus";
 
 export const delayExecute = (
-  fn: () => void,
-  when: typeof DOM_READY | typeof PAGE_LOADED = PAGE_LOADED
+  when: typeof DOM_READY | typeof PAGE_LOADED = PAGE_LOADED,
+  delayMax: number | false = 6000
 ) => {
-  if (when === DOM_READY) {
-    if (document.readyState !== "loading") {
-      fn();
+  const delayWithEvent = new Promise<void>(r => {
+    const resolve = () => r();
+    if (when === DOM_READY) {
+      if (document.readyState !== "loading") {
+        resolve();
+      } else {
+        EventBus.once(EVENTS_TYPE.DOM_LOADED, resolve);
+      }
     } else {
-      EventBus.once(EVENTS_TYPE.DOM_LOADED, fn);
+      if (document.readyState === "complete") {
+        resolve();
+      } else {
+        EventBus.once(EVENTS_TYPE.PAGE_LOADED, resolve);
+      }
     }
-  } else {
-    if (document.readyState === "complete") {
-      fn();
-    } else {
-      EventBus.once(EVENTS_TYPE.PAGE_LOADED, fn);
-    }
-  }
+  });
+  const delayWithTimeout = delayMax && new Promise(resolve => setTimeout(resolve, delayMax));
+  return Promise.race<unknown>([delayWithEvent, delayWithTimeout].filter(Boolean));
 };

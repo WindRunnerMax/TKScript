@@ -44,7 +44,7 @@ export const Zhihu: WebSite = {
   regexp: /zhuanlan\.zhihu\.com/,
   start(type) {
     if (type === COPY_TYPE) {
-      delayExecute(init, DOM_LOADED);
+      delayExecute(DOM_LOADED).then(init);
       styles.insertCSS(STYLE_ID, AUTO_USER_SELECT + ALLOW_PAINT);
       EventBus.on(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
       EventBus.on(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
