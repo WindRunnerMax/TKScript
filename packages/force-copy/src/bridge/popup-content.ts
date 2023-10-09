@@ -1,5 +1,7 @@
 import { cross } from "@/utils/global";
 import { PC_QUERY_STATE_KEY_TYPE } from "./constant";
+import { isEmptyValue } from "laser-utils";
+import { logger } from "@/utils/logger";
 
 const PC_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE", "QUERY_STATE"] as const;
 export const POPUP_TO_CONTENT_REQUEST = PC_REQUEST_TYPE.reduce(
@@ -38,15 +40,20 @@ export type PC_RESPONSE = {
 export class PCBridge {
   static async postToContent(data: PC_REQUEST) {
     return new Promise<PC_RESPONSE | null>(resolve => {
-      cross.tabs.query({ active: true, currentWindow: true }).then(tabs => {
-        const tab = tabs[0];
-        const tabId = tab && tab.id;
-        if (tabId && tab.url && !tab.url.startsWith("chrome://")) {
-          cross.tabs.sendMessage(tabId, data).then(resolve);
-        } else {
-          resolve(null);
-        }
-      });
+      cross.tabs
+        .query({ active: true, currentWindow: true })
+        .then(tabs => {
+          const tab = tabs[0];
+          const tabId = tab && tab.id;
+          if (!isEmptyValue(tabId)) {
+            cross.tabs.sendMessage(tabId, data).then(resolve);
+          } else {
+            resolve(null);
+          }
+        })
+        .catch(error => {
+          logger.warning("Send Message Error", error);
+        });
     });
   }
 
