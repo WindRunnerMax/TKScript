@@ -161,7 +161,13 @@ export const App: FC = () => {
           <IconGithub />
           {i18n.t("Information.GitHub")}
         </a>
-        <a onClick={() => window.open("https://github.com/WindrunnerMax/TKScript")}>
+        <a
+          onClick={() =>
+            window.open(
+              "https://github.com/WindrunnerMax/TKScript/tree/master/packages/force-copy/README.md"
+            )
+          }
+        >
           <IconQuestionCircle />
           {i18n.t("Information.Help")}
         </a>

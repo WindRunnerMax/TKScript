@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Force Copy",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Force Copy Everything",
   "default_locale": "en",
   "icons": {
