@@ -1,8 +1,9 @@
 const path = require("path");
 const { default: HtmlPlugin } = require("@rspack/plugin-html");
-const FilePlugin = require("./script/file");
+const FilePlugin = require("./script/files");
 const { getUniqueId, isDev } = require("./script/utils");
 const ReloadPlugin = require("./script/reload");
+const ManifestPlugin = require("./script/manifest");
 
 /**
  * @type {import('@rspack/cli').Configuration}
@@ -23,6 +24,7 @@ module.exports = {
     }),
     new FilePlugin(),
     new ReloadPlugin(),
+    new ManifestPlugin(),
   ],
   resolve: {
     alias: {

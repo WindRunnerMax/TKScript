@@ -1,6 +1,6 @@
 {
   "name": "force-copy",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "author": "Czy",
   "license": "MIT",
   "sideEffects": false,
@@ -35,7 +35,8 @@
     "less": "^3.0.0",
     "less-loader": "6.0.0",
     "sass": "^1.52.3",
-    "sass-loader": "^13.3.2"
+    "sass-loader": "^13.3.2",
+    "ts-node": "^10.9.1"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
