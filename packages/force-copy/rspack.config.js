@@ -5,6 +5,12 @@ const { getUniqueId, isDev } = require("./script/utils");
 const ReloadPlugin = require("./script/reload");
 const ManifestPlugin = require("./script/manifest");
 
+const EVENT_TYPE = isDev ? "EVENT_TYPE" : getUniqueId();
+const INJECT_FILE = isDev ? "INJECT_FILE" : getUniqueId();
+
+process.env.EVENT_TYPE = EVENT_TYPE;
+process.env.INJECT_FILE = INJECT_FILE;
+
 /**
  * @type {import('@rspack/cli').Configuration}
  */
@@ -13,8 +19,8 @@ module.exports = {
   entry: {
     popup: "./src/popup/index.tsx",
     content: "./src/content/index.ts",
-    inject: "./src/inject/index.ts",
     worker: "./src/worker/index.ts",
+    [INJECT_FILE]: "./src/inject/index.ts",
   },
   plugins: [
     new HtmlPlugin({
@@ -35,7 +41,8 @@ module.exports = {
     define: {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
-      "process.env.EVENT_TYPE": JSON.stringify(isDev ? "EVENT_TYPE" : getUniqueId()),
+      "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
+      "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
     },
     pluginImport: [
       {

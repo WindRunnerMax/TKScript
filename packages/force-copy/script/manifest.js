@@ -18,6 +18,7 @@ class ManifestPlugin {
     });
 
     compiler.hooks.done.tapPromise("ManifestPlugin", () => {
+      delete require.cache[require.resolve(this.manifest)];
       const manifest = require(this.manifest);
       const version = require("../package.json").version;
       manifest.version = version;

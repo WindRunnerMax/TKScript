@@ -24,7 +24,7 @@ const MANIFEST: Record<string, unknown> = {
   ],
   web_accessible_resources: [
     {
-      resources: ["static/*", "inject.js"],
+      resources: ["static/*", process.env.INJECT_FILE + ".js"],
       matches: ["<all_urls>"],
     },
   ],
@@ -40,6 +40,9 @@ if (process.env.PLATFORM === "gecko") {
   MANIFEST.browser_action = MANIFEST.action;
   MANIFEST.browser_specific_settings = {
     gecko: {
+      strict_min_version: "91.1.0",
+    },
+    gecko_android: {
       strict_min_version: "91.1.0",
     },
   };
