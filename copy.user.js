@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.20
+// @version     6.1.21
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -20,6 +20,7 @@
 // @match       *://*.zhihu.com/*
 // @match       *://z.30edu.com.cn/*
 // @match       *://docs.qq.com/doc/*
+// @match       *://docs.qq.com/sheet/*
 // @match       *://boke112.com/post/*
 // @match       *://*.yuque.com/*
 // @match       *://www.commandlinux.com/*
@@ -207,10 +208,12 @@
       regexp: /.*segmentfault\.com\/.+/,
       init: function() {
         const body = dom$1.query("body");
-        body.classList.add("_sf_adjust_body");
-        body.onclick = () => {
-          body.style.paddingRight = "0";
-        };
+        if (body) {
+          body.classList.add("_sf_adjust_body");
+          body.onclick = () => {
+            body.style.paddingRight = "0";
+          };
+        }
       }
     };
 
@@ -420,7 +423,7 @@
                   return void 0;
                 if (target instanceof HTMLDivElement && target.querySelector("[data-focus-scope-start]")) {
                   const element = target.querySelector("[data-focus-scope-start]");
-                  element && element.parentElement && element.parentElement.textContent.indexOf("立即登录/注册") > -1 && element.parentElement.parentElement && element.parentElement.parentElement.removeChild(element.parentElement);
+                  element && element.parentElement && element.parentElement.textContent && element.parentElement.textContent.indexOf("立即登录/注册") > -1 && element.parentElement.parentElement && element.parentElement.parentElement.removeChild(element.parentElement);
                 }
               }
             }
@@ -435,10 +438,11 @@
       regexp: /.*30edu\.com\.cn\/.+/,
       init: function() {
         window.onload = () => {
+          var _a;
           const iframes = document.getElementsByTagName("iframe");
           if (iframes.length === 2) {
-            const body = iframes[1].contentWindow.document.querySelector("body");
-            utils.removeAttributes(body, ["oncopy", "oncontextmenu", "onselectstart"]);
+            const body = (_a = iframes[1].contentWindow) == null ? void 0 : _a.document.querySelector("body");
+            body && utils.removeAttributes(body, ["oncopy", "oncontextmenu", "onselectstart"]);
           }
         };
       }
@@ -462,8 +466,8 @@
           const editor = unsafeWindow.pad.editor;
           if (editor.getCopyContent) {
             const content = editor.getCopyContent() || {};
-            const plainText = content.plain;
-            const htmlText = content.html;
+            const plainText = content.plain || "";
+            const htmlText = content.html || "";
             return {
               [TEXT_PLAIN]: plainText,
               [TEXT_HTML]: htmlText
@@ -471,14 +475,34 @@
           } else {
             editor._docEnv.copyable = true;
             editor.clipboardManager.copy();
-            const plainText = editor.clipboardManager.customClipboard.plain;
-            const htmlText = editor.clipboardManager.customClipboard.html;
+            const plainText = editor.clipboardManager.customClipboard.plain || "";
+            const htmlText = editor.clipboardManager.customClipboard.html || "";
             editor._docEnv.copyable = false;
             return {
               [TEXT_PLAIN]: plainText,
               [TEXT_HTML]: htmlText
             };
           }
+        } else if (unsafeWindow.SpreadsheetApp && unsafeWindow.SpreadsheetApp.permissions && unsafeWindow.SpreadsheetApp.permissions.sheetStatus && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canCopy === false && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit() === false) {
+          utils.showButton();
+          const SpreadsheetApp = unsafeWindow.SpreadsheetApp;
+          const [selection] = SpreadsheetApp.view.getSelectionRanges();
+          if (selection) {
+            const text = [];
+            const { startColIndex, startRowIndex, endColIndex, endRowIndex } = selection;
+            for (let i = startRowIndex; i <= endRowIndex; i++) {
+              for (let k = startColIndex; k <= endColIndex; k++) {
+                const cell = SpreadsheetApp.workbook.activeSheet.getCellDataAtPosition(i, k);
+                if (!cell)
+                  continue;
+                text.push(" ", cell.value || "");
+              }
+              i !== endRowIndex && text.push("\n");
+            }
+            const str = text.join("");
+            return /^\s*$/.test(str) ? "" : str;
+          }
+          return "";
         }
         return "";
       }
@@ -701,9 +725,9 @@
           const close = () => {
             dom$1.remove("#copy-template-html");
             dom$1.remove("#copy-template-css");
-            closeButton.removeEventListener("click", close);
+            closeButton && closeButton.removeEventListener("click", close);
           };
-          closeButton.addEventListener("click", close);
+          closeButton && closeButton.addEventListener("click", close);
         };
         document.addEventListener("DOMContentLoaded", () => {
           dom$1.append(
@@ -716,8 +740,8 @@
         });
       },
       getSelectedText: () => {
-        if (window.getSelection && window.getSelection().toString()) {
-          return window.getSelection().toString();
+        if (window.getSelection && (window.getSelection() || "").toString()) {
+          return (window.getSelection() || "").toString();
         }
         const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
         if (result)
