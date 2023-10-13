@@ -86,9 +86,9 @@ const website: Website = {
       const close = () => {
         dom.remove("#copy-template-html");
         dom.remove("#copy-template-css");
-        closeButton.removeEventListener("click", close);
+        closeButton && closeButton.removeEventListener("click", close);
       };
-      closeButton.addEventListener("click", close);
+      closeButton && closeButton.addEventListener("click", close);
     };
     document.addEventListener("DOMContentLoaded", () => {
       dom.append(
@@ -101,8 +101,8 @@ const website: Website = {
     });
   },
   getSelectedText: (): string => {
-    if (window.getSelection && window.getSelection().toString()) {
-      return window.getSelection().toString();
+    if (window.getSelection && (window.getSelection() || "").toString()) {
+      return (window.getSelection() || "").toString();
     }
     const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
     if (result) return result[1];

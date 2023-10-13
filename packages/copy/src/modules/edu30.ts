@@ -7,8 +7,8 @@ const website: Website = {
     window.onload = () => {
       const iframes = document.getElementsByTagName("iframe");
       if (iframes.length === 2) {
-        const body = iframes[1].contentWindow.document.querySelector("body");
-        utils.removeAttributes(body, ["oncopy", "oncontextmenu", "onselectstart"]);
+        const body = iframes[1].contentWindow?.document.querySelector("body");
+        body && utils.removeAttributes(body, ["oncopy", "oncontextmenu", "onselectstart"]);
       }
     };
   },
