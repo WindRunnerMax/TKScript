@@ -20,8 +20,8 @@ const website: Website = {
       const editor = unsafeWindow.pad.editor;
       if (editor.getCopyContent) {
         const content = editor.getCopyContent() || {};
-        const plainText: string | undefined = content.plain;
-        const htmlText: string | undefined = content.html;
+        const plainText: string = content.plain || "";
+        const htmlText: string = content.html || "";
         return {
           [TEXT_PLAIN]: plainText,
           [TEXT_HTML]: htmlText,
@@ -29,17 +29,52 @@ const website: Website = {
       } else {
         editor._docEnv.copyable = true;
         editor.clipboardManager.copy();
-        const plainText: string | undefined = editor.clipboardManager.customClipboard.plain;
-        const htmlText: string | undefined = editor.clipboardManager.customClipboard.html;
+        const plainText: string = editor.clipboardManager.customClipboard.plain || "";
+        const htmlText: string = editor.clipboardManager.customClipboard.html || "";
         editor._docEnv.copyable = false;
         return {
           [TEXT_PLAIN]: plainText,
           [TEXT_HTML]: htmlText,
         };
       }
+    } else if (
+      unsafeWindow.SpreadsheetApp &&
+      unsafeWindow.SpreadsheetApp.permissions &&
+      unsafeWindow.SpreadsheetApp.permissions.sheetStatus &&
+      unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canCopy === false &&
+      unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit &&
+      unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit() === false
+    ) {
+      utils.showButton();
+      const SpreadsheetApp = unsafeWindow.SpreadsheetApp;
+      const [selection] = SpreadsheetApp.view.getSelectionRanges();
+      if (selection) {
+        const text: string[] = [];
+        const { startColIndex, startRowIndex, endColIndex, endRowIndex } = selection;
+        for (let i = startRowIndex; i <= endRowIndex; i++) {
+          for (let k = startColIndex; k <= endColIndex; k++) {
+            const cell = SpreadsheetApp.workbook.activeSheet.getCellDataAtPosition(i, k);
+            if (!cell) continue;
+            text.push(" ", cell.value || "");
+          }
+          i !== endRowIndex && text.push("\n");
+        }
+        const str = text.join("");
+        return /^\s*$/.test(str) ? "" : str;
+      }
+      return "";
     }
     return "";
   },
 };
 
 export default website;
+
+// Sheet
+// SpreadsheetApp.feature._copyPaste.copyPasteCache.onCopy({
+//   selectGridRange: SpreadsheetApp.view.getSelectionRanges()[0],
+//   copyType: 0,
+//   app: SpreadsheetApp.feature.app,
+//   isSelectAll: undefined,
+// });
+// SpreadsheetApp.sheetStatus.workbookStatus.status.setCanCopy(true);
