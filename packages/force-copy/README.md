@@ -2,7 +2,8 @@
 
 Force Copy allows you to lift copy restrictions, keyboard restrictions, and right-click menu restrictions on Web pages.
 
-## Download
+## Install
+
 * [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/force-copy/)
 * [Chrome Web Store](https://chrome.google.com/webstore/detail/force-copy/cceclgeciefpanebkfkogecbjjchmico)
 * [Github Releases](https://github.com/WindrunnerMax/TKScript/releases)
@@ -16,7 +17,8 @@ $ pnpm run build:gecko # Gecko
 ```
 
 ## Notice
-![Alt](./public/misc//poster.png)
+
+<img src="./public/misc//poster.png" width="500">
 
 All functions of the extension are turned off by default. When you need it, click the extension program and select the corresponding module to start it.
 
