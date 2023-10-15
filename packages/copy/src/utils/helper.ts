@@ -1,7 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-// Scan Object
+// =========================================================================== //
+
+/**
+ * Scan Object
+ */
 const weakSet = new WeakSet();
 const pathRouter = ["root"];
 
@@ -37,6 +41,8 @@ deepScanObject(window, 0, 10);
 
 console.log("finish");
 
+// =========================================================================== //
+
 /**
  * Read Clipboard
  */
@@ -56,6 +62,8 @@ setTimeout(() => {
     }
   });
 }, 2000);
+
+// =========================================================================== //
 
 /**
  * Remove Listeners
@@ -84,6 +92,8 @@ for (const element of elements) {
   element instanceof HTMLElement && removeAllEventListeners(element);
 }
 
+// =========================================================================== //
+
 /**
  * Remove Attributes
  */
@@ -94,6 +104,8 @@ for (const element of elements) {
     attrs.forEach(item => element.removeAttribute(item));
   }
 }
+
+// =========================================================================== //
 
 /**
  * Hook Function Call
@@ -113,3 +125,5 @@ Function.prototype.call = function (dynamic, ...args) {
     return null;
   }
 };
+
+// =========================================================================== //
