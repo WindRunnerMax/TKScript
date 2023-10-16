@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import { App } from "./components/app";
 import { LOG_LEVEL, logger } from "@/utils/logger";
 
-if (process.env.NODE_ENV === "development") {
+if (__DEV__) {
   logger.setLevel(LOG_LEVEL.INFO);
 }
 

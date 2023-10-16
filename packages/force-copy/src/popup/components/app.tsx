@@ -171,7 +171,7 @@ export const App: FC = () => {
           <IconQuestionCircle />
           {i18n.t("Information.Help")}
         </a>
-        {process.env.NODE_ENV === "development" && (
+        {__DEV__ && (
           <a onClick={() => cross.runtime.reload()}>
             <IconRefresh />
             {i18n.t("Information.Reload")}

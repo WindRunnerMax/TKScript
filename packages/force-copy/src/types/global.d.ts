@@ -3,6 +3,7 @@ declare module "*.scss" {
   export default content;
 }
 
+declare const __DEV__: boolean;
 declare const browser: typeof chrome | undefined;
 
 declare namespace NodeJS {

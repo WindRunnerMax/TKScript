@@ -5,7 +5,7 @@ import { onPopupMessage } from "./runtime/popup-message";
 import { LOG_LEVEL, logger } from "@/utils/logger";
 
 (() => {
-  if (process.env.NODE_ENV === "development") {
+  if (__DEV__) {
     self === top && onReceiveReloadMsg();
     logger.setLevel(LOG_LEVEL.INFO);
   }

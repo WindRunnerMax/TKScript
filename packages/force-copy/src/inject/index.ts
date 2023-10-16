@@ -8,7 +8,7 @@ import { onContentMessage } from "./utils/content-msg";
 import { LOG_LEVEL, logger } from "@/utils/logger";
 import { DOM_STAGE } from "copy/src/constant/event";
 
-if (process.env.NODE_ENV === "development") {
+if (__DEV__) {
   logger.setLevel(LOG_LEVEL.INFO);
 }
 

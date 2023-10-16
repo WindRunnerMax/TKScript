@@ -4,7 +4,7 @@ import { logger } from "./logger";
 export const RELOAD_APP = "RELOAD_APP";
 
 export const onReceiveReloadMsg = () => {
-  if (process.env.NODE_ENV === "development") {
+  if (__DEV__) {
     try {
       const ws = new WebSocket("ws://localhost:3333");
       // 收到消息即重载
@@ -22,7 +22,7 @@ export const onReceiveReloadMsg = () => {
 };
 
 export const reloadApp = (msg: unknown) => {
-  if (process.env.NODE_ENV === "development" && msg === RELOAD_APP) {
+  if (__DEV__ && msg === RELOAD_APP) {
     cross.runtime.reload();
     logger.warning("RELOAD SUCCESS");
   }
