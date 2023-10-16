@@ -1,5 +1,5 @@
 import { cross } from "@/utils/global";
-import { PC_QUERY_STATE_KEY_TYPE } from "./constant";
+import { PCQueryStateType } from "./constant";
 import { isEmptyValue } from "laser-utils";
 import { logger } from "@/utils/logger";
 
@@ -15,7 +15,7 @@ export const POPUP_TO_CONTENT_RESPONSE = PC_RESPONSE_TYPE.reduce(
   {} as { [K in typeof PC_RESPONSE_TYPE[number]]: `__${K}__` }
 );
 
-export type PC_REQUEST =
+export type PCRequestType =
   | {
       type: typeof POPUP_TO_CONTENT_REQUEST.COPY_TYPE;
       payload: { checked: boolean; once: boolean };
@@ -32,14 +32,14 @@ export type PC_REQUEST =
       type: typeof POPUP_TO_CONTENT_REQUEST.QUERY_STATE;
     };
 
-export type PC_RESPONSE = {
+export type PCResponseType = {
   type: typeof POPUP_TO_CONTENT_RESPONSE.STATE;
-  payload: { [K in PC_QUERY_STATE_KEY_TYPE]: boolean };
+  payload: { [K in PCQueryStateType]: boolean };
 };
 
 export class PCBridge {
-  static async postToContent(data: PC_REQUEST) {
-    return new Promise<PC_RESPONSE | null>(resolve => {
+  static async postToContent(data: PCRequestType) {
+    return new Promise<PCResponseType | null>(resolve => {
       cross.tabs
         .query({ active: true, currentWindow: true })
         .then(tabs => {
@@ -57,11 +57,11 @@ export class PCBridge {
     });
   }
 
-  static onPopupMessage(cb: (data: PC_REQUEST) => void | PC_RESPONSE) {
+  static onPopupMessage(cb: (data: PCRequestType) => void | PCResponseType) {
     const handler = (
-      message: PC_REQUEST,
+      message: PCRequestType,
       sender: chrome.runtime.MessageSender,
-      sendResponse: (response?: PC_RESPONSE | null) => void
+      sendResponse: (response?: PCResponseType | null) => void
     ) => {
       const rtn = cb(message);
       sendResponse(rtn || null);

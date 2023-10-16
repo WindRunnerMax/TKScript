@@ -8,7 +8,7 @@ import {
   PCBridge,
   POPUP_TO_CONTENT_RESPONSE,
 } from "@/bridge/popup-content";
-import { PC_QUERY_STATE_TYPE } from "@/bridge/constant";
+import { PC_QUERY_STATE_ENUM } from "@/bridge/constant";
 import { I18n } from "../i18n";
 import { cross } from "@/utils/global";
 const Row = Grid.Row;
@@ -37,12 +37,12 @@ export const App: FC = () => {
 
   useLayoutEffect(() => {
     const mapper: Record<string, typeof setCopyState> = {
-      [PC_QUERY_STATE_TYPE.COPY]: setCopyState,
-      [PC_QUERY_STATE_TYPE.MENU]: setMenuState,
-      [PC_QUERY_STATE_TYPE.KEYBOARD]: setKeydownState,
-      [PC_QUERY_STATE_TYPE.COPY_ONCE]: setCopyStateOnce,
-      [PC_QUERY_STATE_TYPE.MENU_ONCE]: setMenuStateOnce,
-      [PC_QUERY_STATE_TYPE.KEYBOARD_ONCE]: setKeydownStateOnce,
+      [PC_QUERY_STATE_ENUM.COPY]: setCopyState,
+      [PC_QUERY_STATE_ENUM.MENU]: setMenuState,
+      [PC_QUERY_STATE_ENUM.KEYBOARD]: setKeydownState,
+      [PC_QUERY_STATE_ENUM.COPY_ONCE]: setCopyStateOnce,
+      [PC_QUERY_STATE_ENUM.MENU_ONCE]: setMenuStateOnce,
+      [PC_QUERY_STATE_ENUM.KEYBOARD_ONCE]: setKeydownStateOnce,
     };
     PCBridge.postToContent({
       type: POPUP_TO_CONTENT_REQUEST.QUERY_STATE,

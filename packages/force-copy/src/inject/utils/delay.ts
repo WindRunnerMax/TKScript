@@ -1,5 +1,5 @@
 import { DOM_READY, PAGE_LOADED } from "copy/src/constant/event";
-import { EVENTS_TYPE, EventBus } from "./bus";
+import { EVENTS_ENUM, EventBus } from "./bus";
 
 export const delayExecute = (
   when: typeof DOM_READY | typeof PAGE_LOADED = PAGE_LOADED,
@@ -11,13 +11,13 @@ export const delayExecute = (
       if (document.readyState !== "loading") {
         resolve();
       } else {
-        EventBus.once(EVENTS_TYPE.DOM_LOADED, resolve);
+        EventBus.once(EVENTS_ENUM.DOM_LOADED, resolve);
       }
     } else {
       if (document.readyState === "complete") {
         resolve();
       } else {
-        EventBus.once(EVENTS_TYPE.PAGE_LOADED, resolve);
+        EventBus.once(EVENTS_ENUM.PAGE_LOADED, resolve);
       }
     }
   });

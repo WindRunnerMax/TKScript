@@ -1,4 +1,4 @@
-const PC_QUERY_STATE_KEY = [
+const PC_QUERY_STATE_TYPE = [
   "COPY",
   "MENU",
   "KEYBOARD",
@@ -6,15 +6,15 @@ const PC_QUERY_STATE_KEY = [
   "MENU_ONCE",
   "KEYBOARD_ONCE",
 ] as const;
-export const PC_QUERY_STATE_TYPE = PC_QUERY_STATE_KEY.reduce(
+export const PC_QUERY_STATE_ENUM = PC_QUERY_STATE_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: cur }),
-  {} as { [K in typeof PC_QUERY_STATE_KEY[number]]: K }
+  {} as { [K in typeof PC_QUERY_STATE_TYPE[number]]: K }
 );
-export type PC_QUERY_STATE_KEY_TYPE = typeof PC_QUERY_STATE_KEY[number];
+export type PCQueryStateType = typeof PC_QUERY_STATE_TYPE[number];
 
-const CI_EXECUTION_KEY = ["START", "CLOSE"] as const;
-export const CI_EXECUTION_TYPE = CI_EXECUTION_KEY.reduce(
+const CI_EXECUTION_TYPE = ["START", "CLOSE"] as const;
+export const CI_EXECUTION_ENUM = CI_EXECUTION_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: cur }),
-  {} as { [K in typeof CI_EXECUTION_KEY[number]]: K }
+  {} as { [K in typeof CI_EXECUTION_TYPE[number]]: K }
 );
-export type CI_EXECUTION_KEY_TYPE = typeof CI_EXECUTION_KEY[number];
+export type CIExecutionType = typeof CI_EXECUTION_TYPE[number];

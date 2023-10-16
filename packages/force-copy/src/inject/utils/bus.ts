@@ -1,7 +1,7 @@
 import { ALL_ACTION_TYPE } from "@/utils/constant";
 import { EventBus as AbstractEventBus } from "laser-utils";
 
-const EVENTS = [
+const EVENTS_TYPE = [
   "MOUSE_UP_CAPTURE",
   "MOUSE_DOWN_CAPTURE",
   "MOUSE_UP_BUBBLE",
@@ -17,25 +17,25 @@ const EVENTS = [
   "SELECT_START_CAPTURE",
 ] as const;
 
-export const EVENTS_TYPE = EVENTS.reduce(
+export const EVENTS_ENUM = EVENTS_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
-  {} as { [K in typeof EVENTS[number]]: `__${K}__` }
+  {} as { [K in typeof EVENTS_TYPE[number]]: `__${K}__` }
 );
 
 interface EventBusParams {
-  [EVENTS_TYPE.MOUSE_UP_CAPTURE]: MouseEvent;
-  [EVENTS_TYPE.MOUSE_DOWN_CAPTURE]: MouseEvent;
-  [EVENTS_TYPE.MOUSE_UP_BUBBLE]: MouseEvent;
-  [EVENTS_TYPE.MOUSE_DOWN_BUBBLE]: MouseEvent;
-  [EVENTS_TYPE.DOM_LOADED]: Event;
-  [EVENTS_TYPE.PAGE_LOADED]: Event;
-  [EVENTS_TYPE.OPEN_ACTION]: ALL_ACTION_TYPE;
-  [EVENTS_TYPE.CLOSE_ACTION]: ALL_ACTION_TYPE;
-  [EVENTS_TYPE.OPEN_ONCE_ACTION]: ALL_ACTION_TYPE;
-  [EVENTS_TYPE.COPY_CAPTURE]: Event;
-  [EVENTS_TYPE.KEY_BOARD_CAPTURE]: KeyboardEvent;
-  [EVENTS_TYPE.CONTEXT_MENU_CAPTURE]: Event;
-  [EVENTS_TYPE.SELECT_START_CAPTURE]: Event;
+  [EVENTS_ENUM.MOUSE_UP_CAPTURE]: MouseEvent;
+  [EVENTS_ENUM.MOUSE_DOWN_CAPTURE]: MouseEvent;
+  [EVENTS_ENUM.MOUSE_UP_BUBBLE]: MouseEvent;
+  [EVENTS_ENUM.MOUSE_DOWN_BUBBLE]: MouseEvent;
+  [EVENTS_ENUM.DOM_LOADED]: Event;
+  [EVENTS_ENUM.PAGE_LOADED]: Event;
+  [EVENTS_ENUM.OPEN_ACTION]: ALL_ACTION_TYPE;
+  [EVENTS_ENUM.CLOSE_ACTION]: ALL_ACTION_TYPE;
+  [EVENTS_ENUM.OPEN_ONCE_ACTION]: ALL_ACTION_TYPE;
+  [EVENTS_ENUM.COPY_CAPTURE]: Event;
+  [EVENTS_ENUM.KEY_BOARD_CAPTURE]: KeyboardEvent;
+  [EVENTS_ENUM.CONTEXT_MENU_CAPTURE]: Event;
+  [EVENTS_ENUM.SELECT_START_CAPTURE]: Event;
 }
 
 declare module "laser-utils" {

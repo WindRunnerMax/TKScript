@@ -1,6 +1,6 @@
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { WebSite } from "../types/website";
-import { EVENTS_TYPE, EventBus } from "../utils/bus";
+import { EVENTS_ENUM, EventBus } from "../utils/bus";
 import styles from "copy-currency/src/utils";
 import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
 import instance from "copy/src/utils/instance";
@@ -52,30 +52,30 @@ export const Wenku: WebSite = {
           COPY_BUTTON_STYLE +
           "#reader-helper{display:none !important;} "
       );
-      EventBus.on(EVENTS_TYPE.MOUSE_UP_BUBBLE, onMouseUp);
-      EventBus.on(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
-      EventBus.on(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
-      EventBus.on(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
-      EventBus.on(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);
+      EventBus.on(EVENTS_ENUM.MOUSE_UP_BUBBLE, onMouseUp);
+      EventBus.on(EVENTS_ENUM.MOUSE_DOWN_CAPTURE, onMouseDown);
+      EventBus.on(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
+      EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
+      EventBus.on(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
-      EventBus.on(EVENTS_TYPE.KEY_BOARD_CAPTURE, stopNativePropagation);
+      EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);
     } else if (type === CONTEXT_MENU_TYPE) {
-      EventBus.on(EVENTS_TYPE.CONTEXT_MENU_CAPTURE, stopNativePropagation);
+      EventBus.on(EVENTS_ENUM.CONTEXT_MENU_CAPTURE, stopNativePropagation);
     }
   },
   close(type) {
     if (type === COPY_TYPE) {
       instance.destroy();
       styles.removeCSS(STYLE_ID);
-      EventBus.off(EVENTS_TYPE.MOUSE_UP_BUBBLE, onMouseUp);
-      EventBus.off(EVENTS_TYPE.MOUSE_DOWN_CAPTURE, onMouseDown);
-      EventBus.off(EVENTS_TYPE.COPY_CAPTURE, stopNativePropagation);
-      EventBus.off(EVENTS_TYPE.KEY_BOARD_CAPTURE, copyKeyboardHandler);
-      EventBus.off(EVENTS_TYPE.SELECT_START_CAPTURE, stopNativePropagation);
+      EventBus.off(EVENTS_ENUM.MOUSE_UP_BUBBLE, onMouseUp);
+      EventBus.off(EVENTS_ENUM.MOUSE_DOWN_CAPTURE, onMouseDown);
+      EventBus.off(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
+      EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
+      EventBus.off(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
-      EventBus.off(EVENTS_TYPE.KEY_BOARD_CAPTURE, stopNativePropagation);
+      EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);
     } else if (type === CONTEXT_MENU_TYPE) {
-      EventBus.off(EVENTS_TYPE.CONTEXT_MENU_CAPTURE, stopNativePropagation);
+      EventBus.off(EVENTS_ENUM.CONTEXT_MENU_CAPTURE, stopNativePropagation);
     }
   },
 };
