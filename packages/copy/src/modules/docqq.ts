@@ -55,7 +55,7 @@ const website: Website = {
           for (let k = startColIndex; k <= endColIndex; k++) {
             const cell = SpreadsheetApp.workbook.activeSheet.getCellDataAtPosition(i, k);
             if (!cell) continue;
-            text.push(" ", cell.value || "");
+            text.push(" ", cell.formattedValue?.value || cell.value || "");
           }
           i !== endRowIndex && text.push("\n");
         }
