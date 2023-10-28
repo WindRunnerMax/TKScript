@@ -2,6 +2,7 @@ import { cross } from "@/utils/global";
 import { PCQueryStateType } from "./constant";
 import { isEmptyValue } from "laser-utils";
 import { logger } from "@/utils/logger";
+import { URL_MATCH } from "@/utils/constant";
 
 const PC_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE", "QUERY_STATE"] as const;
 export const POPUP_TO_CONTENT_REQUEST = PC_REQUEST_TYPE.reduce(
@@ -45,6 +46,11 @@ export class PCBridge {
         .then(tabs => {
           const tab = tabs[0];
           const tabId = tab && tab.id;
+          const tabURL = tab && tab.url;
+          if (tabURL && !URL_MATCH.some(match => new RegExp(match).test(tabURL))) {
+            resolve(null);
+            return void 0;
+          }
           if (!isEmptyValue(tabId)) {
             cross.tabs.sendMessage(tabId, data).then(resolve);
           } else {

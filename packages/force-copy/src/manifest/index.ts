@@ -1,3 +1,5 @@
+const URL_MATCH = ["https://*/*", "http://*/*", "file://*/*"];
+
 // Chromium
 const MANIFEST: Record<string, unknown> = {
   manifest_version: 3,
@@ -16,10 +18,16 @@ const MANIFEST: Record<string, unknown> = {
   },
   content_scripts: [
     {
-      matches: ["<all_urls>"],
+      matches: [...URL_MATCH],
       js: ["./content.js"],
       run_at: "document_start",
       all_frames: true,
+    },
+    {
+      world: "MAIN",
+      matches: [...URL_MATCH],
+      js: [process.env.INJECT_FILE + ".js"],
+      run_at: "document_start",
     },
   ],
   web_accessible_resources: [
@@ -31,7 +39,8 @@ const MANIFEST: Record<string, unknown> = {
   background: {
     service_worker: "worker.js",
   },
-  permissions: ["activeTab"],
+  host_permissions: [...URL_MATCH],
+  permissions: ["activeTab", "tabs"],
 };
 
 // Gecko
@@ -50,6 +59,7 @@ if (process.env.PLATFORM === "gecko") {
   delete MANIFEST.action;
   delete MANIFEST.background;
   delete MANIFEST.permissions;
+  delete MANIFEST.host_permissions;
   delete MANIFEST.web_accessible_resources;
 }
 

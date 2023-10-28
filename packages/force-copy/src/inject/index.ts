@@ -13,6 +13,7 @@ if (__DEV__) {
 }
 
 (async (): Promise<void> => {
+  logger.info("Inject Script Loaded");
   initBaseEvents();
   const state: State = {
     COPY: !!storage.local.get<boolean>(COPY_TYPE) || !!storage.session.get<boolean>(COPY_TYPE),

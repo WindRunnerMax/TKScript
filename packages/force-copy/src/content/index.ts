@@ -9,6 +9,7 @@ import { LOG_LEVEL, logger } from "@/utils/logger";
     self === top && onReceiveReloadMsg();
     logger.setLevel(LOG_LEVEL.INFO);
   }
+  logger.info("Content Script Loaded");
   implantScript();
   PCBridge.onPopupMessage(onPopupMessage);
 })();
