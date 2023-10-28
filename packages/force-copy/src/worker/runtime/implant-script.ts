@@ -9,16 +9,20 @@ export const implantScript = () => {
   if (cross.scripting.registerContentScripts) {
     logger.info("Register Inject Scripts By Scripting API");
     // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/scripting/registerContentScripts
-    cross.scripting.registerContentScripts([
-      {
-        matches: [...URL_MATCH],
-        runAt: "document_start",
-        world: "MAIN",
-        allFrames: true,
-        js: [process.env.INJECT_FILE + ".js"],
-        id: process.env.INJECT_FILE,
-      },
-    ]);
+    cross.scripting
+      .registerContentScripts([
+        {
+          matches: [...URL_MATCH],
+          runAt: "document_start",
+          world: "MAIN",
+          allFrames: true,
+          js: [process.env.INJECT_FILE + ".js"],
+          id: process.env.INJECT_FILE,
+        },
+      ])
+      .catch(err => {
+        logger.warning("Register Inject Scripts Failed", err);
+      });
   } else {
     logger.info("Register Inject Scripts By Tabs API");
     // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/onUpdated

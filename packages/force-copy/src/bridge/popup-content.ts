@@ -39,6 +39,9 @@ export type PCResponseType = {
 };
 
 export class PCBridge {
+  public static readonly REQUEST = POPUP_TO_CONTENT_REQUEST;
+  public static readonly RESPONSE = POPUP_TO_CONTENT_RESPONSE;
+
   static async postToContent(data: PCRequestType) {
     return new Promise<PCResponseType | null>(resolve => {
       cross.tabs
@@ -66,7 +69,7 @@ export class PCBridge {
   static onPopupMessage(cb: (data: PCRequestType) => void | PCResponseType) {
     const handler = (
       message: PCRequestType,
-      sender: chrome.runtime.MessageSender,
+      _: chrome.runtime.MessageSender,
       sendResponse: (response?: PCResponseType | null) => void
     ) => {
       const rtn = cb(message);

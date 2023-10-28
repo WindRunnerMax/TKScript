@@ -1,3 +1,4 @@
+import { CWBridge } from "@/bridge/content-worker";
 import { cross } from "./global";
 import { logger } from "./logger";
 
@@ -10,7 +11,7 @@ export const onReceiveReloadMsg = () => {
       // 收到消息即重载
       ws.onmessage = () => {
         try {
-          cross.runtime.id && cross.runtime.sendMessage(RELOAD_APP);
+          CWBridge.postToWorker({ type: CWBridge.REQUEST.RELOAD, payload: null });
         } catch (error) {
           logger.warning("SEND MESSAGE ERROR", error);
         }

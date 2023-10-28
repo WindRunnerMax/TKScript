@@ -1,14 +1,12 @@
-import { cross } from "@/utils/global";
 import { LOG_LEVEL, logger } from "@/utils/logger";
-import { reloadApp } from "@/utils/reload";
 import { implantScript } from "./runtime/implant-script";
+import { CWBridge } from "@/bridge/content-worker";
+import { onContentMessage } from "./runtime/content-message";
 
 (() => {
   if (__DEV__) {
     logger.setLevel(LOG_LEVEL.INFO);
-    cross.runtime.onMessage.addListener(request => {
-      reloadApp(request);
-    });
   }
   implantScript();
+  CWBridge.onContentMessage(onContentMessage);
 })();

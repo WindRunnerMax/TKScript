@@ -3,14 +3,12 @@ import { Switch, Grid } from "@arco-design/web-react";
 import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-react/icon";
 import styles from "./index.module.scss";
 import { cs } from "laser-utils";
-import {
-  POPUP_TO_CONTENT_REQUEST,
-  PCBridge,
-  POPUP_TO_CONTENT_RESPONSE,
-} from "@/bridge/popup-content";
+import { PCBridge } from "@/bridge/popup-content";
 import { PC_QUERY_STATE_ENUM } from "@/bridge/constant";
 import { I18n } from "../i18n";
 import { cross } from "@/utils/global";
+import { setBadge } from "../utils/badge";
+
 const Row = Grid.Row;
 const Col = Grid.Col;
 
@@ -26,13 +24,14 @@ export const App: FC = () => {
 
   const onSwitchChange = (
     type:
-      | typeof POPUP_TO_CONTENT_REQUEST.COPY_TYPE
-      | typeof POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE
-      | typeof POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE,
+      | typeof PCBridge.REQUEST.COPY_TYPE
+      | typeof PCBridge.REQUEST.KEYBOARD_TYPE
+      | typeof PCBridge.REQUEST.CONTEXT_MENU_TYPE,
     checked: boolean,
     once = false
   ) => {
     PCBridge.postToContent({ type: type, payload: { checked, once } });
+    setBadge(checked);
   };
 
   useLayoutEffect(() => {
@@ -45,9 +44,9 @@ export const App: FC = () => {
       [PC_QUERY_STATE_ENUM.KEYBOARD_ONCE]: setKeydownStateOnce,
     };
     PCBridge.postToContent({
-      type: POPUP_TO_CONTENT_REQUEST.QUERY_STATE,
+      type: PCBridge.REQUEST.QUERY_STATE,
     }).then(res => {
-      if (res && res.type === POPUP_TO_CONTENT_RESPONSE.STATE) {
+      if (res && res.type === PCBridge.RESPONSE.STATE) {
         for (const [key, value] of Object.entries(res.payload)) {
           const handler = mapper[key];
           handler && handler(value);
@@ -87,7 +86,7 @@ export const App: FC = () => {
               checked={copyState}
               onChange={v => {
                 setCopyState(v);
-                onSwitchChange(POPUP_TO_CONTENT_REQUEST.COPY_TYPE, v);
+                onSwitchChange(PCBridge.REQUEST.COPY_TYPE, v);
               }}
             />
           </Col>
@@ -97,7 +96,7 @@ export const App: FC = () => {
               checked={copyStateOnce}
               onChange={v => {
                 setCopyStateOnce(v);
-                onSwitchChange(POPUP_TO_CONTENT_REQUEST.COPY_TYPE, v, true);
+                onSwitchChange(PCBridge.REQUEST.COPY_TYPE, v, true);
               }}
             />
           </Col>
@@ -112,7 +111,7 @@ export const App: FC = () => {
               checked={keydownState}
               onChange={v => {
                 setKeydownState(v);
-                onSwitchChange(POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE, v);
+                onSwitchChange(PCBridge.REQUEST.KEYBOARD_TYPE, v);
               }}
             />
           </Col>
@@ -122,7 +121,7 @@ export const App: FC = () => {
               checked={keydownStateOnce}
               onChange={v => {
                 setKeydownStateOnce(v);
-                onSwitchChange(POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE, v, true);
+                onSwitchChange(PCBridge.REQUEST.KEYBOARD_TYPE, v, true);
               }}
             />
           </Col>
@@ -137,7 +136,7 @@ export const App: FC = () => {
               checked={menuState}
               onChange={v => {
                 setMenuState(v);
-                onSwitchChange(POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE, v);
+                onSwitchChange(PCBridge.REQUEST.CONTEXT_MENU_TYPE, v);
               }}
             />
           </Col>
@@ -147,7 +146,7 @@ export const App: FC = () => {
               checked={menuStateOnce}
               onChange={v => {
                 setMenuStateOnce(v);
-                onSwitchChange(POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE, v, true);
+                onSwitchChange(PCBridge.REQUEST.CONTEXT_MENU_TYPE, v, true);
               }}
             />
           </Col>
