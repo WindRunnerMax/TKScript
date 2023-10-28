@@ -1,7 +1,7 @@
-const URL_MATCH = ["https://*/*", "http://*/*", "file://*/*"];
+const __URL_MATCH__ = ["https://*/*", "http://*/*", "file://*/*"];
 
 // Chromium
-const MANIFEST: Record<string, unknown> = {
+const __MANIFEST__: Record<string, unknown> = {
   manifest_version: 3,
   name: "Force Copy",
   version: "0.0.0",
@@ -18,16 +18,10 @@ const MANIFEST: Record<string, unknown> = {
   },
   content_scripts: [
     {
-      matches: [...URL_MATCH],
+      matches: [...__URL_MATCH__],
       js: ["./content.js"],
       run_at: "document_start",
       all_frames: true,
-    },
-    {
-      world: "MAIN",
-      matches: [...URL_MATCH],
-      js: [process.env.INJECT_FILE + ".js"],
-      run_at: "document_start",
     },
   ],
   web_accessible_resources: [
@@ -39,15 +33,15 @@ const MANIFEST: Record<string, unknown> = {
   background: {
     service_worker: "worker.js",
   },
-  host_permissions: [...URL_MATCH],
-  permissions: ["activeTab", "tabs"],
+  host_permissions: [...__URL_MATCH__],
+  permissions: ["activeTab", "tabs", "scripting"],
 };
 
 // Gecko
 if (process.env.PLATFORM === "gecko") {
-  MANIFEST.manifest_version = 2;
-  MANIFEST.browser_action = MANIFEST.action;
-  MANIFEST.browser_specific_settings = {
+  __MANIFEST__.manifest_version = 2;
+  __MANIFEST__.browser_action = __MANIFEST__.action;
+  __MANIFEST__.browser_specific_settings = {
     gecko: {
       strict_min_version: "91.1.0",
     },
@@ -56,11 +50,11 @@ if (process.env.PLATFORM === "gecko") {
     },
   };
 
-  delete MANIFEST.action;
-  delete MANIFEST.background;
-  delete MANIFEST.permissions;
-  delete MANIFEST.host_permissions;
-  delete MANIFEST.web_accessible_resources;
+  delete __MANIFEST__.action;
+  delete __MANIFEST__.background;
+  delete __MANIFEST__.permissions;
+  delete __MANIFEST__.host_permissions;
+  delete __MANIFEST__.web_accessible_resources;
 }
 
-module.exports = MANIFEST;
+module.exports = __MANIFEST__;

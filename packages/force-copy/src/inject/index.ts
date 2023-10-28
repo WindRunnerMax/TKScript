@@ -8,11 +8,19 @@ import { onContentMessage } from "./utils/content-msg";
 import { LOG_LEVEL, logger } from "@/utils/logger";
 import { DOM_STAGE } from "copy/src/constant/event";
 
-if (__DEV__) {
-  logger.setLevel(LOG_LEVEL.INFO);
-}
-
 (async (): Promise<void> => {
+  if (__DEV__) {
+    logger.setLevel(LOG_LEVEL.INFO);
+  }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  if (window[process.env.INJECT_FILE]) {
+    logger.info("Inject Script Already Loaded");
+    return void 0;
+  }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  window[process.env.INJECT_FILE] = true;
   logger.info("Inject Script Loaded");
   initBaseEvents();
   const state: State = {
