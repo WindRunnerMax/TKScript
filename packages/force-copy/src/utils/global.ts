@@ -1,7 +1,9 @@
 let env = chrome;
 
-if (process.env.PLATFORM === "gecko" && typeof browser !== "undefined") {
+// #IFDEF GECKO
+if (typeof browser !== "undefined") {
   env = browser;
 }
+// #ENDIF
 
 export const cross = env;

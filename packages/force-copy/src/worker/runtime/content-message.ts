@@ -14,7 +14,10 @@ export const onContentMessage = (data: CWRequestType, sender: chrome.runtime.Mes
       const { payload } = data;
       if (payload && sender.tab && sender.tab.id) {
         const tabId = sender.tab.id;
-        const action = process.env.PLATFORM === "chromium" ? cross.action : cross.browserAction;
+        let action: typeof cross.action | typeof cross.browserAction = cross.action;
+        // #IFDEF GECKO
+        action = cross.browserAction;
+        // #ENDIF
         action.setBadgeText({ text: payload.toString(), tabId });
         action.setBadgeBackgroundColor({ color: "#4e5969", tabId });
       }

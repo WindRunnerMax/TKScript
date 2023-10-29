@@ -80,6 +80,17 @@ module.exports = {
         ],
         type: "css",
       },
+      {
+        test: /\.(jsx?|tsx?)$/,
+        use: [
+          {
+            loader: "./script/define",
+            options: {
+              // debug: true,
+            },
+          },
+        ],
+      },
     ],
   },
   output: {

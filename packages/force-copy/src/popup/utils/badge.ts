@@ -10,7 +10,10 @@ export const cipherBadgeNumber = (checked: boolean) => {
     })
     .then(tabId => {
       if (tabId) {
-        const action = process.env.PLATFORM === "chromium" ? cross.action : cross.browserAction;
+        let action: typeof cross.action | typeof cross.browserAction = cross.action;
+        // #IFDEF GECKO
+        action = cross.browserAction;
+        // #ENDIF
         action.getBadgeText({ tabId }).then(text => {
           const badge = Number(text) || 0;
           const next = badge + (checked ? 1 : -1);
