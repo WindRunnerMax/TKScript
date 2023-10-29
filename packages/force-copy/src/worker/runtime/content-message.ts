@@ -13,8 +13,10 @@ export const onContentMessage = (data: CWRequestType, sender: chrome.runtime.Mes
     case CWBridge.REQUEST.SET_BADGE: {
       const { payload } = data;
       if (payload && sender.tab && sender.tab.id) {
-        cross.action.setBadgeText({ text: payload.toString(), tabId: sender.tab.id });
-        cross.action.setBadgeBackgroundColor({ color: "#4e5969", tabId: sender.tab.id });
+        const tabId = sender.tab.id;
+        const action = process.env.PLATFORM === "chromium" ? cross.action : cross.browserAction;
+        action.setBadgeText({ text: payload.toString(), tabId });
+        action.setBadgeBackgroundColor({ color: "#4e5969", tabId });
       }
       break;
     }

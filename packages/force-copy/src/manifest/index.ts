@@ -49,10 +49,12 @@ if (process.env.PLATFORM === "gecko") {
       strict_min_version: "91.1.0",
     },
   };
+  __MANIFEST__.background = {
+    scripts: ["worker.js"],
+  };
+  __MANIFEST__.permissions = ["activeTab", "tabs", ...__URL_MATCH__];
 
   delete __MANIFEST__.action;
-  delete __MANIFEST__.background;
-  delete __MANIFEST__.permissions;
   delete __MANIFEST__.host_permissions;
   delete __MANIFEST__.web_accessible_resources;
 }

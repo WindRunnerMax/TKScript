@@ -7,7 +7,7 @@ import { PCBridge } from "@/bridge/popup-content";
 import { PC_QUERY_STATE_ENUM } from "@/bridge/constant";
 import { I18n } from "../i18n";
 import { cross } from "@/utils/global";
-import { setBadge } from "../utils/badge";
+import { cipherBadgeNumber } from "../utils/badge";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -31,7 +31,7 @@ export const App: FC = () => {
     once = false
   ) => {
     PCBridge.postToContent({ type: type, payload: { checked, once } });
-    setBadge(checked);
+    cipherBadgeNumber(checked);
   };
 
   useLayoutEffect(() => {

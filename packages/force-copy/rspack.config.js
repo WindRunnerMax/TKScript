@@ -42,7 +42,7 @@ module.exports = {
     define: {
       "__DEV__": isDev,
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-      "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
+      "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM || "chromium"),
       "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
       "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
     },

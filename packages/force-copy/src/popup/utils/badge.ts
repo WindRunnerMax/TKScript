@@ -1,6 +1,6 @@
 import { cross } from "@/utils/global";
 
-export const setBadge = (checked: boolean) => {
+export const cipherBadgeNumber = (checked: boolean) => {
   cross.tabs
     .query({ active: true, currentWindow: true })
     .then(tabs => {
@@ -10,11 +10,12 @@ export const setBadge = (checked: boolean) => {
     })
     .then(tabId => {
       if (tabId) {
-        cross.action.getBadgeText({ tabId }).then(text => {
+        const action = process.env.PLATFORM === "chromium" ? cross.action : cross.browserAction;
+        action.getBadgeText({ tabId }).then(text => {
           const badge = Number(text) || 0;
           const next = badge + (checked ? 1 : -1);
-          cross.action.setBadgeText({ text: next <= 0 ? "" : String(next), tabId });
-          cross.action.setBadgeBackgroundColor({ color: "#4e5969", tabId });
+          action.setBadgeText({ text: next <= 0 ? "" : String(next), tabId });
+          action.setBadgeBackgroundColor({ color: "#4e5969", tabId });
         });
       }
     });
