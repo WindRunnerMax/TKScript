@@ -9,7 +9,7 @@
     "build": "rm -rf build && rspack build",
     "dev:rollup": "cross-env NODE_ENV=development rollup -wc",
     "dev:gecko": "cross-env NODE_ENV=development PLATFORM=gecko rspack build --watch",
-    "build:gecko": "rm -rf build && cross-env PLATFORM=gecko rspack build",
+    "build:gecko": "rm -rf build-gecko && cross-env PLATFORM=gecko rspack build",
     "lint:ts": "../../node_modules/typescript/bin/tsc --noEmit"
   },
   "repository": {

@@ -1,10 +1,11 @@
 const path = require("path");
 const { default: HtmlPlugin } = require("@rspack/plugin-html");
 const FilePlugin = require("./script/files");
-const { getUniqueId, isDev } = require("./script/utils");
+const { getUniqueId, isDev, isGecko } = require("./script/utils");
 const ReloadPlugin = require("./script/reload");
 const ManifestPlugin = require("./script/manifest");
 
+const folder = isGecko ? "build-gecko" : "build";
 const EVENT_TYPE = isDev ? "EVENT_TYPE" : getUniqueId();
 const INJECT_FILE = isDev ? "INJECT_FILE" : getUniqueId();
 
@@ -81,7 +82,7 @@ module.exports = {
   output: {
     publicPath: "/",
     filename: "[name].js",
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, folder),
   },
   devtool: false,
 };

@@ -1,7 +1,7 @@
 const path = require("path");
 const tsNode = require("ts-node");
 const fs = require("fs");
-const { promisify } = require("./utils");
+const { promisify, isGecko } = require("./utils");
 
 const writeFile = promisify(fs.writeFile);
 
@@ -22,8 +22,9 @@ class ManifestPlugin {
       const manifest = require(this.manifest);
       const version = require("../package.json").version;
       manifest.version = version;
+      const folder = isGecko ? "build-gecko" : "build";
       return writeFile(
-        path.join(__dirname, "../build/manifest.json"),
+        path.join(__dirname, `../${folder}/manifest.json`),
         JSON.stringify(manifest, null, 2)
       );
     });

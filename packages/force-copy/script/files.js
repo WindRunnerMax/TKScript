@@ -1,5 +1,6 @@
 const thread = require("child_process");
 const path = require("path");
+const { isGecko } = require("./utils");
 
 const exec = command => {
   return new Promise((resolve, reject) => {
@@ -22,8 +23,9 @@ class FilesPlugin {
       const locales = path.join(__dirname, "../public/locales/");
       const resources = path.join(__dirname, "../public/static/");
 
-      const localesTarget = path.join(__dirname, "../build/_locales/");
-      const resourcesTarget = path.join(__dirname, "../build/static/");
+      const folder = isGecko ? "build-gecko" : "build";
+      const localesTarget = path.join(__dirname, `../${folder}/_locales/`);
+      const resourcesTarget = path.join(__dirname, `../${folder}/static/`);
 
       return Promise.all([
         exec(`cp -r ${locales} ${localesTarget}`),
