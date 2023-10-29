@@ -242,6 +242,8 @@
       document.body.removeChild(textarea);
     };
     const isEmptyContent = (data) => {
+      if (!data)
+        return true;
       return isString(data) ? !data : !data[TEXT_PLAIN];
     };
     const copy = (data) => {
