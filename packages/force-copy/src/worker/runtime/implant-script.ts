@@ -45,23 +45,6 @@ export const implantScript = () => {
       });
     }
   } else {
-    logger.info("Register Inject Scripts By Tabs API");
-    // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/onUpdated
-    cross.tabs.onUpdated.addListener((_, changeInfo, tab) => {
-      if (changeInfo.status == "loading") {
-        const tabId = tab && tab.id;
-        const tabURL = tab && tab.url;
-        if (tabURL && !URL_MATCH.some(match => new RegExp(match).test(tabURL))) {
-          return void 0;
-        }
-        if (tabId && cross.tabs.executeScript) {
-          cross.tabs.executeScript(tabId, {
-            allFrames: true,
-            file: "/" + process.env.INJECT_FILE + ".js",
-            runAt: "document_start",
-          });
-        }
-      }
-    });
+    logger.info("Register Inject Scripts By Inline Code");
   }
 };

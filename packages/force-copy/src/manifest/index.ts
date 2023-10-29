@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 const __URL_MATCH__ = ["https://*/*", "http://*/*", "file://*/*"];
 
 // Chromium
@@ -35,27 +38,33 @@ const __MANIFEST__: Record<string, unknown> = {
   },
   host_permissions: [...__URL_MATCH__],
   permissions: ["activeTab", "tabs", "scripting"],
+  minimum_chrome_version: "71.0",
 };
 
 // Gecko
 if (process.env.PLATFORM === "gecko") {
   __MANIFEST__.manifest_version = 2;
   __MANIFEST__.browser_action = __MANIFEST__.action;
-  __MANIFEST__.browser_specific_settings = {
-    gecko: {
-      strict_min_version: "91.1.0",
+  __MANIFEST__.content_scripts = [
+    {
+      matches: [...__URL_MATCH__],
+      js: [process.env.INJECT_FILE + ".js", "./content.js"],
+      run_at: "document_start",
+      all_frames: true,
     },
-    gecko_android: {
-      strict_min_version: "91.1.0",
-    },
-  };
+  ];
   __MANIFEST__.background = {
-    scripts: ["worker.js"],
+    scripts: [__MANIFEST__.background.service_worker],
   };
   __MANIFEST__.permissions = ["activeTab", "tabs", ...__URL_MATCH__];
+  __MANIFEST__.browser_specific_settings = {
+    gecko: { strict_min_version: "91.1.0" },
+    gecko_android: { strict_min_version: "91.1.0" },
+  };
 
   delete __MANIFEST__.action;
   delete __MANIFEST__.host_permissions;
+  delete __MANIFEST__.minimum_chrome_version;
   delete __MANIFEST__.web_accessible_resources;
 }
 

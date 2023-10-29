@@ -35,6 +35,7 @@ const downgradeCopy = (data: CopyData) => {
 };
 
 export const isEmptyContent = (data: CopyParams): boolean => {
+  if (!data) return true;
   return isString(data) ? !data : !data[TEXT_PLAIN];
 };
 

@@ -14,13 +14,13 @@ import { DOM_STAGE } from "copy/src/constant/event";
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  if (window[process.env.INJECT_FILE]) {
+  if (window[process.env.EVENT_TYPE]) {
     logger.info("Inject Script Already Loaded");
     return void 0;
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  window[process.env.INJECT_FILE] = true;
+  window[process.env.EVENT_TYPE] = true;
   logger.info("Inject Script Loaded");
   initBaseEvents();
   const state: State = {

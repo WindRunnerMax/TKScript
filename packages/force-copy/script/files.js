@@ -11,7 +11,7 @@ const exec = command => {
   });
 };
 
-class FilesPlugin {
+exports.FilesPlugin = class FilesPlugin {
   apply(compiler) {
     compiler.hooks.make.tap("FilesPlugin", compilation => {
       const resources = path.join(__dirname, "../public/static");
@@ -33,6 +33,4 @@ class FilesPlugin {
       ]);
     });
   }
-}
-
-module.exports = FilesPlugin;
+};

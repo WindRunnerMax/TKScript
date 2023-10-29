@@ -1,9 +1,10 @@
 const path = require("path");
 const { default: HtmlPlugin } = require("@rspack/plugin-html");
-const FilePlugin = require("./script/files");
+const { FilesPlugin } = require("./script/files");
 const { getUniqueId, isDev, isGecko } = require("./script/utils");
-const ReloadPlugin = require("./script/reload");
-const ManifestPlugin = require("./script/manifest");
+const { ReloadPlugin } = require("./script/reload");
+const { ManifestPlugin } = require("./script/manifest");
+const { WrapperCodePlugin } = require("./script/wrapper");
 
 const folder = isGecko ? "build-gecko" : "build";
 const EVENT_TYPE = isDev ? "EVENT_TYPE" : getUniqueId();
@@ -11,6 +12,7 @@ const INJECT_FILE = isDev ? "INJECT_FILE" : getUniqueId();
 
 process.env.EVENT_TYPE = EVENT_TYPE;
 process.env.INJECT_FILE = INJECT_FILE;
+process.env.PLATFORM = process.env.PLATFORM || "chromium";
 
 /**
  * @type {import('@rspack/cli').Configuration}
@@ -29,9 +31,10 @@ module.exports = {
       template: "./public/popup.html",
       inject: false,
     }),
-    new FilePlugin(),
+    new FilesPlugin(),
     new ReloadPlugin(),
     new ManifestPlugin(),
+    new WrapperCodePlugin(),
   ],
   resolve: {
     alias: {
@@ -42,7 +45,7 @@ module.exports = {
     define: {
       "__DEV__": isDev,
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-      "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM || "chromium"),
+      "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
       "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
       "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
     },

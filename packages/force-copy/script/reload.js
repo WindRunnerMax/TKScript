@@ -6,7 +6,7 @@ const WebSocketServer = require("ws").Server;
  */
 let wsClient = null;
 
-class ReloadPlugin {
+exports.ReloadPlugin = class ReloadPlugin {
   constructor() {
     if (isDev) {
       try {
@@ -26,6 +26,4 @@ class ReloadPlugin {
       wsClient && wsClient.send("reload-app");
     });
   }
-}
-
-module.exports = ReloadPlugin;
+};

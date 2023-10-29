@@ -5,7 +5,7 @@ const { promisify, isGecko } = require("./utils");
 
 const writeFile = promisify(fs.writeFile);
 
-class ManifestPlugin {
+exports.ManifestPlugin = class ManifestPlugin {
   constructor() {
     tsNode.register();
     this.manifest = path.join(__dirname, `../src/manifest/index.ts`);
@@ -29,6 +29,4 @@ class ManifestPlugin {
       );
     });
   }
-}
-
-module.exports = ManifestPlugin;
+};
