@@ -1,0 +1,8 @@
+{
+  "if-def-code-snippet": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "#IFDEF",
+    "body": ["// #IFDEF ${1:PLATFORM}", "$0", "// #ENDIF"],
+    "description": "IFDEF --- ENDIF"
+  }
+}
