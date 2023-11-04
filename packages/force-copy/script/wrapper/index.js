@@ -1,4 +1,4 @@
-const { isChromium } = require("./utils");
+const { isChromium } = require("../utils/node");
 
 exports.WrapperCodePlugin = class WrapperCodePlugin {
   constructor(options) {

@@ -1,14 +1,14 @@
 const path = require("path");
 const tsNode = require("ts-node");
 const fs = require("fs");
-const { promisify, isGecko } = require("./utils");
+const { promisify, isGecko } = require("../utils/node");
 
 const writeFile = promisify(fs.writeFile);
 
 exports.ManifestPlugin = class ManifestPlugin {
   constructor() {
     tsNode.register();
-    this.manifest = path.join(__dirname, `../src/manifest/index.ts`);
+    this.manifest = path.resolve(`src/manifest/index.ts`);
   }
 
   apply(compiler) {
@@ -20,13 +20,10 @@ exports.ManifestPlugin = class ManifestPlugin {
     compiler.hooks.done.tapPromise("ManifestPlugin", () => {
       delete require.cache[require.resolve(this.manifest)];
       const manifest = require(this.manifest);
-      const version = require("../package.json").version;
+      const version = require(path.resolve("package.json")).version;
       manifest.version = version;
       const folder = isGecko ? "build-gecko" : "build";
-      return writeFile(
-        path.join(__dirname, `../${folder}/manifest.json`),
-        JSON.stringify(manifest, null, 2)
-      );
+      return writeFile(path.resolve(`${folder}/manifest.json`), JSON.stringify(manifest, null, 2));
     });
   }
 };

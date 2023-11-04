@@ -10,7 +10,7 @@ const src = path.resolve("src");
  * @param {string} source
  * @returns {string}
  */
-function DefineLoader(source) {
+function IfDefineLoader(source) {
   const debug = this.query.debug;
   const resourcePath = this.resourcePath;
   const platform = (process.env.PLATFORM || "").toLowerCase();
@@ -59,4 +59,4 @@ function DefineLoader(source) {
   return target.join("\n");
 }
 
-module.exports = DefineLoader;
+module.exports = IfDefineLoader;

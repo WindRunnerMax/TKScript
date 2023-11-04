@@ -1,4 +1,4 @@
-const { isDev } = require("./utils");
+const { isDev } = require("../utils/node");
 const WebSocketServer = require("ws").Server;
 
 /**

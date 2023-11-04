@@ -1,10 +1,10 @@
 const path = require("path");
-const { default: HtmlPlugin } = require("@rspack/plugin-html");
 const { FilesPlugin } = require("./script/files");
-const { getUniqueId, isDev, isGecko } = require("./script/utils");
 const { ReloadPlugin } = require("./script/reload");
 const { ManifestPlugin } = require("./script/manifest");
 const { WrapperCodePlugin } = require("./script/wrapper");
+const { default: HtmlPlugin } = require("@rspack/plugin-html");
+const { getUniqueId, isDev, isGecko } = require("./script/utils/node");
 
 const folder = isGecko ? "build-gecko" : "build";
 const EVENT_TYPE = isDev ? "EVENT_TYPE" : getUniqueId();
@@ -84,7 +84,7 @@ module.exports = {
         test: /\.(jsx?|tsx?)$/,
         use: [
           {
-            loader: "./script/define",
+            loader: "./script/if-def",
             options: {
               // debug: true,
             },

@@ -38,7 +38,7 @@ const __MANIFEST__: Record<string, unknown> = {
   },
   host_permissions: [...__URL_MATCH__],
   permissions: ["activeTab", "tabs", "scripting"],
-  minimum_chrome_version: "71.0",
+  minimum_chrome_version: "88.0",
 };
 
 // Gecko
