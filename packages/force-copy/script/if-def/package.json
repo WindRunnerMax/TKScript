@@ -1,0 +1,28 @@
+{
+  "name": "if-def-processor",
+  "version": "1.0.2",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "sideEffects": false,
+  "author": "Czy",
+  "license": "MIT",
+  "description": "Rspack/Webpack if-def predefined syntax loader",
+  "publish": "npm publish --registry=https://registry.npmjs.org/",
+  "bugs": {
+    "url": "https://github.com/WindrunnerMax/TKScript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WindrunnerMax/TKScript"
+  },
+  "homepage": "https://github.com/WindrunnerMax/TKScript",
+  "keywords": [
+    "if-def",
+    "rspack",
+    "loader"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

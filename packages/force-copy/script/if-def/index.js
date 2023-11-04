@@ -4,19 +4,54 @@ const fs = require("fs");
 // 条件编译: `process.env.PLATFORM`的深层次嵌套
 // #IFDEF #ENDIF: `C/C++`预处理指令 平台层面扩展性
 
-const src = path.resolve("src");
 /**
- * @type {import('@rspack/core').LoaderContext}
+ * @this {import('@rspack/core').LoaderContext}
  * @param {string} source
  * @returns {string}
  */
 function IfDefineLoader(source) {
-  const debug = this.query.debug;
+  // 检查参数配置
+  /** @type {boolean} */
+  const debug = this.query.debug || false;
+  /** @type {(string|RegExp)[]} */
+  const include = this.query.include || [path.resolve("src")];
+  /** @type {(string|RegExp)[]} */
+  const exclude = this.query.exclude || [/node_modules/];
+  /** @type {string} */
+  const envKey = this.query.platform || "PLATFORM";
+
+  // 过滤资源路径
+  let hit = false;
   const resourcePath = this.resourcePath;
-  const platform = (process.env.PLATFORM || "").toLowerCase();
-  if (!platform || !resourcePath.startsWith(src)) return source;
+  for (const includeConfig of include) {
+    const verified =
+      includeConfig instanceof RegExp
+        ? includeConfig.test(resourcePath)
+        : resourcePath.startsWith(includeConfig);
+    if (verified) {
+      hit = true;
+      break;
+    }
+  }
+  for (const excludeConfig of exclude) {
+    const verified =
+      excludeConfig instanceof RegExp
+        ? excludeConfig.test(resourcePath)
+        : resourcePath.startsWith(excludeConfig);
+    if (verified) {
+      hit = false;
+      break;
+    }
+  }
+  if (debug && hit) {
+    console.log("if-def-loader hit path", resourcePath);
+  }
+  if (!hit) return source;
+
   // 迭代时控制该行是否命中预处理条件
+  const platform = (process.env[envKey] || "").toLowerCase();
   let terser = false;
+  let revised = false;
   let terserIndex = -1;
   /** @type {number[]} */
   const stack = [];
@@ -33,6 +68,7 @@ function IfDefineLoader(source) {
       const group = match.split("|").map(item => item.trim().toLowerCase());
       if (group.indexOf(platform) === -1) {
         terser = true;
+        revised = true;
         terserIndex = index;
       }
       return "";
@@ -52,10 +88,15 @@ function IfDefineLoader(source) {
     if (terser) return "";
     return line;
   });
-  if (debug) {
+
+  // 测试文件复写
+  if (debug && revised) {
     // rm -rf ./**/*.log
+    console.log("if-def-loader revise path", resourcePath);
     fs.writeFile(resourcePath + ".log", target.join("\n"), () => null);
   }
+
+  // 返回处理结果
   return target.join("\n");
 }
 

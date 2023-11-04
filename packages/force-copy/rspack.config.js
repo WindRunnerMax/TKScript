@@ -43,7 +43,7 @@ module.exports = {
   },
   builtins: {
     define: {
-      "__DEV__": isDev,
+      "__DEV__": JSON.stringify(isDev),
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
       "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
@@ -52,6 +52,7 @@ module.exports = {
     pluginImport: [
       {
         libraryName: "@arco-design/web-react",
+        customName: "@arco-design/web-react/es/{{ member }}",
         style: true,
       },
     ],
