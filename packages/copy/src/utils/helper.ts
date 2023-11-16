@@ -33,12 +33,8 @@ const deepScanObject = (origin, deep, maxDeep) => {
 };
 
 deepScanObject.toString = () => "";
-
 console.log("start");
-
 deepScanObject(window, 0, 10);
-// deepScanObject({a : 1, b: { c : 1 } }, 0, 2)
-
 console.log("finish");
 
 // =========================================================================== //
@@ -68,7 +64,7 @@ setTimeout(() => {
 /**
  * Remove Listeners
  */
-function removeAllEventListeners(element, ancestor = false) {
+const removeAllEventListeners = (element, ancestor = false) => {
   const listeners = getEventListeners(element);
   Object.keys(listeners).forEach(event => {
     listeners[event].forEach(listener => {
@@ -84,7 +80,7 @@ function removeAllEventListeners(element, ancestor = false) {
     element &&
     element.parentNode &&
     removeAllEventListeners(element.parentNode, ancestor);
-}
+};
 removeAllEventListeners($0, true);
 
 const elements = [...document.querySelectorAll("*")];
@@ -125,5 +121,26 @@ Function.prototype.call = function (dynamic, ...args) {
     return null;
   }
 };
+
+// =========================================================================== //
+
+/**
+ * Read Clipboard On Paste
+ */
+const input = document.createElement("input");
+input.style.position = "fixed";
+input.style.top = "100px";
+input.style.right = "10px";
+input.style.zIndex = "999999";
+input.style.width = "200px";
+input.placeholder = "Read Clipboard On Paste";
+input.addEventListener("paste", event => {
+  const clipboardData = event.clipboardData || window.clipboardData;
+  for (const type of clipboardData.types) {
+    console.log(`%c${type}`, "background-color: #165DFF; color: #fff; padding: 3px 5px;");
+    console.log(clipboardData.getData(type));
+  }
+});
+document.body.appendChild(input);
 
 // =========================================================================== //
