@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.22
+// @version     6.1.23
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -820,12 +820,17 @@
     };
 
     const website$3 = {
+      config: {
+        initCopyEvent: false
+      },
       regexp: /note\.youdao\.com\/newEditorV1\/bulb\.html.*/,
       init: function() {
         utils.hideButton();
-        utils.enableUserSelectByCSS();
-        document.addEventListener(MOUSE_DOWN, stopNativePropagation, true);
-        document.addEventListener(MOUSE_MOVE, stopNativePropagation, true);
+        if (window.parent && window.parent.location.href.indexOf("ynoteshare") > -1) {
+          utils.enableUserSelectByCSS();
+          document.addEventListener(MOUSE_DOWN, stopNativePropagation, true);
+          document.addEventListener(MOUSE_MOVE, stopNativePropagation, true);
+        }
       }
     };
 
