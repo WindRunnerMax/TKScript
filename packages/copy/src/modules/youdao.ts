@@ -3,12 +3,17 @@ import utils, { stopNativePropagation } from "../utils/event";
 import { Website } from "../websites";
 
 const website: Website = {
+  config: {
+    initCopyEvent: false,
+  },
   regexp: /note\.youdao\.com\/newEditorV1\/bulb\.html.*/,
   init: function () {
     utils.hideButton();
-    utils.enableUserSelectByCSS();
-    document.addEventListener(MOUSE_DOWN, stopNativePropagation, true);
-    document.addEventListener(MOUSE_MOVE, stopNativePropagation, true);
+    if (window.parent && window.parent.location.href.indexOf("ynoteshare") > -1) {
+      utils.enableUserSelectByCSS();
+      document.addEventListener(MOUSE_DOWN, stopNativePropagation, true);
+      document.addEventListener(MOUSE_MOVE, stopNativePropagation, true);
+    }
   },
 };
 
