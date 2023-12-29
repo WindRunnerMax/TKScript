@@ -73,7 +73,7 @@ export class PCBridge {
       sendResponse: (response?: PCResponseType | null) => void
     ) => {
       const rtn = cb(message);
-      sendResponse(rtn || null);
+      rtn && sendResponse(rtn);
     };
     cross.runtime.onMessage.addListener(handler);
     return () => {
