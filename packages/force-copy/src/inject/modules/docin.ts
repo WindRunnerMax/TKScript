@@ -9,6 +9,9 @@ import { logger } from "@/utils/logger";
 import { delayExecute } from "../utils/delay";
 import { PAGE_LOADED } from "copy/src/constant/event";
 
+let preSelectedText = "";
+let curSelectedText = "";
+
 const init = () => {
   const el = <HTMLDivElement>document.querySelector("#j_select");
   el && el.click();
@@ -22,13 +25,12 @@ const onMouseUp = (event: MouseEvent) => {
   const handler = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const text = window.docinReader?.st || "";
-    logger.info("SELECT", text);
-    if (text) {
-      instance.onCopy(text, event);
-    } else {
-      instance.hide(false);
+    curSelectedText = window.docinReader?.st || "";
+    logger.info("SELECT", curSelectedText);
+    if (curSelectedText && preSelectedText !== curSelectedText) {
+      instance.onCopy(curSelectedText, event);
     }
+    preSelectedText = curSelectedText;
   };
   setTimeout(handler, 100);
 };
