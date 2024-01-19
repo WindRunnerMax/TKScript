@@ -13,6 +13,7 @@ export const Basic: WebSite = {
       EventBus.on(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
       EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.on(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
+      EventBus.on(EVENTS_ENUM.TOUCH_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
       EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);
     } else if (type === CONTEXT_MENU_TYPE) {
@@ -25,6 +26,7 @@ export const Basic: WebSite = {
       EventBus.off(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
       EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
       EventBus.off(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
+      EventBus.off(EVENTS_ENUM.TOUCH_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
       EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);
     } else if (type === CONTEXT_MENU_TYPE) {

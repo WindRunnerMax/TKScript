@@ -22,7 +22,9 @@ import { DOM_STAGE } from "copy/src/constant/event";
   // @ts-ignore
   window[process.env.EVENT_TYPE] = true;
   logger.info("Inject Script Loaded");
+  // 初始化事件
   initBaseEvents();
+  // 初始化状态
   const state: State = {
     COPY: !!storage.local.get<boolean>(COPY_TYPE) || !!storage.session.get<boolean>(COPY_TYPE),
     KEYBOARD:

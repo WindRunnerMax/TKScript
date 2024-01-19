@@ -1,6 +1,6 @@
 {
   "name": "force-copy",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Czy",
   "license": "MIT",
   "sideEffects": false,
@@ -20,7 +20,7 @@
     "@arco-design/web-react": "^2.50.0",
     "copy": "workspace: *",
     "copy-currency": "workspace: *",
-    "laser-utils": "0.0.2-alpha.6",
+    "laser-utils": "0.0.2-alpha.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

@@ -12,3 +12,4 @@ export const COPY = "copy";
 export const SELECT_START = "selectstart";
 export const CONTEXT_MENU = "contextmenu";
 export const KEY_DOWN = "keydown";
+export const TOUCH_START = "touchstart";

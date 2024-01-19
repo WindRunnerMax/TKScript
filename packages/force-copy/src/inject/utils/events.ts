@@ -7,6 +7,7 @@ import {
   MOUSE_UP,
   PAGE_LOADED,
   SELECT_START,
+  TOUCH_START,
 } from "copy/src/constant/event";
 import { EVENTS_ENUM, EventBus } from "./bus";
 
@@ -25,6 +26,11 @@ export const initBaseEvents = () => {
   window.addEventListener(
     SELECT_START,
     e => EventBus.emit(EVENTS_ENUM.SELECT_START_CAPTURE, e),
+    true
+  );
+  window.addEventListener(
+    TOUCH_START,
+    e => EventBus.emit(EVENTS_ENUM.TOUCH_START_CAPTURE, e),
     true
   );
   window.addEventListener(DOM_READY, e => EventBus.emit(EVENTS_ENUM.DOM_LOADED, e), true);
