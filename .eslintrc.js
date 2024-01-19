@@ -44,5 +44,6 @@ module.exports = {
     // 关闭@ts-ignore检查
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/consistent-type-imports": "error",
   },
 };

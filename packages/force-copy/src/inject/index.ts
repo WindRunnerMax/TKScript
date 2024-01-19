@@ -1,4 +1,4 @@
-import { State } from "./types/state";
+import type { State } from "./types/state";
 import { storage } from "laser-utils";
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { websites } from "./modules";

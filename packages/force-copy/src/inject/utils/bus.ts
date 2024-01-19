@@ -1,4 +1,4 @@
-import { ALL_ACTION_TYPE } from "@/utils/constant";
+import type { ALL_ACTION_TYPE } from "@/utils/constant";
 import { EventBus as AbstractEventBus } from "laser-utils";
 
 const EVENTS_TYPE = [
@@ -15,6 +15,7 @@ const EVENTS_TYPE = [
   "KEY_BOARD_CAPTURE",
   "CONTEXT_MENU_CAPTURE",
   "SELECT_START_CAPTURE",
+  "TOUCH_START_CAPTURE",
 ] as const;
 
 export const EVENTS_ENUM = EVENTS_TYPE.reduce(
@@ -36,6 +37,7 @@ interface EventBusParams {
   [EVENTS_ENUM.KEY_BOARD_CAPTURE]: KeyboardEvent;
   [EVENTS_ENUM.CONTEXT_MENU_CAPTURE]: Event;
   [EVENTS_ENUM.SELECT_START_CAPTURE]: Event;
+  [EVENTS_ENUM.TOUCH_START_CAPTURE]: TouchEvent;
 }
 
 declare module "laser-utils" {

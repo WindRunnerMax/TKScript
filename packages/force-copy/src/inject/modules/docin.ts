@@ -1,5 +1,5 @@
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
-import { WebSite } from "../types/website";
+import type { WebSite } from "../types/website";
 import { EVENTS_ENUM, EventBus } from "../utils/bus";
 import style from "copy-currency/src/utils";
 import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
