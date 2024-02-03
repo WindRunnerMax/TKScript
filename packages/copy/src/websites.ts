@@ -1,4 +1,4 @@
-import { CopyParams } from "./utils/copy";
+import type { CopyParams } from "./utils/copy";
 import doc88 from "./modules/doc88";
 import sf from "./modules/sf";
 import wk from "./modules/wk";
@@ -29,6 +29,7 @@ import youdao from "./modules/youdao";
 import common from "./modules/common";
 import commonEnhance from "./modules/common-e";
 import commonPreLoad from "./modules/common-p";
+import { kdoc } from "./modules/kdocs";
 
 export interface WebsiteConfig {
   initCopyEvent?: boolean;
@@ -71,6 +72,7 @@ const websites: Website[] = [
   cnki,
   docin,
   youdao,
+  kdoc,
   common,
   commonEnhance,
   commonPreLoad,
