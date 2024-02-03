@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.23
+// @version     6.1.24
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -86,6 +86,7 @@
 // @match       *://*.163.com/*
 // @match       *://*.aipiaxi.com/*
 // @match       *://wenku.csdn.net/*
+// @match       *://www.kdocs.cn/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -914,6 +915,15 @@
       }
     };
 
+    const kdoc = {
+      regexp: new RegExp("kdocs"),
+      init: function() {
+        window.addEventListener(PAGE_LOADED, () => {
+          window.APP && (window.APP.canCopy = () => true);
+        });
+      }
+    };
+
     const websites = [
       website$s,
       website$r,
@@ -942,6 +952,7 @@
       website$5,
       website$4,
       website$3,
+      kdoc,
       website$2,
       website$1,
       website
