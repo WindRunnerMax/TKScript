@@ -1,6 +1,7 @@
 import { DOM_READY, DOM_STAGE } from "./constant/event";
-import { CopyParams } from "./utils/copy";
-import websites, { Website, WebsiteConfig } from "./websites";
+import type { CopyParams } from "./utils/copy";
+import type { Website, WebsiteConfig } from "./websites";
+import websites from "./websites";
 
 let siteGetSelectedText: (() => CopyParams) | null = null;
 
