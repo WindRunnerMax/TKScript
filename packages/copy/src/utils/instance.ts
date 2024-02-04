@@ -1,4 +1,5 @@
-import { copy, CopyParams } from "./copy";
+import type { CopyParams } from "./copy";
+import { copy } from "./copy";
 
 let dom: null | HTMLDivElement = null;
 let isReadyToHidden = false;

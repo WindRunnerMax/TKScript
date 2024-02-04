@@ -1,6 +1,6 @@
 import { DOM_STAGE } from "../constant/event";
 import utils from "../utils/event";
-import { Website } from "../websites";
+import type { Website } from "../websites";
 
 const website: Website = {
   config: {

@@ -1,4 +1,4 @@
-import { Website } from "../websites";
+import type { Website } from "../websites";
 
 const website: Website = {
   regexp: /google/,

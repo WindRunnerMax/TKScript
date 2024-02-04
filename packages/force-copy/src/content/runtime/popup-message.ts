@@ -1,10 +1,7 @@
 import { CI_EXECUTION_ENUM, PC_QUERY_STATE_ENUM } from "@/bridge/constant";
 import { CIBridge, CONTENT_TO_INJECT_REQUEST } from "@/bridge/content-inject";
-import {
-  PCRequestType,
-  POPUP_TO_CONTENT_REQUEST,
-  POPUP_TO_CONTENT_RESPONSE,
-} from "@/bridge/popup-content";
+import type { PCRequestType } from "@/bridge/popup-content";
+import { POPUP_TO_CONTENT_REQUEST, POPUP_TO_CONTENT_RESPONSE } from "@/bridge/popup-content";
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { isInIframe } from "@/utils/is";
 import { logger } from "@/utils/logger";

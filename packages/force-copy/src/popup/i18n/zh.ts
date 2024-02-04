@@ -1,4 +1,4 @@
-import { DefaultI18nConfig } from "./types";
+import type { DefaultI18nConfig } from "./types";
 
 export const zh: DefaultI18nConfig = {
   Title: "Force Copy",

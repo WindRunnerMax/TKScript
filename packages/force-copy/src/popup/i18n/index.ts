@@ -1,5 +1,5 @@
 import { isString } from "laser-utils";
-import { ConfigBlock, I18nTypes } from "./types";
+import type { ConfigBlock, I18nTypes } from "./types";
 import { en } from "./en";
 import { zh } from "./zh";
 

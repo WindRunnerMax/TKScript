@@ -1,4 +1,5 @@
-import { FC, useLayoutEffect, useState } from "react";
+import type { FC } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Switch, Grid } from "@arco-design/web-react";
 import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-react/icon";
 import styles from "./index.module.scss";

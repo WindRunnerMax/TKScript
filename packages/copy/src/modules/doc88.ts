@@ -1,5 +1,5 @@
 import dom from "../utils/dom";
-import { Website } from "../websites";
+import type { Website } from "../websites";
 
 /*!
  * 外部引用`static.doc88.com`声明

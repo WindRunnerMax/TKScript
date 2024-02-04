@@ -1,5 +1,5 @@
 import { cross } from "@/utils/global";
-import { PCQueryStateType } from "./constant";
+import type { PCQueryStateType } from "./constant";
 import { isEmptyValue } from "laser-utils";
 import { logger } from "@/utils/logger";
 import { URL_MATCH } from "@/utils/constant";

@@ -1,4 +1,5 @@
-import websites, { Website } from "./websites";
+import type { Website } from "./websites";
+import websites from "./websites";
 
 ((): void => {
   const mather = (regex: RegExp, website: Website) => {

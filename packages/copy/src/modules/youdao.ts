@@ -1,6 +1,6 @@
 import { MOUSE_DOWN, MOUSE_MOVE } from "../constant/event";
 import utils, { stopNativePropagation } from "../utils/event";
-import { Website } from "../websites";
+import type { Website } from "../websites";
 
 const website: Website = {
   config: {

@@ -1,5 +1,5 @@
 import { decodeJSON, encodeJSON } from "laser-utils";
-import { CIExecutionType } from "./constant";
+import type { CIExecutionType } from "./constant";
 
 const EVENT_TYPE = process.env.EVENT_TYPE || "EVENT_TYPE_DG";
 

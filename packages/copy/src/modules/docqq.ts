@@ -1,6 +1,6 @@
 import { TEXT_HTML, TEXT_PLAIN } from "../utils/copy";
 import utils from "../utils/event";
-import { Website } from "../websites";
+import type { Website } from "../websites";
 
 const website: Website = {
   regexp: /.*docs\.qq\.com\/.+/,

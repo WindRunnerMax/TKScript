@@ -1,4 +1,5 @@
-import { CWBridge, CWRequestType } from "@/bridge/content-worker";
+import type { CWRequestType } from "@/bridge/content-worker";
+import { CWBridge } from "@/bridge/content-worker";
 import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
 import { RELOAD_APP, reloadApp } from "@/utils/reload";

@@ -1,5 +1,5 @@
 import dom from "../utils/dom";
-import { Website } from "../websites";
+import type { Website } from "../websites";
 
 const website: Website = {
   regexp: /.*segmentfault\.com\/.+/,
