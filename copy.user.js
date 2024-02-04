@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.1.24
+// @version     6.1.25
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -916,11 +916,27 @@
     };
 
     const kdoc = {
+      config: {
+        runAt: DOM_STAGE.START
+      },
       regexp: new RegExp("kdocs"),
       init: function() {
-        window.addEventListener(PAGE_LOADED, () => {
-          window.APP && (window.APP.canCopy = () => true);
-        });
+        const patch = () => {
+          unsafeWindow.APP && (unsafeWindow.APP.canCopy = () => true);
+        };
+        if (unsafeWindow.APP) {
+          patch();
+        } else {
+          let APP = void 0;
+          Object.defineProperty(unsafeWindow, "APP", {
+            configurable: false,
+            set: (value) => {
+              APP = value;
+              value && patch();
+            },
+            get: () => APP
+          });
+        }
       }
     };
 
