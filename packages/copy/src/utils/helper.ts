@@ -136,9 +136,9 @@ input.style.width = "200px";
 input.placeholder = "Read Clipboard On Paste";
 input.addEventListener("paste", event => {
   const clipboardData = event.clipboardData || window.clipboardData;
-  for (const type of clipboardData.types) {
-    console.log(`%c${type}`, "background-color: #165DFF; color: #fff; padding: 3px 5px;");
-    console.log(clipboardData.getData(type));
+  for (const item of clipboardData.items) {
+    console.log(`%c${item.type}`, "background-color: #165DFF; color: #fff; padding: 3px 5px;");
+    console.log(item.kind === "file" ? item.getAsFile() : clipboardData.getData(item.type));
   }
 });
 document.body.appendChild(input);
