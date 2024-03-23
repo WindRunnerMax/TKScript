@@ -46,6 +46,7 @@ const website: Website = {
       "aipiaxi",
       "wenku\\.csdn\\.net",
       "xiaoyuzhoufm\\.com",
+      "mcmod\\.cn",
     ].join("|")
   ),
   init: function () {
