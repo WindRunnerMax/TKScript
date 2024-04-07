@@ -89,7 +89,7 @@
     });
   };
 
-  var utils = {
+  const styles = {
     insertCSS: (id, css) => {
       const style = document.createElement("style");
       style.id = id;
@@ -117,7 +117,7 @@
       openFunction: () => {
         window.addEventListener("selectstart", stopNativePropagation, true);
         window.addEventListener("copy", stopNativePropagation, true);
-        utils.insertCSS(
+        styles.insertCSS(
           STORAGE_KEY_PREFIX + "selectstart-and-copy",
           "*{user-select: auto !important;-webkit-user-select: auto !important;}"
         );
@@ -125,7 +125,7 @@
       closeFunction: () => {
         window.removeEventListener("selectstart", stopNativePropagation, true);
         window.removeEventListener("copy", stopNativePropagation, true);
-        utils.removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
+        styles.removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
       }
     },
     {
