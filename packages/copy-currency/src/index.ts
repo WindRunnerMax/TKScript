@@ -1,5 +1,6 @@
-import { BUTTON_STATUS, ControllerItem, register, STORAGE_KEY_PREFIX } from "./register";
-import utils from "./utils";
+import type { ControllerItem } from "./register";
+import { BUTTON_STATUS, register, STORAGE_KEY_PREFIX } from "./register";
+import { styles } from "./utils";
 
 const stopNativePropagation = (event: Event) => event.stopPropagation();
 const CONTROLLER_MAP: ControllerItem[] = [
@@ -11,7 +12,7 @@ const CONTROLLER_MAP: ControllerItem[] = [
     openFunction: () => {
       window.addEventListener("selectstart", stopNativePropagation, true);
       window.addEventListener("copy", stopNativePropagation, true);
-      utils.insertCSS(
+      styles.insertCSS(
         STORAGE_KEY_PREFIX + "selectstart-and-copy",
         "*{user-select: auto !important;-webkit-user-select: auto !important;}"
       );
@@ -19,7 +20,7 @@ const CONTROLLER_MAP: ControllerItem[] = [
     closeFunction: () => {
       window.removeEventListener("selectstart", stopNativePropagation, true);
       window.removeEventListener("copy", stopNativePropagation, true);
-      utils.removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
+      styles.removeCSS(STORAGE_KEY_PREFIX + "selectstart-and-copy");
     },
   },
   {

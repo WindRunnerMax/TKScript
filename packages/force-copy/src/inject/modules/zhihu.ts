@@ -1,7 +1,7 @@
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import type { WebSite } from "../types/website";
 import { EVENTS_ENUM, EventBus } from "../utils/bus";
-import styles from "copy-currency/src/utils";
+import { styles } from "copy-currency/src/utils";
 import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
 import { ALLOW_PAINT, AUTO_USER_SELECT, STYLE_ID } from "../utils/styles";
 import { delayExecute } from "../utils/delay";

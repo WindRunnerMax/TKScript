@@ -1,7 +1,7 @@
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import type { WebSite } from "../types/website";
 import { EVENTS_ENUM, EventBus } from "../utils/bus";
-import style from "copy-currency/src/utils";
+import { styles } from "copy-currency/src/utils";
 import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
 import instance from "copy/src/utils/instance";
 import { ALLOW_PAINT, AUTO_USER_SELECT, COPY_BUTTON_STYLE, STYLE_ID } from "../utils/styles";
@@ -40,7 +40,7 @@ export const DocIn: WebSite = {
   start(type) {
     if (type === COPY_TYPE) {
       delayExecute(PAGE_LOADED).then(init);
-      style.insertCSS(
+      styles.insertCSS(
         STYLE_ID,
         AUTO_USER_SELECT + ALLOW_PAINT + COPY_BUTTON_STYLE + ".copy-tips{display:none !important;} "
       );
@@ -58,7 +58,7 @@ export const DocIn: WebSite = {
   close(type) {
     if (type === COPY_TYPE) {
       instance.destroy();
-      style.removeCSS(STYLE_ID);
+      styles.removeCSS(STYLE_ID);
       EventBus.off(EVENTS_ENUM.MOUSE_UP_CAPTURE, onMouseUp);
       EventBus.off(EVENTS_ENUM.MOUSE_DOWN_CAPTURE, onMouseDown);
       EventBus.off(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);

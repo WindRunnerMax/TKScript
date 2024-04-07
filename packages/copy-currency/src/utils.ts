@@ -1,4 +1,4 @@
-export default {
+export const styles = {
   insertCSS: (id: string, css: string): void => {
     const style = document.createElement("style");
     style.id = id;
