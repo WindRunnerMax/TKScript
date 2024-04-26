@@ -29,7 +29,7 @@ const scriptConfig = [
   {
     name: "Copy",
     meta: {
-      input: "./meta/blank.js",
+      input: "./meta/blank.ts",
       output: "./dist/meta/copy.meta.js",
       metaFile: "./packages/copy/meta.json",
     },
@@ -42,7 +42,7 @@ const scriptConfig = [
   {
     name: "CopyCurrency",
     meta: {
-      input: "./meta/blank.js",
+      input: "./meta/blank.ts",
       output: "./dist/meta/copy-currency.meta.js",
       metaFile: "./packages/copy-currency/meta.json",
     },
@@ -54,7 +54,7 @@ const scriptConfig = [
   {
     name: "SiteDirector",
     meta: {
-      input: "./meta/blank.js",
+      input: "./meta/blank.ts",
       output: "./dist/meta/site-director.meta.js",
       metaFile: "./packages/site-director/meta.json",
     },
