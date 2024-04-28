@@ -47,6 +47,13 @@ const website: Website = {
       "wenku\\.csdn\\.net",
       "xiaoyuzhoufm\\.com",
       "mcmod\\.cn",
+      "zsxq\\.com",
+      "volcengine\\.com",
+      "lyrical-nonsense\\.com",
+      "xueqiu\\.com",
+      "php\\.cn",
+      "51cto\\.com",
+      "educoder\\.net",
     ].join("|")
   ),
   init: function () {
