@@ -40,7 +40,7 @@ interface EventBusParams {
   [EVENTS_ENUM.TOUCH_START_CAPTURE]: TouchEvent;
 }
 
-declare module "laser-utils" {
+declare module "laser-utils/dist/event-bus" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface EventBusType extends EventBusParams {}
 }
