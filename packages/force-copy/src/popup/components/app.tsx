@@ -5,7 +5,7 @@ import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-re
 import styles from "./index.module.scss";
 import { cs } from "laser-utils";
 import { PCBridge } from "@/bridge/popup-content";
-import { PC_QUERY_STATE_ENUM } from "@/bridge/constant";
+import { PC_QUERY_STATE_ENUM } from "@/bridge/popup-content/constant";
 import { I18n } from "../i18n";
 import { cross } from "@/utils/global";
 import { cipherBadgeNumber } from "../utils/badge";

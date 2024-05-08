@@ -1,4 +1,4 @@
-import { CI_EXECUTION_ENUM, PC_QUERY_STATE_ENUM } from "@/bridge/constant";
+import { PC_QUERY_STATE_ENUM } from "@/bridge/popup-content/constant";
 import { CIBridge, CONTENT_TO_INJECT_REQUEST } from "@/bridge/content-inject";
 import type { PCRequestType } from "@/bridge/popup-content";
 import { POPUP_TO_CONTENT_REQUEST, POPUP_TO_CONTENT_RESPONSE } from "@/bridge/popup-content";
@@ -6,6 +6,7 @@ import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { isInIframe } from "@/utils/is";
 import { logger } from "@/utils/logger";
 import { storage } from "laser-utils";
+import { CI_EXECUTION_ENUM } from "@/bridge/content-inject/constant";
 
 export const onPopupMessage = (data: PCRequestType) => {
   logger.info("Content Receive Popup Message", location.host, data);
