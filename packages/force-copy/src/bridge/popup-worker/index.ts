@@ -1,12 +1,12 @@
 import { cross } from "@/utils/global";
-import type { CWRequestType } from "./request";
-import { CONTENT_TO_WORKER_REQUEST } from "./request";
+import type { PWRequestType } from "./request";
+import { POPUP_TO_WORKER_REQUEST } from "./request";
 
-export class CWBridge {
-  public static readonly REQUEST = CONTENT_TO_WORKER_REQUEST;
+export class PWBridge {
+  public static readonly REQUEST = POPUP_TO_WORKER_REQUEST;
   public static readonly RESPONSE = null;
 
-  static async postToWorker(data: CWRequestType) {
+  static async postToWorker(data: PWRequestType) {
     return new Promise<null>(resolve => {
       if (cross.runtime.id) {
         cross.runtime.sendMessage(data).then(resolve);
@@ -16,9 +16,9 @@ export class CWBridge {
     });
   }
 
-  static onContentMessage(cb: (data: CWRequestType, sender: chrome.runtime.MessageSender) => null) {
+  static onPopupMessage(cb: (data: PWRequestType, sender: chrome.runtime.MessageSender) => null) {
     const handler = (
-      message: CWRequestType,
+      message: PWRequestType,
       sender: chrome.runtime.MessageSender,
       sendResponse: (response?: null) => void
     ) => {

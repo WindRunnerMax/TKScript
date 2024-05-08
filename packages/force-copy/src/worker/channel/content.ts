@@ -1,11 +1,11 @@
-import type { CWRequestType } from "@/bridge/content-worker";
 import { CWBridge } from "@/bridge/content-worker";
+import type { CWRequestType } from "@/bridge/content-worker/request";
 import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
 import { RELOAD_APP, reloadApp } from "@/utils/reload";
 
 export const onContentMessage = (data: CWRequestType, sender: chrome.runtime.MessageSender) => {
-  logger.info("Content Receive Popup Message", data);
+  logger.info("Worker Receive Content Message", data);
   switch (data.type) {
     case CWBridge.REQUEST.RELOAD: {
       reloadApp(RELOAD_APP);

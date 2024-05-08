@@ -1,10 +1,10 @@
-import type { CIRequestType } from "@/bridge/content-inject";
-import { CONTENT_TO_INJECT_REQUEST } from "@/bridge/content-inject";
 import type { WebSite } from "../types/website";
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { logger } from "@/utils/logger";
 import { DOM_STAGE } from "copy/src/constant/event";
-import { CI_EXECUTION_ENUM } from "@/bridge/content-inject/constant";
+import { CI_EXECUTION_ENUM } from "@/bridge/content-inject/state";
+import type { CIRequestType } from "@/bridge/content-inject/request";
+import { CONTENT_TO_INJECT_REQUEST } from "@/bridge/content-inject/request";
 
 export const onContentMessage = (handler: WebSite) => {
   return (data: CIRequestType) => {

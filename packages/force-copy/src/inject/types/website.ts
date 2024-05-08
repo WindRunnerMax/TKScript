@@ -1,6 +1,7 @@
 import type { ALL_ACTION_TYPE } from "@/utils/constant";
 import type { State } from "./state";
 import type { DOM_STAGE } from "copy/src/constant/event";
+import type { RecordValues } from "@/utils/types";
 
 export type WebSite = {
   // 链接匹配正则

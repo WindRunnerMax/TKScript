@@ -1,42 +1,11 @@
 import { cross } from "@/utils/global";
-import type { PCQueryStateType } from "./constant";
 import { isEmptyValue } from "laser-utils";
 import { logger } from "@/utils/logger";
 import { URL_MATCH } from "@/utils/constant";
-
-const PC_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE", "QUERY_STATE"] as const;
-export const POPUP_TO_CONTENT_REQUEST = PC_REQUEST_TYPE.reduce(
-  (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
-  {} as { [K in typeof PC_REQUEST_TYPE[number]]: `__${K}__` }
-);
-
-const PC_RESPONSE_TYPE = ["STATE", "PLACE_HOLDER"] as const;
-export const POPUP_TO_CONTENT_RESPONSE = PC_RESPONSE_TYPE.reduce(
-  (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
-  {} as { [K in typeof PC_RESPONSE_TYPE[number]]: `__${K}__` }
-);
-
-export type PCRequestType =
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.COPY_TYPE;
-      payload: { checked: boolean; once: boolean };
-    }
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE;
-      payload: { checked: boolean; once: boolean };
-    }
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE;
-      payload: { checked: boolean; once: boolean };
-    }
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.QUERY_STATE;
-    };
-
-export type PCResponseType = {
-  type: typeof POPUP_TO_CONTENT_RESPONSE.STATE;
-  payload: { [K in PCQueryStateType]: boolean };
-};
+import type { PCRequestType } from "./request";
+import { POPUP_TO_CONTENT_REQUEST } from "./request";
+import type { PCResponseType } from "./response";
+import { POPUP_TO_CONTENT_RESPONSE } from "./response";
 
 export class PCBridge {
   public static readonly REQUEST = POPUP_TO_CONTENT_REQUEST;
