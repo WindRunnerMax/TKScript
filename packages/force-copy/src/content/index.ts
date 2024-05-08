@@ -1,10 +1,10 @@
 import { PCBridge } from "@/bridge/popup-content";
 import { onReceiveReloadMsg } from "../utils/reload";
-import { onPopupMessage } from "./runtime/popup-message";
+import { onPopupMessage } from "./channel/popup";
 import { LOG_LEVEL, logger } from "@/utils/logger";
-import { initializeWorker } from "./runtime/initialize-worker";
+import { initializeWorker } from "./runtime/initialize";
 import { isInIframe } from "@/utils/is";
-import { implantScript } from "./runtime/implant-script";
+import { implantScript } from "./runtime/script";
 
 (() => {
   if (__DEV__) {

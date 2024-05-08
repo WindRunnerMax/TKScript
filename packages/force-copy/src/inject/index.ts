@@ -4,7 +4,7 @@ import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { websites } from "./modules";
 import { initBaseEvents } from "./utils/events";
 import { CIBridge } from "@/bridge/content-inject";
-import { onContentMessage } from "./utils/content-msg";
+import { onContentMessage } from "./channel/content";
 import { LOG_LEVEL, logger } from "@/utils/logger";
 import { DOM_STAGE } from "copy/src/constant/event";
 
