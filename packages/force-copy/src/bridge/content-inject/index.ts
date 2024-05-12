@@ -1,9 +1,7 @@
 import { decodeJSON, encodeJSON } from "laser-utils";
 import type { CIRequestType } from "./request";
 import { CONTENT_TO_INJECT_REQUEST } from "./request";
-import { MARK } from "./constant";
-
-const EVENT_TYPE = process.env.EVENT_TYPE || "EVENT_TYPE_DG";
+import { EVENT_TYPE, MARK } from "./constant";
 
 export class CIBridge {
   public static readonly REQUEST = CONTENT_TO_INJECT_REQUEST;

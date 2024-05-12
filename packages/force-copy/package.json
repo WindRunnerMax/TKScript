@@ -17,27 +17,26 @@
     "url": "git://github.com/WindrunnerMax/TKScript"
   },
   "dependencies": {
-    "@arco-design/web-react": "^2.50.0",
+    "@arco-design/web-react": "2.50.0",
     "copy": "workspace: *",
     "copy-currency": "workspace: *",
     "laser-utils": "0.0.2-alpha.10",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@rollup/plugin-alias": "^5.0.0",
-    "@rollup/plugin-html": "^1.0.2",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@rspack/cli": "^0.2.5",
-    "@rspack/plugin-html": "^0.2.5",
-    "@types/chrome": "^0.0.241",
-    "@types/react": "^17.0.1",
-    "@types/react-dom": "^17.0.1",
-    "less": "^3.0.0",
+    "@rollup/plugin-alias": "5.0.0",
+    "@rollup/plugin-html": "1.0.2",
+    "@rspack/cli": "0.2.5",
+    "@rspack/plugin-html": "0.2.5",
+    "@types/chrome": "0.0.241",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "less": "3.0.0",
     "less-loader": "6.0.0",
-    "sass": "^1.52.3",
-    "sass-loader": "^13.3.2",
-    "ts-node": "^10.9.1"
+    "sass": "1.52.3",
+    "sass-loader": "13.3.2",
+    "ts-node": "10.9.1"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
