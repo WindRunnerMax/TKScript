@@ -1,4 +1,4 @@
-import type { EventMapToArray, EventMapToRecord, RecordValues } from "@/utils/types";
+import type { EventReflect, Object } from "@/utils/types";
 
 const PW_REQUEST_TYPE = ["RELOAD", "__"] as const;
 export const POPUP_TO_WORKER_REQUEST = PW_REQUEST_TYPE.reduce(
@@ -10,11 +10,11 @@ export type PWRequestMap = {
   [POPUP_TO_WORKER_REQUEST.RELOAD]: null;
 };
 
-export type PWRequestType = RecordValues<
-  EventMapToRecord<RecordValues<typeof POPUP_TO_WORKER_REQUEST>, PWRequestMap>
+export type PWRequestType = Object.Values<
+  EventReflect.Map<Object.Values<typeof POPUP_TO_WORKER_REQUEST>, PWRequestMap>
 >;
 
-export type PWToWorkerArgs = EventMapToArray<
-  RecordValues<typeof POPUP_TO_WORKER_REQUEST>,
+export type PWToWorkerArgs = EventReflect.Array<
+  Object.Values<typeof POPUP_TO_WORKER_REQUEST>,
   PWRequestMap
 >;

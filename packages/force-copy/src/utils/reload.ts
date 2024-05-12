@@ -1,6 +1,7 @@
 import { CWBridge } from "@/bridge/content-worker";
 import { cross } from "./global";
 import { logger } from "./logger";
+import type { Object } from "./types";
 
 export const RELOAD_APP = "RELOAD_APP";
 

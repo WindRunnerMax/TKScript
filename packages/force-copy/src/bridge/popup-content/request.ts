@@ -1,22 +1,17 @@
+import type { EventReflect } from "@/utils/types";
+import { MARK } from "./constant";
+
 const PC_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE", "QUERY_STATE"] as const;
 export const POPUP_TO_CONTENT_REQUEST = PC_REQUEST_TYPE.reduce(
-  (acc, cur) => ({ ...acc, [cur]: `__${cur}__PC__` }),
-  {} as { [K in typeof PC_REQUEST_TYPE[number]]: `__${K}__PC__` }
+  (acc, cur) => ({ ...acc, [cur]: `__${cur}__${MARK}__` }),
+  {} as { [K in typeof PC_REQUEST_TYPE[number]]: `__${K}__${typeof MARK}__` }
 );
 
-export type PCRequestType =
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.COPY_TYPE;
-      payload: { checked: boolean; once: boolean };
-    }
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE;
-      payload: { checked: boolean; once: boolean };
-    }
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE;
-      payload: { checked: boolean; once: boolean };
-    }
-  | {
-      type: typeof POPUP_TO_CONTENT_REQUEST.QUERY_STATE;
-    };
+type EventMap = {
+  [POPUP_TO_CONTENT_REQUEST.COPY_TYPE]: { checked: boolean; once: boolean };
+  [POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE]: { checked: boolean; once: boolean };
+  [POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE]: { checked: boolean; once: boolean };
+  [POPUP_TO_CONTENT_REQUEST.QUERY_STATE]: null;
+};
+
+export type PCRequestType = EventReflect.Tuple<typeof POPUP_TO_CONTENT_REQUEST, EventMap>;

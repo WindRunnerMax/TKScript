@@ -7,7 +7,6 @@ const EVENT_TYPE = process.env.EVENT_TYPE || "EVENT_TYPE_DG";
 
 export class CIBridge {
   public static readonly REQUEST = CONTENT_TO_INJECT_REQUEST;
-  public static readonly RESPONSE = null;
 
   static postToInject(data: CIRequestType) {
     window.dispatchEvent(new CustomEvent(EVENT_TYPE, { detail: encodeJSON(data) }));

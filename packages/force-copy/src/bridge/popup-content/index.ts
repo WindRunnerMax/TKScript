@@ -5,11 +5,10 @@ import { URL_MATCH } from "@/utils/constant";
 import type { PCRequestType } from "./request";
 import { POPUP_TO_CONTENT_REQUEST } from "./request";
 import type { PCResponseType } from "./response";
-import { POPUP_TO_CONTENT_RESPONSE } from "./response";
+import { MARK } from "./constant";
 
 export class PCBridge {
   public static readonly REQUEST = POPUP_TO_CONTENT_REQUEST;
-  public static readonly RESPONSE = POPUP_TO_CONTENT_RESPONSE;
 
   static async postToContent(data: PCRequestType) {
     return new Promise<PCResponseType | null>(resolve => {
@@ -37,16 +36,23 @@ export class PCBridge {
 
   static onPopupMessage(cb: (data: PCRequestType) => void | PCResponseType) {
     const handler = (
-      message: PCRequestType,
+      request: PCRequestType,
       _: chrome.runtime.MessageSender,
-      sendResponse: (response?: PCResponseType | null) => void
+      sendResponse: (response: PCResponseType | null) => void
     ) => {
-      const rtn = cb(message);
-      rtn && sendResponse(rtn);
+      const response = cb(request);
+      response && response.type === request.type && sendResponse(response);
     };
     cross.runtime.onMessage.addListener(handler);
     return () => {
       cross.runtime.onMessage.removeListener(handler);
     };
+  }
+
+  static isPCRequestType(data: PCRequestType): data is PCRequestType {
+    if (data && data.type && data.type.endsWith(`__${MARK}__`)) {
+      return true;
+    }
+    return false;
   }
 }

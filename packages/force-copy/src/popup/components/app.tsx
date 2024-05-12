@@ -5,10 +5,10 @@ import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-re
 import styles from "./index.module.scss";
 import { cs } from "laser-utils";
 import { PCBridge } from "@/bridge/popup-content";
-import { PC_QUERY_STATE_ENUM } from "@/bridge/popup-content/state";
 import { I18n } from "../i18n";
 import { cross } from "@/utils/global";
 import { cipherBadgeNumber } from "../utils/badge";
+import { PC_QUERY_STATE_ENUM } from "@/bridge/popup-content/response";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -46,8 +46,9 @@ export const App: FC = () => {
     };
     PCBridge.postToContent({
       type: PCBridge.REQUEST.QUERY_STATE,
+      payload: null,
     }).then(res => {
-      if (res && res.type === PCBridge.RESPONSE.STATE) {
+      if (res && res.type === PCBridge.REQUEST.QUERY_STATE) {
         for (const [key, value] of Object.entries(res.payload)) {
           const handler = mapper[key];
           handler && handler(value);
