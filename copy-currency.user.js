@@ -149,4 +149,4 @@
     register(CONTROLLER_MAP);
   })();
 
-})();
+}());
