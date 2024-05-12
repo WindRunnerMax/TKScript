@@ -1,6 +1,7 @@
 import { decodeJSON, encodeJSON } from "laser-utils";
 import type { CIRequestType } from "./request";
 import { CONTENT_TO_INJECT_REQUEST } from "./request";
+import { MARK } from "./constant";
 
 const EVENT_TYPE = process.env.EVENT_TYPE || "EVENT_TYPE_DG";
 
@@ -27,5 +28,12 @@ export class CIBridge {
       // @ts-ignore
       window.removeEventListener(EVENT_TYPE, handler);
     };
+  }
+
+  static isCIRequestType(data: CIRequestType): data is CIRequestType {
+    if (data && data.type && data.type.endsWith(`__${MARK}__`)) {
+      return true;
+    }
+    return false;
   }
 }
