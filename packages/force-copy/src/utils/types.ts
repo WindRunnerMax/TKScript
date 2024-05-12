@@ -9,6 +9,10 @@ export namespace Array {
   export type Values<T extends readonly unknown[]> = T[number];
 }
 
+export namespace String {
+  export type Map<T extends string> = { [P in T]: P };
+}
+
 export namespace EventReflect {
   export type Array<T, M extends Record<string, unknown>> = T extends string
     ? [type: unknown extends M[T] ? never : T, payload: M[T]]

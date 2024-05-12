@@ -1,17 +1,17 @@
-import { cross } from "@/utils/global";
 import { isEmptyValue } from "laser-utils";
-import { logger } from "@/utils/logger";
+
 import { URL_MATCH } from "@/utils/constant";
-import type { PCRequestType } from "./request";
+import { cross } from "@/utils/global";
+import { logger } from "@/utils/logger";
+import type { WCRequestType } from "./request";
 import { POPUP_TO_CONTENT_REQUEST } from "./request";
-import type { PCResponseType } from "./response";
 import { MARK } from "./constant";
 
-export class PCBridge {
+export class WCBridge {
   public static readonly REQUEST = POPUP_TO_CONTENT_REQUEST;
 
-  static async postToContent(data: PCRequestType) {
-    return new Promise<PCResponseType | null>(resolve => {
+  static async postToContent(data: WCRequestType) {
+    return new Promise<void | null>(resolve => {
       cross.tabs
         .query({ active: true, currentWindow: true })
         .then(tabs => {
@@ -34,14 +34,14 @@ export class PCBridge {
     });
   }
 
-  static onPopupMessage(cb: (data: PCRequestType) => void | PCResponseType) {
+  static onWorkerMessage(cb: (data: WCRequestType) => void | null) {
     const handler = (
-      request: PCRequestType,
+      message: WCRequestType,
       _: chrome.runtime.MessageSender,
-      sendResponse: (response: PCResponseType | null) => void
+      sendResponse: (response?: void) => void
     ) => {
-      const response = cb(request);
-      response && response.type === request.type && sendResponse(response);
+      const rtn = cb(message);
+      rtn && sendResponse(rtn);
     };
     cross.runtime.onMessage.addListener(handler);
     return () => {
@@ -49,7 +49,7 @@ export class PCBridge {
     };
   }
 
-  static isPCRequestType(data: PCRequestType): data is PCRequestType {
+  static isWCRequestType(data: WCRequestType): data is WCRequestType {
     return data && data.type && data.type.endsWith(`__${MARK}__`);
   }
 }

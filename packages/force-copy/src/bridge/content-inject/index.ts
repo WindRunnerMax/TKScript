@@ -30,9 +30,6 @@ export class CIBridge {
   }
 
   static isCIRequestType(data: CIRequestType): data is CIRequestType {
-    if (data && data.type && data.type.endsWith(`__${MARK}__`)) {
-      return true;
-    }
-    return false;
+    return data && data.type && data.type.endsWith(`__${MARK}__`);
   }
 }

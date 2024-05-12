@@ -1,10 +1,10 @@
 import { cross } from "@/utils/global";
 import type { CWRequestType } from "./request";
 import { CONTENT_TO_WORKER_REQUEST } from "./request";
+import { MARK } from "./constant";
 
 export class CWBridge {
   public static readonly REQUEST = CONTENT_TO_WORKER_REQUEST;
-  public static readonly RESPONSE = null;
 
   static async postToWorker(data: CWRequestType) {
     return new Promise<null>(resolve => {
@@ -29,5 +29,9 @@ export class CWBridge {
     return () => {
       cross.runtime.onMessage.removeListener(handler);
     };
+  }
+
+  static isCWRequestType(data: CWRequestType): data is CWRequestType {
+    return data && data.type && data.type.endsWith(`__${MARK}__`);
   }
 }

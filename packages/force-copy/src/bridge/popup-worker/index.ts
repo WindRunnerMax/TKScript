@@ -1,10 +1,10 @@
 import { cross } from "@/utils/global";
 import type { PWRequestType } from "./request";
 import { POPUP_TO_WORKER_REQUEST } from "./request";
+import { MARK } from "./constant";
 
 export class PWBridge {
   public static readonly REQUEST = POPUP_TO_WORKER_REQUEST;
-  public static readonly RESPONSE = null;
 
   static async postToWorker(data: PWRequestType) {
     return new Promise<null>(resolve => {
@@ -29,5 +29,9 @@ export class PWBridge {
     return () => {
       cross.runtime.onMessage.removeListener(handler);
     };
+  }
+
+  static isPWRequestType(data: PWRequestType): data is PWRequestType {
+    return data && data.type && data.type.endsWith(`__${MARK}__`);
   }
 }
