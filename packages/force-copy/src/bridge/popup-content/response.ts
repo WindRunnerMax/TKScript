@@ -1,4 +1,4 @@
-import type { EventReflect, Object, String } from "@/utils/types";
+import type { Reflex, Object } from "@/utils/types";
 import type { POPUP_TO_CONTENT_REQUEST } from "./request";
 
 export const PC_QUERY_STATE_ENUM = {
@@ -16,4 +16,4 @@ type EventMap = {
   [POPUP_TO_CONTENT_REQUEST.QUERY_STATE]: { [K in PCQueryStateType]: boolean };
 };
 
-export type PCResponseType = EventReflect.Tuple<String.Map<keyof EventMap>, EventMap>;
+export type PCResponseType = Reflex.Tuple<EventMap>;

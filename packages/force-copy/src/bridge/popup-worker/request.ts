@@ -1,4 +1,4 @@
-import type { EventReflect, Object } from "@/utils/types";
+import type { Reflex } from "@/utils/types";
 import { MARK } from "./constant";
 
 const PW_REQUEST_TYPE = ["RELOAD", "__"] as const;
@@ -9,11 +9,9 @@ export const POPUP_TO_WORKER_REQUEST = PW_REQUEST_TYPE.reduce(
 
 export type PWRequestMap = {
   [POPUP_TO_WORKER_REQUEST.RELOAD]: null;
+  [POPUP_TO_WORKER_REQUEST.__]: null;
 };
 
-export type PWRequestType = EventReflect.Tuple<typeof POPUP_TO_WORKER_REQUEST, PWRequestMap>;
+export type PWRequestType = Reflex.Tuple<PWRequestMap>;
 
-export type PWRequestArgs = EventReflect.Array<
-  Object.Values<typeof POPUP_TO_WORKER_REQUEST>,
-  PWRequestMap
->;
+export type PWRequestArgs = Reflex.Array<PWRequestMap>;

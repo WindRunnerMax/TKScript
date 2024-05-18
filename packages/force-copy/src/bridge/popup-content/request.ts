@@ -1,4 +1,4 @@
-import type { EventReflect } from "@/utils/types";
+import type { Reflex } from "@/utils/types";
 import { MARK } from "./constant";
 
 const PC_REQUEST_TYPE = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE", "QUERY_STATE"] as const;
@@ -14,4 +14,4 @@ type EventMap = {
   [POPUP_TO_CONTENT_REQUEST.QUERY_STATE]: null;
 };
 
-export type PCRequestType = EventReflect.Tuple<typeof POPUP_TO_CONTENT_REQUEST, EventMap>;
+export type PCRequestType = Reflex.Tuple<EventMap>;

@@ -1,4 +1,4 @@
-import type { EventReflect } from "@/utils/types";
+import type { Reflex } from "@/utils/types";
 import { MARK } from "./constant";
 
 const WC_REQUEST_TYPE = ["DATA", "__"] as const;
@@ -11,4 +11,4 @@ type EventMap = {
   [POPUP_TO_CONTENT_REQUEST.DATA]: string;
 };
 
-export type WCRequestType = EventReflect.Tuple<typeof POPUP_TO_CONTENT_REQUEST, EventMap>;
+export type WCRequestType = Reflex.Tuple<EventMap>;

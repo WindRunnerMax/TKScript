@@ -1,4 +1,4 @@
-import type { EventReflect, Object } from "@/utils/types";
+import type { Reflex, Object } from "@/utils/types";
 import { MARK } from "./constant";
 
 const CI_REQUEST_ENUM = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE"] as const;
@@ -20,4 +20,4 @@ export type EventMap = {
   [CONTENT_TO_INJECT_REQUEST.CONTEXT_MENU_TYPE]: CIExecutionType;
 };
 
-export type CIRequestType = EventReflect.Tuple<typeof CONTENT_TO_INJECT_REQUEST, EventMap>;
+export type CIRequestType = Reflex.Tuple<EventMap>;

@@ -1,4 +1,4 @@
-import type { EventReflect } from "@/utils/types";
+import type { Reflex } from "@/utils/types";
 import { MARK } from "./constant";
 
 const CW_REQUEST_TYPE = ["RELOAD", "SET_BADGE"] as const;
@@ -12,4 +12,4 @@ type EventMap = {
   [CONTENT_TO_WORKER_REQUEST.SET_BADGE]: number;
 };
 
-export type CWRequestType = EventReflect.Tuple<typeof CONTENT_TO_WORKER_REQUEST, EventMap>;
+export type CWRequestType = Reflex.Tuple<EventMap>;
