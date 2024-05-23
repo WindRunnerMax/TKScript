@@ -6,7 +6,7 @@ Force Copy professionally circumvents limitations pertaining to Web Copying, Key
 
 * [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/force-copy/)
 * [Chrome Web Store](https://chrome.google.com/webstore/detail/force-copy/cceclgeciefpanebkfkogecbjjchmico)
-* [Github Releases](https://github.com/WindrunnerMax/TKScript/releases)
+* [GitHub Releases](https://github.com/WindrunnerMax/TKScript/releases)
 
 ## Release
 
