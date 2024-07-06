@@ -229,26 +229,24 @@
 
     const TEXT_PLAIN = "text/plain";
     const TEXT_HTML = "text/html";
-    const downgradeCopy = (data) => {
+    const execCopyCommand = (data) => {
       const textarea = document.createElement("textarea");
-      textarea.addEventListener(
-        COPY,
-        (event) => {
-          for (const [key, value] of Object.entries(data)) {
-            event.clipboardData && event.clipboardData.setData(key, value);
-          }
-          event.stopPropagation();
-          event.preventDefault();
-        },
-        true
-      );
+      const handler = (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        for (const [key, value] of Object.entries(data)) {
+          event.clipboardData && event.clipboardData.setData(key, value);
+        }
+      };
+      textarea.addEventListener(COPY, handler, true);
       textarea.style.position = "fixed";
-      textarea.style.left = "-999px";
-      textarea.style.top = "-999px";
-      textarea.value = data[TEXT_PLAIN];
+      textarea.style.left = "-999999999px";
+      textarea.style.top = "-999999999px";
+      textarea.value = data[TEXT_PLAIN] || " ";
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
+      textarea.removeEventListener(COPY, handler);
       document.body.removeChild(textarea);
     };
     const isEmptyContent = (data) => {
@@ -268,10 +266,10 @@
           dataItems[key] = blob;
         }
         navigator.clipboard.write([new ClipboardItem(dataItems)]).catch(() => {
-          downgradeCopy(params);
+          execCopyCommand(params);
         });
       } else {
-        downgradeCopy(params);
+        execCopyCommand(params);
       }
       return true;
     };
