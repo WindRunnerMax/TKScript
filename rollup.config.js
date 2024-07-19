@@ -1,6 +1,5 @@
 import postcss from "rollup-plugin-postcss";
 import esbuild from "rollup-plugin-esbuild";
-// import { terser } from "rollup-plugin-terser";
 import metablock from "rollup-plugin-userscript-metablock";
 import path from "path";
 import replace from "@rollup/plugin-replace";

@@ -62,9 +62,6 @@ importers:
       rollup-plugin-postcss:
         specifier: 4.0.1
         version: 4.0.1(postcss@8.3.11)
-      rollup-plugin-terser:
-        specifier: 7.0.2
-        version: 7.0.2(rollup@2.56.3)
       rollup-plugin-userscript-metablock:
         specifier: 0.3.1
         version: 0.3.1
@@ -106,12 +103,6 @@ importers:
         specifier: 17.0.2
         version: 17.0.2(react@17.0.2)
     devDependencies:
-      '@rollup/plugin-alias':
-        specifier: 5.0.0
-        version: 5.0.0(rollup@2.56.3)
-      '@rollup/plugin-html':
-        specifier: 1.0.2
-        version: 1.0.2(rollup@2.56.3)
       '@rspack/cli':
         specifier: 0.2.5
         version: 0.2.5(esbuild@0.15.10)(react-refresh@0.14.0)(webpack@5.91.0)
@@ -182,14 +173,6 @@ packages:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
     dependencies:
       '@babel/highlight': 7.24.5
-    dev: true
-
-  /@babel/code-frame@7.24.2:
-    resolution: {integrity: sha512-y5+tLQyV8pg3fsiln67BVLD1P13Eg4lh5RW9mF0zUuvLrv9uIQ4MCL+CRT+FTsBlBjcIan6PGsLcBN0m3ClUyQ==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/highlight': 7.24.5
-      picocolors: 1.0.0
     dev: true
 
   /@babel/helper-validator-identifier@7.24.5:
@@ -428,19 +411,6 @@ packages:
     resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==}
     dev: true
 
-  /@rollup/plugin-alias@5.0.0(rollup@2.56.3):
-    resolution: {integrity: sha512-l9hY5chSCjuFRPsnRm16twWBiSApl2uYFLsepQYwtBuAxNMQ/1dJqADld40P0Jkqm65GRTLy/AC6hnpVebtLsA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      rollup: 2.56.3
-      slash: 4.0.0
-    dev: true
-
   /@rollup/plugin-commonjs@20.0.0(rollup@2.56.3):
     resolution: {integrity: sha512-5K0g5W2Ol8hAcTHqcTBHiA7M58tfmYi1o9KxeJuuRNpGaTa5iLjcyemBitCBcKXaHamOBBEH2dGom6v6Unmqjg==}
     engines: {node: '>= 8.0.0'}
@@ -454,18 +424,6 @@ packages:
       is-reference: 1.2.1
       magic-string: 0.25.9
       resolve: 1.22.8
-      rollup: 2.56.3
-    dev: true
-
-  /@rollup/plugin-html@1.0.2(rollup@2.56.3):
-    resolution: {integrity: sha512-jGqb45BPj5kwvb/bq1jIzUDLebsm1xmfnY1rwgTIZyjpsMyMKLuQO27n4z5qv6kZmxqxh+CBRD7d1rjAu85Uzg==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
       rollup: 2.56.3
     dev: true
 
@@ -553,6 +511,7 @@ packages:
     resolution: {integrity: sha512-6thA5rs4euQUXSlCkq+0TnVnWA2Or1oFGbmIpRGf2VDZjDYZ8VtqMIgAg08ZE9qJT8tSCuGBliAE9ccxUQ009A==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -561,6 +520,7 @@ packages:
     resolution: {integrity: sha512-sXTg+tvt0x5hEULvxi3alXAazbXh2KHubzT8hEjT9px5mPpHdhwnBTETt7+q4bbigwePT+ZDgS4Gkp2Rnqc4wg==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -569,6 +529,7 @@ packages:
     resolution: {integrity: sha512-wB5ST0PubSto2dVGbzS+/MItJAtmj+a5L0OoavMBsxKCfhAdKC4L7TB27LSCpZx8ltm66nNzBnv+FOep6DFV4w==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -577,6 +538,7 @@ packages:
     resolution: {integrity: sha512-Ia8V9f1PDKroXq12NstdjPazMa2TZjJNowz2T6KkGcvwVtBlzFHjg/fbwkmGHHsAtJTKmV/L7KdOyYC59P8wyw==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -3826,15 +3788,6 @@ packages:
     dev: true
     optional: true
 
-  /jest-worker@26.6.2:
-    resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
-    engines: {node: '>= 10.13.0'}
-    dependencies:
-      '@types/node': 20.8.0
-      merge-stream: 2.0.0
-      supports-color: 7.2.0
-    dev: true
-
   /jest-worker@27.5.1:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
@@ -5325,19 +5278,6 @@ packages:
       - ts-node
     dev: true
 
-  /rollup-plugin-terser@7.0.2(rollup@2.56.3):
-    resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
-    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
-    peerDependencies:
-      rollup: ^2.0.0
-    dependencies:
-      '@babel/code-frame': 7.24.2
-      jest-worker: 26.6.2
-      rollup: 2.56.3
-      serialize-javascript: 4.0.0
-      terser: 5.31.0
-    dev: true
-
   /rollup-plugin-userscript-metablock@0.3.1:
     resolution: {integrity: sha512-FwGgBQ8oD9MYkUI2CRPD4TJr3hV0UP4YCOGFQDK8PqMZLD6IbPvuraG3qhMCFhukzeTgfEs6uGsUO0xujeJEFw==}
     dependencies:
@@ -5537,12 +5477,6 @@ packages:
       - supports-color
     dev: true
 
-  /serialize-javascript@4.0.0:
-    resolution: {integrity: sha512-GaNA54380uFefWghODBWEGisLZFj00nS5ACs6yHa9nLqlLpVLO8ChDGeKRjZnV4Nh4n0Qi7nhYZD/9fCPzEqkw==}
-    dependencies:
-      randombytes: 2.1.0
-    dev: true
-
   /serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
     dependencies:
@@ -5658,11 +5592,6 @@ packages:
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
-    dev: true
-
-  /slash@4.0.0:
-    resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
-    engines: {node: '>=12'}
     dev: true
 
   /slice-ansi@4.0.0:
