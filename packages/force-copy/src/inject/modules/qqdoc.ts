@@ -11,31 +11,54 @@ import { TEXT_HTML, TEXT_PLAIN } from "copy/src/utils/copy";
 const onMouseDown = () => {
   instance.hide(false);
 };
+
 const onMouseUp = (event: MouseEvent) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (window.pad && window.pad.editor) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+  // QQ Doc
+  if (window.pad && window.pad.editor && !window.pad.editor.isCopyable()) {
     const editor = window.pad.editor;
     if (editor.getCopyContent) {
       const content = editor.getCopyContent() || {};
       const plainText: string | undefined = content.plain;
-      const htmlText: string | undefined = content.html;
+      const htmlText: string = content.html || "";
       logger.info("SELECT", plainText);
       if (plainText) {
-        instance.onCopy({ [TEXT_PLAIN]: plainText, [TEXT_HTML]: htmlText || "" }, event);
-      } else {
-        instance.hide(false);
+        return instance.onCopy({ [TEXT_PLAIN]: plainText, [TEXT_HTML]: htmlText }, event);
       }
     }
-  } else {
-    instance.hide(false);
   }
+  // QQ Sheet
+  if (
+    window.SpreadsheetApp &&
+    window.SpreadsheetApp.permissions &&
+    window.SpreadsheetApp.permissions.sheetStatus &&
+    window.SpreadsheetApp.permissions.sheetStatus.canCopy === false &&
+    window.SpreadsheetApp.permissions.sheetStatus.canEdit &&
+    window.SpreadsheetApp.permissions.sheetStatus.canEdit() === false
+  ) {
+    const SpreadsheetApp = window.SpreadsheetApp;
+    const [selection] = SpreadsheetApp.view.getSelectionRanges();
+    if (selection) {
+      const text: string[] = [];
+      const { startColIndex, startRowIndex, endColIndex, endRowIndex } = selection;
+      for (let i = startRowIndex; i <= endRowIndex; i++) {
+        for (let k = startColIndex; k <= endColIndex; k++) {
+          const cell = SpreadsheetApp.workbook.activeSheet.getCellDataAtPosition(i, k);
+          if (!cell) continue;
+          text.push(" ", cell.formattedValue?.value || cell.value || "");
+        }
+        i !== endRowIndex && text.push("\n");
+      }
+      const str = text.join("");
+      logger.info("SELECT", str);
+      return instance.onCopy(/^\s*$/.test(str) ? "" : str, event);
+    }
+  }
+  // Final
+  return instance.hide(false);
 };
 
 export const QQDoc: WebSite = {
-  regexp: /docs\.qq\.com/,
+  regexp: /(docs\.qq\.com)|(doc\.weixin\.qq\.com)/,
   start(type) {
     if (type === COPY_TYPE) {
       styles.insertCSS(STYLE_ID, AUTO_USER_SELECT + ALLOW_PAINT + COPY_BUTTON_STYLE);

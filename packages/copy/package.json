@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/WindrunnerMax/TKScript"
   },
+  "scripts": {
+    "lint:ts": "../../node_modules/typescript/bin/tsc --noEmit"
+  },
   "sideEffects": false,
   "files": [
     "src"

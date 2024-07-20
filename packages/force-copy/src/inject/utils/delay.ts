@@ -13,12 +13,12 @@ export const delayExecute = (
       } else {
         EventBus.once(EVENTS_ENUM.DOM_LOADED, resolve);
       }
+      return void 0;
+    }
+    if (document.readyState === "complete") {
+      resolve();
     } else {
-      if (document.readyState === "complete") {
-        resolve();
-      } else {
-        EventBus.once(EVENTS_ENUM.PAGE_LOADED, resolve);
-      }
+      EventBus.once(EVENTS_ENUM.PAGE_LOADED, resolve);
     }
   });
   const delayWithTimeout = delayMax && new Promise(resolve => setTimeout(resolve, delayMax));

@@ -15,6 +15,7 @@ const website: Website = {
     };
   },
   getSelectedText: function () {
+    // QQ Doc
     if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
       utils.showButton();
       const editor = unsafeWindow.pad.editor;
@@ -37,7 +38,9 @@ const website: Website = {
           [TEXT_HTML]: htmlText,
         };
       }
-    } else if (
+    }
+    // QQ Sheet
+    if (
       unsafeWindow.SpreadsheetApp &&
       unsafeWindow.SpreadsheetApp.permissions &&
       unsafeWindow.SpreadsheetApp.permissions.sheetStatus &&
@@ -62,15 +65,14 @@ const website: Website = {
         const str = text.join("");
         return /^\s*$/.test(str) ? "" : str;
       }
-      return "";
     }
+    // Final
     return "";
   },
 };
 
 export default website;
 
-// Sheet
 // SpreadsheetApp.feature._copyPaste.copyPasteCache.onCopy({
 //   selectGridRange: SpreadsheetApp.view.getSelectionRanges()[0],
 //   copyType: 0,

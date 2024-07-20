@@ -15,10 +15,9 @@
     "declaration": false,
     "jsx": "react-jsx",
     "newLine": "lf",
-    "baseUrl": ".",
     "paths": {
-      "copy/*": ["packages/copy/*"],
-      "copy-currency/*": ["packages/copy-currency/*"],
+      "copy/*": ["./packages/copy/*"],
+      "copy-currency/*": ["./packages/copy-currency/*"],
     }
   },
   "include": ["packages/*/src"],

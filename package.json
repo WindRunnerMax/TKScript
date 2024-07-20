@@ -14,7 +14,8 @@
     "build:force-copy": "pnpm --filter force-copy run build",
     "dev:force-copy:gecko": "pnpm --filter force-copy run dev:gecko",
     "build:force-copy:gecko": "pnpm --filter force-copy run build:gecko",
-    "lint-es": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore ."
+    "lint:es": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore .",
+    "lint:ts": "pnpm --filter '*' run lint:ts"
   },
   "author": "Czy",
   "license": "MIT",
