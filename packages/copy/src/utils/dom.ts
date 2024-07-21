@@ -1,6 +1,6 @@
 import { isString } from "./is";
 
-const dom = {
+export const dom = {
   query: function (selector: string): null | HTMLElement {
     return document.querySelector(selector);
   },

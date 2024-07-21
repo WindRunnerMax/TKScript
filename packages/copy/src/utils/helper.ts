@@ -106,20 +106,30 @@ for (const element of elements) {
 /**
  * Hook Function Call
  */
+let index = 0;
+const log = window.console.log;
+(function reset() {
+  index = 0;
+  setTimeout(reset, 3000);
+})();
+const native = [Array.prototype.slice, Object.prototype.toString, Object.prototype.hasOwnProperty];
 Function.prototype.call = function (dynamic, ...args) {
-  const context = Object(dynamic) || window;
-  const symbol = Symbol();
-  context[symbol] = this;
-  args.length === 2 && console.log(args);
-  try {
-    const result = context[symbol](...args);
-    delete context[symbol];
-    return result;
-  } catch (error) {
-    console.log("Hook Call Error", error);
-    console.log(context, context[symbol], this, dynamic, args);
-    return null;
+  if (
+    !dynamic ||
+    typeof dynamic !== "object" ||
+    native.includes(this) ||
+    !args.length ||
+    dynamic.nodeType
+  ) {
+    return this.bind(dynamic)(...args);
   }
+  index++;
+  if (index < 30) {
+    log("__dynamic", dynamic);
+    log("__args", args);
+    log("__this", this);
+  }
+  return this.bind(dynamic)(...args);
 };
 
 // =========================================================================== //

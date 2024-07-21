@@ -15,7 +15,7 @@ import { MOUSE_UP } from "./constant/event";
         const content = getSelectedText();
         if (isEmptyContent(content)) {
           instance.hide();
-          return "";
+          return void 0;
         }
         instance.onCopy(content, e);
       };

@@ -73,4 +73,5 @@ class Instance {
 }
 
 export const instance = new Instance();
+
 export default instance;

@@ -7,7 +7,7 @@ export const stopNativePropagation = (event: Event): void => {
   event.stopPropagation(); // 阻止该元素继续冒泡后的`on`同类事件触发
 };
 
-export default {
+export const event = {
   hideButton: (): void => {
     instance.disable();
   },
@@ -70,3 +70,5 @@ export default {
     );
   },
 };
+
+export default event;

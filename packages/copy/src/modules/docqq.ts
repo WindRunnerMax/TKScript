@@ -1,9 +1,9 @@
 import { TEXT_HTML, TEXT_PLAIN } from "../utils/copy";
-import utils from "../utils/event";
+import { instance } from "../utils/instance";
 import type { Website } from "../websites";
 
 const website: Website = {
-  regexp: /.*docs\.qq\.com\/.+/,
+  regexp: /.*docs\.qq\.com\/(doc)|(sheet)\/.+/,
   config: {
     initCopyEvent: false,
     captureInstance: true,
@@ -11,13 +11,13 @@ const website: Website = {
   },
   init: function () {
     window.onload = () => {
-      utils.hideButton();
+      instance.disable();
     };
   },
   getSelectedText: function () {
     // QQ Doc
     if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
-      utils.showButton();
+      instance.enable();
       const editor = unsafeWindow.pad.editor;
       if (editor.getCopyContent) {
         const content = editor.getCopyContent() || {};
@@ -48,7 +48,7 @@ const website: Website = {
       unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit &&
       unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit() === false
     ) {
-      utils.showButton();
+      instance.enable();
       const SpreadsheetApp = unsafeWindow.SpreadsheetApp;
       const [selection] = SpreadsheetApp.view.getSelectionRanges();
       if (selection) {

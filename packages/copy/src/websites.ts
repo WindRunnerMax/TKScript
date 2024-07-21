@@ -5,6 +5,7 @@ import wk from "./modules/wk";
 import zhihu from "./modules/zhihu";
 import edu30 from "./modules/edu30";
 import docqq from "./modules/docqq";
+import qqSlider from "./modules/qq-slider";
 import boke112 from "./modules/boke112";
 import diyifanwen from "./modules/diyifanwen";
 import mbalib from "./modules/mbalib";
@@ -49,6 +50,7 @@ const websites: Website[] = [
   wk,
   zhihu,
   edu30,
+  qqSlider,
   docqq,
   boke112,
   diyifanwen,
