@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.2.3
+// @version     6.2.4
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -21,6 +21,7 @@
 // @match       *://z.30edu.com.cn/*
 // @match       *://docs.qq.com/doc/*
 // @match       *://docs.qq.com/sheet/*
+// @match       *://docs.qq.com/slide/*
 // @match       *://boke112.com/post/*
 // @match       *://*.yuque.com/*
 // @match       *://www.commandlinux.com/*
@@ -130,7 +131,7 @@
       return opt.call(value) === "[object String]";
     }
 
-    const dom$1 = {
+    const dom = {
       query: function(selector) {
         return document.querySelector(selector);
       },
@@ -167,8 +168,8 @@
     };
     const initBaseStyle = () => {
       window.addEventListener(DOM_READY, () => {
-        dom$1.append("head", `<style>${css_248z$1}</style>`);
-        dom$1.append("head", `<style>${css_248z}</style>`);
+        dom.append("head", `<style>${css_248z$1}</style>`);
+        dom.append("head", `<style>${css_248z}</style>`);
       });
     };
 
@@ -177,10 +178,10 @@
      * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
      */
     let path = "";
-    const website$t = {
+    const website$u = {
       regexp: /.*doc88\.com\/.+/,
       init: () => {
-        dom$1.append(
+        dom.append(
           "body",
           `<style id="copy-element-hide">#left-menu{display: none !important;}</style>`
         );
@@ -208,16 +209,16 @@
         if (!select) {
           unsafeWindow.Config.vip = 1;
           unsafeWindow.Config.logined = 1;
-          dom$1.remove("#copy-element-hide");
+          dom.remove("#copy-element-hide");
         }
         return select;
       }
     };
 
-    const website$s = {
+    const website$t = {
       regexp: /.*segmentfault\.com\/.+/,
       init: function() {
-        const body = dom$1.query("body");
+        const body = dom.query("body");
         if (body) {
           body.classList.add("_sf_adjust_body");
           body.onclick = () => {
@@ -274,74 +275,77 @@
       return true;
     };
 
-    let dom = null;
-    let isReadyToHidden = false;
-    const instance = {
-      id: "__copy",
-      className: "__copy-button",
-      init: function(name) {
-        const container = document.createElement("div");
-        container.id = this.id;
-        container.className = this.className;
-        container.innerText = name || "复制";
-        container.addEventListener("mouseup", (e) => e.stopPropagation(), true);
-        container.addEventListener("mousedown", (e) => e.stopPropagation(), true);
-        dom = container;
-        document.body.appendChild(dom);
-      },
-      getInstance: function() {
-        if (dom === null) {
-          this.init();
-        }
-        return dom;
-      },
-      show: function(event) {
-        if (isReadyToHidden)
-          return void 0;
-        const dom2 = this.getInstance();
-        dom2.style.left = `${event.pageX + 30}px`;
-        dom2.style.top = `${event.pageY}px`;
-        dom2.style.opacity = "1";
-        dom2.style.zIndex = "1000";
-      },
-      hide: function(keep = 350) {
-        const dom2 = this.getInstance();
-        dom2.style.opacity = "0";
-        if (keep) {
-          isReadyToHidden = true;
-          setTimeout(() => {
-            dom2.style.zIndex = "-10000";
-            isReadyToHidden = false;
-          }, keep);
-        }
-      },
-      onCopy: function(content, event) {
-        const dom2 = this.getInstance();
-        this.show(event);
-        dom2.onclick = () => {
-          copy(content);
-          this.hide();
+    class Instance {
+      constructor() {
+        this.id = "__copy";
+        this.className = "__copy-button";
+        this.isReadyToHidden = false;
+        this.dom = null;
+        this.enable = () => {
+          const dom = this.getInstance();
+          dom.style.display = "flex";
         };
-      },
-      enable: function() {
-        const dom2 = this.getInstance();
-        dom2.style.display = "flex";
-      },
-      disable: function() {
-        const dom2 = this.getInstance();
-        dom2.style.display = "none";
-      },
-      destroy: function() {
-        const el = this.getInstance();
-        el.remove();
-        dom = null;
+        this.disable = () => {
+          const dom = this.getInstance();
+          dom.style.display = "none";
+        };
+        this.destroy = () => {
+          const el = this.getInstance();
+          el.remove();
+          this.dom = null;
+        };
+        this.init = (name) => {
+          const container = document.createElement("div");
+          container.id = this.id;
+          container.className = this.className;
+          container.innerText = name || "复制";
+          container.addEventListener("mouseup", (e) => e.stopPropagation(), true);
+          container.addEventListener("mousedown", (e) => e.stopPropagation(), true);
+          this.dom = container;
+          document.body.appendChild(this.dom);
+        };
+        this.getInstance = () => {
+          if (this.dom === null) {
+            this.init();
+          }
+          return this.dom;
+        };
+        this.show = (event) => {
+          if (this.isReadyToHidden)
+            return void 0;
+          const dom = this.getInstance();
+          dom.style.left = `${event.pageX + 30}px`;
+          dom.style.top = `${event.pageY}px`;
+          dom.style.opacity = "1";
+          dom.style.zIndex = "1000";
+        };
+        this.hide = (keep = 350) => {
+          const dom = this.getInstance();
+          dom.style.opacity = "0";
+          if (keep) {
+            this.isReadyToHidden = true;
+            setTimeout(() => {
+              dom.style.zIndex = "-10000";
+              this.isReadyToHidden = false;
+            }, keep);
+          }
+        };
+        this.onCopy = (content, event) => {
+          const dom = this.getInstance();
+          this.show(event);
+          dom.onclick = () => {
+            copy(content);
+            this.hide();
+          };
+        };
       }
-    };
+    }
+    const instance = new Instance();
 
-    const stopNativePropagation = (event) => {
-      event.stopPropagation();
+    const stopNativePropagation = (event2) => {
+      event2.stopPropagation();
     };
-    var utils = {
+    const event = {
       hideButton: () => {
         instance.disable();
       },
@@ -406,23 +410,23 @@
       }
     };
 
-    const website$r = {
+    const website$s = {
       regexp: /.*wk\.baidu\.com\/view\/.+/,
       init: function() {
-        utils.hideButton();
-        utils.enableOnSelectStartByCapture();
+        event.hideButton();
+        event.enableOnSelectStartByCapture();
         window.onload = () => {
-          dom$1.attr(".sf-edu-wenku-vw-container", "style", "");
+          dom.attr(".sf-edu-wenku-vw-container", "style", "");
         };
       }
     };
 
-    const website$q = {
+    const website$r = {
       regexp: /.*zhihu\.com\/.*/,
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnCopyByCapture();
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnCopyByCapture();
         if (location.hostname === "zhuanlan.zhihu.com") {
           const removeFocalPointModal = (mutationsList) => {
             for (const mutation of mutationsList) {
@@ -444,7 +448,7 @@
       }
     };
 
-    const website$p = {
+    const website$q = {
       regexp: /.*30edu\.com\.cn\/.+/,
       init: function() {
         window.onload = () => {
@@ -452,14 +456,14 @@
           const iframes = document.getElementsByTagName("iframe");
           if (iframes.length === 2) {
             const body = (_a = iframes[1].contentWindow) == null ? void 0 : _a.document.querySelector("body");
-            body && utils.removeAttributes(body, ["oncopy", "oncontextmenu", "onselectstart"]);
+            body && event.removeAttributes(body, ["oncopy", "oncontextmenu", "onselectstart"]);
           }
         };
       }
     };
 
-    const website$o = {
-      regexp: /.*docs\.qq\.com\/.+/,
+    const website$p = {
+      regexp: /.*docs\.qq\.com\/(doc)|(sheet)\/.+/,
       config: {
         initCopyEvent: false,
         captureInstance: true,
@@ -467,13 +471,13 @@
       },
       init: function() {
         window.onload = () => {
-          utils.hideButton();
+          instance.disable();
         };
       },
       getSelectedText: function() {
         var _a;
         if (unsafeWindow.pad && unsafeWindow.pad.editor && !unsafeWindow.pad.editor.isCopyable()) {
-          utils.showButton();
+          instance.enable();
           const editor = unsafeWindow.pad.editor;
           if (editor.getCopyContent) {
             const content = editor.getCopyContent() || {};
@@ -494,8 +498,9 @@
               [TEXT_HTML]: htmlText
             };
           }
-        } else if (unsafeWindow.SpreadsheetApp && unsafeWindow.SpreadsheetApp.permissions && unsafeWindow.SpreadsheetApp.permissions.sheetStatus && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canCopy === false && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit() === false) {
-          utils.showButton();
+        }
+        if (unsafeWindow.SpreadsheetApp && unsafeWindow.SpreadsheetApp.permissions && unsafeWindow.SpreadsheetApp.permissions.sheetStatus && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canCopy === false && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit && unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit() === false) {
+          instance.enable();
           const SpreadsheetApp = unsafeWindow.SpreadsheetApp;
           const [selection] = SpreadsheetApp.view.getSelectionRanges();
           if (selection) {
@@ -513,16 +518,57 @@
             const str = text.join("");
             return /^\s*$/.test(str) ? "" : str;
           }
-          return "";
         }
         return "";
+      }
+    };
+
+    const website$o = {
+      regexp: /.*docs\.qq\.com\/slide\/.+/,
+      config: {
+        initCopyEvent: false,
+        captureInstance: true,
+        runAt: "document-end"
+      },
+      init: function() {
+        if (unsafeWindow.__ARK_EXTENSION_SERVICE__ && !unsafeWindow.clientVars.privilegeAttribute.can_copy) {
+          let webpackJsonp = unsafeWindow.webpackJsonp;
+          Object.defineProperty(unsafeWindow, "webpackJsonp", {
+            get() {
+              return webpackJsonp;
+            },
+            set(newValue) {
+              if (newValue.push.__HOOKED__) {
+                return;
+              }
+              webpackJsonp = newValue;
+              const originPush = webpackJsonp.push;
+              function push(...args) {
+                const [, mods] = args[0];
+                for (const [key, fn] of Object.entries(mods)) {
+                  const stringifyFn = String(fn);
+                  if (/this\.shouldResponseCopy/.test(stringifyFn)) {
+                    const next = stringifyFn.replace(/this\.shouldResponseCopy\(/g, "(() => true)(");
+                    mods[key] = new Function(`return (${next})`)();
+                  }
+                }
+                return originPush.call(this, ...args);
+              }
+              push.__HOOKED__ = 1;
+              webpackJsonp.push = push;
+            }
+          });
+        }
+        window.onload = () => {
+          instance.disable();
+        };
       }
     };
 
     const website$n = {
       regexp: new RegExp(".+://boke112.com/post/.+"),
       init: function() {
-        utils.enableOnCopyByCapture();
+        event.enableOnCopyByCapture();
         const template = `
             <style>
                 :not(input):not(textarea)::selection {
@@ -536,16 +582,16 @@
                 }
             </style>
         `;
-        dom$1.append("head", template);
+        dom.append("head", template);
       }
     };
 
     const website$m = {
       regexp: /diyifanwen/,
       init: function() {
-        utils.hideButton();
-        utils.enableOnCopyByCapture();
-        utils.enableOnKeyDownByCapture();
+        event.hideButton();
+        event.enableOnCopyByCapture();
+        event.enableOnKeyDownByCapture();
       }
     };
 
@@ -553,7 +599,7 @@
       regexp: /mbalib/,
       init: function() {
         window.onload = () => {
-          utils.removeAttributes("fullScreenContainer", ["oncopy", "oncontextmenu", "onselectstart"]);
+          event.removeAttributes("fullScreenContainer", ["oncopy", "oncontextmenu", "onselectstart"]);
         };
       }
     };
@@ -561,9 +607,9 @@
     const website$k = {
       regexp: /cnitpm/,
       init: function() {
-        utils.hideButton();
+        event.hideButton();
         window.onload = () => {
-          utils.removeAttributes("body", ["oncopy", "oncontextmenu", "onselectstart"]);
+          event.removeAttributes("body", ["oncopy", "oncontextmenu", "onselectstart"]);
         };
       }
     };
@@ -571,89 +617,89 @@
     const website$j = {
       regexp: new RegExp(".+bbs.mihoyo.com/.+"),
       init: function() {
-        utils.hideButton();
-        utils.enableOnCopyByCapture();
-        utils.enableOnSelectStartByCapture();
-        utils.enableUserSelectByCSS();
+        event.hideButton();
+        event.enableOnCopyByCapture();
+        event.enableOnSelectStartByCapture();
+        event.enableUserSelectByCSS();
       }
     };
 
     const website$i = {
       regexp: new RegExp(".+www.uemeds.cn/.+"),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
+        event.hideButton();
+        event.enableUserSelectByCSS();
       }
     };
 
     const website$h = {
       regexp: new RegExp(".+aiyuke.com/news/.+"),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
+        event.hideButton();
+        event.enableUserSelectByCSS();
       }
     };
 
     const website$g = {
       regexp: new RegExp("qidian"),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnCopy(".main-read-container");
-        utils.enableOnContextMenu(".main-read-container");
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnCopy(".main-read-container");
+        event.enableOnContextMenu(".main-read-container");
       }
     };
 
     const website$f = {
       regexp: new RegExp("zongheng"),
       init: function() {
-        utils.removeAttributes(".reader_box", ["style", "unselectable", "onselectstart"]);
-        utils.removeAttributes(".reader_main", ["style", "unselectable", "onselectstart"]);
-        utils.hideButton();
-        utils.enableOnKeyDown("body");
-        utils.enableUserSelectByCSS();
-        utils.enableOnCopy(".content");
-        utils.enableOnContextMenu("body");
-        utils.enableOnSelectStart(".content");
+        event.removeAttributes(".reader_box", ["style", "unselectable", "onselectstart"]);
+        event.removeAttributes(".reader_main", ["style", "unselectable", "onselectstart"]);
+        event.hideButton();
+        event.enableOnKeyDown("body");
+        event.enableUserSelectByCSS();
+        event.enableOnCopy(".content");
+        event.enableOnContextMenu("body");
+        event.enableOnSelectStart(".content");
       }
     };
 
     const website$e = {
       regexp: new RegExp("17k"),
       init: () => {
-        utils.hideButton();
-        utils.enableOnCopy(".readAreaBox .p");
+        event.hideButton();
+        event.enableOnCopy(".readAreaBox .p");
       }
     };
 
     const website$d = {
       regexp: new RegExp("ciweimao"),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnCopy("#J_BookCnt");
-        utils.enableOnContextMenu("body");
-        utils.enableOnSelectStart("#J_BookCnt");
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnCopy("#J_BookCnt");
+        event.enableOnContextMenu("body");
+        event.enableOnSelectStart("#J_BookCnt");
       }
     };
 
     const website$c = {
       regexp: new RegExp("book\\.qq"),
       init: function() {
-        utils.hideButton();
-        utils.enableOnCopy("body");
-        utils.enableUserSelectByCSS();
-        utils.enableOnContextMenu("body");
-        utils.enableOnSelectStart("body");
+        event.hideButton();
+        event.enableOnCopy("body");
+        event.enableUserSelectByCSS();
+        event.enableOnContextMenu("body");
+        event.enableOnSelectStart("body");
       }
     };
 
     const website$b = {
       regexp: new RegExp("utaten"),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnSelectStartByCapture();
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnSelectStartByCapture();
       }
     };
 
@@ -663,7 +709,7 @@
       },
       regexp: new RegExp("wenku.baidu.com/(view|link|aggs).*"),
       init: function() {
-        dom$1.append("head", `<style>@media print { body{ display:block; } }</style>`);
+        dom.append("head", `<style>@media print { body{ display:block; } }</style>`);
         let canvasDataGroup = [];
         const originObject = {
           context2DPrototype: unsafeWindow.document.createElement("canvas").getContext("2d").__proto__
@@ -730,23 +776,23 @@
             "</div>",
             "</div>"
           ].join("");
-          dom$1.append("body", templateHTML);
-          dom$1.append("body", templateCSS);
+          dom.append("body", templateHTML);
+          dom.append("body", templateCSS);
           const closeButton = document.querySelector("#copy-template-html #template-close");
           const close = () => {
-            dom$1.remove("#copy-template-html");
-            dom$1.remove("#copy-template-css");
+            dom.remove("#copy-template-html");
+            dom.remove("#copy-template-css");
             closeButton && closeButton.removeEventListener("click", close);
           };
           closeButton && closeButton.addEventListener("click", close);
         };
         document.addEventListener("DOMContentLoaded", () => {
-          dom$1.append(
+          dom.append(
             "head",
             `<style>#copy-btn-wk{padding: 10px; background: rgba(0,0,0,0.5);position: fixed; left:0; top: 40%;cursor: pointer;color: #fff; z-index: 99999;}</style>`
           );
-          dom$1.append("body", "<div id='copy-btn-wk'>复制</div>");
-          const btn = dom$1.query("#copy-btn-wk");
+          dom.append("body", "<div id='copy-btn-wk'>复制</div>");
+          const btn = dom.query("#copy-btn-wk");
           btn && (btn.onclick = render);
         });
       },
@@ -764,44 +810,44 @@
     const website$9 = {
       regexp: new RegExp("xiaohongshu"),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnKeyDownByCapture();
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnKeyDownByCapture();
       }
     };
 
     const website$8 = {
       regexp: new RegExp("leetcode"),
       init: function() {
-        utils.hideButton();
-        utils.enableOnCopy("#lc-home");
+        event.hideButton();
+        event.enableOnCopy("#lc-home");
       }
     };
 
     const website$7 = {
       regexp: /csdn/,
       init: function() {
-        utils.hideButton();
-        utils.enableOnCopyByCapture();
-        utils.enableUserSelectByCSS();
+        event.hideButton();
+        event.enableOnCopyByCapture();
+        event.enableUserSelectByCSS();
       }
     };
 
     const website$6 = {
       regexp: new RegExp("bilibili"),
       init: function() {
-        utils.hideButton();
-        utils.enableOnCopyByCapture();
+        event.hideButton();
+        event.enableOnCopyByCapture();
       }
     };
 
     const website$5 = {
       regexp: new RegExp("cnki"),
       init: function() {
-        utils.hideButton();
-        utils.enableOnContextMenuByCapture();
-        utils.enableOnKeyDownByCapture();
-        utils.enableOnCopyByCapture();
+        event.hideButton();
+        event.enableOnContextMenuByCapture();
+        event.enableOnKeyDownByCapture();
+        event.enableOnCopyByCapture();
       }
     };
 
@@ -815,9 +861,9 @@
       init: function() {
         window.addEventListener(PAGE_LOADED, () => {
           var _a;
-          return (_a = dom$1.query("#j_select")) == null ? void 0 : _a.click();
+          return (_a = dom.query("#j_select")) == null ? void 0 : _a.click();
         });
-        dom$1.append("head", "<style>#reader-copy-el{display: none;}</style>");
+        dom.append("head", "<style>#reader-copy-el{display: none;}</style>");
       },
       getSelectedText: function() {
         if (unsafeWindow.docinReader && unsafeWindow.docinReader.st) {
@@ -833,9 +879,9 @@
       },
       regexp: /note\.youdao\.com\/newEditorV1\/bulb\.html.*/,
       init: function() {
-        utils.hideButton();
+        event.hideButton();
         if (window.parent && window.parent.location.href.indexOf("ynoteshare") > -1) {
-          utils.enableUserSelectByCSS();
+          event.enableUserSelectByCSS();
           document.addEventListener(MOUSE_DOWN, stopNativePropagation, true);
           document.addEventListener(MOUSE_MOVE, stopNativePropagation, true);
         }
@@ -898,21 +944,21 @@
         ].join("|")
       ),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnCopyByCapture();
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnCopyByCapture();
       }
     };
 
     const website$1 = {
       regexp: new RegExp(["wjx", "fanyi\\.baidu", "tianqi", "rrdynb", "fuwu7"].join("|")),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnCopyByCapture();
-        utils.enableOnKeyDownByCapture();
-        utils.enableOnSelectStartByCapture();
-        utils.enableOnContextMenuByCapture();
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnCopyByCapture();
+        event.enableOnKeyDownByCapture();
+        event.enableOnSelectStartByCapture();
+        event.enableOnContextMenuByCapture();
       }
     };
 
@@ -922,12 +968,12 @@
       },
       regexp: new RegExp(["examcoo"].join("|")),
       init: function() {
-        utils.hideButton();
-        utils.enableUserSelectByCSS();
-        utils.enableOnCopyByCapture();
-        utils.enableOnKeyDownByCapture();
-        utils.enableOnSelectStartByCapture();
-        utils.enableOnContextMenuByCapture();
+        event.hideButton();
+        event.enableUserSelectByCSS();
+        event.enableOnCopyByCapture();
+        event.enableOnKeyDownByCapture();
+        event.enableOnSelectStartByCapture();
+        event.enableOnContextMenuByCapture();
       }
     };
 
@@ -957,11 +1003,12 @@
     };
 
     const websites = [
+      website$t,
       website$s,
       website$r,
       website$q,
-      website$p,
       website$o,
+      website$p,
       website$n,
       website$m,
       website$l,
@@ -977,7 +1024,7 @@
       website$b,
       website$a,
       website$9,
-      website$t,
+      website$u,
       website$8,
       website$7,
       website$6,
@@ -1039,7 +1086,7 @@
             const content = getSelectedText();
             if (isEmptyContent(content)) {
               instance.hide();
-              return "";
+              return void 0;
             }
             instance.onCopy(content, e);
           };
