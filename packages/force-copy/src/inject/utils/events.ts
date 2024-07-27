@@ -37,7 +37,8 @@ export const initBaseEvents = () => {
   window.addEventListener(PAGE_LOADED, e => EventBus.emit(EVENTS_ENUM.PAGE_LOADED, e), true);
 };
 
-export const stopNativePropagation = (event: Event) => event.stopPropagation();
+export const stopNativePropagation = (event: Event) => event.stopImmediatePropagation();
+
 export const copyKeyboardHandler = (e: KeyboardEvent) => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLocaleUpperCase() === "C") {
     stopNativePropagation(e);

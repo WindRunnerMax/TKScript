@@ -121,7 +121,7 @@ Function.prototype.call = function (dynamic, ...args) {
     !args.length ||
     dynamic.nodeType
   ) {
-    return this.bind(dynamic)(...args);
+    return Reflect.apply(this, dynamic, args);
   }
   index++;
   if (index < 30) {
@@ -129,7 +129,7 @@ Function.prototype.call = function (dynamic, ...args) {
     log("__args", args);
     log("__this", this);
   }
-  return this.bind(dynamic)(...args);
+  return Reflect.apply(this, dynamic, args);
 };
 
 // =========================================================================== //
