@@ -14,13 +14,17 @@ const initWebsite = (): WebsiteConfig => {
   };
   const mather = (regex: RegExp, website: Website) => {
     if (regex.test(window.location.href)) {
-      if (website.config) websiteConfig = Object.assign(websiteConfig, website.config);
+      if (website.config) {
+        websiteConfig = Object.assign(websiteConfig, website.config);
+      }
       if (websiteConfig.runAt === DOM_STAGE.END) {
         window.addEventListener(DOM_READY, () => website.init());
       } else {
         website.init();
       }
-      if (website.getSelectedText) siteGetSelectedText = website.getSelectedText;
+      if (website.getSelectedText) {
+        siteGetSelectedText = website.getSelectedText;
+      }
       return true;
     }
     return false;

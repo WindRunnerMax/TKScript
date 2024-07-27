@@ -94,8 +94,8 @@ importers:
         specifier: 'workspace: *'
         version: link:../copy-currency
       laser-utils:
-        specifier: 0.0.2-alpha.10
-        version: 0.0.2-alpha.10
+        specifier: 0.0.5-beta.0
+        version: 0.0.5-beta.0
       react:
         specifier: 17.0.2
         version: 17.0.2
@@ -3914,8 +3914,8 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /laser-utils@0.0.2-alpha.10:
-    resolution: {integrity: sha512-zrlaxB1UkqC9aX99jnUGwUhsgw8CpmTGLR2bHL4+TF1f02kCBtHSc4mWuyVejXALWc+9i0RrN0gYmqtLigJUCg==}
+  /laser-utils@0.0.5-beta.0:
+    resolution: {integrity: sha512-V1x6pK3TbYyX0HlkJuAneIvubnf32ZSw5OE45fi+gGehv9q7J36+er5Yjas+uwGvXoCmwfKnuPL9rWsv4WSnLA==}
     dev: false
 
   /launch-editor@2.6.1:

@@ -25,7 +25,7 @@ const website: Website = {
           const [, mods] = args[0];
           for (const [key, fn] of Object.entries(mods)) {
             const stringifyFn = String(fn);
-            if (/this\.shouldResponseCopy/.test(stringifyFn)) {
+            if (/this\.shouldResponseCopy\(/.test(stringifyFn)) {
               const next = stringifyFn.replace(/this\.shouldResponseCopy\(/g, "(() => true)(");
               // .replace(/this.storeManager=/g, "window.storeManager=this.storeManager=")
               mods[key] = new Function(`return (${next})`)();

@@ -2,7 +2,7 @@ import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import type { WebSite } from "../types/website";
 import { EVENTS_ENUM, EventBus } from "../utils/bus";
 import { styles } from "copy-currency/src/utils";
-import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
+import { onCopyKeyboardHandler, stopNativePropagation } from "../utils/events";
 import instance from "copy/src/utils/instance";
 import { ALLOW_PAINT, AUTO_USER_SELECT, COPY_BUTTON_STYLE, STYLE_ID } from "../utils/styles";
 import { logger } from "@/utils/logger";
@@ -47,7 +47,7 @@ export const DocIn: WebSite = {
       EventBus.on(EVENTS_ENUM.MOUSE_UP_CAPTURE, onMouseUp);
       EventBus.on(EVENTS_ENUM.MOUSE_DOWN_CAPTURE, onMouseDown);
       EventBus.on(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
-      EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
+      EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, onCopyKeyboardHandler);
       EventBus.on(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
       EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);
@@ -62,7 +62,7 @@ export const DocIn: WebSite = {
       EventBus.off(EVENTS_ENUM.MOUSE_UP_CAPTURE, onMouseUp);
       EventBus.off(EVENTS_ENUM.MOUSE_DOWN_CAPTURE, onMouseDown);
       EventBus.off(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
-      EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
+      EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, onCopyKeyboardHandler);
       EventBus.off(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
       EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);

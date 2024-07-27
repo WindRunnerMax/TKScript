@@ -2,7 +2,7 @@ import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import type { WebSite } from "../types/website";
 import { EVENTS_ENUM, EventBus } from "../utils/bus";
 import { styles } from "copy-currency/src/utils";
-import { copyKeyboardHandler, stopNativePropagation } from "../utils/events";
+import { onCopyKeyboardHandler, stopNativePropagation } from "../utils/events";
 import { ALLOW_PAINT, AUTO_USER_SELECT, STYLE_ID } from "../utils/styles";
 import { delayExecute } from "../utils/delay";
 import { DOM_LOADED } from "copy/src/constant/event";
@@ -47,7 +47,7 @@ export const Zhihu: WebSite = {
       delayExecute(DOM_LOADED).then(init);
       styles.insertCSS(STYLE_ID, AUTO_USER_SELECT + ALLOW_PAINT);
       EventBus.on(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
-      EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
+      EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, onCopyKeyboardHandler);
       EventBus.on(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
       EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);
@@ -59,7 +59,7 @@ export const Zhihu: WebSite = {
     if (type === COPY_TYPE) {
       styles.removeCSS(STYLE_ID);
       EventBus.off(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
-      EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, copyKeyboardHandler);
+      EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, onCopyKeyboardHandler);
       EventBus.off(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);
     } else if (type === KEYBOARD_TYPE) {
       EventBus.off(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);

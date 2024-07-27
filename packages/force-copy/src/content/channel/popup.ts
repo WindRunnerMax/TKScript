@@ -1,7 +1,7 @@
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { isInIframe } from "@/utils/is";
 import { logger } from "@/utils/logger";
-import { storage } from "laser-utils";
+import { Storage } from "laser-utils";
 import { CI_EXECUTION_ENUM } from "@/bridge/content-inject/request";
 import type { PCRequestType } from "@/bridge/popup-content/request";
 import { POPUP_TO_CONTENT_REQUEST } from "@/bridge/popup-content/request";
@@ -18,9 +18,9 @@ export const onPopupMessage = (data: PCRequestType) => {
         payload: data.payload.checked ? CI_EXECUTION_ENUM.START : CI_EXECUTION_ENUM.CLOSE,
       });
       if (!data.payload.once) {
-        storage.local.set(COPY_TYPE, data.payload.checked);
+        Storage.local.set(COPY_TYPE, data.payload.checked);
       } else {
-        storage.session.set(COPY_TYPE, data.payload.checked);
+        Storage.session.set(COPY_TYPE, data.payload.checked);
       }
       break;
     }
@@ -30,9 +30,9 @@ export const onPopupMessage = (data: PCRequestType) => {
         payload: data.payload.checked ? CI_EXECUTION_ENUM.START : CI_EXECUTION_ENUM.CLOSE,
       });
       if (!data.payload.once) {
-        storage.local.set(KEYBOARD_TYPE, data.payload.checked);
+        Storage.local.set(KEYBOARD_TYPE, data.payload.checked);
       } else {
-        storage.session.set(KEYBOARD_TYPE, data.payload.checked);
+        Storage.session.set(KEYBOARD_TYPE, data.payload.checked);
       }
       break;
     }
@@ -42,9 +42,9 @@ export const onPopupMessage = (data: PCRequestType) => {
         payload: data.payload.checked ? CI_EXECUTION_ENUM.START : CI_EXECUTION_ENUM.CLOSE,
       });
       if (!data.payload.once) {
-        storage.local.set(CONTEXT_MENU_TYPE, data.payload.checked);
+        Storage.local.set(CONTEXT_MENU_TYPE, data.payload.checked);
       } else {
-        storage.session.set(CONTEXT_MENU_TYPE, data.payload.checked);
+        Storage.session.set(CONTEXT_MENU_TYPE, data.payload.checked);
       }
       break;
     }
@@ -53,12 +53,12 @@ export const onPopupMessage = (data: PCRequestType) => {
       return {
         type: data.type,
         payload: {
-          [PC_QUERY_STATE_ENUM.COPY]: !!storage.local.get<boolean>(COPY_TYPE),
-          [PC_QUERY_STATE_ENUM.MENU]: !!storage.local.get<boolean>(CONTEXT_MENU_TYPE),
-          [PC_QUERY_STATE_ENUM.KEYBOARD]: !!storage.local.get<boolean>(KEYBOARD_TYPE),
-          [PC_QUERY_STATE_ENUM.COPY_ONCE]: !!storage.session.get<boolean>(COPY_TYPE),
-          [PC_QUERY_STATE_ENUM.MENU_ONCE]: !!storage.session.get<boolean>(CONTEXT_MENU_TYPE),
-          [PC_QUERY_STATE_ENUM.KEYBOARD_ONCE]: !!storage.session.get<boolean>(KEYBOARD_TYPE),
+          [PC_QUERY_STATE_ENUM.COPY]: !!Storage.local.get<boolean>(COPY_TYPE),
+          [PC_QUERY_STATE_ENUM.MENU]: !!Storage.local.get<boolean>(CONTEXT_MENU_TYPE),
+          [PC_QUERY_STATE_ENUM.KEYBOARD]: !!Storage.local.get<boolean>(KEYBOARD_TYPE),
+          [PC_QUERY_STATE_ENUM.COPY_ONCE]: !!Storage.session.get<boolean>(COPY_TYPE),
+          [PC_QUERY_STATE_ENUM.MENU_ONCE]: !!Storage.session.get<boolean>(CONTEXT_MENU_TYPE),
+          [PC_QUERY_STATE_ENUM.KEYBOARD_ONCE]: !!Storage.session.get<boolean>(KEYBOARD_TYPE),
         },
       };
     }
