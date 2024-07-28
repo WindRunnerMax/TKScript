@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Fragment, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { PCBridge } from "@/bridge/popup-content";
 import type { I18n } from "../../i18n";
@@ -56,7 +56,7 @@ export const Console: FC<{
   }, []);
 
   return (
-    <Fragment>
+    <div className={styles.console}>
       <Row className={styles.captain}>
         <Col span={8} className={styles.name}>
           {i18n.t("Captain.Modules")}
@@ -143,6 +143,6 @@ export const Console: FC<{
           />
         </Col>
       </Row>
-    </Fragment>
+    </div>
   );
 };

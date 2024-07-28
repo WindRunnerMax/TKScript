@@ -8,9 +8,12 @@ import {
   FOCUS_OUT,
   KEY_DOWN,
   MOUSE_DOWN,
+  MOUSE_MOVE,
   MOUSE_UP,
   PAGE_LOADED,
   SELECT_START,
+  TOUCH_END,
+  TOUCH_MOVE,
   TOUCH_START,
 } from "copy/src/constant/event";
 import { EVENTS_ENUM, EventBus } from "./bus";
@@ -43,6 +46,9 @@ export const initBaseEvents = () => {
   window.addEventListener(FOCUS_IN, e => EventBus.emit(EVENTS_ENUM.FOCUS_CAPTURE, e), true);
   window.addEventListener(BLUR, e => EventBus.emit(EVENTS_ENUM.BLUR_CAPTURE, e), true);
   window.addEventListener(FOCUS_OUT, e => EventBus.emit(EVENTS_ENUM.FOCUS_CAPTURE, e), true);
+  window.addEventListener(MOUSE_MOVE, e => EventBus.emit(EVENTS_ENUM.MOUSE_MOVE_CAPTURE, e), true);
+  window.addEventListener(TOUCH_MOVE, e => EventBus.emit(EVENTS_ENUM.TOUCH_MOVE_CAPTURE, e), true);
+  window.addEventListener(TOUCH_END, e => EventBus.emit(EVENTS_ENUM.TOUCH_END_CAPTURE, e), true);
 };
 
 export const stopNativePropagation = (event: Event) => event.stopImmediatePropagation();

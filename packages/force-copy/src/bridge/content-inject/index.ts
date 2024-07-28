@@ -1,4 +1,4 @@
-import { decodeJSON, encodeJSON } from "laser-utils";
+import { decodeJSON, encodeJSON, isUndefined } from "laser-utils";
 import type { CIRequestType } from "./request";
 import { CONTENT_TO_INJECT_REQUEST } from "./request";
 import { EVENT_TYPE, MARK } from "./constant";
@@ -13,7 +13,7 @@ export class CIBridge {
   static onContentMessage(cb: (data: CIRequestType) => void) {
     const handler = (event: CustomEvent<string>) => {
       const data = decodeJSON<CIRequestType>(event.detail);
-      if (data && data.type && data.payload) {
+      if (data && data.type && !isUndefined(data.payload)) {
         cb(data);
       }
     };

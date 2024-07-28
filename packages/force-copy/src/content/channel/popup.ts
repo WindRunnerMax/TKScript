@@ -8,6 +8,7 @@ import { POPUP_TO_CONTENT_REQUEST } from "@/bridge/popup-content/request";
 import { CIBridge } from "@/bridge/content-inject";
 import { CONTENT_TO_INJECT_REQUEST } from "@/bridge/content-inject/request";
 import { PC_QUERY_STATE_ENUM } from "@/bridge/popup-content/response";
+import { PCBridge } from "@/bridge/popup-content";
 
 export const onPopupMessage = (data: PCRequestType) => {
   logger.info("Content Receive Popup Message", location.host, data);
@@ -61,6 +62,27 @@ export const onPopupMessage = (data: PCRequestType) => {
           [PC_QUERY_STATE_ENUM.KEYBOARD_ONCE]: !!Storage.session.get<boolean>(KEYBOARD_TYPE),
         },
       };
+    }
+    case PCBridge.REQUEST.DEBUG_MOUSE_EVENT: {
+      CIBridge.postToInject({
+        type: CIBridge.REQUEST.DEBUG_MOUSE_EVENT,
+        payload: null,
+      });
+      break;
+    }
+    case PCBridge.REQUEST.DEBUG_FOCUS_EVENT: {
+      CIBridge.postToInject({
+        type: CIBridge.REQUEST.DEBUG_FOCUS_EVENT,
+        payload: null,
+      });
+      break;
+    }
+    case PCBridge.REQUEST.DEBUG_EDITABLE: {
+      CIBridge.postToInject({
+        type: CIBridge.REQUEST.DEBUG_EDITABLE,
+        payload: null,
+      });
+      break;
     }
   }
 };

@@ -48,7 +48,6 @@ export const QQPpt: WebSite = {
   start(type) {
     if (type === COPY_TYPE) {
       win.__CAN_COPY = true;
-      console.dir(win, win.__CAN_COPY);
       styles.insertCSS(STYLE_ID, AUTO_USER_SELECT + ALLOW_PAINT);
     } else if (type === KEYBOARD_TYPE) {
       EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, stopNativePropagation);

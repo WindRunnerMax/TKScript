@@ -15,12 +15,3 @@ body {
   background-color: var(--color-border-3);
   width: 100%;
 }
-
-.console {
-  position: relative;
-  > div {
-    margin: 10px 5px;
-    display: flex;
-    align-items: center;
-  }
-}

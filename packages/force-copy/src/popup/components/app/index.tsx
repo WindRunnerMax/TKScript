@@ -16,9 +16,7 @@ export const App: FC = () => {
 
       <div className={styles.hr}></div>
 
-      <div className={styles.console}>
-        <Console i18n={i18n}></Console>
-      </div>
+      <Console i18n={i18n}></Console>
 
       <div className={styles.hr}></div>
 
