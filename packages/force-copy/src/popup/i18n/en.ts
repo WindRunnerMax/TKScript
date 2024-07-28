@@ -11,8 +11,14 @@ export const en = {
     ContextMenu: "ContextMenu",
   },
   Information: {
+    Tools: "Tools",
     GitHub: "GitHub",
     Help: "Help",
     Reload: "Reload",
+  },
+  Tools: {
+    MouseEvent: "MouseEvent",
+    FocusEvent: "FocusEvent",
+    Editable: "Editable",
   },
 };

@@ -1,6 +1,6 @@
 import { cross } from "@/utils/global";
 
-export const cipherBadgeNumber = (checked: boolean) => {
+export const setBadgeNumber = (checked: boolean) => {
   cross.tabs
     .query({ active: true, currentWindow: true })
     .then(tabs => {

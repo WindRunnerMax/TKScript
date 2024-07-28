@@ -1,3 +1,4 @@
+import { en } from "./en";
 import type { DefaultI18nConfig } from "./types";
 
 export const zh: DefaultI18nConfig = {
@@ -12,9 +13,6 @@ export const zh: DefaultI18nConfig = {
     Keyboard: "解除键盘限制",
     ContextMenu: "解除右键限制",
   },
-  Information: {
-    GitHub: "GitHub",
-    Help: "Help",
-    Reload: "Reload",
-  },
+  Information: en.Information,
+  Tools: en.Tools,
 };

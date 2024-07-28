@@ -13,3 +13,7 @@ export const SELECT_START = "selectstart";
 export const CONTEXT_MENU = "contextmenu";
 export const KEY_DOWN = "keydown";
 export const TOUCH_START = "touchstart";
+export const FOCUS = "focus";
+export const BLUR = "blur";
+export const FOCUS_IN = "focusin";
+export const FOCUS_OUT = "focusout";

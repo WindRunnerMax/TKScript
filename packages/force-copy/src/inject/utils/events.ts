@@ -1,7 +1,11 @@
 import {
+  BLUR,
   CONTEXT_MENU,
   COPY,
   DOM_READY,
+  FOCUS,
+  FOCUS_IN,
+  FOCUS_OUT,
   KEY_DOWN,
   MOUSE_DOWN,
   MOUSE_UP,
@@ -35,6 +39,10 @@ export const initBaseEvents = () => {
   );
   window.addEventListener(DOM_READY, e => EventBus.emit(EVENTS_ENUM.DOM_LOADED, e), true);
   window.addEventListener(PAGE_LOADED, e => EventBus.emit(EVENTS_ENUM.PAGE_LOADED, e), true);
+  window.addEventListener(FOCUS, e => EventBus.emit(EVENTS_ENUM.FOCUS_CAPTURE, e), true);
+  window.addEventListener(FOCUS_IN, e => EventBus.emit(EVENTS_ENUM.FOCUS_CAPTURE, e), true);
+  window.addEventListener(BLUR, e => EventBus.emit(EVENTS_ENUM.BLUR_CAPTURE, e), true);
+  window.addEventListener(FOCUS_OUT, e => EventBus.emit(EVENTS_ENUM.FOCUS_CAPTURE, e), true);
 };
 
 export const stopNativePropagation = (event: Event) => event.stopImmediatePropagation();
