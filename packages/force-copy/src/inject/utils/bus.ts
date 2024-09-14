@@ -1,4 +1,4 @@
-import type { ALL_ACTION_TYPE } from "@/utils/constant";
+import type { ActionType } from "@/utils/constant";
 import { EventBus as AbstractEventBus } from "laser-utils";
 
 const EVENTS_TYPE = [
@@ -36,9 +36,9 @@ interface EventBusParams {
   [EVENTS_ENUM.MOUSE_MOVE_CAPTURE]: MouseEvent;
   [EVENTS_ENUM.DOM_LOADED]: Event;
   [EVENTS_ENUM.PAGE_LOADED]: Event;
-  [EVENTS_ENUM.OPEN_ACTION]: ALL_ACTION_TYPE;
-  [EVENTS_ENUM.CLOSE_ACTION]: ALL_ACTION_TYPE;
-  [EVENTS_ENUM.OPEN_ONCE_ACTION]: ALL_ACTION_TYPE;
+  [EVENTS_ENUM.OPEN_ACTION]: ActionType;
+  [EVENTS_ENUM.CLOSE_ACTION]: ActionType;
+  [EVENTS_ENUM.OPEN_ONCE_ACTION]: ActionType;
   [EVENTS_ENUM.COPY_CAPTURE]: Event;
   [EVENTS_ENUM.KEY_BOARD_CAPTURE]: KeyboardEvent;
   [EVENTS_ENUM.CONTEXT_MENU_CAPTURE]: Event;
