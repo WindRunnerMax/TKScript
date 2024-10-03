@@ -1,6 +1,9 @@
 import dom from "../utils/dom";
 import type { Website } from "../websites";
 
+let preSelectedText = "";
+let curSelectedText = "";
+
 const website: Website = {
   config: {
     runAt: "document-start",
@@ -104,8 +107,29 @@ const website: Website = {
     if (window.getSelection && (window.getSelection() || "").toString()) {
       return (window.getSelection() || "").toString();
     }
-    const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
-    if (result) return result[1];
+    try {
+      const elements = unsafeWindow.document.querySelectorAll("#app > div");
+      for (const item of elements) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const vue = item.__vue__;
+        if (vue) {
+          const text = vue.$store.getters["readerPlugin/selectedTextTrim"];
+          text && (curSelectedText = text);
+          break;
+        }
+      }
+    } catch (error) {
+      console.warn("GET TEXT FAIL", error);
+    }
+    if (!curSelectedText) {
+      const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
+      result && result[1] && (curSelectedText = result[1]);
+    }
+    if (curSelectedText && preSelectedText !== curSelectedText) {
+      preSelectedText = curSelectedText;
+      return curSelectedText;
+    }
     return "";
   },
 };
