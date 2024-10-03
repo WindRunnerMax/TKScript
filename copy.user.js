@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.2.6
+// @version     6.2.7
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -701,6 +701,8 @@
       }
     };
 
+    let preSelectedText = "";
+    let curSelectedText = "";
     const website$a = {
       config: {
         runAt: "document-start"
@@ -798,9 +800,27 @@
         if (window.getSelection && (window.getSelection() || "").toString()) {
           return (window.getSelection() || "").toString();
         }
-        const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
-        if (result)
-          return result[1];
+        try {
+          const elements = unsafeWindow.document.querySelectorAll("#app > div");
+          for (const item of elements) {
+            const vue = item.__vue__;
+            if (vue) {
+              const text = vue.$store.getters["readerPlugin/selectedTextTrim"];
+              text && (curSelectedText = text);
+              break;
+            }
+          }
+        } catch (error) {
+          console.warn("GET TEXT FAIL", error);
+        }
+        if (!curSelectedText) {
+          const result = /查看全部包含“([\s\S]*?)”的文档/.exec(document.body.innerHTML);
+          result && result[1] && (curSelectedText = result[1]);
+        }
+        if (curSelectedText && preSelectedText !== curSelectedText) {
+          preSelectedText = curSelectedText;
+          return curSelectedText;
+        }
         return "";
       }
     };
