@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.2.7
+// @version     6.2.8
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -17,6 +17,7 @@
 // @match       *://segmentfault.com/*
 // @match       *://wk.baidu.com/view/*
 // @match       *://leetcode-cn.com/problems/*
+// @match       *://leetcode.cn/problems/*
 // @match       *://*.zhihu.com/*
 // @match       *://z.30edu.com.cn/*
 // @match       *://docs.qq.com/doc/*
@@ -838,7 +839,10 @@
       regexp: new RegExp("leetcode"),
       init: function() {
         event.hideButton();
-        event.enableOnCopy("#lc-home");
+        window.addEventListener(PAGE_LOADED, () => {
+          event.enableOnCopy("#lc-home");
+          event.enableOnCopy("[data-layout-path='/ts0/t1']");
+        });
       }
     };
 
