@@ -136,6 +136,8 @@ importers:
 
   packages/site-director: {}
 
+  packages/water-mark: {}
+
 packages:
 
   /@arco-design/color@0.4.0:

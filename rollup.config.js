@@ -63,6 +63,19 @@ const scriptConfig = [
       injectCss: false,
     },
   },
+  {
+    name: "WaterMark",
+    meta: {
+      input: "./meta/blank.ts",
+      output: "./dist/meta/water-mark.meta.js",
+      metaFile: "./packages/water-mark/meta.json",
+    },
+    script: {
+      input: "./packages/water-mark/src/index.ts",
+      output: "./dist/water-mark.user.js",
+      injectCss: false,
+    },
+  },
 ];
 
 export default [
