@@ -77,6 +77,17 @@
 </tr>
 
 <tr>
+<td>移除页面水印</td>
+<td><a href="https://github.com/WindrunnerMax/TKScript/blob/master/packages/water-mark/README.md">详情</a></td>
+<td>
+<a href="https://windrunnermax.github.io/TKScript/water-mark.user.js">安装</a>
+<span>｜</span>
+<a href="https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@gh-pages/water-mark.user.js">备用</a>
+</td>
+<td>独立适配模式，移除常见网页的水印，用于<code>CSDN</code>等。</td>
+</tr>
+
+<tr>
 <td>自动展开阅读全文</td>
 <td><a href="https://github.com/WindrunnerMax/TKScript/blob/master/packages/expansion/README.md">详情</a></td>
 <td>
