@@ -84,7 +84,7 @@
 <span>｜</span>
 <a href="https://cdn.jsdelivr.net/gh/WindrunnerMax/TKScript@gh-pages/water-mark.user.js">备用</a>
 </td>
-<td>独立适配模式，移除常见网页的水印，用于<code>CSDN</code>等。</td>
+<td>移除常见网页的水印，请自行处理<code>@match</code>到匹配地址。</td>
 </tr>
 
 <tr>
