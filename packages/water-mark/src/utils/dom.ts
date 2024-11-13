@@ -1,12 +1,11 @@
 import { FALLBACK_CLASS } from "./constant";
 
 export const lintWaterMarkDOM = (node: Node) => {
-  if (node instanceof Element && node.hasAttribute("style")) {
-    const styles = node.getAttribute("style") || "";
-    if (styles.indexOf("pointer-events: none;") === -1) {
+  if (node instanceof HTMLElement && node.hasAttribute("style")) {
+    if (node.style.pointerEvents !== "none") {
       return false;
     }
-    if (styles.indexOf("background: url") > -1 || styles.indexOf("background-image: url") > -1) {
+    if (node.style.background.startsWith("url") || node.style.backgroundImage.startsWith("url")) {
       !node.classList.contains(FALLBACK_CLASS) && node.classList.add(FALLBACK_CLASS);
       return true;
     }

@@ -31,13 +31,19 @@ export const common: Website = {
     };
     const PRESET_CLASSES = [
       "." + FALLBACK_CLASS,
+      `[id*="watermark"]`,
+      `[id*="WaterMark"]`,
+      `[id*="Watermark"]`,
       `[class*="watermark"]`,
       `[class*="WaterMark"]`,
+      `[class*="Watermark"]`,
     ].join(",");
     injectCSSEarly(`${PRESET_CLASSES}{${OPACITY_PROPERTY}}`);
     const PRESET_BACKGROUND = [
       `[style*="pointer-events: none;"][style*="background: url"]`,
       `[style*="pointer-events: none;"][style*="background-image: url"]`,
+      `[style*="pointer-events:none;"][style*="background:url"]`,
+      `[style*="pointer-events:none;"][style*="background-image:url"]`,
     ].join(",");
     injectCSSEarly(`${PRESET_BACKGROUND}{${OPACITY_BACKGROUND_PROPERTY}}`);
   },

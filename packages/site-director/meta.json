@@ -1,25 +1,22 @@
 {
-    "name": "🔥🔥🔥跳转链接直达🔥🔥🔥",
-    "namespace": "https://github.com/WindrunnerMax/TKScript",
-    "version": "1.3.3",
-    "description": "跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN、简书",
-    "author": "Czy",
-    "match": [
-        "*://*.google.com/*",
-        "*://*.google.com.cn/*",
-        "*://*.google.com.hk/*",
-        "*://link.zhihu.com/*",
-        "*://link.csdn.net/*",
-        "*://link.juejin.cn/*",
-        "*://www.jianshu.com/go-wild/*",
-        "*://mail.qq.com/cgi-bin/readtemplate/*"
-    ],
-    "license": "MIT License",
-    "supportURL": "https://github.com/WindrunnerMax/TKScript/issues",
-    "installURL": "https://github.com/WindrunnerMax/TKScript",
-    "grant": [
-        "unsafeWindow",
-        "GM_xmlhttpRequest"
-    ],
-    "run-at": "document-start"
+  "name": "🔥🔥🔥跳转链接直达🔥🔥🔥",
+  "namespace": "https://github.com/WindrunnerMax/TKScript",
+  "version": "1.3.3",
+  "description": "跳转链接直达，去掉确定跳转链接页面，用于谷歌、知乎、CSDN、简书",
+  "author": "Czy",
+  "match": [
+    "*://*.google.com/*",
+    "*://*.google.com.cn/*",
+    "*://*.google.com.hk/*",
+    "*://link.zhihu.com/*",
+    "*://link.csdn.net/*",
+    "*://link.juejin.cn/*",
+    "*://www.jianshu.com/go-wild/*",
+    "*://mail.qq.com/cgi-bin/readtemplate/*"
+  ],
+  "license": "MIT License",
+  "supportURL": "https://github.com/WindrunnerMax/TKScript/issues",
+  "installURL": "https://github.com/WindrunnerMax/TKScript",
+  "grant": ["unsafeWindow", "GM_xmlhttpRequest"],
+  "run-at": "document-start"
 }
