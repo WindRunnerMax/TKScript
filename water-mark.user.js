@@ -2,9 +2,10 @@
 // @name        移除页面水印
 // @description 移除常见网页的水印
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.1
+// @version     1.0.2
 // @author      Czy
-// @match       *://so.csdn.net/*
+// @match       http://*/*
+// @match       https://*/*
 // @supportURL  https://github.com/WindrunnerMax/TKScript/issues
 // @license     GPL License
 // @installURL  https://github.com/WindrunnerMax/TKScript
@@ -27,12 +28,11 @@
   ].join("");
 
   const lintWaterMarkDOM = (node) => {
-    if (node instanceof Element && node.hasAttribute("style")) {
-      const styles = node.getAttribute("style") || "";
-      if (styles.indexOf("pointer-events: none;") === -1) {
+    if (node instanceof HTMLElement && node.hasAttribute("style")) {
+      if (node.style.pointerEvents !== "none") {
         return false;
       }
-      if (styles.indexOf("background: url") > -1 || styles.indexOf("background-image: url") > -1) {
+      if (node.style.background.startsWith("url") || node.style.backgroundImage.startsWith("url")) {
         !node.classList.contains(FALLBACK_CLASS) && node.classList.add(FALLBACK_CLASS);
         return true;
       }
@@ -102,36 +102,25 @@
       };
       const PRESET_CLASSES = [
         "." + FALLBACK_CLASS,
+        `[id*="watermark"]`,
+        `[id*="WaterMark"]`,
+        `[id*="Watermark"]`,
         `[class*="watermark"]`,
-        `[class*="WaterMark"]`
+        `[class*="WaterMark"]`,
+        `[class*="Watermark"]`
       ].join(",");
       injectCSSEarly(`${PRESET_CLASSES}{${OPACITY_PROPERTY}}`);
       const PRESET_BACKGROUND = [
         `[style*="pointer-events: none;"][style*="background: url"]`,
-        `[style*="pointer-events: none;"][style*="background-image: url"]`
+        `[style*="pointer-events: none;"][style*="background-image: url"]`,
+        `[style*="pointer-events:none;"][style*="background:url"]`,
+        `[style*="pointer-events:none;"][style*="background-image:url"]`
       ].join(",");
       injectCSSEarly(`${PRESET_BACKGROUND}{${OPACITY_BACKGROUND_PROPERTY}}`);
     }
   };
 
-  const csdn = {
-    regexp: /so\.csdn\.net/,
-    init: () => {
-      const observer = MutationObserver.prototype.observe;
-      MutationObserver.prototype.observe = function(target, options) {
-        if (target instanceof Element && target.classList.contains("chat-mask")) {
-          const nodes = Array.from(target.children);
-          nodes.forEach((node) => lintWaterMarkDOM(node));
-          return;
-        }
-        observer.call(this, target, options);
-      };
-      const classes = ["." + FALLBACK_CLASS].join(",");
-      injectCSSEarly(`${classes}{${OPACITY_PROPERTY}}`);
-    }
-  };
-
-  const websites = [csdn, common];
+  const websites = [common];
   const web = websites.find((item) => item.regexp.test(location.href));
   web && web.init();
 
