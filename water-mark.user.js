@@ -2,7 +2,7 @@
 // @name        移除页面水印
 // @description 移除常见网页的水印
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.2
+// @version     1.0.3
 // @author      Czy
 // @match       http://*/*
 // @match       https://*/*
@@ -102,19 +102,19 @@
       };
       const PRESET_CLASSES = [
         "." + FALLBACK_CLASS,
-        `[id*="watermark"]`,
-        `[id*="WaterMark"]`,
-        `[id*="Watermark"]`,
-        `[class*="watermark"]`,
-        `[class*="WaterMark"]`,
-        `[class*="Watermark"]`
+        `div[id*="watermark"]`,
+        `div[id*="WaterMark"]`,
+        `div[id*="Watermark"]`,
+        `div[class*="watermark"]`,
+        `div[class*="WaterMark"]`,
+        `div[class*="Watermark"]`
       ].join(",");
       injectCSSEarly(`${PRESET_CLASSES}{${OPACITY_PROPERTY}}`);
       const PRESET_BACKGROUND = [
-        `[style*="pointer-events: none;"][style*="background: url"]`,
-        `[style*="pointer-events: none;"][style*="background-image: url"]`,
-        `[style*="pointer-events:none;"][style*="background:url"]`,
-        `[style*="pointer-events:none;"][style*="background-image:url"]`
+        `div[style*="pointer-events"][style*="background: url"]`,
+        `div[style*="pointer-events"][style*="background-image: url"]`,
+        `div[style*="pointer-events"][style*="background:url"]`,
+        `div[style*="pointer-events"][style*="background-image:url"]`
       ].join(",");
       injectCSSEarly(`${PRESET_BACKGROUND}{${OPACITY_BACKGROUND_PROPERTY}}`);
     }
