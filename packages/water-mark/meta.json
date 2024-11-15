@@ -1,7 +1,7 @@
 {
   "name": "移除页面水印",
   "namespace": "https://github.com/WindrunnerMax/TKScript",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "移除常见网页的水印",
   "author": "Czy",
   "match": ["http://*/*", "https://*/*"],
