@@ -50,8 +50,9 @@ export const implantScript = () => {
   // 使用 cross.tabs.executeScript 得到的 window 是 content window
   // 此时就必须要使用 Inject Script 的方式才能正常注入脚本
   // 然而这种方式就会受到 CSP 的限制, 因此在这里处理 CSP 问题
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src
+  // https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript
   // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onHeadersReceived
-  let nonceId = "";
   chrome.webRequest.onHeadersReceived.addListener(
     res => {
       if (!res.responseHeaders) return void 0;
@@ -60,50 +61,31 @@ export const implantScript = () => {
       }
       for (let i = 0; i < res.responseHeaders.length; i++) {
         const responseHeaderName = res.responseHeaders[i].name.toLowerCase();
-        if (responseHeaderName === "content-security-policy") {
-          const value = res.responseHeaders[i].value || "";
-          const nonce = /'nonce-([-+/=\w]+)'/.exec(value);
-          if (nonce && nonce[1]) {
-            nonceId = nonce[1];
+        // 仅处理 CSP 的问题
+        if (responseHeaderName !== "content-security-policy") continue;
+        const value = res.responseHeaders[i].value || "";
+        const types = value.split(";").map(it => it.trim());
+        const target: string[] = [];
+        // 这里的 HASH 在 WrapperCodePlugin 中计算并替换资源
+        const hashed = "'sha256-${CSP-HASH}'";
+        for (const item of types) {
+          const [type, ...rest] = item.split(" ");
+          if (type === "script-src" || type === "default-src") {
+            target.push([type, hashed, ...rest].join(" "));
+            continue;
           }
+          target.push(item);
         }
+        // 这里存在一个问题, 扩展的 CSP 总是更倾向于更加严格的模式
+        // 实际测试中仅有完全抹除标头时, 才可以解决冲突的问题
+        res.responseHeaders[i].value = target.join(";");
       }
       return {
         responseHeaders: res.responseHeaders,
       };
     },
-    { urls: URL_MATCH },
-    ["responseHeaders"]
+    { urls: URL_MATCH, types: ["main_frame", "sub_frame"] },
+    ["blocking", "responseHeaders"]
   );
-  // https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript
-  cross.tabs.onUpdated.addListener((_, changeInfo, tab) => {
-    if (changeInfo.status == "loading") {
-      const tabId = tab && tab.id;
-      const tabURL = tab && tab.url;
-      if (!tabId || !tabURL) return void 0;
-      if (!URL_MATCH.some(match => new RegExp(match).test(tabURL))) {
-        return void 0;
-      }
-      const code = `
-        if (window["${process.env.INJECT_FILE}"] && document instanceof XMLDocument === false) {
-          const script = document.createElementNS("http://www.w3.org/1999/xhtml", "script");
-          script.setAttribute("type", "text/javascript");
-          script.innerText = \`;(\${window["${process.env.INJECT_FILE}"].toString()})();\`;
-          script.nonce = "${nonceId}";
-          document.documentElement.appendChild(script);
-          // script.onload = () => script.remove();
-          // delete window["${process.env.INJECT_FILE}"];
-        };`;
-      cross.tabs
-        .executeScript(tabId, {
-          allFrames: true,
-          code: code,
-          runAt: "document_start",
-        })
-        .catch(err => {
-          if (__DEV__) logger.warning("Inject Script", err);
-        });
-    }
-  });
   // #ENDIF
 };

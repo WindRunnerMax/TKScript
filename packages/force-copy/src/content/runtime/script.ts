@@ -6,6 +6,7 @@ export const implantScript = () => {
     if (document instanceof XMLDocument) return void 0;
     const script = document.createElementNS("http://www.w3.org/1999/xhtml", "script");
     script.setAttribute("type", "text/javascript");
+    // 这里的内容需要跟 WrapperCodePlugin 的 HASH 计算保持一致
     script.innerText = `;(${fn.toString()})();`;
     document.documentElement.appendChild(script);
     script.onload = () => script.remove();

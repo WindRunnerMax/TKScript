@@ -1,7 +1,7 @@
 const thread = require("child_process");
 const path = require("path");
 const fs = require("fs/promises");
-const { isGecko } = require("../utils/node");
+const { IS_GECKO } = require("../utils/node");
 
 const exec = command => {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ const exec = command => {
 
 exports.FilesPlugin = class FilesPlugin {
   constructor() {
-    const folder = isGecko ? "build-gecko" : "build";
+    const folder = IS_GECKO ? "build-gecko" : "build";
     fs.mkdir(`${folder}/static`, { recursive: true });
     fs.mkdir(`${folder}/_locales`, { recursive: true });
   }
@@ -30,7 +30,7 @@ exports.FilesPlugin = class FilesPlugin {
       const locales = path.resolve("public/locales");
       const resources = path.resolve("public/static");
 
-      const folder = isGecko ? "build-gecko" : "build";
+      const folder = IS_GECKO ? "build-gecko" : "build";
       const localesTarget = path.resolve(`${folder}/_locales`);
       const resourcesTarget = path.resolve(`${folder}/static`);
 

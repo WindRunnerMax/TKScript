@@ -4,18 +4,18 @@ const { ReloadPlugin } = require("./script/reload");
 const { ManifestPlugin } = require("./script/manifest");
 const { WrapperCodePlugin } = require("./script/wrapper");
 const { default: HtmlPlugin } = require("@rspack/plugin-html");
-const { getUniqueId, isDev, isGecko } = require("./script/utils/node");
+const { getUniqueId, IS_DEV, IS_GECKO } = require("./script/utils/node");
 
-const folder = isGecko ? "build-gecko" : "build";
-const EVENT_TYPE = isDev ? "EVENT_TYPE" : getUniqueId();
-const INJECT_FILE = isDev ? "INJECT_FILE" : getUniqueId();
+const folder = IS_GECKO ? "build-gecko" : "build";
+const EVENT_TYPE = IS_DEV ? "EVENT_TYPE" : getUniqueId();
+const INJECT_FILE = IS_DEV ? "INJECT_FILE" : getUniqueId();
 
 process.env.EVENT_TYPE = EVENT_TYPE;
 process.env.INJECT_FILE = INJECT_FILE;
 process.env.PLATFORM = process.env.PLATFORM || "chromium";
 
 /**
- * @type {import('@rspack/cli').Configuration}
+ * @type {import("@rspack/cli").Configuration}
  */
 module.exports = {
   context: __dirname,
@@ -43,7 +43,7 @@ module.exports = {
   },
   builtins: {
     define: {
-      "__DEV__": JSON.stringify(isDev),
+      "__DEV__": JSON.stringify(IS_DEV),
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
       "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),

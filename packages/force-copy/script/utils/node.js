@@ -1,9 +1,14 @@
-const isDev = process.env.NODE_ENV === "development";
-const isProd = process.env.NODE_ENV === "production";
-const isGecko = process.env.PLATFORM === "gecko";
-const isChromium = process.env.PLATFORM ? process.env.PLATFORM === "chromium" : true;
-
+const IS_DEV = process.env.NODE_ENV === "development";
+const IS_PROD = process.env.NODE_ENV === "production";
+const IS_GECKO = process.env.PLATFORM === "gecko";
+const IS_CHROMIUM = process.env.PLATFORM ? process.env.PLATFORM === "chromium" : true;
 const CHARTS = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
+
+exports.IS_DEV = IS_DEV;
+exports.IS_PROD = IS_PROD;
+exports.IS_GECKO = IS_GECKO;
+exports.IS_CHROMIUM = IS_CHROMIUM;
+
 const getUniqueId = (len = 10) => {
   const chars = new Array(len - 1).fill("");
   return (
@@ -22,9 +27,5 @@ const promisify = fn => {
     });
 };
 
-exports.isDev = isDev;
-exports.isProd = isProd;
-exports.isGecko = isGecko;
 exports.promisify = promisify;
-exports.isChromium = isChromium;
 exports.getUniqueId = getUniqueId;

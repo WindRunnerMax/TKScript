@@ -1,4 +1,4 @@
-const { isDev } = require("../utils/node");
+const { IS_DEV } = require("../utils/node");
 const WebSocketServer = require("ws").Server;
 
 /**
@@ -8,7 +8,7 @@ let wsClient = null;
 
 exports.ReloadPlugin = class ReloadPlugin {
   constructor() {
-    if (isDev) {
+    if (IS_DEV) {
       try {
         const server = new WebSocketServer({ port: 3333 });
         server.on("connection", client => {

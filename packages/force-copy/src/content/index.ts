@@ -12,7 +12,7 @@ import { implantScript } from "./runtime/script";
     logger.setLevel(LOG_LEVEL.INFO);
   }
   logger.info("Content Script Loaded");
-  // implantScript();
+  implantScript();
   !isInIframe && initializeWorker();
   PCBridge.onPopupMessage(onPopupMessage);
 })();
