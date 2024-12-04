@@ -29,7 +29,7 @@
   "devDependencies": {
     "@rspack/cli": "0.2.5",
     "@rspack/plugin-html": "0.2.5",
-    "@types/chrome": "0.0.241",
+    "@types/chrome": "0.0.287",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
     "less": "3.0.0",

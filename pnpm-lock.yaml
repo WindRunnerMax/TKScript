@@ -110,8 +110,8 @@ importers:
         specifier: 0.2.5
         version: 0.2.5(@rspack/core@0.2.5)
       '@types/chrome':
-        specifier: 0.0.241
-        version: 0.0.241
+        specifier: 0.0.287
+        version: 0.0.287
       '@types/react':
         specifier: 17.0.2
         version: 17.0.2
@@ -775,8 +775,8 @@ packages:
       '@types/node': 20.8.0
     dev: true
 
-  /@types/chrome@0.0.241:
-    resolution: {integrity: sha512-3WxC2D8zhyDnCU1GxyznoyUulLH6ReLWUWQm5LSM7S1rvV9w+k8TUNbWrFavk6zz2E1ws05lNawnSa7rK5kY8Q==}
+  /@types/chrome@0.0.287:
+    resolution: {integrity: sha512-wWhBNPNXZHwycHKNYnexUcpSbrihVZu++0rdp6GEk5ZgAglenLx+RwdEouh6FrHS0XQiOxSd62yaujM1OoQlZQ==}
     dependencies:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.15

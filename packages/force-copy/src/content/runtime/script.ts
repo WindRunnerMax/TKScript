@@ -9,10 +9,9 @@ export const implantScript = () => {
     // 这里的内容需要跟 WrapperCodePlugin 的 HASH 计算保持一致
     script.innerText = `;(${fn.toString()})();`;
     document.documentElement.appendChild(script);
+    // 在这里仅移除 script 标签, 但不会删除 window 上的属性
+    // 保证在 CSP 限制下可以重试, 且处于隔离环境不会受到影响
     script.onload = () => script.remove();
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    delete window[process.env.INJECT_FILE];
   }
   // #ENDIF
 };
