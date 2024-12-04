@@ -56,7 +56,13 @@ if (process.env.PLATFORM === "gecko") {
   __MANIFEST__.background = {
     scripts: [__MANIFEST__.background.service_worker],
   };
-  __MANIFEST__.permissions = ["activeTab", "tabs", ...__URL_MATCH__];
+  __MANIFEST__.permissions = [
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    ...__URL_MATCH__,
+  ];
   __MANIFEST__.browser_specific_settings = {
     gecko: { strict_min_version: "91.1.0" },
     gecko_android: { strict_min_version: "91.1.0" },
