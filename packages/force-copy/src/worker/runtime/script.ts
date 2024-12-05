@@ -1,9 +1,9 @@
 import { URL_MATCH } from "@/utils/constant";
 import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
+import { CODE_PREFIX, CODE_SUFFIX } from "../utils/constant";
 
-export const implantScript = () => {
-  /**  RUN INJECT SCRIPT IN DOCUMENT START **/
+export const importScript = () => {
   // #IFDEF CHROMIUM
   // https://bugs.chromium.org/p/chromium/issues/detail?id=634381
   // https://stackoverflow.com/questions/75495191/chrome-extension-manifest-v3-how-to-use-window-addeventlistener
@@ -35,6 +35,7 @@ export const implantScript = () => {
           return void 0;
         }
         if (tabId && cross.scripting) {
+          // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/scripting/executeScript
           cross.scripting.executeScript({
             target: { tabId: tabId, allFrames: true },
             files: [process.env.INJECT_FILE + ".js"],
@@ -49,8 +50,8 @@ export const implantScript = () => {
   // #IFDEF GECKO
   logger.info("Register Inject Scripts By Content Script Inline Code");
   // 使用 cross.tabs.executeScript 得到的 window 是 content window
-  // 此时就必须要使用 Inject Script 的方式才能正常注入脚本
-  // 然而这种方式就会受到 CSP 的限制, 因此在这里处理 CSP 问题
+  // 此时就必须要使用 inject script 的方式才能正常注入脚本
+  // 然而这种方式就会受到 content security policy 策略的限制
   // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onHeadersReceived
   chrome.webRequest.onHeadersReceived.addListener(
     res => {
@@ -66,7 +67,7 @@ export const implantScript = () => {
         const types = value.split(";").map(it => it.trim());
         const target: string[] = [];
         // CSP 不支持多个 nonce, 但可以配置多个 hash
-        // 这里的 HASH 会在 WrapperCodePlugin 中计算并替换资源
+        // 这里的 hash 会在编译时计算并替换资源
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src
         const hashed = "'sha256-${CSP-HASH}'";
         for (const item of types) {
@@ -77,40 +78,51 @@ export const implantScript = () => {
           }
           target.push(item);
         }
-        // 覆盖原有的响应头, 但扩展的 CSP 总是更倾向于更加严格的模式
+        // 覆盖原有的响应头, 扩展的 CSP 总是更倾向于更加严格的模式
         // 实际测试中仅有完全抹除标头时, 才可以解决冲突的问题
         res.responseHeaders[i].value = target.join(";");
-        // 如果存在 nonce 的配置, 则尝试注入 Inject Script
+        // 存在 CSP 时尝试直接在 content script 中执行
+        let code = [
+          `if (window["${process.env.INJECT_FILE}"] && document instanceof XMLDocument === false) {`,
+          `  window["${process.env.INJECT_FILE}"]();`,
+          `};`,
+        ].join("\n");
+        // 如果存在 blob: 的配置 尝试以 blob src 的形式注入
+        if (/script-src[- \w']+blob:/.test(value)) {
+          code = [
+            CODE_PREFIX,
+            `script.src = URL.createObjectURL(new Blob([code]));`,
+            CODE_SUFFIX,
+          ].join("\n");
+        }
+        // 如果存在 nonce 的配置 则会尝试以 nonce 的形式注入
         const nonce = /'nonce-([-+/=\w]+)'/.exec(value);
         if (nonce && nonce[1]) {
-          const nonceId = nonce[1];
-          const code = `
-          if (window["${process.env.INJECT_FILE}"] && document instanceof XMLDocument === false) {
-            const script = document.createElementNS("http://www.w3.org/1999/xhtml", "script");
-            script.setAttribute("type", "text/javascript");
-            script.innerText = \`;(\${window["${process.env.INJECT_FILE}"].toString()})();\`;
-            script.nonce = "${nonceId}";
-            document.documentElement.appendChild(script);
-            script.onload = () => script.remove();
-          };`;
-          const onUpdate = (_: number, changeInfo: chrome.tabs.TabChangeInfo) => {
-            if (changeInfo.status !== "loading") return void 0;
-            // https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript
-            cross.tabs
-              .executeScript(res.tabId, {
-                allFrames: true,
-                code: code,
-                runAt: "document_start",
-              })
-              .catch(err => {
-                if (__DEV__) logger.warning("Inject Script", err);
-              });
-            cross.tabs.onUpdated.removeListener(onUpdate);
-          };
-          // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/onUpdated
-          // @ts-expect-error filter params
-          cross.tabs.onUpdated.addListener(onUpdate, { tabId: res.tabId });
+          code = [
+            CODE_PREFIX,
+            `script.nonce = "${nonce[1]}";`,
+            `script.innerText = code`,
+            CODE_SUFFIX,
+          ].join("\n");
         }
+        const onUpdate = (_: number, changeInfo: chrome.tabs.TabChangeInfo) => {
+          if (changeInfo.status !== "loading") return void 0;
+          // https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions/API/tabs/executeScript
+          cross.tabs
+            .executeScript(res.tabId, {
+              allFrames: false,
+              code: code,
+              runAt: "document_start",
+              frameId: res.frameId,
+            })
+            .catch(err => {
+              if (__DEV__) logger.warning("Inject Script", err);
+            });
+          cross.tabs.onUpdated.removeListener(onUpdate);
+        };
+        // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/onUpdated
+        // @ts-expect-error filter params
+        cross.tabs.onUpdated.addListener(onUpdate, { tabId: res.tabId });
       }
       // 返回修改后的响应头配置
       return {

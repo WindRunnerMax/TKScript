@@ -1,4 +1,4 @@
-export const implantScript = () => {
+export const importScript = () => {
   const fn = window[process.env.INJECT_FILE as unknown as number] as unknown as () => void;
   // #IFDEF GECKO
   if (fn) {
@@ -10,8 +10,8 @@ export const implantScript = () => {
     script.innerText = `;(${fn.toString()})();`;
     document.documentElement.appendChild(script);
     // 在这里仅移除 script 标签, 但不会删除 window 上的属性
-    // 保证在 CSP 限制下可以重试, 且处于隔离环境不会受到影响
-    script.onload = () => script.remove();
+    // 保证注入重试, inject 幂等且 content 处于隔离环境不会受到影响
+    script.remove();
   }
   // #ENDIF
 };
