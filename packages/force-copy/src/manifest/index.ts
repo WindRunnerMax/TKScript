@@ -37,7 +37,7 @@ const __MANIFEST__: Record<string, unknown> = {
     service_worker: "worker.js",
   },
   host_permissions: [...__URL_MATCH__],
-  permissions: ["activeTab", "tabs", "scripting"],
+  permissions: ["activeTab", "tabs", "scripting", "management"],
   minimum_chrome_version: "88.0",
 };
 
@@ -61,6 +61,7 @@ if (process.env.PLATFORM === "gecko") {
     "tabs",
     "webRequest",
     "webRequestBlocking",
+    "management",
     ...__URL_MATCH__,
   ];
   __MANIFEST__.browser_specific_settings = {

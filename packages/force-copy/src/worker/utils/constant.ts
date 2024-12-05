@@ -10,3 +10,5 @@ export const CODE_SUFFIX = [
   `  script.remove();`,
   `}`,
 ].join("\n");
+
+export const NOOP = () => null;

@@ -4,7 +4,7 @@ import { onPopupMessage } from "./channel/popup";
 import { LOG_LEVEL, logger } from "@/utils/logger";
 import { initializeWorker } from "./runtime/initialize";
 import { isInIframe } from "@/utils/is";
-import { implantScript } from "./runtime/script";
+import { importScript } from "./runtime/script";
 
 (() => {
   if (__DEV__) {
@@ -12,7 +12,7 @@ import { implantScript } from "./runtime/script";
     logger.setLevel(LOG_LEVEL.INFO);
   }
   logger.info("Content Script Loaded");
-  implantScript();
+  importScript();
   !isInIframe && initializeWorker();
   PCBridge.onPopupMessage(onPopupMessage);
 })();
