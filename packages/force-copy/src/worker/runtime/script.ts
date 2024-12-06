@@ -3,7 +3,7 @@ import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
 import { CODE_PREFIX, CODE_SUFFIX } from "../utils/constant";
 
-export const importScript = () => {
+export const importWorkerScript = () => {
   // #IFDEF CHROMIUM
   // https://bugs.chromium.org/p/chromium/issues/detail?id=634381
   // https://stackoverflow.com/questions/75495191/chrome-extension-manifest-v3-how-to-use-window-addeventlistener
@@ -52,6 +52,7 @@ export const importScript = () => {
   // 使用 cross.tabs.executeScript 得到的 window 是 content window
   // 此时就必须要使用 inject script 的方式才能正常注入脚本
   // 然而这种方式就会受到 content security policy 策略的限制
+  // https://github.com/violentmonkey/violentmonkey/issues/1001
   // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onHeadersReceived
   chrome.webRequest.onHeadersReceived.addListener(
     res => {

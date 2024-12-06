@@ -13,6 +13,7 @@
 - [ ] Force Copy
 - [ ] Copy Currency
 - [ ] Site Director
+- [ ] Water Mark
 - [ ] Captcha
 - [ ] Expansion
 - [ ] Completion
