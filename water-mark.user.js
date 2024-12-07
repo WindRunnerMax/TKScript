@@ -1,21 +1,25 @@
 // ==UserScript==
-// @name        移除页面水印
-// @description 移除常见网页的水印
-// @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     1.0.3
-// @author      Czy
-// @match       http://*/*
-// @match       https://*/*
-// @supportURL  https://github.com/WindrunnerMax/TKScript/issues
-// @license     GPL License
-// @installURL  https://github.com/WindrunnerMax/TKScript
-// @run-at      document-start
-// @grant       unsafeWindow
+// @name    🔥🔥🔥移除页面水印🔥🔥🔥
+// @name:en Remove Page Watermark
+// @name:zh 🔥🔥🔥移除页面水印🔥🔥🔥
+// @description    移除常见网页的水印
+// @description:en Remove watermarks from common web pages
+// @description:zh 移除常见网页的水印
+// @namespace  https://github.com/WindrunnerMax/TKScript
+// @version    1.0.4
+// @author     Czy
+// @match      http://*/*
+// @match      https://*/*
+// @supportURL https://github.com/WindrunnerMax/TKScript/issues
+// @license    GPL License
+// @installURL https://github.com/WindrunnerMax/TKScript
+// @run-at     document-start
+// @grant      unsafeWindow
 // ==/UserScript==
 (function () {
   'use strict';
 
-  const FALLBACK_CLASS = "_watermark";
+  const FALLBACK_CLASS = "__WATERMARK__";
   const OPACITY_PROPERTY = [
     "opacity: 0 !important;",
     "visibility: hidden !important;",
@@ -27,15 +31,19 @@
     "background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important;"
   ].join("");
 
-  const lintWaterMarkDOM = (node) => {
-    if (node instanceof HTMLElement && node.hasAttribute("style")) {
-      if (node.style.pointerEvents !== "none") {
-        return false;
-      }
-      if (node.style.background.startsWith("url") || node.style.backgroundImage.startsWith("url")) {
-        !node.classList.contains(FALLBACK_CLASS) && node.classList.add(FALLBACK_CLASS);
-        return true;
-      }
+  const inspectWaterMarkDOM = (node) => {
+    if (node instanceof HTMLElement === false) {
+      return false;
+    }
+    if (node.classList.contains(FALLBACK_CLASS)) {
+      return true;
+    }
+    if (!node.hasAttribute("style") || node.style.pointerEvents !== "none") {
+      return false;
+    }
+    if (node.style.background.startsWith("url") || node.style.backgroundImage.startsWith("url")) {
+      !node.classList.contains(FALLBACK_CLASS) && node.classList.add(FALLBACK_CLASS);
+      return true;
     }
     return false;
   };
@@ -79,16 +87,16 @@
     init: () => {
       const observer = MutationObserver.prototype.observe;
       MutationObserver.prototype.observe = function(target, options) {
-        lintWaterMarkDOM(target);
-        target.childNodes.forEach(lintWaterMarkDOM);
+        inspectWaterMarkDOM(target);
+        target.childNodes.forEach(inspectWaterMarkDOM);
         observer.call(this, target, options);
       };
       const _MutationObserver = MutationObserver;
-      const cb = (callback) => {
+      const getMutationCallback = (callback) => {
         return (records, observer2) => {
           let isMatchedWaterMarkDOM = false;
           for (const record of records) {
-            if (lintWaterMarkDOM(record.target) && !isMatchedWaterMarkDOM) {
+            if (inspectWaterMarkDOM(record.target) && !isMatchedWaterMarkDOM) {
               isMatchedWaterMarkDOM = true;
             }
           }
@@ -97,7 +105,7 @@
       };
       unsafeWindow.MutationObserver = class extends _MutationObserver {
         constructor(callback) {
-          super(cb(callback));
+          super(getMutationCallback(callback));
         }
       };
       const PRESET_CLASSES = [
