@@ -1,4 +1,4 @@
-export const FALLBACK_CLASS = "_watermark";
+export const FALLBACK_CLASS = "__WATERMARK__";
 
 export const OPACITY_PROPERTY = [
   "opacity: 0 !important;",

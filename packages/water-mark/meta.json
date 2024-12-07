@@ -1,8 +1,16 @@
 {
-  "name": "移除页面水印",
+  "name": {
+    "default": "🔥🔥🔥移除页面水印🔥🔥🔥",
+    "en": "Remove Page Watermark",
+    "zh": "🔥🔥🔥移除页面水印🔥🔥🔥"
+  },
   "namespace": "https://github.com/WindrunnerMax/TKScript",
-  "version": "1.0.3",
-  "description": "移除常见网页的水印",
+  "version": "1.0.4",
+  "description": {
+    "default": "移除常见网页的水印",
+    "en": "Remove watermarks from common web pages",
+    "zh": "移除常见网页的水印"
+  },
   "author": "Czy",
   "match": ["http://*/*", "https://*/*"],
   "supportURL": "https://github.com/WindrunnerMax/TKScript/issues",

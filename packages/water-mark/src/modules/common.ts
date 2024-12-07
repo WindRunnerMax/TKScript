@@ -1,6 +1,6 @@
 import type { Website } from "../types/website";
 import { FALLBACK_CLASS, OPACITY_BACKGROUND_PROPERTY, OPACITY_PROPERTY } from "../utils/constant";
-import { lintWaterMarkDOM } from "../utils/dom";
+import { inspectWaterMarkDOM } from "../utils/dom";
 import { injectCSSEarly } from "../utils/styles";
 
 export const common: Website = {
@@ -8,16 +8,16 @@ export const common: Website = {
   init: () => {
     const observer = MutationObserver.prototype.observe;
     MutationObserver.prototype.observe = function (target, options) {
-      lintWaterMarkDOM(target);
-      target.childNodes.forEach(lintWaterMarkDOM);
+      inspectWaterMarkDOM(target);
+      target.childNodes.forEach(inspectWaterMarkDOM);
       observer.call(this, target, options);
     };
     const _MutationObserver = MutationObserver;
-    const cb = (callback: MutationCallback) => {
+    const getMutationCallback = (callback: MutationCallback) => {
       return (records: MutationRecord[], observer: MutationObserver) => {
         let isMatchedWaterMarkDOM = false;
         for (const record of records) {
-          if (lintWaterMarkDOM(record.target) && !isMatchedWaterMarkDOM) {
+          if (inspectWaterMarkDOM(record.target) && !isMatchedWaterMarkDOM) {
             isMatchedWaterMarkDOM = true;
           }
         }
@@ -26,7 +26,7 @@ export const common: Website = {
     };
     unsafeWindow.MutationObserver = class extends _MutationObserver {
       constructor(callback: MutationCallback) {
-        super(cb(callback));
+        super(getMutationCallback(callback));
       }
     };
     const PRESET_CLASSES = [
