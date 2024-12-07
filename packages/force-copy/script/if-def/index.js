@@ -1,11 +1,11 @@
 const path = require("path");
 const fs = require("fs");
 
-// 条件编译: `process.env.PLATFORM`的深层次嵌套
-// #IFDEF #ENDIF: `C/C++`预处理指令 平台层面扩展性
+// 条件编译: process.env.PLATFORM 的深层次嵌套
+// #IFDEF #ENDIF: C/C++ 预处理指令 平台层面扩展性
 
 /**
- * @this {import('@rspack/core').LoaderContext}
+ * @this {import("@rspack/core").LoaderContext}
  * @param {string} source
  * @returns {string}
  */
@@ -59,10 +59,10 @@ function IfDefineLoader(source) {
   const target = lines.map((line, index) => {
     // 去掉首尾的空白 去掉行首注释符号与空白符(可选)
     const code = line.trim().replace(/^\/\/\s*/, "");
-    // 检查预处理指令起始 `#IFDEF`只会置`true`
+    // 检查预处理指令起始 #IFDEF 只会置 true
     if (/^#IFDEF/.test(code)) {
       stack.push(index);
-      // 如果是`true`继续即可
+      // 如果是 true 继续即可
       if (terser) return "";
       const match = code.replace("#IFDEF", "").trim();
       const group = match.split("|").map(item => item.trim().toLowerCase());
@@ -73,10 +73,10 @@ function IfDefineLoader(source) {
       }
       return "";
     }
-    // 检查预处理指令结束 `#IFDEF`只会置`false`
+    // 检查预处理指令结束 #IFDEF 只会置 false
     if (/^#ENDIF$/.test(code)) {
       const index = stack.pop();
-      // 额外的`#ENDIF`忽略
+      // 额外的 #ENDIF 忽略
       if (index === undefined) return "";
       if (index === terserIndex) {
         terser = false;
