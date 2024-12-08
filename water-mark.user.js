@@ -82,7 +82,7 @@
     styles.insertCSS(String(Math.random()), css);
   };
 
-  const common = {
+  const basic = {
     regexp: /.*/,
     init: () => {
       const observer = MutationObserver.prototype.observe;
@@ -128,7 +128,7 @@
     }
   };
 
-  const websites = [common];
+  const websites = [basic];
   const web = websites.find((item) => item.regexp.test(location.href));
   web && web.init();
 
