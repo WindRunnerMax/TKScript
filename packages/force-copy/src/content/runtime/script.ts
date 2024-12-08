@@ -26,6 +26,11 @@ export const importInjectScript = () => {
       script.onload = () => {
         script.remove();
         // 如果仍然不存在 尝试在 Content Script 中执行
+        // 在 Content Script 中执行可以保证 DOM 事件类型的处理
+        !unsafeWindow[signal] && fn();
+      };
+      script.onerror = () => {
+        script.remove();
         !unsafeWindow[signal] && fn();
       };
     }

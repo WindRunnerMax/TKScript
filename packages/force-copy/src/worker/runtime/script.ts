@@ -49,12 +49,14 @@ export const importWorkerScript = () => {
 
   // #IFDEF GECKO
   logger.info("Register Inject Scripts By Content Script Inline Code");
-  // 使用 cross.tabs.executeScript 得到的 window 是 content window
-  // 此时就必须要使用 inject script 的方式才能正常注入脚本
-  // 然而这种方式就会受到 content security policy 策略的限制
+  // 使用 cross.tabs.executeScript 得到的 Window 是 Content Window
+  // 此时就必须要使用 Inject Script 的方式才能正常注入脚本
+  // 然而这种方式就会受到 Content Security Policy 策略的限制
   // https://github.com/violentmonkey/violentmonkey/issues/1001
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src
   // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onHeadersReceived
-  chrome.webRequest.onHeadersReceived.addListener(
+  // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onResponseStarted
+  chrome.webRequest.onResponseStarted.addListener(
     res => {
       if (!res.responseHeaders) return void 0;
       if (res.type !== "main_frame" && res.type !== "sub_frame") {
@@ -65,24 +67,14 @@ export const importWorkerScript = () => {
         // 仅处理 CSP 的问题
         if (responseHeaderName !== "content-security-policy") continue;
         const value = res.responseHeaders[i].value || "";
-        const types = value.split(";").map(it => it.trim());
-        const target: string[] = [];
-        // CSP 不支持多个 nonce, 但可以配置多个 hash
-        // 这里的 hash 会在编译时计算并替换资源
-        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src
-        const hashed = "'sha256-${CSP-HASH}'";
-        for (const item of types) {
-          const [type, ...rest] = item.split(" ");
-          if (type === "script-src" || type === "default-src") {
-            target.push([type, hashed, ...rest].join(" "));
-            continue;
-          }
-          target.push(item);
-        }
-        // 覆盖原有的响应头, 扩展的 CSP 总是更倾向于更加严格的模式
-        // 实际测试中仅有完全抹除标头时, 才可以解决冲突的问题
-        res.responseHeaders[i].value = target.join(";");
-        // 存在 CSP 时尝试直接在 content script 中执行
+        // CSP 不支持多个 nonce, 但可以配置多个 sha-hash
+        // 这里的 hash 会在编译时计算并替换资源 'sha256-${CSP-HASH}'
+        // 但对 CSP 策略修改存在问题, 这里仅读取并尝试注入, 而不直接增加 hash
+        // 例如 'self' => ok / 'self'+'hash' => error 宽松到严格结构问题
+        // 此外即使覆盖原有的响应头, 扩展的 CSP 总是更倾向于更加严格的模式
+        // 在实际测试中, 仅有完全抹除标头时, 才可以实际解决多个扩展冲突的问题
+        // ...
+        // 存在 CSP 时尝试直接在 Content Script 中执行
         let code = [
           `if (window["${process.env.INJECT_FILE}"] && document instanceof XMLDocument === false) {`,
           `  window["${process.env.INJECT_FILE}"]();`,
@@ -102,7 +94,7 @@ export const importWorkerScript = () => {
           code = [
             CODE_PREFIX,
             `script.nonce = "${nonce[1]}";`,
-            `script.innerText = code`,
+            `script.innerText = code;`,
             CODE_SUFFIX,
           ].join("\n");
         }
@@ -125,13 +117,11 @@ export const importWorkerScript = () => {
         // @ts-expect-error filter params
         cross.tabs.onUpdated.addListener(onUpdate, { tabId: res.tabId });
       }
-      // 返回修改后的响应头配置
-      return {
-        responseHeaders: res.responseHeaders,
-      };
+      // onHeadersReceived 仅读取响应头而不修改
+      return void 0;
     },
     { urls: URL_MATCH, types: ["main_frame", "sub_frame"] },
-    ["blocking", "responseHeaders"]
+    ["responseHeaders"]
   );
   // #ENDIF
 };

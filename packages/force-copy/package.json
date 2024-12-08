@@ -1,6 +1,6 @@
 {
   "name": "force-copy",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "author": "Czy",
   "license": "MIT",
   "sideEffects": false,
@@ -10,8 +10,8 @@
     "dev:rollup": "cross-env NODE_ENV=development rollup -wc",
     "dev:gecko": "cross-env NODE_ENV=development PLATFORM=gecko rspack build --watch",
     "build:gecko": "rm -rf build-gecko && cross-env PLATFORM=gecko rspack build",
-    "build:zip": "mkdir -p .zip && cd build && zip -r ../.zip/chromium.zip .",
-    "build:zip:gecko": "mkdir -p .zip && cd build-gecko && zip -r ../.zip/gecko.zip .",
+    "build:zip": "mkdir -p .zip && rm -f .zip/chromium.zip && cd build && zip -r ../.zip/chromium.zip .",
+    "build:zip:gecko": "mkdir -p .zip && rm -f .zip/gecko.zip && cd build-gecko && zip -r ../.zip/gecko.zip .",
     "lint:ts": "../../node_modules/typescript/bin/tsc --noEmit"
   },
   "repository": {
