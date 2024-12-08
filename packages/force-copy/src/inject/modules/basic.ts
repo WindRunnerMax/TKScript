@@ -3,13 +3,13 @@ import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import type { WebSite } from "../types/website";
 import { EVENTS_ENUM, EventBus } from "../utils/bus";
 import { onCopyKeyboardHandler, stopNativePropagation } from "../utils/events";
-import { STYLE_ID, AUTO_USER_SELECT } from "../utils/styles";
+import { STYLE_ID, AUTO_USER_SELECT, AUTO_SELECTION } from "../utils/styles";
 
 export const Basic: WebSite = {
   regexp: /.*/,
   start(type) {
     if (type === COPY_TYPE) {
-      styles.insertCSS(STYLE_ID, AUTO_USER_SELECT);
+      styles.insertCSS(STYLE_ID, AUTO_USER_SELECT + AUTO_SELECTION);
       EventBus.on(EVENTS_ENUM.COPY_CAPTURE, stopNativePropagation);
       EventBus.on(EVENTS_ENUM.KEY_BOARD_CAPTURE, onCopyKeyboardHandler);
       EventBus.on(EVENTS_ENUM.SELECT_START_CAPTURE, stopNativePropagation);

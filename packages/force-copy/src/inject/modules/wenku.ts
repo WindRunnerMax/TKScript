@@ -17,8 +17,7 @@ const onMouseUp = (event: MouseEvent) => {
   try {
     const elements = document.querySelectorAll("#app > div");
     for (const item of elements) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error __vue__
       const vue = item.__vue__;
       if (vue) {
         const text = vue.$store.getters["readerPlugin/selectedTextTrim"];

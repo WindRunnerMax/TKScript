@@ -3,7 +3,7 @@ import { FALLBACK_CLASS, OPACITY_BACKGROUND_PROPERTY, OPACITY_PROPERTY } from ".
 import { inspectWaterMarkDOM } from "../utils/dom";
 import { injectCSSEarly } from "../utils/styles";
 
-export const common: Website = {
+export const basic: Website = {
   regexp: /.*/,
   init: () => {
     const observer = MutationObserver.prototype.observe;

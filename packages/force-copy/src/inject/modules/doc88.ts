@@ -23,12 +23,10 @@ const onMouseUpCapture = () => {
 };
 const init = () => {
   try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error global
     window.Config && (window.Config.vip = 1) && (window.Config.logined = 1);
     const hook = () => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error global
       const api = window.Core.Annotation.api;
       const keys = Object.keys(api).filter(key => isString(api[key]));
       const duplication: Record<string, unknown> = {};
@@ -47,12 +45,10 @@ const init = () => {
         });
       });
     };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error global
     if (window.Core) {
       hook();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error global
     } else if (window.Core === null) {
       delayExecute(PAGE_LOADED).then(hook);
     } else {
