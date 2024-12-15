@@ -1,10 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-const __URL_MATCH__ = ["https://*/*", "http://*/*", "file://*/*"];
+import type { Manifest } from "./types";
+import { __URL_MATCH__ } from "./types";
 
 // Chromium
-const __MANIFEST__: Record<string, unknown> = {
+const __MANIFEST__: Manifest = {
   manifest_version: 3,
   name: "Force Copy",
   version: "0.0.0",
@@ -54,7 +52,7 @@ if (process.env.PLATFORM === "gecko") {
     },
   ];
   __MANIFEST__.background = {
-    scripts: [__MANIFEST__.background.service_worker],
+    scripts: [__MANIFEST__.background.service_worker as string],
   };
   __MANIFEST__.permissions = ["activeTab", "tabs", "webRequest", "management", ...__URL_MATCH__];
   __MANIFEST__.browser_specific_settings = {

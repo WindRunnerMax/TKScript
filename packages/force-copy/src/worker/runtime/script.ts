@@ -56,7 +56,7 @@ export const importWorkerScript = () => {
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src
   // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onHeadersReceived
   // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onResponseStarted
-  chrome.webRequest.onResponseStarted.addListener(
+  cross.webRequest.onResponseStarted.addListener(
     res => {
       if (!res.responseHeaders) return void 0;
       if (res.type !== "main_frame" && res.type !== "sub_frame") {

@@ -17,9 +17,14 @@
     "newLine": "lf",
     "paths": {
       "copy/*": ["./packages/copy/*"],
-      "copy-currency/*": ["./packages/copy-currency/*"],
+      "copy-currency/*": ["./packages/copy-currency/*"]
     }
   },
   "include": ["packages/*/src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }
