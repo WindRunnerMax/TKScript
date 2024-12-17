@@ -6,7 +6,7 @@
 // @description:en Remove watermarks from common web pages
 // @description:zh 移除常见网页的水印
 // @namespace  https://github.com/WindrunnerMax/TKScript
-// @version    1.0.4
+// @version    1.0.5
 // @author     Czy
 // @match      http://*/*
 // @match      https://*/*
@@ -28,7 +28,7 @@
   const OPACITY_BACKGROUND_PROPERTY = [
     "background: transparent !important;",
     "background-color: transparent !important;",
-    "background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important;"
+    "background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)) !important;"
   ].join("");
 
   const inspectWaterMarkDOM = (node) => {
@@ -108,17 +108,15 @@
           super(getMutationCallback(callback));
         }
       };
-      const PRESET_CLASSES = [
-        "." + FALLBACK_CLASS,
+      const PRESET_CLASSES = [`.${FALLBACK_CLASS}`].join(",");
+      injectCSSEarly(`${PRESET_CLASSES}{${OPACITY_PROPERTY}}`);
+      const PRESET_BACKGROUND = [
         `div[id*="watermark"]`,
         `div[id*="WaterMark"]`,
         `div[id*="Watermark"]`,
         `div[class*="watermark"]`,
         `div[class*="WaterMark"]`,
-        `div[class*="Watermark"]`
-      ].join(",");
-      injectCSSEarly(`${PRESET_CLASSES}{${OPACITY_PROPERTY}}`);
-      const PRESET_BACKGROUND = [
+        `div[class*="Watermark"]`,
         `div[style*="pointer-events"][style*="background: url"]`,
         `div[style*="pointer-events"][style*="background-image: url"]`,
         `div[style*="pointer-events"][style*="background:url"]`,
