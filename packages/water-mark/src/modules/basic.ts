@@ -29,17 +29,15 @@ export const basic: Website = {
         super(getMutationCallback(callback));
       }
     };
-    const PRESET_CLASSES = [
-      "." + FALLBACK_CLASS,
+    const PRESET_CLASSES = [`.${FALLBACK_CLASS}`].join(",");
+    injectCSSEarly(`${PRESET_CLASSES}{${OPACITY_PROPERTY}}`);
+    const PRESET_BACKGROUND = [
       `div[id*="watermark"]`,
       `div[id*="WaterMark"]`,
       `div[id*="Watermark"]`,
       `div[class*="watermark"]`,
       `div[class*="WaterMark"]`,
       `div[class*="Watermark"]`,
-    ].join(",");
-    injectCSSEarly(`${PRESET_CLASSES}{${OPACITY_PROPERTY}}`);
-    const PRESET_BACKGROUND = [
       `div[style*="pointer-events"][style*="background: url"]`,
       `div[style*="pointer-events"][style*="background-image: url"]`,
       `div[style*="pointer-events"][style*="background:url"]`,

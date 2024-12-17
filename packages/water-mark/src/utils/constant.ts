@@ -9,7 +9,7 @@ export const OPACITY_PROPERTY = [
 export const OPACITY_BACKGROUND_PROPERTY = [
   "background: transparent !important;",
   "background-color: transparent !important;",
-  "background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important;",
+  "background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)) !important;",
 ].join("");
 
 export const NOOP = () => null;
