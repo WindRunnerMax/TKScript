@@ -21,6 +21,7 @@ const EVENTS_TYPE = [
   "MOUSE_MOVE_CAPTURE",
   "TOUCH_MOVE_CAPTURE",
   "TOUCH_END_CAPTURE",
+  "PASTE_CAPTURE",
 ] as const;
 
 export const EVENTS_ENUM = EVENTS_TYPE.reduce(
@@ -48,6 +49,7 @@ interface EventBusParams {
   [EVENTS_ENUM.BLUR_CAPTURE]: FocusEvent;
   [EVENTS_ENUM.TOUCH_MOVE_CAPTURE]: TouchEvent;
   [EVENTS_ENUM.TOUCH_END_CAPTURE]: TouchEvent;
+  [EVENTS_ENUM.PASTE_CAPTURE]: ClipboardEvent;
 }
 
 declare module "laser-utils/dist/es/event-bus" {

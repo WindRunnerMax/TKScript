@@ -19,3 +19,4 @@ export const FOCUS = "focus";
 export const BLUR = "blur";
 export const FOCUS_IN = "focusin";
 export const FOCUS_OUT = "focusout";
+export const PASTE = "paste";

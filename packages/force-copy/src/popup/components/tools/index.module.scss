@@ -8,10 +8,4 @@ $box-shadow: 0 0 4px var(--color-border-2);
   border-radius: 4px;
   box-shadow: $box-shadow;
 
-  .row {
-    margin-bottom: 5px;
-    &:last-child {
-      margin-bottom: auto;
-    }
-  }
 }

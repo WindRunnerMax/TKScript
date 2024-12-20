@@ -8,7 +8,9 @@ const CI_REQUEST_ENUM = [
   "DEBUG_MOUSE_EVENT",
   "DEBUG_FOCUS_EVENT",
   "DEBUG_EDITABLE",
+  "DEBUG_PASTE",
 ] as const;
+
 export const CONTENT_TO_INJECT_REQUEST = CI_REQUEST_ENUM.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__${MARK}__` }),
   {} as { [K in typeof CI_REQUEST_ENUM[number]]: `__${K}__${typeof MARK}__` }
@@ -28,6 +30,7 @@ export type EventMap = {
   [CONTENT_TO_INJECT_REQUEST.DEBUG_MOUSE_EVENT]: null;
   [CONTENT_TO_INJECT_REQUEST.DEBUG_FOCUS_EVENT]: null;
   [CONTENT_TO_INJECT_REQUEST.DEBUG_EDITABLE]: null;
+  [CONTENT_TO_INJECT_REQUEST.DEBUG_PASTE]: null;
 };
 
 export type CIRequestType = Reflex.Tuple<EventMap>;

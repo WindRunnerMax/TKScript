@@ -4,8 +4,7 @@ import type { FC } from "react";
 import type { I18n } from "@/popup/i18n";
 import { PCBridge } from "@/bridge/popup-content";
 
-const Row = Grid.Row;
-const Col = Grid.Col;
+const GridItem = Grid.GridItem;
 
 export const Tools: FC<{
   i18n: I18n;
@@ -13,8 +12,8 @@ export const Tools: FC<{
 }> = ({ i18n }) => {
   return (
     <div className={styles.container}>
-      <Row className={styles.row} gutter={10}>
-        <Col span={12}>
+      <Grid cols={2} colGap={10} rowGap={5}>
+        <GridItem>
           <Button
             size="mini"
             onClick={() =>
@@ -26,8 +25,8 @@ export const Tools: FC<{
           >
             {i18n.t("Tools.MouseEvent")}
           </Button>
-        </Col>
-        <Col span={12}>
+        </GridItem>
+        <GridItem>
           <Button
             onClick={() =>
               PCBridge.postToContent({
@@ -39,10 +38,8 @@ export const Tools: FC<{
           >
             {i18n.t("Tools.FocusEvent")}
           </Button>
-        </Col>
-      </Row>
-      <Row className={styles.row}>
-        <Col span={12}>
+        </GridItem>
+        <GridItem>
           <Button
             onClick={() =>
               PCBridge.postToContent({
@@ -54,8 +51,21 @@ export const Tools: FC<{
           >
             {i18n.t("Tools.Editable")}
           </Button>
-        </Col>
-      </Row>
+        </GridItem>
+        <GridItem>
+          <Button
+            onClick={() =>
+              PCBridge.postToContent({
+                type: PCBridge.REQUEST.DEBUG_PASTE_EVENT,
+                payload: null,
+              })
+            }
+            size="mini"
+          >
+            {i18n.t("Tools.PasteEvent")}
+          </Button>
+        </GridItem>
+      </Grid>
     </div>
   );
 };

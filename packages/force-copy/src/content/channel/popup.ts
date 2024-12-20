@@ -84,5 +84,12 @@ export const onPopupMessage = (data: PCRequestType) => {
       });
       break;
     }
+    case PCBridge.REQUEST.DEBUG_PASTE_EVENT: {
+      CIBridge.postToInject({
+        type: CIBridge.REQUEST.DEBUG_PASTE,
+        payload: null,
+      });
+      break;
+    }
   }
 };

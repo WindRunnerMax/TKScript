@@ -20,5 +20,6 @@ export const en = {
     MouseEvent: "MouseEvent",
     FocusEvent: "FocusEvent",
     Editable: "Editable",
+    PasteEvent: "PasteEvent",
   },
 };

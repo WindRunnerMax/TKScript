@@ -48,6 +48,10 @@ export const onContentMessage = (handler: WebSite) => {
         document.body.contentEditable = "true";
         break;
       }
+      case CIBridge.REQUEST.DEBUG_PASTE: {
+        EventBus.on(EVENTS_ENUM.PASTE_CAPTURE, stopNativePropagation);
+        break;
+      }
     }
   };
 };
