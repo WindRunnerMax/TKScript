@@ -6,7 +6,7 @@
 // @description:en Remove watermarks from common web pages
 // @description:zh 移除常见网页的水印
 // @namespace  https://github.com/WindrunnerMax/TKScript
-// @version    1.0.5
+// @version    1.0.6
 // @author     Czy
 // @match      http://*/*
 // @match      https://*/*
@@ -14,6 +14,7 @@
 // @license    GPL License
 // @installURL https://github.com/WindrunnerMax/TKScript
 // @run-at     document-start
+// @grant      GM_addStyle
 // @grant      unsafeWindow
 // ==/UserScript==
 (function () {
@@ -67,17 +68,21 @@
   };
 
   const injectCSSEarly = (css) => {
+    if (typeof GM_addStyle === "function") {
+      GM_addStyle(css);
+      return void 0;
+    }
     const style = document.createElement("style");
     style.innerText = css;
     const head = document.head;
     if (head) {
       head.appendChild(style);
-      return;
+      return void 0;
     }
     const html = document.documentElement;
     if (html) {
       html.appendChild(style);
-      return;
+      return void 0;
     }
     styles.insertCSS(String(Math.random()), css);
   };

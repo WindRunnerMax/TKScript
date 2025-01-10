@@ -6,7 +6,7 @@
 // @description:en Remove watermarks from common web pages
 // @description:zh 移除常见网页的水印
 // @namespace  https://github.com/WindrunnerMax/TKScript
-// @version    1.0.5
+// @version    1.0.6
 // @author     Czy
 // @match      http://*/*
 // @match      https://*/*
@@ -14,5 +14,6 @@
 // @license    GPL License
 // @installURL https://github.com/WindrunnerMax/TKScript
 // @run-at     document-start
+// @grant      GM_addStyle
 // @grant      unsafeWindow
 // ==/UserScript==

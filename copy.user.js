@@ -2,7 +2,7 @@
 // @name        🔥🔥🔥文本选中复制🔥🔥🔥
 // @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace   https://github.com/WindrunnerMax/TKScript
-// @version     6.2.8
+// @version     6.2.9
 // @author      Czy
 // @match       *://wenku.baidu.com/view/*
 // @match       *://wenku.baidu.com/share/*
@@ -175,8 +175,8 @@
     };
 
     /*!
-     * 外部引用`static.doc88.com`声明
-     * 此部分是在处理`doc88.com`才会加载的资源文件，此资源文件由该网站加载时提供
+     * 外部引用 static.doc88.com 声明
+     * 此部分是在处理 doc88.com 才会加载的资源文件，此资源文件由该网站加载时提供
      */
     let path = "";
     const website$u = {
@@ -188,7 +188,7 @@
         );
         GM_xmlhttpRequest({
           method: "GET",
-          url: "https://res3.doc88.com/resources/js/modules/main-v2.min.js?v=2.56",
+          url: "https://res3.doc88.com/resources/js/modules/main-v2.min.js?v=3.55",
           onload: function(response) {
             const result = /\("#cp_textarea"\).val\(([\S]*?)\);/.exec(response.responseText);
             if (result)
