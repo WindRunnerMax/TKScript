@@ -10,6 +10,10 @@ export const inspectWaterMarkDOM = (node: Node) => {
   if (!node.hasAttribute("style") || node.style.pointerEvents !== "none") {
     return false;
   }
+  if (node instanceof HTMLImageElement && node.src && node.src.startsWith("data:")) {
+    !node.classList.contains(FALLBACK_CLASS) && node.classList.add(FALLBACK_CLASS);
+    return true;
+  }
   if (node.style.background.startsWith("url") || node.style.backgroundImage.startsWith("url")) {
     !node.classList.contains(FALLBACK_CLASS) && node.classList.add(FALLBACK_CLASS);
     return true;
