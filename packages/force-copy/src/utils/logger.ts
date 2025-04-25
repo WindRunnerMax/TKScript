@@ -1,38 +1,45 @@
-export const LOG_LEVEL = {
-  INFO: 0,
-  WARNING: 1,
-  ERROR: 2,
-  DISABLE: 3,
-};
+const _global: typeof globalThis = (() => {
+  if (typeof globalThis !== "undefined") return globalThis; // ES2020
+  if (typeof window !== "undefined") return window; // Browser
+  if (typeof global !== "undefined") return global; // Node
+  if (typeof self !== "undefined") return self; // Worker
+  return Function("return this")(); // Fallback
+})();
+
+export const log = _global.console.log;
+export const warn = _global.console.warn;
+export const error = _global.console.error;
+export const trace = _global.console.trace;
+export const LOG_LEVEL = { INFO: 0, WARNING: 1, ERROR: 2, DISABLE: 3 };
 
 class Logger {
-  constructor(private level: number) {}
+  public constructor(private level: number) {}
 
-  setLevel(level: typeof LOG_LEVEL[keyof typeof LOG_LEVEL]) {
+  public setLevel(level: typeof LOG_LEVEL[keyof typeof LOG_LEVEL]) {
     this.level = level;
   }
 
-  info(...args: unknown[]) {
+  public info(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.INFO) {
-      console.log("FC Log:", ...args);
+      log("FC Log:", ...args);
     }
   }
 
-  trace(...args: unknown[]) {
+  public trace(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.INFO) {
-      console.trace("FC Trace:", ...args);
+      trace("FC Trace:", ...args);
     }
   }
 
-  warning(...args: unknown[]) {
+  public warning(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.WARNING) {
-      console.warn("FC Warning:", ...args);
+      warn("FC Warning:", ...args);
     }
   }
 
-  error(...args: unknown[]) {
+  public error(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.ERROR) {
-      console.error("FC Error:", ...args);
+      error("FC Error:", ...args);
     }
   }
 }
