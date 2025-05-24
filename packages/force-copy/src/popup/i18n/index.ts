@@ -7,23 +7,32 @@ const cache: Record<string, I18nTypes> = {};
 
 export class I18n {
   private config: I18nTypes;
+  private language: string;
   constructor(language: string) {
-    this.config = I18n.getFullConfig(language);
+    this.language = language.toLowerCase();
+    this.config = I18n.getFullConfig(this.language);
   }
 
   public t = (key: keyof I18nTypes, defaultValue = "") => {
     return this.config[key] || defaultValue || key;
   };
 
-  private static getFullConfig = (key: string) => {
-    if (cache[key]) return cache[key];
+  public get p(): typeof en {
+    if (this.language.startsWith("zh")) {
+      return zh;
+    }
+    return en;
+  }
+
+  private static getFullConfig = (lang: string) => {
+    if (cache[lang]) return cache[lang];
     let config;
-    if (key.toLowerCase().startsWith("zh")) {
+    if (lang.startsWith("zh")) {
       config = this.generateFlattenConfig(zh);
     } else {
       config = this.generateFlattenConfig(en);
     }
-    cache[key] = config;
+    cache[lang] = config;
     return config;
   };
 

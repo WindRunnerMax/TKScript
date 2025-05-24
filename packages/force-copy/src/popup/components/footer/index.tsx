@@ -13,7 +13,9 @@ import { Tools } from "../tools";
 
 export const Footer: FC<{
   i18n: I18n;
-}> = ({ i18n }) => {
+}> = props => {
+  const { i18n } = props;
+
   return (
     <div className={styles.footer}>
       <Trigger trigger="click" popup={() => <Tools i18n={i18n}></Tools>}>

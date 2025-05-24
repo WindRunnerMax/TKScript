@@ -8,32 +8,33 @@ const GridItem = Grid.GridItem;
 
 export const Tools: FC<{
   i18n: I18n;
-  visible?: boolean;
-}> = ({ i18n }) => {
+}> = props => {
+  const { i18n } = props;
+
   return (
     <div className={styles.container}>
       <Grid cols={2} colGap={10} rowGap={5}>
         <GridItem>
           <Button
             size="mini"
-            onClick={() =>
+            onClick={() => {
               PCBridge.postToContent({
                 type: PCBridge.REQUEST.DEBUG_MOUSE_EVENT,
                 payload: null,
-              })
-            }
+              });
+            }}
           >
             {i18n.t("Tools.MouseEvent")}
           </Button>
         </GridItem>
         <GridItem>
           <Button
-            onClick={() =>
+            onClick={() => {
               PCBridge.postToContent({
                 type: PCBridge.REQUEST.DEBUG_FOCUS_EVENT,
                 payload: null,
-              })
-            }
+              });
+            }}
             size="mini"
           >
             {i18n.t("Tools.FocusEvent")}
@@ -41,28 +42,28 @@ export const Tools: FC<{
         </GridItem>
         <GridItem>
           <Button
-            onClick={() =>
+            onClick={() => {
               PCBridge.postToContent({
-                type: PCBridge.REQUEST.DEBUG_EDITABLE,
+                type: PCBridge.REQUEST.DEBUG_PASTE_EVENT,
                 payload: null,
-              })
-            }
+              });
+            }}
             size="mini"
           >
-            {i18n.t("Tools.Editable")}
+            {i18n.t("Tools.PasteEvent")}
           </Button>
         </GridItem>
         <GridItem>
           <Button
-            onClick={() =>
+            onClick={() => {
               PCBridge.postToContent({
-                type: PCBridge.REQUEST.DEBUG_PASTE_EVENT,
+                type: PCBridge.REQUEST.DEBUG_EDITABLE,
                 payload: null,
-              })
-            }
+              });
+            }}
             size="mini"
           >
-            {i18n.t("Tools.PasteEvent")}
+            {i18n.t("Tools.Editable")}
           </Button>
         </GridItem>
       </Grid>

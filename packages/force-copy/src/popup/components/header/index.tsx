@@ -5,7 +5,9 @@ import type { I18n } from "@/popup/i18n";
 
 export const Header: FC<{
   i18n: I18n;
-}> = ({ i18n }) => {
+}> = props => {
+  const { i18n } = props;
+
   return (
     <div className={cs(styles.captain)}>
       <img src="./static/favicon.128.png" alt="" />

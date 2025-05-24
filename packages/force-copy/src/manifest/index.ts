@@ -9,13 +9,13 @@ const __MANIFEST__: Manifest = {
   description: "Force Copy Everything",
   default_locale: "en",
   icons: {
-    32: "./static/favicon.128.png",
-    96: "./static/favicon.128.png",
-    128: "./static/favicon.128.png",
+    32: "static/favicon.128.png",
+    96: "static/favicon.128.png",
+    128: "static/favicon.128.png",
   },
   action: {
     default_popup: "popup.html",
-    default_icon: "./static/favicon.128.png",
+    default_icon: "static/favicon.128.png",
   },
   content_scripts: [
     {
