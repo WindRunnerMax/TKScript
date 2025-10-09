@@ -8,22 +8,39 @@
  */
 const weakSet = new WeakSet();
 const pathRouter = ["root"];
+const regexp = /以熔体流动速率/;
 
 const deepScanObject = (origin, deep, maxDeep) => {
   if (deep > maxDeep) return;
+  if (origin instanceof Map) {
+    weakSet.add(origin);
+    if (weakSet.has(origin)) return;
+    origin = [...origin.entries()];
+  }
   for (const item in origin) {
+    const currentPath = pathRouter.join("/") + "/" + item;
     try {
       const value = origin[item];
+      if (
+        value instanceof Node ||
+        value instanceof Window ||
+        item.includes("_react") ||
+        item.includes("cssRule")
+      ) {
+        continue;
+      }
       if (value && typeof value === "object") {
-        if (weakSet.has(value)) continue;
+        if (weakSet.has(value)) {
+          regexp.test(item) && console.log(currentPath);
+          continue;
+        }
         weakSet.add(value);
         pathRouter.push(item);
         deepScanObject(value, deep + 1, maxDeep);
         pathRouter.pop();
       } else {
-        const regexp = /以熔体流动速率/;
         if (regexp.test(item) || regexp.test(value)) {
-          console.log(pathRouter.join("/") + "/" + item, "================", value);
+          console.log(currentPath, "================", value);
         }
       }
     } catch (e) {
