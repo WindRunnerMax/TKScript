@@ -40,13 +40,16 @@ const website: Website = {
       }
     }
     // QQ Sheet
+    const sheetStatus = unsafeWindow.SpreadsheetApp
+      ? unsafeWindow.SpreadsheetApp.permissions
+        ? unsafeWindow.SpreadsheetApp.permissions.sheetStatus
+        : unsafeWindow.SpreadsheetApp.sheetStatus
+      : null;
     if (
-      unsafeWindow.SpreadsheetApp &&
-      unsafeWindow.SpreadsheetApp.permissions &&
-      unsafeWindow.SpreadsheetApp.permissions.sheetStatus &&
-      unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canCopy === false &&
-      unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit &&
-      unsafeWindow.SpreadsheetApp.permissions.sheetStatus.canEdit() === false
+      sheetStatus &&
+      sheetStatus.canCopy === false &&
+      sheetStatus.canEdit &&
+      sheetStatus.canEdit() === false
     ) {
       instance.enable();
       const SpreadsheetApp = unsafeWindow.SpreadsheetApp;
