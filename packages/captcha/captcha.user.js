@@ -1,11 +1,10 @@
 // ==UserScript==
 // @name         SWVerifyCode
 // @namespace    https://github.com/WindrunnerMax/TKScript
-// @version      1.1
+// @version      1.1.1
 // @description  try to take over the world!
 // @author       Czy
-// @match        *://jwgl.sdust.edu.cn/
-// @match        *://jwgl.sdust.edu.cn/jsxsd/
+// @match        *://jwgl.sdust.edu.cn/*
 // @grant        none
 // ==/UserScript==
 
@@ -164,7 +163,7 @@ function main() {
 (function () {
   "use strict";
   const img = document.getElementById("SafeCodeImg");
-  img.onload = function () {
-    main();
-  };
+  if (!img) return void 0;
+  img.onload = main;
+  img.complete && main();
 })();
